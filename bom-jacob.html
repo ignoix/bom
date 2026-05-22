@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 雅各书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+/* header */
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#065f46;background:#d1fae5;border-color:#6ee7b7}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+/* page grid */
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+/* intro banner */
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+/* phase label */
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+/* arrow */
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+/* node */
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+/* node colour themes */
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+
+/* major event marker */
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+/* side note */
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+/* symbol/note boxes */
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+
+/* legend */
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+/* relationship diagram */
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 時間線</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">雅各书</span>
+  <span class="he">Jacob · Temple Sermon, Zenos's Allegory &amp; the Anti-Christ</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab on" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · SMALL PLATES OF NEPHI</div>
+  <div class="intro-h">雅各书 · Jacob</div>
+  <div class="intro-en">Record of Jacob — Temple Sermon, Zenos's Olive Tree Allegory &amp; Defeat of the Anti-Christ</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>约公元前 544–421 年</b></span>
+    <span class="im">地点 <b>尼腓地 Land of Nephi（美洲）</b></span>
+    <span class="im">章节 <b>7 章</b></span>
+    <span class="im">核心 <b>贞洁训诫 · 橄榄树比喻 · 反基督谢伦</b></span>
+  </div>
+</div>
+
+<!-- ── activity map ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="jmA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#d97706"/>
+      </marker>
+      <marker id="jmB" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#1d4ed8"/>
+      </marker>
+    </defs>
+
+    <!-- Ocean background -->
+    <rect width="860" height="430" fill="#bfdbfe" rx="8"/>
+
+    <!-- ── Land mass (simplified Mesoamerica / southern Mexico + Central America) ── -->
+    <polygon points="20,0 200,0 420,0 640,0 810,20 850,90 845,200 820,300 780,370 700,415 590,420 490,420 390,420 290,410 200,380 140,335 100,275 70,210 50,140 30,70 20,0" fill="#bbf7d0"/>
+
+    <!-- Gulf of Mexico (water overlay, upper right) -->
+    <ellipse cx="700" cy="78" rx="118" ry="54" fill="#bfdbfe" opacity="0.93"/>
+
+    <!-- ── Territory zones ── -->
+    <!-- Lamanite: Pacific coastal strip (First Inheritance) -->
+    <ellipse cx="164" cy="312" rx="56" ry="68" fill="rgba(254,202,202,0.50)" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6,3"/>
+    <!-- Nephite: inland highlands (Land of Nephi) -->
+    <ellipse cx="326" cy="246" rx="92" ry="82" fill="rgba(219,234,254,0.50)" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+    <!-- ── Wilderness boundary ── -->
+    <path d="M 220,90 Q 222,200 220,390" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="9,4"/>
+    <text x="224" y="82" font-size="9" fill="#16a34a">旷野</text>
+    <text x="224" y="93" font-size="8" fill="#16a34a">Wilderness</text>
+
+    <!-- ── Water labels ── -->
+    <text x="26" y="195" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="26" y="207" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific</text>
+    <text x="822" y="280" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text x="822" y="292" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Caribbean</text>
+    <text x="700" y="68" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text x="700" y="79" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text>
+
+    <!-- ── Continent label ── -->
+    <text x="520" y="240" fill="#64748b" font-size="11" text-anchor="middle" opacity="0.5">北美洲 / 中美洲</text>
+    <text x="520" y="253" fill="#64748b" font-size="9" text-anchor="middle" opacity="0.45">Mesoamerica · 尼腓人活动区域</text>
+
+    <!-- ── Territory labels ── -->
+    <text x="164" y="262" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text x="164" y="275" text-anchor="middle" font-size="8.5" fill="#f87171">Lamanites</text>
+    <text x="326" y="176" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">尼腓地</text>
+    <text x="326" y="189" text-anchor="middle" font-size="8.5" fill="#3b82f6">Land of Nephi</text>
+
+    <!-- ── Location markers ── -->
+
+    <!-- 1. Land of First Inheritance (coastal Pacific, Lamanite) -->
+    <circle cx="154" cy="334" r="7" fill="#f97316" stroke="#fff" stroke-width="2"/>
+    <rect x="18" y="358" width="234" height="38" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="135" y="372" fill="#9f1239" font-size="9.5" font-weight="bold" text-anchor="middle">初居地 · 太平洋海岸</text>
+    <text x="135" y="384" fill="#f87171" font-size="8.5" text-anchor="middle">Land of First Inheritance · 拉曼人留守</text>
+    <line x1="154" y1="341" x2="140" y2="358" stroke="#f97316" stroke-width="1.2"/>
+
+    <!-- 2. Temple / City of Nephi (all Jacob events happen here) -->
+    <!-- Temple icon: house shape -->
+    <polygon points="318,230 340,230 340,246 329,240 318,246" fill="#1d4ed8" stroke="#fff" stroke-width="1.5"/>
+    <rect x="321" y="244" width="16" height="10" fill="#1d4ed8"/>
+    <!-- Glow ring around icon -->
+    <circle cx="329" cy="240" r="18" fill="rgba(29,78,216,0.12)" stroke="#93c5fd" stroke-width="1"/>
+    <!-- Label box -->
+    <rect x="358" y="213" width="244" height="58" rx="5" fill="rgba(255,255,255,0.93)" stroke="#93c5fd" stroke-width="1.3"/>
+    <text x="480" y="228" fill="#1e3a8a" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓圣殿 / 尼腓城</text>
+    <text x="480" y="240" fill="#2563eb" font-size="8.5" text-anchor="middle">Temple &amp; City of Nephi</text>
+    <text x="480" y="252" fill="#475569" font-size="8" text-anchor="middle">第 2–3 章：圣殿训道（贞洁·财富）</text>
+    <text x="480" y="262" fill="#475569" font-size="8" text-anchor="middle">第 7 章：谢伦反基督对峙</text>
+    <line x1="347" y1="238" x2="358" y2="238" stroke="#1d4ed8" stroke-width="1.2"/>
+
+    <!-- ── Migration reference arrow (back-reference to 2 Nephi 5) ── -->
+    <path d="M 160,328 Q 190,295 268,264" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#jmA)"/>
+    <text x="190" y="300" fill="#b45309" font-size="8" text-anchor="middle">尼腓二书</text>
+    <text x="190" y="310" fill="#b45309" font-size="8" text-anchor="middle">第 5 章迁移</text>
+
+    <!-- ── Title box ── -->
+    <rect x="6" y="6" width="230" height="36" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="bold">雅各书活动地图</text>
+    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Jacob Activity Map · Not to Scale</text>
+
+    <!-- ── Legend ── -->
+    <rect x="6" y="52" width="128" height="100" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <circle cx="22" cy="69" r="5" fill="#f97316"/>
+    <text x="33" y="73" fill="#475569" font-size="9">初居地（拉曼人）</text>
+    <polygon points="22,82 33,82 33,94 27.5,88 22,94" fill="#1d4ed8"/>
+    <text x="38" y="91" fill="#475569" font-size="9">尼腓圣殿</text>
+    <ellipse cx="22" cy="110" rx="11" ry="7" fill="rgba(254,202,202,0.5)" stroke="#fca5a5" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="38" y="114" fill="#475569" font-size="9">拉曼人领域</text>
+    <ellipse cx="22" cy="130" rx="11" ry="7" fill="rgba(219,234,254,0.5)" stroke="#93c5fd" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="38" y="134" fill="#475569" font-size="9">尼腓人领域</text>
+    <line x1="14" y1="145" x2="34" y2="145" stroke="#4ade80" stroke-width="1.8" stroke-dasharray="5,3"/>
+    <text x="38" y="149" fill="#475569" font-size="9">旷野边界</text>
+
+    <!-- ── Chapter timeline note (bottom right) ── -->
+    <rect x="380" y="300" width="472" height="120" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="616" y="316" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">雅各书章节 · 约公元前 544–421 年</text>
+    <text x="616" y="316" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b"></text>
+    <text x="392" y="332" font-size="9" fill="#475569">① 第 1 章　尼腓去世 · 雅各开始记录小版</text>
+    <text x="392" y="346" font-size="9" fill="#475569">② 第 2–3 章　圣殿训道：财富骄傲 · 一夫一妻训诫</text>
+    <text x="392" y="360" font-size="9" fill="#475569">③ 第 4 章　见证基督 · 以赛亚绊脚石预言</text>
+    <text x="392" y="374" font-size="9" fill="#475569">④ 第 5 章　泽诺橄榄树比喻（全书最长章）</text>
+    <text x="392" y="388" font-size="9" fill="#475569">⑤ 第 6 章　比喻应用 · 悔改呼吁</text>
+    <text x="392" y="402" font-size="9" fill="#475569">⑥ 第 7 章　谢伦反基督 · 神迹认罪 · 传位伊诺斯</text>
+  </svg>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，确切地点学术上仍有争议；主流观点倾向中美洲理论 · Mesoamerica hypothesis; locations are debated</div>
+</div>
+
+<!-- ── character relationship diagram ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">人物关系 · KEY FIGURES</div>
+  <svg viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0;background:#f8fafc">
+    <defs>
+      <marker id="jArr" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#94a3b8"/>
+      </marker>
+      <marker id="jTea" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#059669"/>
+      </marker>
+      <marker id="jRed" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/>
+      </marker>
+      <marker id="jAmb" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#d97706"/>
+      </marker>
+    </defs>
+
+    <!-- ── 已逝父母（顶部，灰色虚线）── -->
+    <rect x="290" y="14" width="96" height="34" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="338" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#64748b">李海</text>
+    <text x="338" y="42" text-anchor="middle" font-size="9" fill="#94a3b8">Lehi · 已逝</text>
+
+    <rect x="404" y="14" width="96" height="34" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="452" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#64748b">撒利亚</text>
+    <text x="452" y="42" text-anchor="middle" font-size="9" fill="#94a3b8">Sariah · 已逝</text>
+
+    <!-- 父母连线 -->
+    <line x1="386" y1="31" x2="404" y2="31" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+    <!-- ── 尼腓（已逝，上一位记录者）── -->
+    <rect x="130" y="14" width="104" height="34" rx="6" fill="#f1f5f9" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="182" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">尼腓</text>
+    <text x="182" y="42" text-anchor="middle" font-size="9" fill="#94a3b8">Nephi · 前任记录者（已逝）</text>
+
+    <!-- 尼腓 → 雅各（授职箭头） -->
+    <line x1="234" y1="31" x2="268" y2="90" stroke="#059669" stroke-width="1.8" stroke-dasharray="4,2.5" marker-end="url(#jTea)"/>
+    <text x="242" y="58" text-anchor="middle" font-size="8.5" fill="#059669">授职为</text>
+    <text x="242" y="68" text-anchor="middle" font-size="8.5" fill="#059669">祭司/教师</text>
+
+    <!-- ── 雅各（主角，核心）── -->
+    <rect x="268" y="82" width="120" height="40" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+    <text x="328" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#065f46">雅各</text>
+    <text x="328" y="113" text-anchor="middle" font-size="9.5" fill="#059669">Jacob · 大祭司 · 著者</text>
+
+    <!-- 父母 → 雅各 -->
+    <line x1="338" y1="48" x2="333" y2="82" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <line x1="452" y1="48" x2="360" y2="86" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+    <!-- ── 约瑟（雅各的弟弟）── -->
+    <rect x="434" y="82" width="96" height="40" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="482" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">约瑟</text>
+    <text x="482" y="113" text-anchor="middle" font-size="9" fill="#b45309">Joseph · 雅各之弟</text>
+
+    <!-- ── 伊诺斯（雅各之子，下一位记录者）── -->
+    <rect x="268" y="178" width="120" height="38" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="328" y="195" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">伊诺斯</text>
+    <text x="328" y="207" text-anchor="middle" font-size="9" fill="#059669">Enos · 雅各之子 · 下一记录者</text>
+
+    <!-- 雅各 → 伊诺斯 -->
+    <line x1="328" y1="122" x2="328" y2="178" stroke="#059669" stroke-width="1.5" marker-end="url(#jTea)"/>
+    <text x="348" y="152" font-size="8.5" fill="#059669">传递金版</text>
+
+    <!-- ── 拉曼人（对立方）── -->
+    <rect x="20" y="82" width="104" height="40" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="72" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text x="72" y="113" text-anchor="middle" font-size="9" fill="#f87171">Lamanites · 敌对</text>
+
+    <!-- 雅各 ↔ 拉曼人（对比关系） -->
+    <line x1="268" y1="102" x2="124" y2="102" stroke="#fca5a5" stroke-width="1.2" stroke-dasharray="4,2.5"/>
+    <text x="196" y="97" text-anchor="middle" font-size="8.5" fill="#f87171">第 3 章：以拉曼人</text>
+    <text x="196" y="107" text-anchor="middle" font-size="8.5" fill="#f87171">婚姻忠诚为例</text>
+
+    <!-- ── 谢伦（反基督）── -->
+    <rect x="600" y="82" width="112" height="40" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="2"/>
+    <text x="656" y="99" text-anchor="middle" font-size="12" font-weight="bold" fill="#9f1239">谢伦</text>
+    <text x="656" y="112" text-anchor="middle" font-size="9" fill="#f87171">Sherem · 反基督者</text>
+
+    <!-- 谢伦 → 雅各（对抗） -->
+    <line x1="600" y1="102" x2="388" y2="102" stroke="#dc2626" stroke-width="1.8" marker-end="url(#jRed)"/>
+    <text x="490" y="96" text-anchor="middle" font-size="8.5" fill="#dc2626">质问·否认基督</text>
+
+    <!-- 谢伦认罪后死亡 -->
+    <rect x="600" y="170" width="112" height="34" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="656" y="186" text-anchor="middle" font-size="11" font-weight="bold" fill="#64748b">谢伦认罪</text>
+    <text x="656" y="198" text-anchor="middle" font-size="8.5" fill="#94a3b8">死前认罪，信仰复苏</text>
+    <line x1="656" y1="122" x2="656" y2="170" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#jArr)"/>
+
+    <!-- ── 泽诺（引用的先知）── -->
+    <rect x="20" y="178" width="112" height="40" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="76" y="196" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">泽诺</text>
+    <text x="76" y="208" text-anchor="middle" font-size="9" fill="#7c3aed">Zenos · 古以色列先知（铜版）</text>
+
+    <!-- 泽诺 → 雅各（引用） -->
+    <line x1="132" y1="198" x2="268" y2="148" stroke="#c4b5fd" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#jArr)"/>
+    <text x="192" y="180" text-anchor="middle" font-size="8.5" fill="#a78bfa">第5章：橄榄</text>
+    <text x="192" y="190" text-anchor="middle" font-size="8.5" fill="#a78bfa">树比喻</text>
+
+    <!-- ── 以赛亚（间接引用）── -->
+    <rect x="434" y="178" width="112" height="40" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="490" y="196" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">以赛亚</text>
+    <text x="490" y="208" text-anchor="middle" font-size="9" fill="#7c3aed">Isaiah · 第4章 磐石预言</text>
+
+    <!-- 以赛亚 → 雅各 -->
+    <line x1="446" y1="183" x2="388" y2="130" stroke="#c4b5fd" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#jArr)"/>
+    <text x="432" y="164" text-anchor="middle" font-size="8.5" fill="#a78bfa">绊脚石</text>
+    <text x="432" y="174" text-anchor="middle" font-size="8.5" fill="#a78bfa">预言引用</text>
+
+    <!-- ── legend ── -->
+    <rect x="8" y="270" width="500" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <rect x="18" y="280" width="10" height="10" rx="2" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+    <text x="32" y="289" font-size="9" fill="#64748b">雅各书核心人物</text>
+    <rect x="148" y="280" width="10" height="10" rx="2" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="162" y="289" font-size="9" fill="#64748b">引用/援引先知</text>
+    <rect x="280" y="280" width="10" height="10" rx="2" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="294" y="289" font-size="9" fill="#64748b">对立方</text>
+    <rect x="18" y="296" width="10" height="10" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="32" y="305" font-size="9" fill="#64748b">已逝/历史人物</text>
+    <rect x="148" y="296" width="10" height="10" rx="2" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="162" y="305" font-size="9" fill="#64748b">家族成员</text>
+  </svg>
+</div>
+
+<!-- ══ 传承 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">传承</div></div>
+<div class="n amb">
+  <div class="nd">约 公元前 544 年</div>
+  <div class="nt">第 1 章　传承与开篇</div>
+  <div class="ne">Jacob's Introduction · 尼腓地 Land of Nephi</div>
+  <ul class="nl">
+    <li>尼腓 Nephi 在世时亲自膏立雅各为祭司与教师；雅各接受记录小版的使命</li>
+    <li>尼腓去世，众人深切哀悼——他们称他为伟大的保护者与引领者</li>
+    <li>离开耶路撒冷已逾五十年；尼腓人与拉曼人持续战争，Nephites 保住了他们的土地</li>
+    <li>雅各宣明：小版只记最宝贵的属灵内容，世俗史另载于大版；他将忠实履行使命</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">两套金版的分工</div>
+    <div class="se">Small &amp; Large Plates · 尼腓二书 4–5 章</div>
+    <div class="sd">小版：属灵内容<br>大版：政治历史<br>雅各书属于小版<br>——摩尔门经的神学核心</div>
+  </div>
+</div>
+
+<!-- 重大事件：尼腓逝世 -->
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">✦</span>
+  <div>
+    <div>先知尼腓 Nephi 于尼腓地辞世，众人悲恸</div>
+    <div class="ev-date">约 公元前 544 年 · 第 1 章</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 训道 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">训道</div></div>
+<div class="n ros">
+  <div class="nd">约 公元前 540 年</div>
+  <div class="nt">第 2 章　圣殿训道（上）：财富与贞洁</div>
+  <div class="ne">Temple Sermon Part I · 尼腓圣殿 Nephi's Temple</div>
+  <ul class="nl">
+    <li>雅各奉神命召集全体人民（包括妇女儿童）在圣殿前集会</li>
+    <li>第一警告：许多人因财富而骄傲自大，衣着华丽轻看贫穷弟兄——骄傲是首要大罪</li>
+    <li>第二警告：部分男性仿效大卫与所罗门行多妻之事——此乃行淫，令妻子儿女哀伤</li>
+    <li>"你们每人应有一妻；若神命令须生养众多，才另当别论。"——明确一夫一妻原则</li>
+    <li>神对骄傲与淫乱深感悲痛，祂倾听了妇女孩子们的祷告与哭声</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">大卫与所罗门</div>
+    <div class="se">David &amp; Solomon · 雅各 2:23–24</div>
+    <div class="sd">雅各明确批评：<br>大卫的多妻与<br>所罗门的许多妃嫔<br>令神憎恶，<br>除非神特别命令</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n ros">
+  <div class="nd">约 公元前 540 年</div>
+  <div class="nt">第 3 章　圣殿训道（下）：以拉曼人为鉴</div>
+  <div class="ne">Temple Sermon Part II · 尼腓圣殿 Nephi's Temple</div>
+  <ul class="nl">
+    <li>雅各以拉曼人为反面教材中的正面例子：他们恪守一夫一妻，对妻子忠诚，孩子充满爱</li>
+    <li>严词警告淫乱的尼腓人：你们的孩子将因此受苦，你们的后代将咒诅你们</li>
+    <li>拉曼人因信守婚姻之约，在这一点上比尼腓人更讨神喜悦</li>
+    <li>雅各以纯洁的心离开他们；他的衣服不染他们的罪——先知性的无罪宣告</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">拉曼人的反讽</div>
+    <div class="se">Lamanite Faithfulness · 雅各 3:5–7</div>
+    <div class="sd">在婚姻上，外邦人<br>（拉曼人）的表现<br>胜过"选民"——<br>先知性的道德反转</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 见证 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">见证</div></div>
+<div class="n tea">
+  <div class="nd">约 公元前 540–530 年</div>
+  <div class="nt">第 4 章　基督见证与绊脚石预言</div>
+  <div class="ne">Testimony of Christ &amp; the Stumbling Stone · 尼腓地</div>
+  <ul class="nl">
+    <li>雅各感慨：刻写金版费力艰辛，因此只记最宝贵的话——每一字都充满神圣重量</li>
+    <li>由圣灵的力量，我们知道基督将来受难、复活，并藉赎罪和好神与人</li>
+    <li>引以赛亚 Isaiah 28：以色列人因不接受基督这块"磐石"而绊倒——预见犹太人拒绝弥赛亚</li>
+    <li>"你们为何拒绝神的话？……他能刺穿那被造之物所不能刺穿的深处。"</li>
+    <li>通过神的圣洁秩序，靠信心与悔改得以与神和好——救赎教义的核心</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="note">
+    <div class="sn">以赛亚 28 章</div>
+    <div class="se">Isaiah 28:16 · 磐石预言</div>
+    <div class="sd">"我在锡安立了一块<br>石头，试验过的石头，<br>宝贵的房角石"<br>——弥赛亚将成为<br>以色列人的绊脚石</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 比喻 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">比喻</div></div>
+<div class="n vio">
+  <div class="nd">约 公元前 530–520 年</div>
+  <div class="nt">第 5 章　橄榄树比喻（泽诺先知）</div>
+  <div class="ne">Zenos's Allegory of the Olive Tree · 全书最长章节</div>
+  <ul class="nl">
+    <li>雅各大量引用铜版上的先知泽诺 Zenos 之预言——此先知未收录于圣经，乃摩尔门经独有</li>
+    <li><b>家主</b>（神）与<b>仆人</b>（先知）精心照料一株家橄榄树（以色列）</li>
+    <li>主树腐烂，主人将嫩枝接往野地各处（以色列散至世界各处）；野枝接入主树（外邦归主）</li>
+    <li>历经多次修剪、嫁接、施肥：树结出好坏果子——记录各世代以色列兴衰</li>
+    <li>末期：主人与仆人一同下田收获，<b>所有树木最终都结出好果</b>——末日全以色列归主的预言</li>
+    <li>泽诺的比喻呼应保罗（罗马书11章），却更详细——成为摩尔门神学中以色列聚集的核心文本</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">比喻结构</div>
+    <div class="se">Allegory Structure · 5章共77节</div>
+    <div class="sd">
+      <b>主树</b> = 以色列<br>
+      <b>嫩枝</b> = 散居族裔<br>
+      <b>野枝</b> = 外邦人<br>
+      <b>家主</b> = 神<br>
+      <b>仆人</b> = 先知<br>
+      <b>好果</b> = 灵性得救
+    </div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n vio">
+  <div class="nd">约 公元前 520 年</div>
+  <div class="nt">第 6 章　比喻的应用：悔改呼吁</div>
+  <div class="ne">Application of the Allegory · 尼腓地</div>
+  <ul class="nl">
+    <li>雅各应用泽诺的比喻：神已施展大能，祂的手伸展向你们——不要拒绝</li>
+    <li>末日必至：好树会被留存，坏树将被砍下投入火中</li>
+    <li>当趁祂门仍开着的时候进来；不然审判日到时，惟有悲哀与叹息</li>
+    <li>"哦，明智起来！凭你们灵魂所受的教导，而非凭人的智慧。"</li>
+  </ul>
+</div>
+<div class="si-sp"></div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 对抗 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">对抗</div></div>
+<div class="n blu">
+  <div class="nd">约 公元前 500–421 年</div>
+  <div class="nt">第 7 章　谢伦反基督与信仰复苏</div>
+  <div class="ne">Sherem the Anti-Christ · 尼腓地</div>
+  <ul class="nl">
+    <li>谢伦 Sherem：能言善辩、博学多才，公开宣扬"没有基督"——以律法否定预言</li>
+    <li>谢伦质问雅各："你怎能知道尚未发生的事？你将律法歪曲了！"</li>
+    <li>雅各回应：所有先知都见证了基督；若没有赎罪，律法毫无意义</li>
+    <li>谢伦要求神迹，雅各说：若神愿意，祂会向你显现——谢伦当场被神能击倒</li>
+    <li>谢伦卧床数日后要求众人集聚，临终公开认罪：基督是真实的，魔鬼欺骗了我</li>
+    <li>谢伦死后，众人因其认罪而深受震动，信仰大得复苏；后来拉曼人战争频繁，雅各年老</li>
+    <li>雅各将金版传给儿子<b>伊诺斯 Enos</b>，留下最后话语："再会，直到我因神恩典得以相见"</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">谢伦模式</div>
+    <div class="se">Anti-Christ Pattern · 雅各 7:1–23</div>
+    <div class="sd">谢伦是摩尔门经<br>首位反基督者，<br>其模式后来出现于<br>科里侯（阿尔玛 30）<br>——均以理性否定</div>
+  </div>
+  <div class="sb" style="margin-top:7px">
+    <div class="sn">神迹的意义</div>
+    <div class="se">Signs &amp; Faith · 雅各 7:14</div>
+    <div class="sd">神迹不产生信仰，<br>却证实信仰：<br>谢伦被击倒，<br>不是要信服他，<br>而是使众人确信</div>
+  </div>
+</div>
+
+<!-- 重大事件：雅各传位 -->
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">✦</span>
+  <div>
+    <div>雅各年迈，将金版传给儿子伊诺斯 Enos，结束记录</div>
+    <div class="ev-date">约 公元前 421 年 · 第 7 章末</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- ── legend ── -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>传承·开篇</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>圣殿训道（贞洁·财富）</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>基督见证·救赎教义</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>泽诺橄榄树比喻·末日聚集</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>谢伦反基督·信仰复苏</div>
+</div>
+
+<!-- ── olive tree allegory structure ── -->
+<div class="rel">
+  <div class="rel-title">橄榄树比喻结构示意 · ALLEGORY OF THE OLIVE TREE (Jacob 5)</div>
+  <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+    <defs>
+      <marker id="oArr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#6b7280"/>
+      </marker>
+      <marker id="oGrn" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#059669"/>
+      </marker>
+    </defs>
+
+    <!-- ── 主干：以色列主树 ── -->
+    <rect x="354" y="10" width="152" height="44" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+    <text x="430" y="28" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">主橄榄树（以色列）</text>
+    <text x="430" y="43" text-anchor="middle" font-size="9.5" fill="#059669">Master Olive Tree = Israel</text>
+
+    <!-- 主树腐烂 → 分散 -->
+    <text x="430" y="67" text-anchor="middle" font-size="8.5" fill="#dc2626">主树枝条腐烂 → 分散各地</text>
+
+    <!-- ── 三处野地（散居地）── -->
+    <!-- 野地 A (左上) -->
+    <rect x="30" y="80" width="130" height="54" rx="6" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="95" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">野地 A</text>
+    <text x="95" y="111" text-anchor="middle" font-size="9" fill="#b45309">接入嫩枝（尼腓人祖先）</text>
+    <text x="95" y="123" text-anchor="middle" font-size="8.5" fill="#b45309">最初结好果</text>
+
+    <!-- 野地 B (中上) -->
+    <rect x="354" y="80" width="152" height="54" rx="6" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="430" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">野地 B</text>
+    <text x="430" y="111" text-anchor="middle" font-size="9" fill="#b45309">接入嫩枝（其他散居族裔）</text>
+    <text x="430" y="123" text-anchor="middle" font-size="8.5" fill="#b45309">结果参差</text>
+
+    <!-- 野地 C (右上) -->
+    <rect x="700" y="80" width="130" height="54" rx="6" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="765" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">野地 C</text>
+    <text x="765" y="111" text-anchor="middle" font-size="9" fill="#b45309">接入嫩枝（其他民族）</text>
+    <text x="765" y="123" text-anchor="middle" font-size="8.5" fill="#b45309">结果参差</text>
+
+    <!-- 主树与野地之间的线 -->
+    <line x1="354" y1="54" x2="160" y2="80" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#oArr)"/>
+    <line x1="430" y1="54" x2="430" y2="80" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#oArr)"/>
+    <line x1="506" y1="54" x2="700" y2="80" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#oArr)"/>
+
+    <!-- 主树接入野枝 -->
+    <rect x="354" y="160" width="152" height="44" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="430" y="177" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">主树接入野枝</text>
+    <text x="430" y="191" text-anchor="middle" font-size="9" fill="#059669">外邦归主 Gentiles grafted in</text>
+
+    <!-- 野地线 → 主树 -->
+    <line x1="160" y1="134" x2="354" y2="168" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#oArr)"/>
+    <line x1="430" y1="134" x2="430" y2="160" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#oArr)"/>
+    <line x1="700" y1="134" x2="506" y2="168" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#oArr)"/>
+
+    <!-- ── 末日大聚集 ── -->
+    <rect x="280" y="240" width="300" height="44" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+    <text x="430" y="258" text-anchor="middle" font-size="13" font-weight="bold" fill="#065f46">末日：所有树结好果</text>
+    <text x="430" y="274" text-anchor="middle" font-size="9.5" fill="#059669">全以色列归主 · Last Days Gathering of Israel</text>
+    <line x1="430" y1="204" x2="430" y2="240" stroke="#059669" stroke-width="2" marker-end="url(#oGrn)"/>
+
+    <!-- 左侧说明 -->
+    <text x="10" y="168" font-size="9" fill="#64748b">主树 = 以色列全家</text>
+    <text x="10" y="180" font-size="9" fill="#64748b">嫩枝 = 散居后裔</text>
+    <text x="10" y="192" font-size="9" fill="#64748b">野枝 = 外邦归信者</text>
+    <text x="10" y="204" font-size="9" fill="#64748b">家主 = 神</text>
+    <text x="10" y="216" font-size="9" fill="#64748b">仆人 = 先知</text>
+
+    <!-- 右侧阶段说明 -->
+    <text x="852" y="58" text-anchor="end" font-size="9" fill="#94a3b8">第一阶段</text>
+    <text x="852" y="68" text-anchor="end" font-size="9" fill="#94a3b8">腐烂与分散</text>
+    <text x="852" y="146" text-anchor="end" font-size="9" fill="#94a3b8">第二阶段</text>
+    <text x="852" y="156" text-anchor="end" font-size="9" fill="#94a3b8">嫁接与修剪</text>
+    <text x="852" y="230" text-anchor="end" font-size="9" fill="#94a3b8">第三阶段</text>
+    <text x="852" y="240" text-anchor="end" font-size="9" fill="#94a3b8">末日大聚集</text>
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

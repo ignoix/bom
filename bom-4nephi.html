@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 第四尼腓书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#0f766e;background:#f0fdf9;border-color:#5eead4}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.cya{background:#ecfeff;border-color:#67e8f9}.cya .nt{color:#164e63}.cya .ne{color:#0e7490}
+
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+.cnote{background:#fff;border:1.5px solid #67e8f9;border-radius:7px;padding:8px 10px}
+.cnote .sn{color:#164e63}.cnote .se{color:#0e7490}
+
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 时间线</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">第四尼腓书</span>
+  <span class="he">4 Nephi · Golden Age · Two Hundred Years of Peace · Pride Cycle · Division Returns</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab on" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · LARGE PLATES · ABRIDGED BY MORMON</div>
+  <div class="intro-h">第四尼腓书 · 4 Nephi</div>
+  <div class="intro-en">The Golden Age · No Poor · No Pride · Two Centuries of Peace · Then Decay &amp; Division</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>公元 34–321 年</b></span>
+    <span class="im">地点 <b>全美洲大地</b></span>
+    <span class="im">章节 <b>1 章（仅 49 节）</b></span>
+    <span class="im">核心 <b>黄金时代 · 骄傲循环 · 再度分裂</b></span>
+  </div>
+</div>
+
+<!-- ── timeline chart ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">时间轴示意 · TIMELINE OVERVIEW</div>
+  <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0;background:#f8fafc">
+    <!-- Axis -->
+    <line x1="40" y1="110" x2="830" y2="110" stroke="#d1d5db" stroke-width="1.5"/>
+    <!-- Year markers -->
+    <text x="40" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">AD 34</text>
+    <line x1="40" y1="112" x2="40" y2="120" stroke="#94a3b8"/>
+    <text x="192" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">AD 100</text>
+    <line x1="192" y1="112" x2="192" y2="120" stroke="#94a3b8"/>
+    <text x="382" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">AD 200</text>
+    <line x1="382" y1="112" x2="382" y2="120" stroke="#94a3b8"/>
+    <text x="571" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">AD 300</text>
+    <line x1="571" y1="112" x2="571" y2="120" stroke="#94a3b8"/>
+    <text x="640" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">AD 321</text>
+    <line x1="640" y1="112" x2="640" y2="120" stroke="#94a3b8"/>
+
+    <!-- Golden Age bar AD 34-200 -->
+    <rect x="40" y="80" width="342" height="28" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="211" y="99" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">黄金时代（约 167 年）</text>
+
+    <!-- Decay bar AD 200-231 -->
+    <rect x="382" y="80" width="57" height="28" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="410" y="99" text-anchor="middle" font-size="8" fill="#92400e">衰落</text>
+
+    <!-- Division bar AD 231-321 -->
+    <rect x="439" y="80" width="200" height="28" rx="4" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="539" y="99" text-anchor="middle" font-size="9" fill="#9f1239">再度分裂（约 90 年）</text>
+
+    <!-- Ammaron hides plates -->
+    <line x1="640" y1="80" x2="640" y2="60" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <rect x="644" y="46" width="170" height="28" rx="4" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2"/>
+    <text x="729" y="62" text-anchor="middle" font-size="9" fill="#4c1d95">亚马仑藏金版（AD 321）</text>
+
+    <!-- Key events above -->
+    <circle cx="40" cy="110" r="4" fill="#6d28d9"/>
+    <text x="40" y="72" text-anchor="middle" font-size="8" fill="#4c1d95">基督升天</text>
+    <circle cx="192" cy="110" r="4" fill="#059669"/>
+    <text x="192" y="72" text-anchor="middle" font-size="8" fill="#065f46">第一代过世</text>
+    <circle cx="382" cy="110" r="4" fill="#d97706"/>
+    <text x="382" y="72" text-anchor="middle" font-size="8" fill="#92400e">骄傲回归</text>
+    <circle cx="439" cy="110" r="4" fill="#dc2626"/>
+    <text x="439" y="72" text-anchor="middle" font-size="8" fill="#9f1239">再度分裂</text>
+    <circle cx="640" cy="110" r="4" fill="#7c3aed"/>
+
+    <!-- Summary note -->
+    <text x="430" y="160" text-anchor="middle" font-size="9" fill="#475569">第四尼腓书仅 49 节，却记录了近三百年的历史——是摩尔门经中时间跨度最大的单一章节</text>
+    <text x="430" y="174" text-anchor="middle" font-size="8.5" fill="#94a3b8">黄金时代的核心标志："再无拉曼人，再无尼腓人——他们都是基督的儿女，皆成为一体"（4 Ne 1:17）</text>
+    <text x="430" y="188" text-anchor="middle" font-size="8" fill="#94a3b8">衰落的第一标志：有人自称"尼腓人"（AD 231）——民族认同的回归，标志着合一的终结</text>
+  </svg>
+</div>
+
+<!-- ══ 黄金时代 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">黄金<br>时代</div></div>
+<div class="n tea">
+  <div class="nd">公元 34–200 年</div>
+  <div class="nt">第 1–23 节　基督升天后，合一与丰盛——没有贫穷，没有骄傲</div>
+  <div class="ne">Post-Christ Era · No Poor · No Contention · All Things Common · Miracles Continue</div>
+  <ul class="nl">
+    <li>基督升天后，门徒们在全地传道，建立教会；全地所有的人——包括拉曼人与尼腓人——都归改了</li>
+    <li>"再没有拉曼人，也没有尼腓人，没有——伊实玛利人，没有玛所尼人……他们都成了基督的儿女"</li>
+    <li>众人施行<b>共产制度（All Things Common）</b>——没有富人，没有穷人；他们把一切都归为公共所有</li>
+    <li>十二门徒施行神迹：医病、驱邪、使死人复活；整个大地因基督的能力充满喜乐与平安</li>
+    <li>第一代亲历基督的人相继去世（约 AD 100），但信仰传递给了第二代——他们同样义正</li>
+    <li>约 110 年，尼腓四世（Nephi IV）将记录传给儿子亚马一世（Amos I）——信仰在家族中稳定传承</li>
+    <li>这段黄金时代（约 167 年）是摩尔门经中描述时间最长、却笔墨最少的时期——因为太平，无事可叙</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">共产制度</div>
+    <div class="se">All Things Common · 第 1:3</div>
+    <div class="sd">没有贫穷<br>没有骄傲<br>公共分享<br>167年<br>无纷争<br>→ 摩尔门经<br>最接近<br>乌托邦的描述</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 衰落开始 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">衰落<br>初现</div></div>
+<div class="n amb">
+  <div class="nd">约 公元 200–231 年</div>
+  <div class="nt">第 24–35 节　骄傲重现，私有财产回归，教会开始分裂</div>
+  <div class="ne">Pride Returns · Private Property · Church Splits · Robbers Re-emerge</div>
+  <ul class="nl">
+    <li>约公元 200 年，一小部分人开始<b>不再共享财产</b>，重建骄傲与等级——黄金时代宣告终结</li>
+    <li>他们拒绝接受悔改与洗礼；教会内部出现了"称呼自己是尼腓人而拒绝接受基督名字的人"</li>
+    <li>那些离开教会的人建立了<b>反宗教团体（-ites）</b>：称为"尼腓人"、"雅各人"、"约瑟人"等——以民族血统而非信仰认同</li>
+    <li><b>盖地安顿匪帮</b>重新出现，带来更大的腐败；"他们再度变得如同从前一般邪恶"</li>
+    <li>摩尔门在这里用非常悲痛的语气记录："如此短暂的岁月过去，这么好的一个民族……"</li>
+    <li>亚马一世在约 194 年将记录传给亚马二世（Amos II）；亚马二世又传给亚马仑（Ammaron）</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">骄傲的第一步</div>
+    <div class="se">Pride Enters · 第 1:24</div>
+    <div class="sd">衰落不是<br>突然的<br>从一小群<br>人开始——<br>不再共享<br>→ 骄傲<br>→ 分裂<br>→ 腐败</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 再度分裂 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">再度<br>分裂</div></div>
+<div class="n ros">
+  <div class="nd">约 公元 231–321 年</div>
+  <div class="nt">第 35–49 节　拉曼人与尼腓人再度对立，亚马仑藏金版于科莫拉山</div>
+  <div class="ne">Division Restored · Lamanites vs. Nephites Again · Ammaron Hides the Plates (AD 321)</div>
+  <ul class="nl">
+    <li>约公元 231 年，有人自称"拉曼人"，种族认同的回归标志着两族对立的重新开始</li>
+    <li>此后九十年，社会腐败持续深化——盖地安顿匪帮横行，杀人放火，教会日益衰弱</li>
+    <li>约公元 306 年，亚马仑（Ammaron）被圣灵引导，将所有神圣的记录（金版）<b>藏于科莫拉山（Hill Shim）</b></li>
+    <li>约公元 321 年，亚马仑找到年轻的<b>摩尔门（Mormon）</b>（约十岁），告诉他金版的藏处，嘱咐他长大后继续记录</li>
+    <li>第四尼腓书在这里以一句沉重的话语结束：从此"邪恶的人遍布全地"</li>
+    <li>这一章是摩尔门经中节奏最快的叙事——近三百年的历史，仅用 49 节记录完毕</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">亚马仑藏版</div>
+    <div class="se">Ammaron Hides Plates · AD 321</div>
+    <div class="sd">被圣灵感召<br>将金版<br>藏入科莫拉<br>→ 告诉少年<br>摩尔门<br>将来的使命<br>→ 传承链条<br>被保全了</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">📜</span>
+  <div>
+    <div>亚马仑告诉年幼的摩尔门：金版藏于科莫拉山，等你长大后，去取出来，继续刻写尼腓人的历史</div>
+    <div class="ev-date">约 公元 321 年 · 第 1:47–49 · 摩尔门书的开篇从这里接续</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- legend -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>黄金时代（AD 34–200）</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>骄傲回归·衰落初现（AD 200–231）</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>再度分裂·亚马仑藏版（AD 231–321）</div>
+</div>
+
+<!-- ── Diagram ── -->
+<div class="rel">
+  <div class="rel-title">历史循环示意 · THE CYCLE IN 4 NEPHI</div>
+  <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+
+    <!-- Cycle of Pride diagram -->
+    <!-- 1. Christ appears → Unity -->
+    <rect x="20" y="20" width="160" height="54" rx="8" fill="#d1fae5" stroke="#6ee7b7" stroke-width="2"/>
+    <text x="100" y="42" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">基督亲临</text>
+    <text x="100" y="56" text-anchor="middle" font-size="8.5" fill="#059669">AD 34 · 合一开始</text>
+    <text x="100" y="67" text-anchor="middle" font-size="7.5" fill="#94a3b8">无尼腓人·无拉曼人</text>
+
+    <!-- 2. Golden Age -->
+    <rect x="20" y="108" width="160" height="54" rx="8" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
+    <text x="100" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">黄金时代</text>
+    <text x="100" y="143" text-anchor="middle" font-size="8.5" fill="#0e7490">AD 34–200</text>
+    <text x="100" y="154" text-anchor="middle" font-size="7.5" fill="#94a3b8">无贫穷·无纷争</text>
+    <line x1="100" y1="74" x2="100" y2="108" stroke="#059669" stroke-width="1.5" marker-end="url(#c1)"/>
+
+    <!-- 3. Prosperity → Pride -->
+    <rect x="20" y="196" width="160" height="54" rx="8" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+    <text x="100" y="218" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">骄傲兴起</text>
+    <text x="100" y="231" text-anchor="middle" font-size="8.5" fill="#b45309">约 AD 200</text>
+    <text x="100" y="242" text-anchor="middle" font-size="7.5" fill="#94a3b8">放弃共产·等级回归</text>
+    <line x1="100" y1="162" x2="100" y2="196" stroke="#d97706" stroke-width="1.5" marker-end="url(#c2)"/>
+
+    <!-- Arrows -->
+    <defs>
+      <marker id="c1" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#059669"/></marker>
+      <marker id="c2" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#d97706"/></marker>
+      <marker id="c3" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/></marker>
+      <marker id="c4" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
+    </defs>
+
+    <!-- 4. Division -->
+    <rect x="220" y="196" width="160" height="54" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="2"/>
+    <text x="300" y="218" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">再度分裂</text>
+    <text x="300" y="231" text-anchor="middle" font-size="8.5" fill="#be123c">AD 231</text>
+    <text x="300" y="242" text-anchor="middle" font-size="7.5" fill="#94a3b8">尼腓人vs拉曼人再现</text>
+    <line x1="180" y1="223" x2="220" y2="223" stroke="#dc2626" stroke-width="1.5" marker-end="url(#c3)"/>
+
+    <!-- 5. Record hidden -->
+    <rect x="420" y="196" width="160" height="54" rx="8" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
+    <text x="500" y="218" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">亚马仑藏版</text>
+    <text x="500" y="231" text-anchor="middle" font-size="8.5" fill="#7c3aed">AD 321</text>
+    <text x="500" y="242" text-anchor="middle" font-size="7.5" fill="#94a3b8">科莫拉山·托付摩尔门</text>
+    <line x1="380" y1="223" x2="420" y2="223" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#c4)"/>
+
+    <!-- Context box -->
+    <rect x="620" y="14" width="224" height="230" rx="8" fill="#fff" stroke="#e2e8f0"/>
+    <text x="732" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">第四尼腓书的独特地位</text>
+    <text x="628" y="52" font-size="8.5" fill="#475569">· 仅 1 章 49 节</text>
+    <text x="628" y="66" font-size="8.5" fill="#475569">· 跨越 287 年（AD 34–321）</text>
+    <text x="628" y="80" font-size="8.5" fill="#475569">· 记录者：尼腓四世 → 亚马</text>
+    <text x="628" y="94" font-size="8.5" fill="#475569">  一世 → 亚马二世 → 亚马仑</text>
+    <text x="628" y="108" font-size="8.5" fill="#475569">· 黄金时代无须多写，因为</text>
+    <text x="628" y="122" font-size="8.5" fill="#475569">  "一切都很好"就是结论</text>
+    <text x="628" y="142" font-size="9" font-weight="bold" fill="#065f46">黄金时代的条件：</text>
+    <text x="628" y="157" font-size="8.5" fill="#475569">✓ 无贫穷·无争吵</text>
+    <text x="628" y="171" font-size="8.5" fill="#475569">✓ 无说谎·无奸淫</text>
+    <text x="628" y="185" font-size="8.5" fill="#475569">✓ 无谋杀·无盗窃</text>
+    <text x="628" y="199" font-size="8.5" fill="#475569">✓ 共同拥有·皆兄弟</text>
+    <text x="628" y="219" font-size="8" fill="#94a3b8">→ 骄傲循环的"顶峰"状态</text>
+    <text x="628" y="233" font-size="8" fill="#94a3b8">→ 记录衰落才需要大量笔墨</text>
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

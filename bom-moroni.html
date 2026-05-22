@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 摩罗乃书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#db2777;background:#fdf2f8;border-color:#f9a8d4}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.cya{background:#ecfeff;border-color:#67e8f9}.cya .nt{color:#164e63}.cya .ne{color:#0e7490}
+.pin{background:#fdf2f8;border-color:#f9a8d4}.pin .nt{color:#9d174d}.pin .ne{color:#db2777}
+
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+.cnote{background:#fff;border:1.5px solid #67e8f9;border-radius:7px;padding:8px 10px}
+.cnote .sn{color:#164e63}.cnote .se{color:#0e7490}
+.pnote{background:#fff;border:1.5px solid #f9a8d4;border-radius:7px;padding:8px 10px}
+.pnote .sn{color:#9d174d}.pnote .se{color:#db2777}
+
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 时间线</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">摩罗乃书</span>
+  <span class="he">Moroni · Alone · Ether (Jaredites) · Faith &amp; Gifts · Moroni's Promise</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab on" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · MORONI'S OWN WRITINGS · FINAL BOOK</div>
+  <div class="intro-h">摩罗乃书 · Moroni</div>
+  <div class="intro-en">Last Nephite · Alone · Ether Summary · Church Ordinances · Faith &amp; Gifts · Moroni's Promise</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>约公元 401–421 年</b></span>
+    <span class="im">地点 <b>旷野（流亡中） · 科莫拉山</b></span>
+    <span class="im">章节 <b>10 章</b></span>
+    <span class="im">核心 <b>最后的独孤见证 · 摩罗乃应许 · 金版封印埋藏</b></span>
+  </div>
+</div>
+
+<!-- ── context panel ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">摩罗乃的处境 · MORONI'S SITUATION</div>
+  <svg viewBox="0 0 860 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0;background:#f8fafc">
+    <defs>
+      <marker id="mnA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#db2777"/></marker>
+    </defs>
+
+    <!-- Timeline -->
+    <line x1="40" y1="80" x2="820" y2="80" stroke="#d1d5db" stroke-width="1.5"/>
+
+    <!-- AD 385 Cumorah -->
+    <circle cx="80" cy="80" r="6" fill="#9f1239"/>
+    <line x1="80" y1="74" x2="80" y2="44" stroke="#9f1239" stroke-width="1.2"/>
+    <rect x="0" y="26" width="160" height="18" rx="4" fill="#fee2e2" stroke="#fca5a5"/>
+    <text x="80" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#9f1239">AD 385 · 科莫拉山之战</text>
+
+    <!-- AD 401 Moroni writes Mormon 8 -->
+    <circle cx="250" cy="80" r="6" fill="#db2777"/>
+    <line x1="250" y1="74" x2="250" y2="44" stroke="#db2777" stroke-width="1.2"/>
+    <rect x="182" y="26" width="136" height="18" rx="4" fill="#fdf2f8" stroke="#f9a8d4"/>
+    <text x="250" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#9d174d">约 AD 401 · 开始写摩8</text>
+
+    <!-- AD 421 Moroni buries plates -->
+    <circle cx="720" cy="80" r="8" fill="#db2777" stroke="#fff" stroke-width="2"/>
+    <line x1="720" y1="72" x2="720" y2="44" stroke="#db2777" stroke-width="1.5"/>
+    <rect x="635" y="26" width="170" height="18" rx="4" fill="#fdf2f8" stroke="#f9a8d4" stroke-width="1.5"/>
+    <text x="720" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#9d174d">AD 421 · 埋藏金版</text>
+
+    <!-- Time bar: Moroni alone -->
+    <rect x="80" y="88" width="640" height="16" rx="4" fill="rgba(219,39,119,0.12)" stroke="#f9a8d4"/>
+    <text x="400" y="100" text-anchor="middle" font-size="8.5" fill="#be185d">摩罗乃独自存活约 36 年（AD 385–421）</text>
+
+    <!-- Writing stages -->
+    <rect x="250" y="118" width="130" height="42" rx="5" fill="#fdf2f8" stroke="#f9a8d4"/>
+    <text x="315" y="134" text-anchor="middle" font-size="9" font-weight="bold" fill="#9d174d">摩尔门书 8–9 章</text>
+    <text x="315" y="145" text-anchor="middle" font-size="8" fill="#db2777">摩罗乃接续父亲记录</text>
+    <text x="315" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 401</text>
+    <line x1="250" y1="104" x2="315" y2="118" stroke="#db2777" stroke-width="1" marker-end="url(#mnA)"/>
+
+    <rect x="400" y="118" width="130" height="42" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+    <text x="465" y="134" text-anchor="middle" font-size="9" font-weight="bold" fill="#7c2d12">以帖书（缩编）</text>
+    <text x="465" y="145" text-anchor="middle" font-size="8" fill="#c2410c">雅列人的历史</text>
+    <text x="465" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 401–421</text>
+
+    <rect x="550" y="118" width="130" height="42" rx="5" fill="#fdf2f8" stroke="#f9a8d4"/>
+    <text x="615" y="134" text-anchor="middle" font-size="9" font-weight="bold" fill="#9d174d">摩罗乃书 1–10 章</text>
+    <text x="615" y="145" text-anchor="middle" font-size="8" fill="#db2777">教规·信心·应许</text>
+    <text x="615" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 421</text>
+    <line x1="720" y1="104" x2="615" y2="118" stroke="#db2777" stroke-width="1" marker-end="url(#mnA)"/>
+
+    <!-- Context summary -->
+    <rect x="20" y="178" width="820" height="96" rx="5" fill="#fff" stroke="#e2e8f0"/>
+    <text x="430" y="196" text-anchor="middle" font-size="10" font-weight="bold" fill="#9d174d">摩罗乃：最孤独的见证者</text>
+    <text x="430" y="210" text-anchor="middle" font-size="9" fill="#475569">在科莫拉山战役之后，摩罗乃独自在荒野流亡约三十六年，无论走到哪里，拉曼人都想杀他</text>
+    <text x="430" y="224" text-anchor="middle" font-size="8.5" fill="#475569">他一再写道："我不知道自己是否还活着"、"我没有木料铸版，也没有矿"——在极度匮乏中继续完成记录</text>
+    <text x="430" y="238" text-anchor="middle" font-size="8.5" fill="#94a3b8">他在摩罗乃书中写道："若我的错误被人看见，要记住这是人的软弱——神能将软弱变为力量"（第 12:27）</text>
+    <text x="430" y="252" text-anchor="middle" font-size="8" fill="#94a3b8">公元 421 年，他将金版埋藏于科莫拉山，完成了从里海出走耶路撒冷（公元前 600 年）开始的历史使命</text>
+    <text x="430" y="265" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 1400 年后（1823年），摩罗乃以天使的身份向约瑟·斯密显现，带领他找到金版</text>
+  </svg>
+</div>
+
+<!-- ══ 接续父亲的记录 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#9f1239"></div><div class="ph-text">父亲<br>遗志</div></div>
+<div class="n ros">
+  <div class="nd">约 公元 401 年</div>
+  <div class="nt">第 8–9 章（摩尔门书）　摩罗乃在父亲战死后接续写作</div>
+  <div class="ne">Moroni Continues After Mormon's Death · Witness of Destruction · Alone in the Wilderness</div>
+  <ul class="nl">
+    <li>摩尔门书第 8 章开篇：<b>"愿知道此书写于摩尔门死后；他被拉曼人杀害"</b>——儿子用最朴素的文字记录父亲的死讯</li>
+    <li>摩罗乃记录：整个尼腓民族几乎全被消灭，只剩下他一个人流亡旷野，"我无处可去"</li>
+    <li>他宣告：这部金版将来会因神的恩典被带出，"给那些被这经典感动而悔改的人做见证"</li>
+    <li>第 9 章：摩罗乃向未来的读者发出警告，"你们不可不信神迹，因为神昨日今日永远不变"</li>
+    <li>他批评未来时代的教会："当你们高举某些人凌驾于别人之上……你们已经离弃了福音"</li>
+    <li>他强调：<b>金版的不完美</b>——摩尔门经是人写的，人必有弱点，但神的能力能赐力量于软弱之中</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">父亲战死</div>
+    <div class="se">Mormon's Death · 摩尔门 8:3</div>
+    <div class="sd">摩罗乃写：<br>"我父亲<br>摩尔门<br>被拉曼人<br>杀害了"<br>——全书最<br>沉痛的一行</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 教规教导 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text">教规<br>教导</div></div>
+<div class="n cya">
+  <div class="nd">约 公元 401–421 年</div>
+  <div class="nt">第 1–6 章（摩罗乃书）　摩罗乃写下教会教规：祭司、圣餐、会员资格</div>
+  <div class="ne">Church Ordinances · Sacrament Prayers · Church Membership · Gifts of the Spirit</div>
+  <ul class="nl">
+    <li>摩罗乃起初没有打算再写，但被圣灵感动，将他父亲所教导的教会教规记录下来</li>
+    <li>第 2 章：基督教导如何授予圣灵；第 3 章：祭司的按立礼</li>
+    <li>第 4–5 章：完整的<b>圣餐祷词（Sacrament Prayers）</b>——饼与水的祷告被原文照录</li>
+    <li>这些圣餐祷词至今仍在末世圣徒教会的圣餐仪式中按原文朗读，是摩尔门经中使用频率最高的片段</li>
+    <li>第 6 章：教会成员制度——信徒需如何被教会名册记录，如何被开除，以及悔改的机制</li>
+    <li>第 7 章：摩尔门关于<b>信心、希望与仁爱</b>的讲道——"若无仁爱，你所做的一切都是枉然"</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="cnote">
+    <div class="sn">圣餐祷词</div>
+    <div class="se">Sacrament Prayer · 第 4–5章</div>
+    <div class="sd">被原文照录<br>两千年后<br>仍在世界各<br>地每周使用<br>→ 这片段是<br>全书中被<br>引用最多的</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 信心与神迹 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">信心<br>神迹</div></div>
+<div class="n vio">
+  <div class="nd">约 公元 401–421 年</div>
+  <div class="nt">第 7–9 章　信心、希望、仁爱——神迹不会止息</div>
+  <div class="ne">Faith · Hope · Charity · Gifts of Spirit · Miracles Do Not Cease</div>
+  <ul class="nl">
+    <li>第 7 章（摩尔门的讲道）：神迹的来源是信心，神迹不会在信心存在的地方止息——"凡不信神迹的人，不认识基督"</li>
+    <li>摩尔门比较信心与希望与仁爱：信心使人得盼望；盼望使人得仁爱；<b>仁爱（Charity）是基督纯洁的爱</b></li>
+    <li>"仁爱从不止息"——这段文字与哥林多前书 13 章遥相呼应，是摩尔门经中最著名的仁爱颂歌</li>
+    <li>第 8 章（摩罗乃的教训）：关于<b>幼儿洗礼</b>的争议——摩罗乃强烈谴责幼儿洗礼，认为这是错误的，因为幼儿无罪</li>
+    <li>第 9 章：摩罗乃对"不信神迹"者的呼吁——"难道你不知道神昨日今日直到永远都是一样的吗？"</li>
+    <li>神的各种恩赐（语言、翻译、预言、医病……）——这些赐给所有相信之人，不会因时代而止息</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">仁爱颂</div>
+    <div class="se">Charity · 第 7:46</div>
+    <div class="sd">摩尔门说：<br>"抓住仁爱<br>这是最好<br>的——若你<br>拥有仁爱<br>在最后日<br>神就会说<br>你是好的"</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 摩罗乃应许 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#db2777"></div><div class="ph-text">摩罗乃<br>应许</div></div>
+<div class="n pin">
+  <div class="nd">约 公元 421 年（最后章节）</div>
+  <div class="nt">第 10 章　最后的应许：真诚祈问者必得圣灵的见证</div>
+  <div class="ne">Moroni's Promise · Seek with Sincere Heart · Holy Ghost Will Bear Witness · Final Farewell</div>
+  <ul class="nl">
+    <li>摩罗乃写下全书最后的邀请：当你读完此书，<b>以真诚的心、真正的意图，以对基督的信心</b>向神祈问</li>
+    <li>"神必借着圣灵的能力，向你显明这些事的真实性"——这就是著名的<b>摩罗乃应许（Moroni's Promise）</b></li>
+    <li>他邀请读者记住神对他们所做的一切，以感恩的心读这部记录</li>
+    <li>他列举圣灵的恩赐：语言、知识、信仰、医病、神迹、预言……"这些恩赐永远不止息"</li>
+    <li>他向读者道别："我对你们说：很快，你会在基督的审判台前见到我"——这是全书最后的话</li>
+    <li>摩罗乃随即将金版封印，埋入科莫拉山——时年约公元 421 年</li>
+    <li>从公元前 600 年里海出走，到公元 421 年摩罗乃埋版，这段故事历时整整一千年</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="pnote">
+    <div class="sn">摩罗乃应许</div>
+    <div class="se">Moroni's Promise · 第 10:4–5</div>
+    <div class="sd">以真诚的心<br>真正的意图<br>对基督的信心<br>祈问神<br>→ 圣灵将<br>向你作证<br>这事的<br>真实性</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">📿</span>
+  <div>
+    <div>摩罗乃将金版埋于科莫拉山——约公元 421 年，最后一位尼腓人完成了他的使命</div>
+    <div class="ev-date">约 AD 421 · 从里海出走（BC 600）算起，历时 1021 年 · 约 1400 年后，摩罗乃以天使之身向约瑟·斯密显现</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- legend -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>摩罗乃接续父亲记录·孤独见证</div>
+  <div class="lg-item"><div class="lg-box" style="background:#ecfeff;border-color:#67e8f9"></div>教会教规·圣餐祷词</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>信心·希望·仁爱颂</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fdf2f8;border-color:#f9a8d4"></div>摩罗乃应许·最后告别·埋藏金版</div>
+</div>
+
+<!-- ── Final diagram ── -->
+<div class="rel">
+  <div class="rel-title">摩尔门经的完整弧线 · THE ARC OF THE BOOK OF MORMON</div>
+  <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+    <defs>
+      <marker id="arc" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#64748b"/></marker>
+    </defs>
+
+    <!-- Timeline arc -->
+    <path d="M 40,200 Q 200,60 430,50 Q 600,44 700,100 Q 760,135 820,200" fill="none" stroke="#d1d5db" stroke-width="2.5"/>
+
+    <!-- BC 600 start -->
+    <circle cx="40" cy="200" r="7" fill="#dc2626"/>
+    <text x="40" y="220" text-anchor="middle" font-size="8.5" fill="#9f1239" font-weight="bold">BC 600</text>
+    <text x="40" y="231" text-anchor="middle" font-size="7.5" fill="#94a3b8">里海出走</text>
+
+    <!-- BC 91 Judges -->
+    <circle cx="180" cy="100" r="5" fill="#2563eb"/>
+    <text x="180" y="90" text-anchor="middle" font-size="8" fill="#1e3a8a">BC 91</text>
+    <text x="180" y="79" text-anchor="middle" font-size="7" fill="#94a3b8">法官时代</text>
+
+    <!-- AD 34 Christ -->
+    <circle cx="430" cy="50" r="10" fill="#6d28d9" stroke="#fff" stroke-width="2"/>
+    <text x="430" y="36" text-anchor="middle" font-size="9" fill="#4c1d95" font-weight="bold">AD 34</text>
+    <text x="430" y="25" text-anchor="middle" font-size="8" fill="#94a3b8">基督亲临</text>
+    <text x="430" y="14" text-anchor="middle" font-size="7.5" fill="#94a3b8">（最高峰）</text>
+
+    <!-- AD 200 decay -->
+    <circle cx="580" cy="62" r="5" fill="#d97706"/>
+    <text x="600" y="56" text-anchor="middle" font-size="8" fill="#92400e">AD 200</text>
+    <text x="600" y="67" text-anchor="middle" font-size="7" fill="#94a3b8">骄傲回归</text>
+
+    <!-- AD 385 Cumorah -->
+    <circle cx="730" cy="135" r="7" fill="#9f1239"/>
+    <text x="730" y="155" text-anchor="middle" font-size="8.5" fill="#9f1239" font-weight="bold">AD 385</text>
+    <text x="730" y="166" text-anchor="middle" font-size="7.5" fill="#94a3b8">科莫拉山</text>
+
+    <!-- AD 421 Buried -->
+    <circle cx="820" cy="200" r="7" fill="#db2777"/>
+    <text x="820" y="220" text-anchor="middle" font-size="8.5" fill="#db2777" font-weight="bold">AD 421</text>
+    <text x="820" y="231" text-anchor="middle" font-size="7.5" fill="#94a3b8">金版埋藏</text>
+
+    <!-- Books label below arc -->
+    <text x="40" y="248" text-anchor="start" font-size="8" fill="#475569">一书·二书·雅各·以挪士·雅龙·奥姆尼</text>
+    <text x="220" y="248" text-anchor="middle" font-size="8" fill="#1e3a8a">摩赛亚·阿尔玛·希拉曼</text>
+    <text x="430" y="248" text-anchor="middle" font-size="9" fill="#4c1d95" font-weight="bold">三书（顶点）</text>
+    <text x="600" y="248" text-anchor="middle" font-size="8" fill="#92400e">四书·摩尔门</text>
+    <text x="770" y="248" text-anchor="middle" font-size="8" fill="#db2777">摩罗乃</text>
+
+    <!-- Summary -->
+    <rect x="20" y="260" width="820" height="30" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="430" y="274" text-anchor="middle" font-size="9" fill="#475569">摩罗乃书是摩尔门经的封底——以最孤独的声音，写下最普世的邀请：真诚祈问，圣灵必证明此书的真实性</text>
+    <text x="430" y="286" text-anchor="middle" font-size="8" fill="#94a3b8">整部摩尔门经历时 1021 年（BC 600–AD 421），以里海家族的信仰之旅开始，以最后一人的孤独见证结束</text>
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

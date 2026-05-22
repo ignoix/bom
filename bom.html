@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 尼腓一书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+/* header */
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#92400e;background:#fef3c7;border-color:#fde68a}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+/* page grid: phase(68px) | main(1fr) | side(176px) */
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+/* intro banner */
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+/* phase label */
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+/* arrow */
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+/* node */
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+/* node colour themes */
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+
+/* major event marker */
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+/* side note */
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+/* symbol key */
+.sym{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym{border-color:#6ee7b7}
+
+/* legend */
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+.lg-line{width:22px;height:0;border:none}
+
+/* ── relationship diagram ── */
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 時間線</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">尼腓一书</span>
+  <span class="he">1 Nephi · His Reign and Ministry</span>
+  <nav class="nav">
+    <a class="tab on" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · SMALL PLATES OF NEPHI</div>
+  <div class="intro-h">尼腓一书 · 1 Nephi</div>
+  <div class="intro-en">Record of Nephi — From Jerusalem to the Promised Land</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>约公元前 600–589 年</b></span>
+    <span class="im">起点 <b>耶路撒冷 Jerusalem</b></span>
+    <span class="im">终点 <b>应许之地 Promised Land（美洲 Americas）</b></span>
+    <span class="im">章节 <b>22 章</b></span>
+  </div>
+</div>
+
+<!-- ── journey map ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">地图示意 · JOURNEY MAP</div>
+  <svg viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="aA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#d97706"/>
+      </marker>
+    </defs>
+
+    <!-- Ocean background -->
+    <rect width="860" height="380" fill="#bfdbfe" rx="8"/>
+
+    <!-- ── Land masses ── -->
+    <!-- Europe / Anatolia strip (top) -->
+    <polygon points="0,0 232,0 226,27 210,42 174,47 130,37 80,23 33,11 0,7" fill="#bbf7d0"/>
+    <!-- Africa (left) -->
+    <polygon points="0,7 33,11 80,23 130,37 156,47 163,73 160,124 148,190 128,270 103,360 58,380 0,380" fill="#bbf7d0"/>
+    <!-- Sinai Peninsula -->
+    <polygon points="160,70 173,52 191,63 194,94 179,110 163,100 159,80" fill="#fde68a"/>
+    <!-- Levant (Israel / Canaan) -->
+    <polygon points="164,47 179,42 191,53 189,71 177,77 164,69 163,53" fill="#bbf7d0"/>
+    <!-- Mesopotamia / Iran / Caucasus -->
+    <polygon points="189,42 240,31 320,19 420,17 500,37 534,31 584,19 640,23 660,45 640,68 580,80 500,87 450,79 390,69 320,61 262,57 214,54 194,54" fill="#bbf7d0"/>
+    <!-- Arabian Peninsula (desert amber) -->
+    <polygon points="184,64 197,47 229,35 315,23 401,21 455,57 470,120 453,194 413,270 353,307 279,314 227,284 197,247 191,184 189,117" fill="#fde68a"/>
+    <!-- Indian Subcontinent -->
+    <polygon points="528,29 598,19 644,44 653,81 646,159 603,214 559,221 529,194 514,147 517,71 523,37" fill="#bbf7d0"/>
+    <!-- SE Asia -->
+    <polygon points="646,27 720,17 748,41 735,77 700,94 666,91 646,67" fill="#bbf7d0"/>
+    <!-- East Asia (top-right) -->
+    <polygon points="720,0 860,0 860,33 810,41 748,39 720,19" fill="#bbf7d0"/>
+    <!-- Indonesia hint -->
+    <ellipse cx="696" cy="158" rx="34" ry="16" fill="#bbf7d0" opacity="0.7"/>
+    <ellipse cx="750" cy="184" rx="27" ry="13" fill="#bbf7d0" opacity="0.65"/>
+    <!-- Americas (right strip) -->
+    <polygon points="824,0 860,0 860,380 824,380 804,340 794,280 791,204 798,134 812,71 822,27" fill="#bbf7d0"/>
+
+    <!-- ── Water labels ── -->
+    <text x="94" y="50" fill="#2563eb" font-size="9" font-style="italic" text-anchor="middle">地中海</text>
+    <text x="94" y="61" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle">Mediterranean</text>
+    <text x="174" y="150" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" transform="rotate(-78,174,150)">红海 Red Sea</text>
+    <text x="408" y="98" fill="#2563eb" font-size="7" font-style="italic" text-anchor="middle">波斯湾</text>
+    <text x="355" y="348" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">阿拉伯海 Arabian Sea</text>
+    <text x="548" y="328" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">印度洋 Indian Ocean</text>
+    <text x="710" y="308" fill="#2563eb" font-size="11" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="710" y="322" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific Ocean</text>
+
+    <!-- ── Land labels ── -->
+    <text x="308" y="182" fill="#92400e" font-size="9" font-style="italic" text-anchor="middle" opacity="0.75">阿拉伯半岛</text>
+    <text x="308" y="194" fill="#92400e" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.75">Arabian Peninsula</text>
+    <text x="839" y="175" fill="#065f46" font-size="8" font-weight="600" text-anchor="middle" transform="rotate(90,839,175)">美洲 Americas</text>
+
+    <!-- ── Journey route ── -->
+    <!-- Southward land route: Jerusalem → Red Sea camp → Arabia interior → Nahom -->
+    <polyline points="186,67 191,107 195,136 208,169 224,207 248,256"
+      fill="none" stroke="#d97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Arrow mid-route -->
+    <polyline points="211,174 216,186"
+      fill="none" stroke="#d97706" stroke-width="2.5" stroke-linecap="round" marker-end="url(#aA)"/>
+    <!-- Eastward leg: Nahom → Bountiful -->
+    <polyline points="248,256 302,242 370,233 428,233"
+      fill="none" stroke="#d97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#aA)"/>
+    <!-- Ocean crossing (dashed): Bountiful → Americas -->
+    <polyline points="428,233 492,268 572,298 662,294 759,250"
+      fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="8,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#aA)"/>
+
+    <!-- ── Location markers ── -->
+    <!-- 1. Jerusalem — blue dot -->
+    <circle cx="186" cy="66" r="6" fill="#1d4ed8" stroke="#fff" stroke-width="2"/>
+    <rect x="195" y="53" width="76" height="23" rx="3" fill="rgba(255,255,255,0.88)"/>
+    <text x="199" y="64" fill="#1e3a8a" font-size="10.5" font-weight="700">耶路撒冷</text>
+    <text x="199" y="74" fill="#1e3a8a" font-size="8.5">Jerusalem</text>
+
+    <!-- 2. Valley of Lemuel — amber dot -->
+    <circle cx="194" cy="136" r="5" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+    <text x="184" y="129" fill="#92400e" font-size="9" text-anchor="end">利曼谷</text>
+    <text x="184" y="140" fill="#92400e" font-size="7.5" text-anchor="end">Valley of Lemuel</text>
+
+    <!-- 3. Nahom — red diamond (death event) -->
+    <polygon points="248,245 256,256 248,267 240,256" fill="#dc2626" stroke="#fff" stroke-width="1.5"/>
+    <rect x="260" y="245" width="148" height="26" rx="3" fill="rgba(255,255,255,0.88)"/>
+    <text x="264" y="256" fill="#9f1239" font-size="9.5" font-weight="700">那合木 Nahom</text>
+    <text x="264" y="267" fill="#9f1239" font-size="8">以实玛利长眠于此 ✦  约前 592 年</text>
+
+    <!-- 4. Bountiful — teal dot -->
+    <circle cx="428" cy="233" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+    <rect x="438" y="222" width="106" height="23" rx="3" fill="rgba(255,255,255,0.88)"/>
+    <text x="442" y="233" fill="#065f46" font-size="10" font-weight="700">丰美之地</text>
+    <text x="442" y="243" fill="#065f46" font-size="8">Bountiful · 造船处</text>
+
+    <!-- 5. Promised Land — green dot -->
+    <circle cx="759" cy="248" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+    <rect x="640" y="235" width="114" height="28" rx="3" fill="rgba(255,255,255,0.88)"/>
+    <text x="645" y="246" fill="#065f46" font-size="9.5" font-weight="700">应许之地</text>
+    <text x="645" y="256" fill="#065f46" font-size="8">Promised Land（美洲）</text>
+
+    <!-- ── Title box ── -->
+    <rect x="6" y="6" width="220" height="38" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="700">尼腓一书路线示意图</text>
+    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">1 Nephi Route · Not to Scale</text>
+
+    <!-- ── Legend box ── -->
+    <rect x="6" y="314" width="248" height="60" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <circle cx="20" cy="326" r="4" fill="#1d4ed8"/>
+    <text x="28" y="330" fill="#475569" font-size="9">起点 / Start</text>
+    <circle cx="113" cy="326" r="4" fill="#d97706"/>
+    <text x="121" y="330" fill="#475569" font-size="9">途经 / Waypoint</text>
+    <circle cx="190" cy="326" r="4" fill="#059669"/>
+    <text x="198" y="330" fill="#475569" font-size="9">终点 / End</text>
+    <polygon points="20,340 26,346 20,352 14,346" fill="#dc2626"/>
+    <text x="30" y="350" fill="#475569" font-size="9">重大事件 / Key Event</text>
+    <line x1="14" y1="365" x2="36" y2="365" stroke="#d97706" stroke-width="2"/>
+    <text x="42" y="369" fill="#475569" font-size="9">陆路 / Land Route</text>
+    <line x1="130" y1="365" x2="152" y2="365" stroke="#d97706" stroke-width="2" stroke-dasharray="4,2.5"/>
+    <text x="158" y="369" fill="#475569" font-size="9">海路 / Sea Route</text>
+  </svg>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议 · Locations are approximate and academically debated</div>
+</div>
+
+<!-- ══ 启程 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">启程</div></div>
+<div class="n amb">
+  <div class="nd">约 公元前 600 年</div>
+  <div class="nt">第 1–2 章　李海出走</div>
+  <div class="ne">Lehi Departs · 耶路撒冷 Jerusalem → 红海 Red Sea</div>
+  <ul class="nl">
+    <li>李海 Lehi 得异象：见神宝座，预言耶路撒冷将被毁</li>
+    <li>奉命带家人出城，放弃金银财产</li>
+    <li>红海旁扎营，拉曼 Laman、利曼 Lemuel 开始抱怨</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">拉曼、利曼</div>
+    <div class="se">Laman &amp; Lemuel · 长兄</div>
+    <div class="sd">认为父亲是"狂妄的幻想者"，贯穿全书不断叛逆</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 取经 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">取经</div></div>
+<div class="n vio">
+  <div class="nd">约 公元前 600 年</div>
+  <div class="nt">第 3–5 章　尼腓取铜版</div>
+  <div class="ne">Nephi Obtains Brass Plates · 耶路撒冷 Jerusalem</div>
+  <ul class="nl">
+    <li>前两次被拉班 Laban 拒绝，财物遭抢</li>
+    <li>第三次：尼腓 Nephi 夜入城，殺醉卧的拉班，化装取走铜版（律法书＋族谱）</li>
+    <li>仆人柔各 Zoram 识破后自愿同行，成为尼腓人祖先之一</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">拉班 Laban</div>
+    <div class="se">守护铜版者 · 反派</div>
+    <div class="sd">贪婪，抢财物，追杀；醉卧街头被尼腓所杀</div>
+  </div>
+  <div class="sb" style="border-color:#86efac">
+    <div class="sn" style="color:#065f46">柔各 Zoram</div>
+    <div class="se" style="color:#16a34a">拉班的仆人 · 新盟友</div>
+    <div class="sd">发现尼腓身份后起誓同行，不再叛逃</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n vio">
+  <div class="nd">约 公元前 600 年</div>
+  <div class="nt">第 6 章　记录目的说明</div>
+  <div class="ne">Nephi's Writing Intent · 利曼谷 Valley of Lemuel</div>
+  <ul class="nl">
+    <li>尼腓说明：此金版只记"劝人归向神"之事，不录完整族谱</li>
+    <li>世俗历史另记于大版（含李海族谱及列王事迹）</li>
+    <li>确立小版的属灵写作目的——后世摩尔门经的核心来源</li>
+  </ul>
+</div>
+<div class="si-sp"></div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n vio">
+  <div class="nd">约 公元前 598 年</div>
+  <div class="nt">第 7 章　以实玛利加入</div>
+  <div class="ne">Ishmael's Family Joins · 耶路撒冷 Jerusalem → 旷野</div>
+  <ul class="nl">
+    <li>再次回城，接以实玛利 Ishmael 全家同行（为婚配）</li>
+    <li>途中拉曼等人叛逆，绑住尼腓；以实玛利女儿求情才得释放</li>
+    <li>儿子们各娶以实玛利的女儿，队伍正式扩大</li>
+  </ul>
+</div>
+<div class="si-sp"></div>
+
+<!-- ══ 异象 ══ -->
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">异象</div></div>
+<div class="n tea">
+  <div class="nd">约 公元前 597 年</div>
+  <div class="nt">第 8 章　李海的生命树异象</div>
+  <div class="ne">Lehi's Dream: Tree of Life · 旷野 Wilderness</div>
+  <ul class="nl">
+    <li>梦见白色生命树，果子象征神的爱</li>
+    <li>铁杆沿窄路延伸；霧霭中许多人迷失或跌入污水</li>
+    <li>宽广大楼中的人嘲笑走向生命树的人；拉曼、利曼拒绝前来</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">象征 Symbols</div>
+    <div class="sd">树 Tree = 神的爱<br>铁杆 Iron Rod = 神的话语<br>霧霭 Mist = 试探<br>大楼 Great Building = 世俗骄傲</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n tea">
+  <div class="nd">约 公元前 597 年</div>
+  <div class="nt">第 9–10 章　两套金版与弥赛亚预言</div>
+  <div class="ne">Two Sets of Plates &amp; Messianic Prophecy · 利曼谷 Valley of Lemuel</div>
+  <ul class="nl">
+    <li>第 9 章：尼腓另造小版，专记属灵内容（即今日摩尔门经小版之源）</li>
+    <li>李海预言：六百年后弥赛亚降临，施洗约翰 John the Baptist 先来预备道路</li>
+    <li>弥赛亚受洗、传道、受难、复活；以色列如橄榄枝，散而后聚于末日</li>
+    <li>尼腓深受感动，渴望亲自见到这一切——引出第 11–15 章大异象</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">六百年预言</div>
+    <div class="sd">约前 597 年李海<br>预见施洗约翰与基督<br>引出尼腓渴望大异象</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n tea">
+  <div class="nd">约 公元前 597 年</div>
+  <div class="nt">第 11–15 章　尼腓大异象</div>
+  <div class="ne">Nephi's Grand Vision · 旷野高山 High Mountain</div>
+  <ul class="nl">
+    <li>见童贞女马利亚 Mary 怀抱婴孩——弥赛亚 Messiah 降生</li>
+    <li>见基督受洗、传道、被钉十字架、复活</li>
+    <li>见美洲历史、大叛道、末日以色列聚集；铁杆 = 经文</li>
+  </ul>
+</div>
+<div class="si-sp"></div>
+
+<!-- ══ 旅程 ══ -->
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">旅程</div></div>
+<div class="n blu">
+  <div class="nd">约 公元前 597–592 年</div>
+  <div class="nt">第 16 章　利阿弘那与折断的弓</div>
+  <div class="ne">The Liahona &amp; Broken Bow · 阿拉伯旷野 Arabian Wilderness</div>
+  <ul class="nl">
+    <li>帐篷门口发现神造指引球利阿弘那 Liahona，靠信心指引方向</li>
+    <li>尼腓弓折断；众人挨饿抱怨，尼腓默制新弓，借利阿弘那觅食</li>
+  </ul>
+</div>
+<div class="si-sp"></div>
+
+<!-- 重大事件：以实玛利去世 -->
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">✦</span>
+  <div>
+    <div>以实玛利 Ishmael 在旷野中去世</div>
+    <div class="ev-date">约 公元前 595 年 · 第 16 章</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n blu">
+  <div class="nd">约 公元前 592 年</div>
+  <div class="nt">第 17 章　丰美之地与造船</div>
+  <div class="ne">Bountiful &amp; Building the Ship · 阿拉伯海岸 Arabian Coast</div>
+  <ul class="nl">
+    <li>八年旷野跋涉后抵达丰美之地 Bountiful——果树丰盛的海岸</li>
+    <li>神命令尼腓按神的方式造船，不依世人惯例</li>
+    <li>拉曼、利曼嘲笑，被神能力震慑后方才协助完工</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">兄弟的嘲笑</div>
+    <div class="se">Brothers' Mockery</div>
+    <div class="sd">"我们在旷野已够苦了，还要造船？你是个傻瓜。"</div>
+  </div>
+</div>
+
+<!-- ══ 航行与抵达 ══ -->
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">航行</div></div>
+<div class="n ros">
+  <div class="nd">约 公元前 589 年</div>
+  <div class="nt">第 18 章　海上叛乱与风暴</div>
+  <div class="ne">Mutiny &amp; Storm at Sea · 太平洋 Pacific Ocean</div>
+  <ul class="nl">
+    <li>航行中拉曼等人放纵；尼腓规劝，被绑于船上</li>
+    <li>利阿弘那失效，狂风大作、倒退四天；撒利亚 Sariah 病倒</li>
+    <li>兄长恐惧求饶，释放尼腓；尼腓祷告，风平浪静</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">规律</div>
+    <div class="se">Pattern</div>
+    <div class="sd">叛逆 → 风暴 → 受苦 → 悔改 → 平静<br>全书反复出现的模式</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<div class="ph-sp"></div>
+<div class="n ros">
+  <div class="nd">约 公元前 589 年</div>
+  <div class="nt">第 19–22 章　抵达与以赛亚预言</div>
+  <div class="ne">Arrival &amp; Isaiah's Prophecies · 应许之地 Promised Land</div>
+  <ul class="nl">
+    <li>安全登陆，种下种子，发现金银铜矿；神应许之地成真</li>
+    <li>尼腓引用以赛亚书 Isaiah 48–49，预言以色列末日聚集</li>
+    <li>神的话语将从锡安（美洲）与耶路撒冷 Jerusalem 两地并出</li>
+  </ul>
+</div>
+<div class="si-sp"></div>
+
+<!-- ══ 图例 ══ -->
+<div class="legend">
+  <div class="legend-title">图例 LEGEND</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>启程阶段</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>取经阶段</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>异象阶段</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>旅程阶段</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>航行/抵达</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fffbeb;border-color:#f59e0b"></div>✦ 重大事件</div>
+  <div class="lg-item"><span style="font-size:14px;color:#e2e8f0">┄┄</span>&nbsp;支线叙事</div>
+</div>
+
+<!-- ══ 人物关系图 ══ -->
+<div class="rel">
+  <div class="rel-title">人物关系图 · CHARACTER MAP · 尼腓一书 1 Nephi</div>
+  <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" style="background:#fff;border-radius:10px;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/>
+      </marker>
+      <marker id="arr-r" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#fca5a5"/>
+      </marker>
+      <marker id="arr-g" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#6ee7b7"/>
+      </marker>
+    </defs>
+
+    <!-- ── Lehi family: parents ── -->
+    <rect x="55" y="22" width="86" height="32" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="98" y="37" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">李海 Lehi</text>
+    <text x="98" y="49" text-anchor="middle" font-size="9" fill="#b45309">族长 · Patriarch</text>
+
+    <text x="157" y="40" text-anchor="middle" font-size="11" fill="#94a3b8">━━</text>
+
+    <rect x="170" y="22" width="100" height="32" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="220" y="37" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">撒利亚 Sariah</text>
+    <text x="220" y="49" text-anchor="middle" font-size="9" fill="#b45309">母亲 · Mother</text>
+
+    <!-- parent → children line -->
+    <line x1="160" y1="54" x2="160" y2="78" stroke="#d1d5db" stroke-width="1.5"/>
+    <line x1="30"  y1="78" x2="360" y2="78" stroke="#d1d5db" stroke-width="1.5"/>
+    <line x1="30"  y1="78" x2="30"  y2="90" stroke="#d1d5db" stroke-width="1.5"/>
+    <line x1="120" y1="78" x2="120" y2="90" stroke="#d1d5db" stroke-width="1.5"/>
+    <line x1="230" y1="78" x2="230" y2="90" stroke="#d1d5db" stroke-width="1.5"/>
+    <line x1="330" y1="78" x2="330" y2="90" stroke="#d1d5db" stroke-width="1.5"/>
+
+    <!-- four sons -->
+    <rect x="-4" y="90" width="68" height="34" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="30" y="106" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">拉曼</text>
+    <text x="30" y="117" text-anchor="middle" font-size="9" fill="#f87171">Laman · 叛逆</text>
+
+    <rect x="86" y="90" width="68" height="34" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="120" y="106" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">利曼</text>
+    <text x="120" y="117" text-anchor="middle" font-size="9" fill="#f87171">Lemuel · 叛逆</text>
+
+    <rect x="196" y="90" width="68" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="230" y="106" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">参姆</text>
+    <text x="230" y="117" text-anchor="middle" font-size="9" fill="#94a3b8">Sam · 跟随</text>
+
+    <rect x="296" y="90" width="68" height="34" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+    <text x="330" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">尼腓</text>
+    <text x="330" y="117" text-anchor="middle" font-size="9" fill="#3b82f6">Nephi · 主角</text>
+
+    <!-- marriage dashes sons → daughters label -->
+    <line x1="30"  y1="124" x2="30"  y2="152" stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1.2"/>
+    <line x1="120" y1="124" x2="120" y2="152" stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1.2"/>
+    <line x1="230" y1="124" x2="230" y2="152" stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1.2"/>
+    <line x1="330" y1="124" x2="330" y2="152" stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1.2"/>
+    <text x="180" y="147" text-anchor="middle" font-size="9" fill="#94a3b8">婚配 Marriage</text>
+
+    <!-- daughters group -->
+    <rect x="-4" y="154" width="368" height="28" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="180" y="173" text-anchor="middle" font-size="11" fill="#065f46">以实玛利的四个女儿 · Ishmael's Four Daughters</text>
+
+    <!-- Ishmael -->
+    <line x1="364" y1="168" x2="400" y2="168" stroke="#6ee7b7" stroke-width="1.2"/>
+    <rect x="400" y="154" width="120" height="28" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="460" y="164" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">以实玛利</text>
+    <text x="460" y="176" text-anchor="middle" font-size="9" fill="#059669">Ishmael · 友族族长</text>
+
+    <!-- ── right side: Laban + Zoram ── -->
+    <rect x="530" y="22" width="94" height="32" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="577" y="37" text-anchor="middle" font-size="12" font-weight="bold" fill="#9f1239">拉班 Laban</text>
+    <text x="577" y="49" text-anchor="middle" font-size="9" fill="#f87171">铜版持有者 · 反派</text>
+
+    <rect x="678" y="22" width="94" height="32" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="725" y="37" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">柔各 Zoram</text>
+    <text x="725" y="49" text-anchor="middle" font-size="9" fill="#059669">拉班仆人 · 后盟友</text>
+
+    <!-- Laban → Nephi: conflict -->
+    <line x1="530" y1="54" x2="530" y2="86" stroke="#fca5a5" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <line x1="364" y1="86" x2="530" y2="86" stroke="#fca5a5" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-r)"/>
+    <text x="447" y="82" text-anchor="middle" font-size="9" fill="#f87171">对立 conflict</text>
+
+    <!-- Zoram → Nephi: alliance -->
+    <line x1="678" y1="58" x2="678" y2="96" stroke="#6ee7b7" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <line x1="364" y1="96" x2="678" y2="96" stroke="#6ee7b7" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+    <text x="521" y="92" text-anchor="middle" font-size="9" fill="#059669">结盟 alliance</text>
+
+    <!-- Laban → Zoram: employs -->
+    <line x1="624" y1="38" x2="678" y2="38" stroke="#cbd5e1" stroke-width="1.2" marker-end="url(#arr)"/>
+    <text x="651" y="33" text-anchor="middle" font-size="8" fill="#94a3b8">主仆</text>
+
+    <!-- ── legend ── -->
+    <rect x="460" y="200" width="12" height="12" rx="2" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.2"/>
+    <text x="476" y="211" font-size="10" fill="#64748b">叛逆者 Rebels</text>
+
+    <rect x="540" y="200" width="12" height="12" rx="2" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2"/>
+    <text x="556" y="211" font-size="10" fill="#64748b">主角 Hero</text>
+
+    <rect x="600" y="200" width="12" height="12" rx="2" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.2"/>
+    <text x="616" y="211" font-size="10" fill="#64748b">盟友 Allies</text>
+
+    <rect x="660" y="200" width="12" height="12" rx="2" fill="#fefce8" stroke="#fde68a" stroke-width="1.2"/>
+    <text x="676" y="211" font-size="10" fill="#64748b">族长 Patriarchs</text>
+
+    <line x1="460" y1="228" x2="486" y2="228" stroke="#94a3b8" stroke-dasharray="4,3" stroke-width="1.2"/>
+    <text x="492" y="232" font-size="10" fill="#64748b">婚配/关联</text>
+    <line x1="556" y1="228" x2="582" y2="228" stroke="#fca5a5" stroke-dasharray="4,3" stroke-width="1.2"/>
+    <text x="588" y="232" font-size="10" fill="#64748b">对立</text>
+    <line x1="630" y1="228" x2="656" y2="228" stroke="#6ee7b7" stroke-dasharray="4,3" stroke-width="1.2"/>
+    <text x="662" y="232" font-size="10" fill="#64748b">结盟</text>
+
+    <!-- note -->
+    <text x="400" y="264" font-size="9" fill="#cbd5e1">* 以实玛利 Ishmael 约公元前 595 年在旷野中去世（第 16 章）</text>
+  </svg>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

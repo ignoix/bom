@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>摩爾門經時間線</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #15100a;
+  color: #e8d5b7;
+  font-family: 'PingFang TC', '微軟正黑體', 'Noto Sans TC', sans-serif;
+  padding: 16px 20px;
+  user-select: none;
+}
+h1 {
+  text-align: center; font-size: 17px; margin-bottom: 12px;
+  color: #b89060; letter-spacing: 1px; font-weight: 300;
+}
+
+/* ════ 頂部工具列（單行）═══════════════════════════════════ */
+.toolbar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; flex-wrap: wrap; justify-content: center;
+}
+/* 縮放 */
+.ctrl-btn {
+  background: #1e1810; border: 1px solid #3d2b1f; color: #b89060;
+  border-radius: 5px; width: 28px; height: 28px; font-size: 16px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.ctrl-btn:hover:not(:disabled) { background: #3d2b1f; color: #e8d5b7; }
+.ctrl-btn:disabled { opacity: 0.25; cursor: default; }
+.zoom-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 130px; height: 3px; background: #3d2b1f; border-radius: 2px; outline: none; cursor: pointer;
+}
+.zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: #c9a84c; cursor: pointer;
+}
+.zoom-label { min-width: 38px; text-align: center; font-size: 12px; color: #c9a84c; font-weight: 600; }
+.ctrl-reset {
+  background: #1e1810; border: 1px solid #3d2b1f; color: #8c6a48;
+  border-radius: 5px; padding: 0 8px; height: 28px; font-size: 11px; cursor: pointer;
+  transition: all 0.15s; font-family: inherit;
+}
+.ctrl-reset:hover { background: #3d2b1f; color: #e8d5b7; }
+
+/* 視窗年份範圍 */
+.viewport-years {
+  font-size: 11px; color: #8c6a48; min-width: 170px; text-align: center;
+  border-left: 1px solid #3d2b1f; padding-left: 10px;
+}
+
+/* 工具列分隔 */
+.tb-sep { width: 1px; height: 20px; background: #3d2b1f; flex-shrink: 0; }
+
+/* 紀元快捷導航 */
+.era-lbl { font-size: 10px; color: #8c6a48; letter-spacing: 1px; }
+.era-btn {
+  background: #1e1810; border: 1px solid #3d2b1f; color: #8c6a48;
+  border-radius: 4px; padding: 2px 7px; font-size: 10px; cursor: pointer;
+  transition: all 0.15s; font-family: inherit;
+}
+.era-btn:hover { background: #3d2b1f; border-color: #5d4030; color: #d9c090; }
+
+/* ════ 分組篩選列 ═══════════════════════════════════════════ */
+.filters { margin-bottom: 12px; }
+.fg-row {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 6px 10px; justify-content: center;
+}
+.fg-label {
+  font-size: 9px; letter-spacing: 2px; font-weight: 700;
+  white-space: nowrap; padding: 0 2px; text-transform: uppercase;
+}
+.fg-sep { width: 1px; height: 20px; background: #3d2b1f; align-self: center; flex-shrink: 0; margin: 0 4px; }
+
+/* 各區段 chip（左=開關 右=▾詳情） */
+.fchip-wrap {
+  display: inline-flex; border-radius: 12px;
+  border: 1px solid #3d2b1f; overflow: hidden;
+  transition: border-color 0.15s;
+}
+.fchip-wrap:hover { border-color: #5d4030; }
+.fchip-wrap.sec-off { opacity: 0.35; }
+.fchip-tog {
+  padding: 3px 7px; font-size: 11px; font-weight: 600;
+  cursor: pointer; background: transparent;
+  border: none; font-family: inherit;
+  display: flex; align-items: center; gap: 3px;
+  transition: background 0.12s;
+}
+.fchip-tog:hover { background: rgba(255,255,255,0.06); }
+.fchip-wrap.pinned .fchip-tog { cursor: default; padding-left: 9px; }
+.fchip-wrap.pinned .fchip-tog:hover { background: transparent; }
+.fchip-dot { font-size: 6px; opacity: 0.8; }
+.fchip-more {
+  padding: 3px 6px; font-size: 9px; color: #705540;
+  cursor: pointer; background: transparent;
+  border: none; border-left: 1px solid #3d2b1f;
+  font-family: inherit; transition: all 0.12s;
+}
+.fchip-more:hover { background: rgba(255,255,255,0.06); color: #b89060; }
+
+/* 全部展開/收起 */
+.master-toggle {
+  background: transparent; border: 1px solid #3d2b1f; color: #8c6a48;
+  border-radius: 10px; padding: 3px 10px; font-size: 10px; cursor: pointer;
+  transition: all 0.15s; font-family: inherit; letter-spacing: 0.5px;
+}
+.master-toggle:hover { background: #1e1810; border-color: #5d4030; color: #b89060; }
+
+/* ════ 外框佈局 ═════════════════════════════════════════════ */
+.outer { display: flex; border: 1px solid #2d2015; border-radius: 8px; overflow: hidden; background: #0c0a06; }
+
+/* ── 左側固定列標籤 ──────────────────────────────────── */
+.row-labels { flex-shrink: 0; width: 76px; background: #120e09; border-right: 1px solid #2d2015; }
+.lbl {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; color: #705540;
+  border-bottom: 1px solid #1e1710;
+  text-align: center; padding: 0 4px; line-height: 1.4; white-space: pre-line;
+}
+.lbl-axis { height: 28px; }
+.lbl-evt  { height: 24px; }
+.lbl-row  { height: 36px; color: #b89060; font-weight: 600; font-size: 10px; letter-spacing: 0.5px; }
+.lbl-sep  {
+  height: 28px; font-size: 10px; letter-spacing: 1.5px; font-weight: 700;
+  border-top-width: 2px; border-top-style: solid;
+}
+
+/* ── 可橫捲區 ─────────────────────────────────────────── */
+.scroll-area { flex: 1; overflow-x: auto; overflow-y: hidden; cursor: grab; }
+.scroll-area.dragging { cursor: grabbing; }
+.timeline    { position: relative; }
+
+/* ── 年份軸 ───────────────────────────────────────────── */
+.year-axis { height: 28px; position: relative; border-bottom: 1px solid #2d2015; background: #0c0a06; }
+.y-tick    { position: absolute; bottom: 0; width: 1px; height: 5px; background: #2d2015; }
+.y-label   { position: absolute; top: 5px; font-size: 9px; color: #8c6a48; transform: translateX(-50%); white-space: nowrap; }
+
+/* ── 分隔線（含區段標題）─────────────────────────────────── */
+.section-sep {
+  height: 28px; border-top-width: 2px; border-top-style: solid;
+  border-bottom: 1px solid #2d2015;
+  display: flex; align-items: center; padding-left: 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+/* ── 分組間隔帶 ───────────────────────────────────────── */
+.section-sep.group-break { height: 36px; border-top-width: 3px; opacity: 1; gap: 8px; }
+.sep-group-lbl { font-size: 8px; letter-spacing: 3px; font-weight: 800; padding: 2px 7px; border-radius: 3px; background: rgba(255,255,255,0.1); }
+.sep-title-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; opacity: 0.8; }
+.lbl-sep.group-break { height: 36px !important; border-top-width: 3px; }
+
+/* ── 事件帶 ───────────────────────────────────────────── */
+.evt-strip { height: 24px; position: relative; border-bottom: 1px solid #2d2015; }
+.evt-mark {
+  position: absolute; top: 0; height: 100%; width: 14px;
+  transform: translateX(-50%); cursor: pointer; z-index: 15;
+  display: flex; align-items: center; justify-content: center;
+  --mc: #c9a84c;
+}
+.evt-mark::after {
+  content: ''; display: block; width: 6px; height: 6px;
+  background: var(--mc); transform: rotate(45deg); border-radius: 1px;
+  transition: all 0.15s; opacity: 0.7;
+}
+.evt-mark:hover::after { transform: rotate(45deg) scale(1.6); opacity: 1; filter: brightness(1.3); }
+.evt-mark.multi::after { width: 8px; height: 8px; }
+
+/* ── 朝代橫列 ─────────────────────────────────────────── */
+.rows       { position: relative; }
+.row-stripe { position: absolute; left: 0; right: 0; height: 36px; }
+.grid-line  { position: absolute; top: 0; bottom: 0; width: 1px; }
+.bar {
+  position: absolute; height: 28px; top: 4px;
+  border-radius: 3px; display: flex; align-items: center; justify-content: center;
+  overflow: hidden; cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: filter 0.15s;
+}
+.bar:hover { filter: brightness(1.35); z-index: 50; }
+.bar span {
+  font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7); padding: 0 4px;
+  white-space: nowrap; pointer-events: none;
+}
+.now-line { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(251,191,36,0.3); z-index: 30; }
+
+/* ── 工具提示 ─────────────────────────────────────────── */
+#tip {
+  position: fixed; background: rgba(21,16,10,0.97); border: 1px solid #3d2b1f;
+  border-radius: 8px; padding: 10px 14px; font-size: 12px;
+  display: none; z-index: 999; pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.7); line-height: 1.9; max-width: 320px;
+}
+#tip strong { font-size: 14px; color: #f0e0c0; display: block; }
+#tip .sub   { color: #8a6030; font-size: 10px; display: block; margin-bottom: 3px; }
+#tip .ehd   { font-size: 11px; font-weight: 700; display: block; margin-bottom: 3px; letter-spacing: 0.5px; }
+#tip .erow  { color: #d9c090; font-size: 11px; display: block; padding-left: 12px; position: relative; line-height: 1.7; }
+#tip .erow::before { content: '·'; position: absolute; left: 2px; color: #6a4a28; }
+
+/* ── Wikipedia 地圖面板 ─────────────────────────────────────── */
+#mapPanel {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  width: 320px; max-height: 80vh;
+  background: #120e09; border: 1px solid #3d2b1f; border-radius: 12px;
+  display: none; flex-direction: column; z-index: 600; overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.85);
+}
+#mpHead {
+  padding: 14px 16px 12px; border-bottom: 1px solid #2d2015;
+  background: #0f0c07; flex-shrink: 0;
+}
+#mpName  { font-size: 15px; font-weight: 700; }
+#mpEn    { font-size: 10px; color: #8a6030; letter-spacing: 0.3px; margin-top: 2px; }
+#mpYears { font-size: 11px; color: #b89060; margin-top: 5px; }
+#mpLoading { padding: 28px 16px; text-align: center; color: #705540; font-size: 12px; flex-shrink: 0; }
+#mpImg   { width: 100%; display: none; object-fit: contain; max-height: 200px; background: #0c0a06; flex-shrink: 0; }
+#mpDesc  {
+  padding: 12px 16px; font-size: 12px; color: #b89060; line-height: 1.75;
+  overflow-y: auto; flex: 1; min-height: 0; border-top: 1px solid #2d2015;
+}
+#mpFoot  {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-top: 1px solid #2d2015;
+  background: #0f0c07; flex-shrink: 0;
+}
+#mpWiki  { font-size: 11px; color: #7db8e8; text-decoration: none; }
+#mpWiki:hover { text-decoration: underline; }
+#mpClose {
+  background: #1e1810; border: 1px solid #3d2b1f; color: #b89060;
+  border-radius: 5px; padding: 4px 12px; font-size: 11px; cursor: pointer;
+  font-family: inherit; transition: all 0.15s;
+}
+#mpClose:hover { background: #3d2b1f; color: #e8d5b7; }
+
+/* ── 十字線年份指示 ─────────────────────────────────────── */
+#crosshair {
+  position: fixed; width: 1px; pointer-events: none; z-index: 200;
+  background: rgba(255,255,255,0.12); display: none;
+}
+#crossYear {
+  position: fixed; pointer-events: none; z-index: 201;
+  background: rgba(21,16,10,0.95); border: 1px solid #3d2b1f;
+  border-radius: 3px; padding: 2px 6px; font-size: 10px; color: #b89060;
+  transform: translateX(-50%); display: none; white-space: nowrap;
+}
+
+/* ── 浮動選單面板 ─────────────────────────────────────────── */
+.filter-panel {
+  position: fixed; z-index: 800;
+  background: #120e09; border: 1px solid #3d2b1f; border-radius: 8px;
+  padding: 12px 14px; min-width: 160px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+}
+.fp-title { font-size: 12px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+.fp-row   { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #8c6a48; cursor: pointer; padding: 3px 0; white-space: nowrap; }
+.fp-row:hover { color: #e8d5b7; }
+.fp-all   { color: #f0e0c0; font-weight: 600; }
+.fp-hr    { border: none; border-top: 1px solid #2d2015; margin: 6px 0; }
+input[type="checkbox"] { cursor: pointer; accent-color: #c9a84c; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<h1>Historical Timeline &nbsp;·&nbsp; 歷史時間線</h1>
+
+<!-- ════ 工具列（縮放 + 紀元跳轉 + 視窗範圍，全部一行）════ -->
+<div class="toolbar">
+  <button class="ctrl-btn" id="zoomOut" title="縮小">－</button>
+  <input  class="zoom-slider" type="range" id="zoomSlider" min="0" max="6" step="1" value="2">
+  <button class="ctrl-btn" id="zoomIn" title="放大">＋</button>
+  <span   class="zoom-label" id="zoomLabel">1×</span>
+  <button class="ctrl-reset" id="zoomReset">重置</button>
+
+  <div class="tb-sep"></div>
+
+  <span class="era-lbl">跳至</span>
+  <button class="era-btn" data-year="-2900">2900 BC</button>
+  <button class="era-btn" data-year="-1200">1200 BC</button>
+  <button class="era-btn" data-year="-500">500 BC</button>
+  <button class="era-btn" data-year="1">AD 1</button>
+  <button class="era-btn" data-year="300">AD 300</button>
+
+  <div class="tb-sep"></div>
+  <span class="viewport-years" id="viewportYears"></span>
+</div>
+
+<!-- ════ 分組篩選列 ════ -->
+<div class="filters" id="filters"></div>
+
+<div class="outer">
+  <div class="row-labels" id="rowLabels">
+    <div class="lbl lbl-axis"></div>
+  </div>
+  <div class="scroll-area" id="scrollArea">
+    <div class="timeline" id="timeline">
+      <div class="year-axis" id="yearAxis"></div>
+    </div>
+  </div>
+</div>
+<div id="mapPanel">
+  <div id="mpHead">
+    <div id="mpName"></div>
+    <div id="mpEn"></div>
+    <div id="mpYears"></div>
+  </div>
+  <div id="mpLoading">載入中⋯</div>
+  <img id="mpImg" alt="歷史地圖">
+  <div id="mpDesc"></div>
+  <div id="mpFoot">
+    <a id="mpWiki" href="#" target="_blank" rel="noopener">Wikipedia ↗</a>
+    <button id="mpClose">關閉</button>
+  </div>
+</div>
+<div id="crosshair"></div>
+<div id="crossYear"></div>
+<div id="tip"></div>
+
+<!-- ── 資料載入 ──────────────────────────────────────────── -->
+<script src="zh/dynasties.js"></script>
+<script src="zh/emperors.js"></script>
+<script src="zh/events.js"></script>
+<script src="mormen/bom.js"></script>
+<script src="bible/bible.js"></script>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  分組定義（篩選列的四個地區分組）
+// ════════════════════════════════════════════════════════
+const SECTION_GROUPS = [
+  { key: 'asia',     label: '亞洲', color: '#10b981' },
+  { key: 'religion', label: '宗教', color: '#a78bfa' },
+];
+
+// ════════════════════════════════════════════════════════
+//  區段設定
+// ════════════════════════════════════════════════════════
+const SECTIONS = [
+  {
+    title:          '中國歷史',
+    group:          'asia',
+    evtLabel:       '歷史事件',
+    evtColor:       '#c9a84c',
+    evtBg:          'rgba(201,168,76,0.04)',
+    pinned:         true,
+    defaultVisRows: [0, 1, 2],
+    rowLabels:      ZH_ROW_LABELS,
+    groups:         [...ZH_DYNASTIES, ...ZH_EMPERORS],
+    events:         ZH_EVENTS,
+  },
+  {
+    title:          '聖經',
+    group:          'religion',
+    defaultOn:      true,
+    evtLabel:       '聖經事件',
+    evtColor:       '#7dd3fc',
+    evtBg:          'rgba(125,211,252,0.04)',
+    sepColor:       '#bae6fd',
+    sepBg:          'rgba(125,211,252,0.06)',
+    sepBorder:      'rgba(125,211,252,0.25)',
+    defaultVisRows: [0, 1, 6],
+    rowLabels:      BIBLE_ROW_LABELS,
+    groups:         BIBLE_GROUPS,
+    events:         BIBLE_EVENTS,
+  },
+  {
+    title:          '摩爾門經',
+    group:          'religion',
+    defaultOn:      true,
+    evtLabel:       '經文事件',
+    evtColor:       '#c4b5fd',
+    evtBg:          'rgba(196,181,253,0.04)',
+    sepColor:       '#ddd6fe',
+    sepBg:          'rgba(196,181,253,0.06)',
+    sepBorder:      'rgba(196,181,253,0.25)',
+    rowLabels:      MORMEN_ROW_LABELS,
+    groups:         MORMEN_GROUPS,
+    events:         MORMEN_EVENTS,
+  },
+];
+
+// ════════════════════════════════════════════════════════
+//  渲染引擎
+// ════════════════════════════════════════════════════════
+const START = -3000, END = 421, RH = 36;
+const NOW_YEAR = 2026;
+const ZOOM_STEPS  = [0.25, 0.5, 1, 2, 5, 10, 20];
+const ZOOM_LABELS = ['0.25×', '0.5×', '1×', '2×', '5×', '10×', '20×'];
+let zoomIdx = 2, PPY = 1;
+
+const toX     = y => (y - START) * PPY;
+const fmtYear = y => y < 0 ? `西元前 ${Math.abs(y)} 年` : (y >= NOW_YEAR ? '至今' : `西元 ${y} 年`);
+
+function groupByYear(arr) {
+  const m = new Map();
+  arr.forEach(e => { if (!m.has(e.year)) m.set(e.year, []); m.get(e.year).push(e.text); });
+  return m;
+}
+SECTIONS.forEach(s => { s._evtMap = groupByYear(s.events); });
+
+const visibility = SECTIONS.map(sec =>
+  new Set(sec.defaultVisRows ?? sec.rowLabels.map((_, i) => i))
+);
+const secVisible = SECTIONS.map(s => s.pinned || !!s.defaultOn);
+
+function toggleSection(sIdx) {
+  if (SECTIONS[sIdx].pinned) return;
+  secVisible[sIdx] = !secVisible[sIdx];
+  buildFilters(); refresh();
+}
+
+function getRowMap(sIdx) {
+  const sorted = [...visibility[sIdx]].sort((a, b) => a - b);
+  const m = new Map();
+  sorted.forEach((r, i) => m.set(r, i));
+  return m;
+}
+
+// 工具提示
+const tip     = document.getElementById('tip');
+const showTip = html => { tip.innerHTML = html; tip.style.display = 'block'; };
+const moveTip = e => {
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  let x = e.clientX + 14, y = e.clientY - th - 8;
+  if (x + tw > window.innerWidth - 10) x = e.clientX - tw - 14;
+  if (y < 10) y = e.clientY + 16;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+};
+const hideTip = () => { tip.style.display = 'none'; };
+
+// ── Wikipedia 地圖面板 ────────────────────────────────────────────────────────
+function closeMapPanel() {
+  document.getElementById('mapPanel').style.display = 'none';
+}
+
+async function showMapPanel(d) {
+  const panel  = document.getElementById('mapPanel');
+  const mpName = document.getElementById('mpName');
+  const mpEn   = document.getElementById('mpEn');
+  const mpYears= document.getElementById('mpYears');
+  const mpLoad = document.getElementById('mpLoading');
+  const mpImg  = document.getElementById('mpImg');
+  const mpDesc = document.getElementById('mpDesc');
+  const mpWiki = document.getElementById('mpWiki');
+
+  mpName.textContent  = d.name;
+  mpName.style.color  = d.color;
+  mpEn.textContent    = d.en;
+  mpYears.textContent = fmtYear(d.start) + ' – ' + fmtYear(d.end) + '　共 ' + (d.end - d.start) + ' 年';
+
+  mpLoad.textContent  = '載入中⋯';
+  mpLoad.style.display= 'block';
+  mpImg.style.display = 'none';
+  mpImg.src           = '';
+  mpDesc.textContent  = '';
+  mpWiki.href         = '#';
+  mpWiki.style.visibility = d.wikiEn ? 'visible' : 'hidden';
+
+  panel.style.display = 'flex';
+
+  if (!d.wikiEn) { mpLoad.textContent = '暫無 Wikipedia 條目連結'; return; }
+
+  mpWiki.href = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(d.wikiEn);
+
+  try {
+    const resp = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(d.wikiEn));
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    mpLoad.style.display = 'none';
+    if (data.thumbnail && data.thumbnail.source) {
+      mpImg.src           = data.thumbnail.source;
+      mpImg.style.display = 'block';
+    }
+    mpDesc.textContent = data.extract || '無摘要資料。';
+  } catch (err) {
+    mpLoad.textContent = '載入失敗（請確認網路連線）';
+  }
+}
+
+function labelInterval() {
+  const v = 1000 / PPY;
+  if (v > 2000) return 500; if (v > 800) return 200; if (v > 300) return 100;
+  if (v > 100)  return 50;  if (v > 40)  return 20;  if (v > 15)  return 10;
+  return 5;
+}
+
+// 工具：hex → rgba
+function hexToRgba(hex, a) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+// ── 分組篩選列 ────────────────────────────────────────────────────────────────
+function buildFilters() {
+  const el = document.getElementById('filters');
+  el.innerHTML = '';
+
+  const row = document.createElement('div');
+  row.className = 'fg-row';
+
+  SECTION_GROUPS.forEach((grp, gi) => {
+    if (gi > 0) {
+      const sep = document.createElement('div');
+      sep.className = 'fg-sep';
+      row.appendChild(sep);
+    }
+
+    const lbl = document.createElement('span');
+    lbl.className = 'fg-label';
+    lbl.style.color = grp.color;
+    lbl.textContent = grp.label;
+    row.appendChild(lbl);
+
+    SECTIONS.forEach((sec, sIdx) => {
+      if (sec.group !== grp.key) return;
+      const isOn = sec.pinned || secVisible[sIdx];
+
+      const wrap = document.createElement('div');
+      wrap.className = 'fchip-wrap' + (isOn ? '' : ' sec-off') + (sec.pinned ? ' pinned' : '');
+
+      const tog = document.createElement('button');
+      tog.className = 'fchip-tog';
+      tog.style.color = sec.evtColor;
+
+      if (!sec.pinned) {
+        const dot = document.createElement('span');
+        dot.className = 'fchip-dot';
+        dot.textContent = isOn ? '●' : '○';
+        tog.appendChild(dot);
+        tog.addEventListener('click', e => { e.stopPropagation(); toggleSection(sIdx); });
+      }
+
+      const name = document.createElement('span');
+      name.textContent = sec.title;
+      tog.appendChild(name);
+      wrap.appendChild(tog);
+
+      const more = document.createElement('button');
+      more.className = 'fchip-more';
+      more.textContent = '▾';
+      more.title = '調整顯示列';
+      more.addEventListener('click', e => { e.stopPropagation(); openPanel(sIdx, more); });
+      wrap.appendChild(more);
+
+      row.appendChild(wrap);
+    });
+  });
+
+  // 右側：全部展開 / 收起
+  const spacer = document.createElement('div');
+  spacer.style.cssText = 'flex:1;min-width:12px;';
+  row.appendChild(spacer);
+
+  ['全部展開', '全部收起'].forEach((label, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'master-toggle';
+    btn.textContent = label;
+    btn.addEventListener('click', () => {
+      SECTIONS.forEach((s, idx) => { if (!s.pinned) secVisible[idx] = (i === 0); });
+      buildFilters(); refresh();
+    });
+    row.appendChild(btn);
+  });
+
+  el.appendChild(row);
+}
+
+// ── 浮動選單面板 ──────────────────────────────────────────────────────────────
+let activePanel = null;
+
+function closePanel() {
+  if (activePanel) { activePanel.remove(); activePanel = null; }
+}
+
+function openPanel(sIdx, anchor) {
+  if (activePanel && activePanel.dataset.sIdx === String(sIdx)) { closePanel(); return; }
+  closePanel();
+
+  const sec   = SECTIONS[sIdx];
+  const vis   = visibility[sIdx];
+  const total = sec.rowLabels.length;
+
+  const panel = document.createElement('div');
+  panel.className = 'filter-panel';
+  panel.dataset.sIdx = sIdx;
+  panel.addEventListener('click', e => e.stopPropagation());
+
+  const titleDiv = document.createElement('div');
+  titleDiv.className = 'fp-title';
+  titleDiv.style.color = sec.evtColor;
+  titleDiv.textContent = sec.title;
+  panel.appendChild(titleDiv);
+
+  const syncAll = () => {
+    allCb.checked = vis.size === total;
+    allCb.indeterminate = vis.size > 0 && vis.size < total;
+  };
+
+  const allLbl = document.createElement('label');
+  allLbl.className = 'fp-row fp-all';
+  const allCb = document.createElement('input');
+  allCb.type = 'checkbox';
+  allCb.checked = vis.size === total;
+  allCb.indeterminate = vis.size > 0 && vis.size < total;
+  allCb.addEventListener('change', () => {
+    const cbs = panel.querySelectorAll('.fp-row:not(.fp-all) input');
+    if (allCb.checked) { sec.rowLabels.forEach((_, r) => vis.add(r)); cbs.forEach(c => c.checked = true); }
+    else               { vis.clear(); cbs.forEach(c => c.checked = false); }
+    buildFilters(); refresh();
+  });
+  allLbl.appendChild(allCb);
+  allLbl.append(' 全部顯示');
+  panel.appendChild(allLbl);
+
+  const hr = document.createElement('hr');
+  hr.className = 'fp-hr';
+  panel.appendChild(hr);
+
+  sec.rowLabels.forEach((name, r) => {
+    const lbl = document.createElement('label');
+    lbl.className = 'fp-row';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = vis.has(r);
+    cb.addEventListener('change', () => {
+      if (cb.checked) vis.add(r); else vis.delete(r);
+      syncAll();
+      buildFilters(); refresh();
+    });
+    lbl.appendChild(cb);
+    lbl.append(' ' + name);
+    panel.appendChild(lbl);
+  });
+
+  document.body.appendChild(panel);
+  const rect = anchor.getBoundingClientRect();
+  const pw   = panel.offsetWidth;
+  let left   = rect.left;
+  if (left + pw > window.innerWidth - 10) left = window.innerWidth - pw - 10;
+  panel.style.top  = (rect.bottom + 4) + 'px';
+  panel.style.left = left + 'px';
+
+  activePanel = panel;
+}
+
+// ── 左側列標籤 ─────────────────────────────────────────────────────────────────
+function buildLabels() {
+  const el = document.getElementById('rowLabels');
+  let anyRendered = false, prevGroup = null;
+  SECTIONS.forEach((sec, idx) => {
+    if (!sec.pinned && !secVisible[idx]) return;
+    if (anyRendered) {
+      const isGroupBreak = sec.group !== prevGroup;
+      const sep = document.createElement('div');
+      if (isGroupBreak) {
+        const grpData = SECTION_GROUPS.find(g => g.key === sec.group);
+        const gc = grpData ? grpData.color : (sec.sepColor || sec.evtColor);
+        sep.className = 'lbl lbl-sep group-break';
+        sep.style.cssText = `color:${gc};background:${hexToRgba(gc, 0.1)};border-top-color:${gc}`;
+      } else {
+        sep.className = 'lbl lbl-sep';
+        sep.style.cssText = `color:${sec.sepColor};background:${sec.sepBg};border-top-color:${sec.sepBorder}`;
+      }
+      sep.textContent = sec.title;
+      el.appendChild(sep);
+    }
+    prevGroup = sec.group;
+    anyRendered = true;
+    const evtLbl = document.createElement('div');
+    evtLbl.className = 'lbl lbl-evt';
+    evtLbl.style.color = sec.evtColor;
+    evtLbl.textContent = sec.evtLabel;
+    el.appendChild(evtLbl);
+    const vis = visibility[idx];
+    sec.rowLabels.forEach((t, r) => {
+      if (!vis.has(r)) return;
+      const d = document.createElement('div');
+      d.className = 'lbl lbl-row';
+      d.textContent = t;
+      el.appendChild(d);
+    });
+  });
+}
+
+// ── 主渲染 ─────────────────────────────────────────────────────────────────────
+function render() {
+  const W = Math.ceil((END - START) * PPY);
+  const timeline = document.getElementById('timeline');
+  timeline.style.width = W + 'px';
+  timeline.innerHTML = '<div class="year-axis" id="yearAxis"></div>';
+
+  const interval = labelInterval();
+
+  const axis = document.getElementById('yearAxis');
+  for (let y = Math.ceil(START / interval) * interval; y <= END; y += interval) {
+    const x = toX(y);
+    const tick = document.createElement('div');
+    tick.className = 'y-tick'; tick.style.left = x + 'px';
+    axis.appendChild(tick);
+    const lbl = document.createElement('div');
+    lbl.className = 'y-label'; lbl.style.left = x + 'px';
+    lbl.textContent = y < 0 ? Math.abs(y) + ' BC' : (y === 0 ? '1 AD' : y + ' AD');
+    axis.appendChild(lbl);
+  }
+
+  let anyRendered = false, prevGroup = null;
+  SECTIONS.forEach((sec, idx) => {
+    if (!sec.pinned && !secVisible[idx]) return;
+
+    const rowMap  = getRowMap(idx);
+    const numRows = rowMap.size;
+
+    if (anyRendered) {
+      const isGroupBreak = sec.group !== prevGroup;
+      const sep = document.createElement('div');
+      if (isGroupBreak) {
+        const grpData = SECTION_GROUPS.find(g => g.key === sec.group);
+        const gc = grpData ? grpData.color : sec.evtColor;
+        sep.className = 'section-sep group-break';
+        sep.style.cssText = `background:${hexToRgba(gc, 0.08)};border-top-color:${gc};color:${gc}`;
+        const gLbl = document.createElement('span');
+        gLbl.className = 'sep-group-lbl';
+        gLbl.textContent = grpData ? grpData.label : '';
+        const tLbl = document.createElement('span');
+        tLbl.className = 'sep-title-lbl';
+        tLbl.textContent = sec.title;
+        sep.appendChild(gLbl);
+        sep.appendChild(tLbl);
+      } else {
+        sep.className = 'section-sep';
+        sep.style.cssText = `background:${sec.sepBg};border-top-color:${sec.sepBorder};color:${sec.sepColor || sec.evtColor}`;
+        sep.textContent = sec.title;
+      }
+      timeline.appendChild(sep);
+    }
+    prevGroup = sec.group;
+    anyRendered = true;
+
+    const evtEl = document.createElement('div');
+    evtEl.className = 'evt-strip';
+    evtEl.style.background = sec.evtBg;
+    timeline.appendChild(evtEl);
+    sec._evtMap.forEach((texts, year) => {
+      const mark = document.createElement('div');
+      mark.className = 'evt-mark' + (texts.length > 1 ? ' multi' : '');
+      mark.style.left = toX(year) + 'px';
+      mark.style.setProperty('--mc', sec.evtColor);
+      mark.addEventListener('mouseenter', () => {
+        showTip(
+          `<span class="ehd" style="color:${sec.evtColor}">${fmtYear(year)}</span>` +
+          texts.map(t => `<span class="erow">${t}</span>`).join('')
+        );
+      });
+      mark.addEventListener('mousemove', moveTip);
+      mark.addEventListener('mouseleave', hideTip);
+      evtEl.appendChild(mark);
+    });
+
+    const rowsEl = document.createElement('div');
+    rowsEl.className = 'rows';
+    rowsEl.style.height = (numRows * RH) + 'px';
+    rowsEl.style.background = hexToRgba(sec.evtColor, 0.05);
+    timeline.appendChild(rowsEl);
+
+    for (let r = 0; r < numRows; r++) {
+      const s = document.createElement('div');
+      s.className = 'row-stripe'; s.style.top = (r * RH) + 'px';
+      s.style.background = r % 2 === 0 ? 'rgba(255,255,255,0.012)' : 'rgba(255,255,255,0.022)';
+      rowsEl.appendChild(s);
+    }
+    for (let y = Math.ceil(START / interval) * interval; y <= END; y += interval) {
+      const line = document.createElement('div');
+      line.className = 'grid-line'; line.style.left = toX(y) + 'px';
+      line.style.background = y % (interval * 5) === 0
+        ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.018)';
+      rowsEl.appendChild(line);
+    }
+
+    const nl = document.createElement('div');
+    nl.className = 'now-line'; nl.style.left = toX(END) + 'px';
+    rowsEl.appendChild(nl);
+
+    sec.groups.forEach(d => {
+      if (!rowMap.has(d.row)) return;
+      const vRow = rowMap.get(d.row);
+      const x = toX(d.start);
+      const w = Math.max((d.end - d.start) * PPY, 1);
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.cssText = `left:${x}px;width:${w}px;top:${vRow*RH+4}px;background:${d.color};${d.dim ? 'opacity:0.28;' : ''}`;
+      if (w >= 14) {
+        const sp = document.createElement('span');
+        if (d.personal !== undefined) {
+          sp.style.fontSize = '9px';
+          sp.textContent = w < 24 ? d.name.slice(0, 1) : d.name.slice(0, 2);
+        } else {
+          sp.textContent = w < 50 && d.name.length > 2 ? d.name.slice(0, 2) : d.name;
+        }
+        bar.appendChild(sp);
+      }
+      bar.addEventListener('mouseenter', () => {
+        if (d.personal !== undefined) {
+          showTip(
+            `<strong>${d.name}</strong>` +
+            (d.personal ? `<span style="color:#b89060;font-size:11px">（${d.personal}）</span>` : '') +
+            `<span class="sub">${d.en}</span>` +
+            (d.nianHao ? `<span style="color:#c9a84c;font-size:11px;display:block">年號：${d.nianHao}</span>` : '') +
+            `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">${d.nianHao !== undefined ? '在位' : d.row === 1 ? '在世' : '在位'} ${d.end - d.start} 年</span>` +
+            (d.wikiEn ? '<br><span style="color:#6a4a28;font-size:10px">點擊查看 Wikipedia ↗</span>' : '')
+          );
+        } else {
+          showTip(
+            `<strong>${d.name}</strong><span class="sub">${d.en}</span>` +
+            `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">共 ${d.end - d.start} 年</span>` +
+            (d.link ? '<br><span style="color:#c9a84c;font-size:10px">點擊開啟敘事頁 ↗</span>' :
+              d.wikiEn ? '<br><span style="color:#6a4a28;font-size:10px">點擊查看 Wikipedia ↗</span>' : '')
+          );
+        }
+      });
+      bar.addEventListener('mousemove', moveTip);
+      bar.addEventListener('mouseleave', hideTip);
+      bar.addEventListener('click', e => {
+        if (dragDistance > 5) return;
+        e.stopPropagation();
+        hideTip();
+        if (d.link) { window.location.href = d.link; return; }
+        showMapPanel(d);
+      });
+      rowsEl.appendChild(bar);
+    });
+  });
+}
+
+// ── 刷新 ──────────────────────────────────────────────────────────────────────
+function refresh() {
+  const sa = document.getElementById('scrollArea');
+  const sl = sa.scrollLeft;
+  document.getElementById('rowLabels').innerHTML = '<div class="lbl lbl-axis"></div>';
+  buildLabels();
+  render();
+  sa.scrollLeft = sl;
+  updateViewportYears();
+}
+
+// ── 視窗年份範圍 ──────────────────────────────────────────────────────────────
+function updateViewportYears() {
+  const sa = document.getElementById('scrollArea');
+  const y1 = Math.round(sa.scrollLeft / PPY + START);
+  const y2 = Math.round((sa.scrollLeft + sa.clientWidth) / PPY + START);
+  const fmt = y => y < 0 ? `${Math.abs(y)} BC` : `AD ${y}`;
+  document.getElementById('viewportYears').textContent = `${fmt(y1)} – ${fmt(y2)}`;
+}
+
+// ── 縮放 ──────────────────────────────────────────────────────────────────────
+function applyZoom(newIdx) {
+  newIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, newIdx));
+  if (newIdx === zoomIdx) return;
+  const sa = document.getElementById('scrollArea');
+  const centerYear = (sa.scrollLeft + sa.clientWidth / 2) / PPY + START;
+  zoomIdx = newIdx; PPY = ZOOM_STEPS[zoomIdx];
+  render();
+  sa.scrollLeft = (centerYear - START) * PPY - sa.clientWidth / 2;
+  document.getElementById('zoomLabel').textContent  = ZOOM_LABELS[zoomIdx];
+  document.getElementById('zoomSlider').value       = zoomIdx;
+  document.getElementById('zoomOut').disabled       = zoomIdx === 0;
+  document.getElementById('zoomIn').disabled        = zoomIdx === ZOOM_STEPS.length - 1;
+  updateViewportYears();
+}
+
+// ── 初始化 ────────────────────────────────────────────────────────────────────
+buildFilters();
+buildLabels();
+render();
+const _sa = document.getElementById('scrollArea');
+_sa.scrollLeft = toX(-600);
+document.getElementById('mapPanel').addEventListener('click', e => e.stopPropagation());
+document.getElementById('mpClose').addEventListener('click', closeMapPanel);
+document.addEventListener('click', e => { closePanel(); closeMapPanel(); });
+updateViewportYears();
+
+// ── 縮放事件 ──────────────────────────────────────────────────────────────────
+document.getElementById('zoomOut')   .addEventListener('click', ()  => applyZoom(zoomIdx - 1));
+document.getElementById('zoomIn')    .addEventListener('click', ()  => applyZoom(zoomIdx + 1));
+document.getElementById('zoomReset') .addEventListener('click', ()  => applyZoom(2));
+document.getElementById('zoomSlider').addEventListener('input', e   => applyZoom(+e.target.value));
+_sa.addEventListener('wheel', e => {
+  if (!e.ctrlKey) return; e.preventDefault();
+  applyZoom(e.deltaY < 0 ? zoomIdx + 1 : zoomIdx - 1);
+}, { passive: false });
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === '+' || e.key === '=') applyZoom(zoomIdx + 1);
+  if (e.key === '-' || e.key === '_') applyZoom(zoomIdx - 1);
+  if (e.key === '0')                  applyZoom(2);
+});
+
+// ── 拖曳平移 ──────────────────────────────────────────────────────────────────
+let isDragging = false, dragStartX = 0, dragScrollLeft = 0, dragDistance = 0;
+_sa.addEventListener('mousedown', e => {
+  if (e.button !== 0) return;
+  isDragging    = true;
+  dragDistance  = 0;
+  dragStartX    = e.clientX;
+  dragScrollLeft= _sa.scrollLeft;
+  _sa.classList.add('dragging');
+  hideTip();
+});
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  dragDistance = Math.abs(e.clientX - dragStartX);
+  _sa.scrollLeft = dragScrollLeft - (e.clientX - dragStartX);
+});
+window.addEventListener('mouseup', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  _sa.classList.remove('dragging');
+});
+
+// ── 紀元快捷導航 ──────────────────────────────────────────────────────────────
+document.querySelectorAll('.era-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    _sa.scrollLeft = toX(+btn.dataset.year) - _sa.clientWidth / 4;
+  });
+});
+
+// ── 十字線年份指示 ────────────────────────────────────────────────────────────
+const crosshairEl = document.getElementById('crosshair');
+const crossYearEl = document.getElementById('crossYear');
+_sa.addEventListener('mousemove', e => {
+  if (isDragging) { crosshairEl.style.display = 'none'; crossYearEl.style.display = 'none'; return; }
+  const rect = _sa.getBoundingClientRect();
+  const year = Math.round((e.clientX - rect.left + _sa.scrollLeft) / PPY + START);
+  crosshairEl.style.cssText = `left:${e.clientX}px;top:${rect.top}px;height:${rect.height}px;display:block;`;
+  crossYearEl.style.cssText = `left:${e.clientX}px;top:${rect.top + 4}px;display:block;`;
+  crossYearEl.textContent = fmtYear(year);
+});
+_sa.addEventListener('mouseleave', () => {
+  crosshairEl.style.display = 'none';
+  crossYearEl.style.display = 'none';
+});
+
+_sa.addEventListener('scroll', updateViewportYears);
+</script>
+</body>
+</html>

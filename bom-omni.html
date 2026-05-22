@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 奥姆尼书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#312e81;background:#eef2ff;border-color:#a5b4fc}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.lim{background:#f7fee7;border-color:#bef264}.lim .nt{color:#3f6212}.lim .ne{color:#4d7c0f}
+.ind{background:#eef2ff;border-color:#a5b4fc}.ind .nt{color:#312e81}.ind .ne{color:#4338ca}
+
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+.inote{background:#fff;border:1.5px solid #a5b4fc;border-radius:7px;padding:8px 10px}
+.inote .sn{color:#312e81}.inote .se{color:#4338ca}
+.vnote{background:#fff;border:1.5px solid #c4b5fd;border-radius:7px;padding:8px 10px}
+.vnote .sn{color:#4c1d95}.vnote .se{color:#7c3aed}
+
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 時間線</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">奥姆尼书</span>
+  <span class="he">Omni · Five Keepers · Northern Migration · End of Small Plates</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab on" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · SMALL PLATES OF NEPHI · FINAL RECORD</div>
+  <div class="intro-h">奥姆尼书 · Omni</div>
+  <div class="intro-en">Five Record Keepers · Northern Migration · Two Peoples United · End of Small Plates of Nephi</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>约公元前 361–130 年</b></span>
+    <span class="im">地点 <b>尼腓地 → 萨拉赫拉地</b></span>
+    <span class="im">章节 <b>1 章 · 30 节</b></span>
+    <span class="im">核心 <b>五位守护 · 北迁 · 两族相遇 · 小版终结</b></span>
+  </div>
+</div>
+
+<!-- ── activity map ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="omA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#4338ca"/>
+      </marker>
+      <marker id="omB" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/>
+      </marker>
+      <marker id="omC" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#0891b2"/>
+      </marker>
+    </defs>
+
+    <rect width="860" height="430" fill="#bfdbfe" rx="8"/>
+    <polygon points="20,0 200,0 420,0 640,0 810,20 850,90 845,200 820,300 780,370 700,415 590,420 490,420 390,420 290,410 200,380 140,335 100,275 70,210 50,140 30,70 20,0" fill="#bbf7d0"/>
+    <ellipse cx="700" cy="78" rx="118" ry="54" fill="#bfdbfe" opacity="0.93"/>
+
+    <!-- Narrow strip of wilderness (divides north from south) -->
+    <path d="M 195,238 Q 340,222 510,228 Q 610,232 700,248" fill="none" stroke="#78716c" stroke-width="2" stroke-dasharray="7,4" opacity="0.65"/>
+    <text x="400" y="216" text-anchor="middle" font-size="8.5" fill="#78716c" opacity="0.9">旷野隔离带 · Narrow Strip of Wilderness</text>
+
+    <!-- Lamanite territory (south-west) -->
+    <ellipse cx="164" cy="320" rx="58" ry="64" fill="rgba(254,202,202,0.45)" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+    <!-- Land of Nephi (south, blue) -->
+    <ellipse cx="348" cy="305" rx="96" ry="74" fill="rgba(219,234,254,0.38)" stroke="#93c5fd" stroke-width="1.8" stroke-dasharray="6,3"/>
+
+    <!-- Land of Zarahemla (north, indigo) — NEW territory discovered -->
+    <ellipse cx="440" cy="152" rx="112" ry="74" fill="rgba(238,242,255,0.62)" stroke="#a5b4fc" stroke-width="2" stroke-dasharray="6,3"/>
+
+    <!-- Migration arrow: Land of Nephi → Zarahemla (Mosiah I) -->
+    <path d="M 362,270 Q 378,225 432,196" fill="none" stroke="#4338ca" stroke-width="2.8" marker-end="url(#omA)"/>
+    <rect x="372" y="224" width="118" height="28" rx="4" fill="rgba(238,242,255,0.94)" stroke="#a5b4fc" stroke-width="1.2"/>
+    <text x="431" y="236" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#312e81">摩赛亚一世率义人北迁</text>
+    <text x="431" y="247" text-anchor="middle" font-size="7.5" fill="#4338ca">Mosiah I leads faithful north</text>
+
+    <!-- Zeniff return arrow (south, red dashed) -->
+    <path d="M 416,210 Q 395,252 356,278" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#omB)"/>
+    <rect x="268" y="240" width="100" height="22" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fca5a5" stroke-width="1.2"/>
+    <text x="318" y="251" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">西尼夫返回尼腓地</text>
+    <text x="318" y="260" text-anchor="middle" font-size="7.5" fill="#f87171">Zeniff's group returns south</text>
+
+    <!-- Mulekite sea-arrival from east (teal dashed) -->
+    <path d="M 808,175 Q 730,168 612,162" fill="none" stroke="#0891b2" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#omC)"/>
+    <rect x="704" y="156" width="148" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#bae6fd" stroke-width="1.2"/>
+    <text x="778" y="168" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">穆勒克人（约公元前 587 年）</text>
+    <text x="778" y="178" text-anchor="middle" font-size="7.5" fill="#0891b2">Mulekites arrive by sea from Jerusalem</text>
+
+    <!-- City of Zarahemla marker (indigo temple) -->
+    <polygon points="432,118 452,118 452,138 442,130 432,138" fill="#4338ca" stroke="#fff" stroke-width="1.5"/>
+    <rect x="456" y="112" width="100" height="22" rx="4" fill="rgba(255,255,255,0.93)" stroke="#a5b4fc"/>
+    <text x="506" y="126" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#312e81">萨拉赫拉城</text>
+    <line x1="452" y1="128" x2="456" y2="124" stroke="#4338ca" stroke-width="1.2"/>
+
+    <!-- Coriantumr stone (amber dot) -->
+    <circle cx="462" cy="162" r="6" fill="#92400e" stroke="#fff" stroke-width="2"/>
+    <rect x="472" y="154" width="160" height="20" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fde68a" stroke-width="1.2"/>
+    <text x="552" y="167" text-anchor="middle" font-size="8.5" fill="#92400e">✦ 科林安通石碑（最后的雅列人）</text>
+    <line x1="468" y1="162" x2="472" y2="162" stroke="#92400e" stroke-width="1.2"/>
+
+    <!-- City of Nephi marker (blue dot) -->
+    <circle cx="352" cy="298" r="6" fill="#1d4ed8" stroke="#fff" stroke-width="2"/>
+    <rect x="362" y="290" width="82" height="20" rx="4" fill="rgba(255,255,255,0.93)" stroke="#93c5fd"/>
+    <text x="403" y="303" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e3a8a">尼腓城</text>
+
+    <!-- Water labels -->
+    <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="28" y="208" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific</text>
+    <text x="820" y="280" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text x="820" y="292" fill="#2563eb" font-size="8" font-style="italic" text-anchor="middle">Caribbean</text>
+    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text x="700" y="78" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text>
+
+    <!-- Territory labels -->
+    <text x="164" y="284" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text x="164" y="297" text-anchor="middle" font-size="8" fill="#f87171">Lamanites</text>
+    <text x="350" y="354" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">尼腓地</text>
+    <text x="350" y="367" text-anchor="middle" font-size="8" fill="#3b82f6">Land of Nephi</text>
+    <text x="440" y="98" text-anchor="middle" font-size="10" font-weight="bold" fill="#312e81">萨拉赫拉地</text>
+    <text x="440" y="111" text-anchor="middle" font-size="8.5" fill="#6366f1">Land of Zarahemla · 新都</text>
+
+    <!-- Title box -->
+    <rect x="6" y="6" width="244" height="36" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="bold">奥姆尼书活动地图</text>
+    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Omni Activity Map · ~361–130 BC</text>
+
+    <!-- Legend -->
+    <rect x="6" y="50" width="162" height="148" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <circle cx="20" cy="68" r="5" fill="#1d4ed8"/>
+    <text x="30" y="72" fill="#475569" font-size="9">尼腓城</text>
+    <polygon points="20,80 31,80 31,92 25.5,86 20,92" fill="#4338ca"/>
+    <text x="36" y="89" fill="#475569" font-size="9">萨拉赫拉城</text>
+    <circle cx="20" cy="104" r="5" fill="#92400e"/>
+    <text x="30" y="108" fill="#475569" font-size="9">科林安通石碑</text>
+    <ellipse cx="20" cy="124" rx="10" ry="7" fill="rgba(238,242,255,0.62)" stroke="#a5b4fc" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="34" y="128" fill="#475569" font-size="9">萨拉赫拉地</text>
+    <ellipse cx="20" cy="144" rx="10" ry="7" fill="rgba(219,234,254,0.38)" stroke="#93c5fd" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="34" y="148" fill="#475569" font-size="9">尼腓地</text>
+    <line x1="12" y1="164" x2="30" y2="164" stroke="#4338ca" stroke-width="2" marker-end="url(#omA)"/>
+    <text x="36" y="168" fill="#475569" font-size="9">北迁路线</text>
+    <line x1="12" y1="182" x2="30" y2="182" stroke="#0891b2" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#omC)"/>
+    <text x="36" y="186" fill="#475569" font-size="9">穆勒克人到达</text>
+
+    <!-- Chapter summary -->
+    <rect x="396" y="320" width="456" height="102" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="624" y="335" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">奥姆尼书 · 约公元前 361–130 年（1章30节）</text>
+    <text x="408" y="351" font-size="9" fill="#475569">① 节 1–11　五位守护者：奥姆尼·阿玛利安·基米旁·亚比拿东·亚玛来开篇</text>
+    <text x="408" y="364" font-size="9" fill="#475569">② 节 12–13 神命北迁：摩赛亚一世率义人出尼腓地，进入旷野</text>
+    <text x="408" y="377" font-size="9" fill="#475569">③ 节 14–19 发现萨城：穆勒克人·语言失传·科林安通碑·两族合并</text>
+    <text x="408" y="390" font-size="9" fill="#475569">④ 节 20–29 亚玛来见证：西尼夫·本雅明王·归向基督的劝诫</text>
+    <text x="408" y="403" font-size="9" fill="#475569">⑤ 节 30　　小版终结：亚玛来将金版交给本雅明王 · 小版时代落幕</text>
+    <text x="408" y="416" font-size="9" fill="#a5b4fc">★ 小版的尼腓人记录在此终结，摩尔门经主体（大版）从摩赛亚书开始</text>
+  </svg>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+</div>
+
+<!-- ══ 守护接力 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">守护接力</div></div>
+<div class="n amb">
+  <div class="nd">约 公元前 361–240 年</div>
+  <div class="nt">节 1–11　四位沉默的守护者</div>
+  <div class="ne">Silent Guardians · 尼腓地 Land of Nephi</div>
+  <ul class="nl">
+    <li><b>奥姆尼（节 1–3，共 3 节）</b>：自称"在罪中度日"，仅因父命而写；曾与拉曼人多次征战，守住了土地</li>
+    <li><b>阿玛利安（节 4–8，共 5 节）</b>：在他的年日，尼腓人中更大的恶人已被消灭；神保存了义人，使他们不灭</li>
+    <li><b>基米旁（节 9，共 1 节）</b>：全书最短的记录者，仅说"我看见兄弟所写的，如今亲自来写"——未多加任何内容</li>
+    <li><b>亚比拿东（节 10–11，共 2 节）</b>：亲身作战，用刀杀了许多拉曼人；他在位期间"没有先知向他说话"</li>
+    <li>四位守护者合计 11 节，占全书不足三分之一；均未记录先知预言或属灵经历——可称"沉默的传承"</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">沉默的传承</div>
+    <div class="se">Silent Guardians · 节 1–11</div>
+    <div class="sd">四人皆无灵性<br>见证可写——<br>他们履行责任<br>却没有先知之<br>言。记录≠见证<br>乃奥姆尼书最<br>深的反思</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 神命北迁 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">神命北迁</div></div>
+<div class="n ros">
+  <div class="nd">约 公元前 200 年前后</div>
+  <div class="nt">节 12–13　神命摩赛亚一世率义人离开尼腓地</div>
+  <div class="ne">Divine Command to Flee · Mosiah I · 尼腓地 → 旷野</div>
+  <ul class="nl">
+    <li>亚玛来（Amaleki）开始书写，他是奥姆尼书中唯一亲历大事件的记录者</li>
+    <li>神向<b>摩赛亚一世（Mosiah I）</b>警告：须离开尼腓地，率领所有愿跟随的义人进入旷野</li>
+    <li>摩赛亚遵命而行，带着那些愿意归向神的人逃出尼腓地，进入旷野</li>
+    <li>神亲自引领他们的方向，穿越旷野，直到发现了一片新土地——<b>萨拉赫拉</b></li>
+    <li>亚玛来本人也随摩赛亚一同北上，亲眼目睹了这一切；他是事件的直接见证者</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">神圣引领的模式</div>
+    <div class="se">Divine Guidance · 节 13</div>
+    <div class="sd">神不仅命令北迁<br>更亲自引路——<br>与尼腓家族横<br>渡大洋时使用<br>利亚托纳<br>（Liahona）<br>的模式相同</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 发现萨城 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">发现萨城</div></div>
+<div class="n tea">
+  <div class="nd">约 公元前 200 年前后</div>
+  <div class="nt">节 14–19　发现穆勒克人，两族相遇合并</div>
+  <div class="ne">Zarahemla · Mulekites · Coriantumr Stone · Two Peoples United</div>
+  <ul class="nl">
+    <li>他们在萨拉赫拉地发现了一群人——<b>萨拉赫拉人（穆勒克人 Mulekites）</b>，已在此居住多年</li>
+    <li>穆勒克人的祖先来自耶路撒冷：西底家被掳时（约公元前 587 年），其子<b>穆勒克（Mulek）</b>带人越洋而来</li>
+    <li>因无经典同行，他们的语言讹变，摩赛亚的人无法理解；后经神迹式的语言恢复，两族得以沟通</li>
+    <li>穆勒克人比尼腓人人数更多；然而因失去经典，他们的信仰已大幅衰退</li>
+    <li>穆勒克人找到了一块大石碑，上刻<b>科林安通（Coriantumr）</b>的事迹——他是最后一个雅列人，死前曾短暂与穆勒克人同住</li>
+    <li>摩赛亚以神赐才能解读碑文，两族就此明白了雅列文明的终结</li>
+    <li>两族在摩赛亚一世带领下合并，共同建立新的尼腓王国，<b>摩赛亚一世成为两族之王</b></li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">三族历史的交汇</div>
+    <div class="se">Three Lineages · 节 14–19</div>
+    <div class="sd">雅列人已灭<br>（科林安通碑）<br>穆勒克人衰退<br>（失语·失典）<br>尼腓人带经典<br>三族历史汇聚<br>于萨拉赫拉</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 亚玛来见证 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#4338ca"></div><div class="ph-text">亚玛来<br>见证</div></div>
+<div class="n ind">
+  <div class="nd">约 公元前 200–130 年</div>
+  <div class="nt">节 20–29　亚玛来见证：西尼夫南归与本雅明王</div>
+  <div class="ne">Amaleki's Testimony · King Benjamin · Zeniff · 萨拉赫拉地</div>
+  <ul class="nl">
+    <li>摩赛亚一世去世后，其子<b>本雅明（Benjamin）</b>接续为王，是一位公义、圣洁的人</li>
+    <li><b>西尼夫（Zeniff）</b>受遣侦察尼腓地，以求重新取得祖地；但行动中爆发内部争执，多人遭到杀害</li>
+    <li>西尼夫率一小批幸存者最终与拉曼人谈判，在尼腓地重新定居——这一故事延续入摩赛亚书</li>
+    <li>亚玛来亲历西尼夫这段经历后，选择回到萨拉赫拉，在本雅明王旗下安居</li>
+    <li>亚玛来以满溢的个人信仰结束书写："请来到神面前，要相信预言和启示"</li>
+    <li>"要存有信心、盼望和爱心；以温柔谦卑的心来归向主，坚持到底"——书中最深的灵性呼召</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="inote">
+    <div class="sn">亚玛来的呼召</div>
+    <div class="se">Amaleki's Call · 节 26</div>
+    <div class="sd">来到神面前<br>相信预言启示<br>存有信心<br>存有盼望<br>存有爱心<br>温柔谦卑<br>坚持到底</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 小版终结 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">小版终结</div></div>
+<div class="n vio">
+  <div class="nd">约 公元前 130 年</div>
+  <div class="nt">节 30　金版交给本雅明王，小版时代落幕</div>
+  <div class="ne">End of Small Plates · Plates to King Benjamin · 萨拉赫拉地</div>
+  <ul class="nl">
+    <li>亚玛来自述：他年老，且没有子嗣可以将金版（小版）传递下去</li>
+    <li>他将金版郑重交给<b>本雅明王（King Benjamin）</b>——记录由此转入王室托管</li>
+    <li>此举标志着<b>小版记录的完全终结</b>：从尼腓一世刻版，历经约 470 年，至此画上句号</li>
+    <li>从此，摩尔门经主体记录依赖大版（由摩尔门约公元后 400 年整理缩编，成为摩尔门经主体）</li>
+    <li>奥姆尼书篇幅虽小，却承载了史诗级转变：尼腓王国从南方迁往北方，并与另一支以色列后裔合并</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="vnote">
+    <div class="sn">小版传承终结</div>
+    <div class="se">End of Small Plates</div>
+    <div class="sd">尼腓→雅各<br>→以挪士→雅龙<br>→奥·阿·基<br>→亚比→亚玛来<br>→本雅明王<br>→摩尔门整理<br>约公元后 400 年</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">★</span>
+  <div>
+    <div>小版的尼腓人记录在此终结，摩尔门经叙事从摩赛亚书（大版）续写</div>
+    <div class="ev-date">约 公元前 130 年 · 节 30 · 历时约 470 年的小版记录画上句号</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- legend -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>守护接力·四位早期记录者</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>神命北迁·摩赛亚一世</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>发现萨城·两族相遇</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eef2ff;border-color:#a5b4fc"></div>亚玛来见证·本雅明·西尼夫</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>小版终结·金版移交</div>
+</div>
+
+<!-- ── Five Keepers proportion diagram ── -->
+<div class="rel">
+  <div class="rel-title">五位守护者 · FIVE RECORD KEEPERS（奥姆尼书 30 节分布）</div>
+  <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+
+    <!-- Background -->
+    <rect width="860" height="220" rx="8" fill="#f8fafc"/>
+
+    <!-- Proportion bar: total x=60 to x=800, width=740, based on verse counts -->
+    <!-- Omni: 3/30 = 10% → 74px (60→134) -->
+    <!-- Amaron: 5/30 = 16.7% → 124px (134→258) -->
+    <!-- Chemish: 1/30 = 3.3% → 24px (258→282) -->
+    <!-- Abinadom: 2/30 = 6.7% → 50px (282→332) -->
+    <!-- Amaleki: 19/30 = 63.3% → 469px (332→801≈800) -->
+
+    <!-- Bar segments -->
+    <rect x="60" y="80" width="74" height="36" rx="3" fill="#fde68a" stroke="#d97706" stroke-width="1.2"/>
+    <text x="97" y="103" text-anchor="middle" font-size="9" font-weight="bold" fill="#92400e">奥姆尼</text>
+
+    <rect x="134" y="80" width="124" height="36" rx="3" fill="#fca5a5" stroke="#dc2626" stroke-width="1.2"/>
+    <text x="196" y="103" text-anchor="middle" font-size="9" font-weight="bold" fill="#7f1d1d">阿玛利安</text>
+
+    <rect x="258" y="80" width="24" height="36" rx="3" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.2"/>
+
+    <rect x="282" y="80" width="50" height="36" rx="3" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.2"/>
+    <text x="307" y="103" text-anchor="middle" font-size="8" fill="#312e81">亚比</text>
+
+    <rect x="332" y="72" width="468" height="52" rx="4" fill="#818cf8" stroke="#4338ca" stroke-width="2"/>
+    <text x="566" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">亚玛来 · Amaleki</text>
+    <text x="566" y="115" text-anchor="middle" font-size="9" fill="#e0e7ff">19 节 · 全书 63%</text>
+
+    <!-- Tick / verse labels above bar -->
+    <text x="97" y="75" text-anchor="middle" font-size="9" fill="#d97706">3节</text>
+    <text x="196" y="75" text-anchor="middle" font-size="9" fill="#dc2626">5节</text>
+    <text x="270" y="75" text-anchor="middle" font-size="8" fill="#6b7280">1节</text>
+    <text x="307" y="75" text-anchor="middle" font-size="9" fill="#4338ca">2节</text>
+    <text x="566" y="67" text-anchor="middle" font-size="10" fill="#4338ca">19节</text>
+
+    <!-- Chemish label (too narrow for inside) -->
+    <line x1="270" y1="119" x2="270" y2="138" stroke="#6b7280" stroke-width="1"/>
+    <text x="270" y="150" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#374151">基米旁</text>
+    <text x="270" y="161" text-anchor="middle" font-size="7.5" fill="#6b7280">Chemish</text>
+
+    <!-- Labels below bar -->
+    <text x="97" y="130" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#92400e">奥姆尼</text>
+    <text x="97" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">Omni</text>
+    <text x="97" y="154" text-anchor="middle" font-size="7.5" fill="#94a3b8">节 1–3</text>
+    <text x="97" y="166" text-anchor="middle" font-size="7.5" fill="#94a3b8">在罪中度日</text>
+
+    <text x="196" y="130" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7f1d1d">阿玛利安</text>
+    <text x="196" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">Amaron</text>
+    <text x="196" y="154" text-anchor="middle" font-size="7.5" fill="#94a3b8">节 4–8</text>
+    <text x="196" y="166" text-anchor="middle" font-size="7.5" fill="#94a3b8">义人得保存</text>
+
+    <text x="307" y="175" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#312e81">亚比拿东</text>
+    <text x="307" y="187" text-anchor="middle" font-size="7.5" fill="#94a3b8">Abinadom · 节 10–11</text>
+
+    <text x="566" y="133" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#312e81">亚玛来（Amaleki） · 节 12–30</text>
+    <text x="566" y="145" text-anchor="middle" font-size="7.5" fill="#6366f1">北迁·萨拉赫拉·穆勒克人·本雅明·西尼夫·归向基督·金版移交</text>
+    <text x="566" y="157" text-anchor="middle" font-size="7.5" fill="#94a3b8">唯一亲历大事件的记录者；是他将小版的尼腓人历史带到了尾声</text>
+
+    <!-- Scale caption -->
+    <text x="60" y="200" font-size="8.5" fill="#94a3b8">※ 色块宽度按节数比例绘制；基米旁仅 1 节（最短），亚玛来占全书 63%（最长）</text>
+
+  </svg>
+</div>
+
+<!-- ── Two peoples encounter + lineage diagram ── -->
+<div class="rel" style="margin-top:24px">
+  <div class="rel-title">两族相遇与人物关系 · TWO PEOPLES &amp; KEY FIGURES</div>
+  <svg viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+    <defs>
+      <marker id="lnI" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#4338ca"/>
+      </marker>
+      <marker id="lnG" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#059669"/>
+      </marker>
+      <marker id="lnR" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/>
+      </marker>
+      <marker id="lnA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#94a3b8"/>
+      </marker>
+    </defs>
+
+    <!-- ── Left branch: Nephite small-plates chain ── -->
+    <rect x="14" y="12" width="130" height="36" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="79" y="27" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">小版记录链</text>
+    <text x="79" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">尼腓·雅各·以挪士·雅龙</text>
+    <line x1="79" y1="48" x2="79" y2="72" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#lnA)"/>
+
+    <!-- ── Center-left: Nephites under Mosiah I ── -->
+    <rect x="14" y="72" width="202" height="44" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.8"/>
+    <text x="115" y="88" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">尼腓人</text>
+    <text x="115" y="101" text-anchor="middle" font-size="8.5" fill="#3b82f6">摩赛亚一世率义人 · 约公元前 200 年北迁</text>
+    <text x="115" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">Nephites · 携带铜版和小版</text>
+
+    <!-- ── Center-right: Mulekites ── -->
+    <rect x="644" y="72" width="202" height="44" rx="6" fill="#ecfeff" stroke="#67e8f9" stroke-width="1.8"/>
+    <text x="745" y="88" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0e7490">穆勒克人</text>
+    <text x="745" y="101" text-anchor="middle" font-size="8.5" fill="#0891b2">穆勒克（西底家之子）后裔 · 约公元前 587 年</text>
+    <text x="745" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">People of Zarahemla · 无经典 · 语言变异</text>
+
+    <!-- Convergence arrows to Zarahemla meeting point -->
+    <line x1="216" y1="110" x2="338" y2="158" stroke="#4338ca" stroke-width="2" marker-end="url(#lnI)"/>
+    <line x1="644" y1="110" x2="522" y2="158" stroke="#0891b2" stroke-width="2" marker-end="url(#lnI)"/>
+
+    <!-- ── Center: Zarahemla meeting point ── -->
+    <rect x="310" y="150" width="240" height="56" rx="8" fill="#eef2ff" stroke="#4338ca" stroke-width="2.5"/>
+    <text x="430" y="168" text-anchor="middle" font-size="12" font-weight="bold" fill="#312e81">★ 萨拉赫拉</text>
+    <text x="430" y="182" text-anchor="middle" font-size="9.5" fill="#4338ca">两族相遇合并 · 约公元前 200 年</text>
+    <text x="430" y="194" text-anchor="middle" font-size="8.5" fill="#6366f1">摩赛亚一世成为两族共同之王</text>
+
+    <!-- ── Right: Jaredite/Coriantumr stone ── -->
+    <rect x="694" y="150" width="158" height="56" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="773" y="168" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">科林安通石碑</text>
+    <text x="773" y="181" text-anchor="middle" font-size="8.5" fill="#b45309">最后一位雅列人</text>
+    <text x="773" y="193" text-anchor="middle" font-size="8" fill="#b45309">Coriantumr · 雅列文明终结</text>
+    <line x1="694" y1="178" x2="550" y2="178" stroke="#fde68a" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#lnA)"/>
+
+    <!-- ── Below: Mosiah I → Benjamin ── -->
+    <line x1="430" y1="206" x2="430" y2="238" stroke="#4338ca" stroke-width="1.5" marker-end="url(#lnI)"/>
+    <text x="448" y="226" font-size="8.5" fill="#4338ca">王位传承</text>
+
+    <rect x="328" y="238" width="204" height="36" rx="6" fill="#eef2ff" stroke="#818cf8" stroke-width="1.5"/>
+    <text x="430" y="253" text-anchor="middle" font-size="11" font-weight="bold" fill="#312e81">本雅明王</text>
+    <text x="430" y="265" text-anchor="middle" font-size="8.5" fill="#6366f1">King Benjamin · 公义圣洁 · 接收小版</text>
+
+    <!-- ── Below right: Zeniff branch ── -->
+    <line x1="430" y1="274" x2="640" y2="285" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="4,2" marker-end="url(#lnR)"/>
+    <rect x="642" y="270" width="210" height="36" rx="6" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="747" y="285" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">西尼夫（Zeniff）</text>
+    <text x="747" y="297" text-anchor="middle" font-size="8" fill="#be123c">返回尼腓地 · 与拉曼人谈判定居</text>
+    <text x="747" y="308" text-anchor="middle" font-size="7.5" fill="#94a3b8">→ 摩赛亚书 继续叙述</text>
+
+    <!-- ── Below left: end of small plates ── -->
+    <line x1="430" y1="274" x2="210" y2="285" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#lnI)"/>
+    <rect x="8" y="270" width="202" height="36" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="109" y="285" text-anchor="middle" font-size="10" font-weight="bold" fill="#4c1d95">小版终结</text>
+    <text x="109" y="297" text-anchor="middle" font-size="8.5" fill="#7c3aed">亚玛来将金版交给本雅明王</text>
+    <text x="109" y="308" text-anchor="middle" font-size="7.5" fill="#94a3b8">约公元前 130 年 · 节 30</text>
+
+    <!-- ── Legend ── -->
+    <rect x="220" y="12" width="420" height="52" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="430" y="27" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">奥姆尼书两大主题：①守护小版的接力 ②两支以色列后裔在新大陆的合并</text>
+    <text x="430" y="40" text-anchor="middle" font-size="8.5" fill="#94a3b8">尼腓人（约公元前 600 年离开耶路撒冷）＋穆勒克人（约公元前 587 年离开耶路撒冷）</text>
+    <text x="430" y="53" text-anchor="middle" font-size="8" fill="#94a3b8">两族同根同源，相隔约 400 年后在萨拉赫拉重逢，各自带来不同的遗产</text>
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

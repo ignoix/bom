@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 希拉曼书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#4c1d95;background:#f5f3ff;border-color:#c4b5fd}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.cya{background:#ecfeff;border-color:#67e8f9}.cya .nt{color:#164e63}.cya .ne{color:#0e7490}
+
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+.cnote{background:#fff;border:1.5px solid #67e8f9;border-radius:7px;padding:8px 10px}
+.cnote .sn{color:#164e63}.cnote .se{color:#0e7490}
+.vnote{background:#fff;border:1.5px solid #c4b5fd;border-radius:7px;padding:8px 10px}
+.vnote .sn{color:#4c1d95}.vnote .se{color:#7c3aed}
+
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 时间线</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">希拉曼书</span>
+  <span class="he">Helaman · Gadianton Robbers · Nephi &amp; Lehi · Samuel the Lamanite</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab on" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · LARGE PLATES · ABRIDGED BY MORMON</div>
+  <div class="intro-h">希拉曼书 · Helaman</div>
+  <div class="intro-en">Gadianton Robbers · Nephi &amp; Lehi in Prison · Samuel's Wall · Signs of Christ's Birth</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>约公元前 52–1 年</b></span>
+    <span class="im">地点 <b>萨拉赫拉 · 邦地 · 各城</b></span>
+    <span class="im">章节 <b>16 章</b></span>
+    <span class="im">核心 <b>盖地安顿匪帮 · 撒母耳站城墙 · 基督降世预兆</b></span>
+  </div>
+</div>
+
+<!-- ── activity map ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <svg viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="hA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
+      <marker id="hR" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/></marker>
+    </defs>
+    <rect width="860" height="400" fill="#bfdbfe" rx="8"/>
+    <polygon points="20,0 200,0 420,0 640,0 810,20 850,90 845,200 820,280 780,340 700,385 590,390 490,390 390,390 290,380 200,350 140,310 100,250 70,190 50,130 30,60 20,0" fill="#bbf7d0"/>
+    <ellipse cx="700" cy="78" rx="118" ry="54" fill="#bfdbfe" opacity="0.93"/>
+
+    <!-- Land of Zarahemla -->
+    <ellipse cx="440" cy="152" rx="120" ry="75" fill="rgba(236,254,255,0.55)" stroke="#67e8f9" stroke-width="1.8" stroke-dasharray="6,3"/>
+    <!-- Land of Nephi / south -->
+    <ellipse cx="280" cy="308" rx="90" ry="68" fill="rgba(254,202,202,0.3)" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <!-- Bountiful / north -->
+    <ellipse cx="600" cy="160" rx="70" ry="48" fill="rgba(245,243,255,0.45)" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+    <!-- Gadianton territory marker -->
+    <circle cx="390" cy="265" r="8" fill="#dc2626" stroke="#fff" stroke-width="2"/>
+    <rect x="400" y="254" width="168" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fca5a5" stroke-width="1.2"/>
+    <text x="484" y="267" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">盖地安顿匪帮</text>
+    <text x="484" y="278" text-anchor="middle" font-size="7.5" fill="#f87171">Gadianton Robbers · 渗透司法·政治</text>
+
+    <!-- Nephi house / Zarahemla -->
+    <polygon points="432,120 452,120 452,140 442,132 432,140" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+    <rect x="456" y="114" width="148" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="530" y="127" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">尼腓家园·萨拉赫拉</text>
+    <text x="530" y="138" text-anchor="middle" font-size="7.5" fill="#7c3aed">尼腓二世传道·宣告将来的基督</text>
+
+    <!-- Samuel on wall -->
+    <rect x="538" y="210" width="168" height="44" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fde68a" stroke-width="2"/>
+    <text x="622" y="226" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">拉曼先知撒母耳</text>
+    <text x="622" y="237" text-anchor="middle" font-size="8" fill="#b45309">Samuel the Lamanite</text>
+    <text x="622" y="248" text-anchor="middle" font-size="7.5" fill="#b45309">站在城墙上 · 预言5年内基督降生</text>
+    <circle cx="540" cy="230" r="5" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+
+    <!-- Prison miracle in Lamanite lands -->
+    <circle cx="280" cy="310" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
+    <rect x="290" y="298" width="148" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.2"/>
+    <text x="364" y="311" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">尼腓与利海被囚</text>
+    <text x="364" y="322" text-anchor="middle" font-size="7.5" fill="#7c3aed">神火环绕·三百人归改</text>
+
+    <!-- Nephi mission route south -->
+    <path d="M 440,152 Q 360,210 280,280" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#hA)"/>
+    <text x="348" y="212" font-size="8" fill="#7c3aed" text-anchor="middle">传教南行</text>
+
+    <!-- Water labels -->
+    <text x="28" y="190" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="820" y="260" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+
+    <!-- Territory labels -->
+    <text x="440" y="96" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">萨拉赫拉地</text>
+    <text x="600" y="128" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">邦地</text>
+    <text x="264" y="363" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">拉曼人地区</text>
+
+    <!-- Title box -->
+    <rect x="6" y="6" width="240" height="36" rx="5" fill="rgba(255,255,255,0.94)" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="14" y="21" fill="#4c1d95" font-size="11" font-weight="bold">希拉曼书活动地图</text>
+    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Helaman Activity Map · ~52–1 BC</text>
+
+    <!-- Chapter summary -->
+    <rect x="6" y="50" width="200" height="136" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="106" y="66" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">希拉曼书（16章）</text>
+    <text x="14" y="82" font-size="8.5" fill="#475569">① 第1–4章　政治暗杀·盖地安顿兴起</text>
+    <text x="14" y="96" font-size="8.5" fill="#475569">② 第5章　 尼腓与利海传教·神火显现</text>
+    <text x="14" y="110" font-size="8.5" fill="#475569">③ 第6–12章 盖地安顿渗透法庭·夺权</text>
+    <text x="14" y="124" font-size="8.5" fill="#475569">④ 第8–11章 尼腓二世大祭司·宣告饥荒</text>
+    <text x="14" y="138" font-size="8.5" fill="#475569">⑤ 第13–15章 撒母耳站城墙·预言基督</text>
+    <text x="14" y="152" font-size="8.5" fill="#475569">⑥ 第16章　预兆开始·信与不信</text>
+    <line x1="12" y1="172" x2="30" y2="172" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#hR)"/>
+    <text x="36" y="176" fill="#475569" font-size="8">盖地安顿扩张</text>
+  </svg>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议</div>
+</div>
+
+<!-- ══ 盖地安顿匪帮兴起 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">匪帮<br>兴起</div></div>
+<div class="n ros">
+  <div class="nd">约 公元前 52–50 年</div>
+  <div class="nt">第 1–4 章　盖地安顿匪帮兴起，渗透法庭，政治暗杀频发</div>
+  <div class="ne">Gadianton Robbers · Political Assassinations · Kishkumen · Secret Combinations</div>
+  <ul class="nl">
+    <li>希拉曼书甫一开篇，就陷入政治危机：首席法官<b>帕合宁（Pahoran）</b>死后，三子争位，引发内战</li>
+    <li>罪犯<b>盖地安顿（Gadianton）</b>成立秘密社团，以暗杀、欺诈手段控制司法——摩尔门经最严厉谴责的"秘密组合"</li>
+    <li>刺客<b>基史古门（Kishkumen）</b>刺杀了首席法官西亚如姆（Cezoram），被揭发后逃跑途中被杀</li>
+    <li>盖地安顿匪帮不断壮大，深入山区，靠掠夺和威胁维持；他们的誓约和仪式是撒旦所启示的古老模式</li>
+    <li>摩尔门记录这段历史时明确说："这些秘密组合是……魔鬼的工程……是尼腓人毁灭的根本原因之一"</li>
+    <li>教会内部也出现骄傲、分裂，信徒迷失在世俗财富中，先知屡次劝告却收效甚微</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">秘密组合</div>
+    <div class="se">Secret Combinations · 第 2章</div>
+    <div class="sd">盖地安顿的<br>秘密誓约：<br>互相保护<br>共谋权力<br>→ 每次在书中<br>出现都标志着<br>文明的衰落</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 尼腓与利海传教 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">神火<br>显现</div></div>
+<div class="n vio">
+  <div class="nd">约 公元前 30 年前后</div>
+  <div class="nt">第 5 章　尼腓与利海被囚，神火环绕，三百余人归改</div>
+  <div class="ne">Nephi &amp; Lehi in Prison · Fire Encircles · Three Hundred Converts · Lamanite Lands</div>
+  <ul class="nl">
+    <li>希拉曼之子<b>尼腓（Nephi）</b>与<b>利海（Lehi）</b>辞去政治职位，专心传道——在萨拉赫拉和拉曼人地区广传福音</li>
+    <li>他们在拉曼人地区传道时被捕入狱；狱卒准备处死他们，突然<b>火焰从天而降</b>，将二人包围</li>
+    <li>狱卒们不敢靠近；黑暗笼罩全场，一个声音说："不要伤害我的仆人"；地也震动，监狱的烟雾弥漫</li>
+    <li>狱中约<b>三百人</b>转向，看见尼腓和利海面孔如天使，说话如神——全都归改信主，受了洗礼</li>
+    <li>这些归改的拉曼人随后去萨拉赫拉传道，竟比尼腓人更有效地带领人归改</li>
+    <li>整个拉曼人国家在这段时期归化基督，甚至比尼腓人更加义正——历史的吊诡之处</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="vnote">
+    <div class="sn">神火的护卫</div>
+    <div class="se">Encircled by Fire · 第 5:23</div>
+    <div class="sd">神火不烧灼<br>只保护<br>面孔如天使<br>不可靠近<br>——神迹成为<br>最有力的<br>传道工具</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 尼腓大祭司 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">尼腓<br>宣告</div></div>
+<div class="n blu">
+  <div class="nd">约 公元前 23–20 年</div>
+  <div class="nt">第 7–12 章　尼腓在花园祷告，宣告贪腐，宣告饥荒，以奇迹为证</div>
+  <div class="ne">Nephi Prays in Garden · Declares Corruption · Prophecy of Famine · Sealing Power</div>
+  <ul class="nl">
+    <li>尼腓（二世）从北方传道归来，爬上自家花园高塔，为百姓的罪恶哀恸，被围观者看见</li>
+    <li>他在人群面前宣告：大法官科里安顿（Seezoram）已被谋杀——不信的人去查验，发现完全正确</li>
+    <li>他被捕讯问，法官们争辩是否处死他——神奇地被释放，以神力保全</li>
+    <li>他宣告：因百姓的不悔改，<b>饥荒将临</b>——三年大旱随即降临，拉曼人和尼腓人皆受饥荒之苦</li>
+    <li>百姓终于悔改，饥荒结束——但好景不长，繁荣带来骄傲，再度循环</li>
+    <li>神赐予尼腓<b>封印的权柄（Sealing Power）</b>：凡他捆绑的在地上捆绑，在天上也捆绑——是摩尔门经中最高的先知授权</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="note">
+    <div class="sn">封印权柄</div>
+    <div class="se">Power to Seal · 第 10:7</div>
+    <div class="sd">神对尼腓说：<br>"我赐你权柄<br>凡你封印的<br>在天上成立"<br>——这是末世<br>先知最高形式<br>的神圣授权</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 撒母耳站城墙 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">撒母耳<br>城墙</div></div>
+<div class="n amb">
+  <div class="nd">约 公元前 6 年</div>
+  <div class="nt">第 13–15 章　拉曼先知撒母耳站在萨拉赫拉城墙上，预言五年内基督降生</div>
+  <div class="ne">Samuel the Lamanite · Prophesies on the City Wall · Signs of Christ's Birth</div>
+  <ul class="nl">
+    <li><b>撒母耳（Samuel）</b>是一个拉曼人先知，被驱逐出城后，他爬上城墙，从城墙上传道</li>
+    <li>他宣告：再过<b>五年</b>，神的儿子基督将降生——届时将有一整夜没有黑暗，还有一颗新星出现</li>
+    <li>城中百姓向他射箭投石，均无法击中——神的护卫使他毫发无伤，令旁观者大为惊骇</li>
+    <li>他预言：基督受难时，尼腓人的土地将裂开，大山崩塌，城市沉没，三日黑暗笼罩</li>
+    <li>他呼吁悔改，宣告拉曼人比尼腓人更有信义——"因为他们更公义，神宁可使用拉曼人"</li>
+    <li>许多人听了撒母耳的话而归改，向尼腓要求受洗；另一些人则愤怒离去</li>
+    <li>撒母耳跳下城墙，消失在旷野中，再未被人见到</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">无法被击中</div>
+    <div class="se">Protected on the Wall · 第 16:2</div>
+    <div class="sd">弓箭投石<br>均落空<br>百姓大惊<br>"必是神力"<br>撒母耳完成<br>宣讲后<br>跳下消失<br>再不露面</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 预兆与信与不信 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">信与<br>不信</div></div>
+<div class="n tea">
+  <div class="nd">约 公元前 1 年</div>
+  <div class="nt">第 16 章　预兆开始显现，信者坚守，不信者合理化异象</div>
+  <div class="ne">Signs Begin · Believers Hold Fast · Disbelievers Rationalize · BC 1 · 基督降生前夕</div>
+  <ul class="nl">
+    <li>预兆逐渐出现，信徒欢喜，不信者却说："这不可能是神迹，必有自然原因"</li>
+    <li>撒旦散布谎言："不可能有那么多神迹，你们被骗了"——怀疑主义大行其道</li>
+    <li>不信者威胁：若基督降生之夜的预兆没有出现，将处死所有相信者</li>
+    <li>尼腓（三世，尼腓二世之子）对此祈祷，<b>神在他当晚显现，告诉他明天基督将降生</b></li>
+    <li>书末——正值关键时刻的前夜：历史在悬念中等待那颗新星出现</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">处死信者的威胁</div>
+    <div class="se">Death Threat · 第 16:12</div>
+    <div class="sd">不信者以死<br>威胁相信者<br>若预兆不来<br>就全杀死<br>——信仰被<br>测试到<br>最紧绷的<br>极限</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">⭐</span>
+  <div>
+    <div>希拉曼书结束，历史悬于黎明前——神对尼腓三世显现，告知基督明天降生，全书以期待中闭幕</div>
+    <div class="ev-date">约 公元前 1 年 · 第 16章末 · 第三尼腓书续接</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- legend -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>盖地安顿匪帮·政治腐败</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>尼腓利海被囚·神火显现</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>尼腓宣告·封印权柄</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>撒母耳站城墙·预言</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>预兆·信与不信</div>
+</div>
+
+<!-- ── Key figures relationship diagram ── -->
+<div class="rel">
+  <div class="rel-title">主要人物关系 · KEY FIGURES OF HELAMAN</div>
+  <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+    <defs>
+      <marker id="hfA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
+      <marker id="hfR" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/></marker>
+      <marker id="hfG" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#059669"/></marker>
+    </defs>
+
+    <!-- 希拉曼二世 -->
+    <rect x="20" y="14" width="130" height="46" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="85" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">希拉曼二世</text>
+    <text x="85" y="47" text-anchor="middle" font-size="8.5" fill="#7c3aed">Helaman II</text>
+    <text x="85" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">首席法官·传道者</text>
+
+    <!-- 尼腓二世 -->
+    <rect x="170" y="14" width="130" height="46" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2.5"/>
+    <text x="235" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓二世</text>
+    <text x="235" y="47" text-anchor="middle" font-size="8.5" fill="#7c3aed">Nephi II (son of Helaman)</text>
+    <text x="235" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">封印权柄·宣告饥荒</text>
+    <line x1="150" y1="37" x2="170" y2="37" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#hfA)"/>
+
+    <!-- 利海 -->
+    <rect x="320" y="14" width="110" height="46" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="375" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">利海</text>
+    <text x="375" y="47" text-anchor="middle" font-size="8.5" fill="#7c3aed">Lehi (brother)</text>
+    <text x="375" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">神火环绕·传教</text>
+    <line x1="300" y1="37" x2="320" y2="37" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#hfA)"/>
+
+    <!-- 撒母耳 -->
+    <rect x="450" y="14" width="140" height="46" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="2.5"/>
+    <text x="520" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">撒母耳（拉曼人）</text>
+    <text x="520" y="47" text-anchor="middle" font-size="8.5" fill="#b45309">Samuel the Lamanite</text>
+    <text x="520" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">城墙上预言·预告基督降生</text>
+
+    <!-- 尼腓三世 -->
+    <rect x="610" y="14" width="130" height="46" rx="6" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="675" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">尼腓三世</text>
+    <text x="675" y="47" text-anchor="middle" font-size="8.5" fill="#0e7490">Nephi III (son of Nephi II)</text>
+    <text x="675" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">亲见基督降生前夕神迹</text>
+
+    <!-- 盖地安顿 -->
+    <rect x="20" y="104" width="140" height="46" rx="6" fill="#fff1f2" stroke="#fca5a5" stroke-width="2"/>
+    <text x="90" y="124" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">盖地安顿</text>
+    <text x="90" y="137" text-anchor="middle" font-size="8.5" fill="#be123c">Gadianton</text>
+    <text x="90" y="148" text-anchor="middle" font-size="7.5" fill="#94a3b8">秘密组合创始人·渗透政治</text>
+
+    <!-- 希望/恐惧对立 -->
+    <rect x="310" y="104" width="240" height="46" rx="6" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="430" y="124" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">信仰的张力：相信者 vs 不信者</text>
+    <text x="430" y="137" text-anchor="middle" font-size="8.5" fill="#c2410c">相信撒母耳 → 等待新星</text>
+    <text x="430" y="148" text-anchor="middle" font-size="7.5" fill="#94a3b8">不信者威胁处死信者——若无预兆成真</text>
+
+    <!-- Summary -->
+    <rect x="22" y="168" width="816" height="96" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="430" y="184" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#475569">希拉曼书的核心主题：骄傲循环（Cycle of Pride）与盖地安顿危机</text>
+    <text x="430" y="198" text-anchor="middle" font-size="8.5" fill="#475569">繁荣 → 骄傲 → 腐败 → 战争/苦难 → 悔改 → 繁荣（循环往复，每次更深）</text>
+    <text x="430" y="212" text-anchor="middle" font-size="8.5" fill="#94a3b8">盖地安顿匪帮成为"文明腐败"的象征——他们不用刀枪，而用谎言、誓约、渗透，从内部瓦解政府与教会</text>
+    <text x="430" y="226" text-anchor="middle" font-size="8" fill="#94a3b8">全书以撒母耳站城墙的画面为顶点——一个拉曼人先知对不肯听讲的尼腓人宣告基督的降临，历史的讽刺达到顶峰</text>
+    <text x="430" y="240" text-anchor="middle" font-size="8" fill="#94a3b8">希拉曼书（52–1 BC）跨越51年，是通往基督降临的最后倒计时——全书末段充满期待与张力</text>
+    <text x="430" y="254" text-anchor="middle" font-size="7.5" fill="#94a3b8">书中三位先知（尼腓二世、利海、撒母耳）都以神迹印证信息——印证了摩尔门经的核心主张：神会呼召各族的先知</text>
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

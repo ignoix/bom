@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 阿尔玛书</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#1e3a8a;background:#eff6ff;border-color:#93c5fd}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.cya{background:#ecfeff;border-color:#67e8f9}.cya .nt{color:#164e63}.cya .ne{color:#0e7490}
+
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+.cnote{background:#fff;border:1.5px solid #67e8f9;border-radius:7px;padding:8px 10px}
+.cnote .sn{color:#164e63}.cnote .se{color:#0e7490}
+.vnote{background:#fff;border:1.5px solid #c4b5fd;border-radius:7px;padding:8px 10px}
+.vnote .sn{color:#4c1d95}.vnote .se{color:#7c3aed}
+
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 时间线</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">阿尔玛书</span>
+  <span class="he">Alma · Missionaries · Captain Moroni · Wars · Stripling Warriors</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab on" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · LARGE PLATES · ABRIDGED BY MORMON</div>
+  <div class="intro-h">阿尔玛书 · Alma</div>
+  <div class="intro-en">Missionaries · Korihor · Anti-Nephi-Lehies · Captain Moroni · Title of Liberty · 2,000 Stripling Warriors</div>
+  <div class="intro-meta">
+    <span class="im">时间 <b>约公元前 91–52 年</b></span>
+    <span class="im">地点 <b>萨拉赫拉 · 安摩乃 · 尼腓地 · 东海岸</b></span>
+    <span class="im">章节 <b>63 章（摩尔门经最长）</b></span>
+    <span class="im">核心 <b>传教使命 · 自由幟 · 两千条子 · 信仰与战争</b></span>
+  </div>
+</div>
+
+<!-- ── activity map ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="alA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#0e7490"/></marker>
+      <marker id="alB" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/></marker>
+      <marker id="alC" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#d97706"/></marker>
+      <marker id="alD" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
+    </defs>
+    <rect width="860" height="430" fill="#bfdbfe" rx="8"/>
+    <polygon points="20,0 200,0 420,0 640,0 810,20 850,90 845,200 820,300 780,370 700,415 590,420 490,420 390,420 290,410 200,380 140,335 100,275 70,210 50,140 30,70 20,0" fill="#bbf7d0"/>
+    <ellipse cx="700" cy="78" rx="118" ry="54" fill="#bfdbfe" opacity="0.93"/>
+
+    <!-- Land of Zarahemla -->
+    <ellipse cx="440" cy="152" rx="112" ry="70" fill="rgba(236,254,255,0.6)" stroke="#67e8f9" stroke-width="2" stroke-dasharray="6,3"/>
+    <!-- Land of Nephi / Anti-Nephi-Lehies -->
+    <ellipse cx="310" cy="310" rx="100" ry="76" fill="rgba(240,253,244,0.5)" stroke="#6ee7b7" stroke-width="1.8" stroke-dasharray="6,3"/>
+    <!-- Ammonihah -->
+    <ellipse cx="560" cy="190" rx="52" ry="36" fill="rgba(255,241,242,0.7)" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <!-- East wilderness / Jershon -->
+    <ellipse cx="680" cy="240" rx="60" ry="50" fill="rgba(245,243,255,0.5)" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+    <!-- Zarahemla marker -->
+    <polygon points="432,118 452,118 452,138 442,130 432,138" fill="#0e7490" stroke="#fff" stroke-width="1.5"/>
+    <rect x="456" y="110" width="136" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#67e8f9" stroke-width="1.5"/>
+    <text x="524" y="124" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">萨拉赫拉</text>
+    <text x="524" y="134" text-anchor="middle" font-size="8" fill="#0e7490">首席法官 · 阿尔玛传道</text>
+
+    <!-- Ammonihah marker -->
+    <circle cx="560" cy="190" r="7" fill="#dc2626" stroke="#fff" stroke-width="2"/>
+    <rect x="570" y="178" width="148" height="26" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fca5a5" stroke-width="1.2"/>
+    <text x="644" y="191" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">安摩乃城</text>
+    <text x="644" y="201" text-anchor="middle" font-size="7.5" fill="#f87171">阿尔玛·阿米利克传道 · 殉道者被焚</text>
+
+    <!-- Anti-Nephi-Lehies bury weapons -->
+    <circle cx="310" cy="315" r="7" fill="#059669" stroke="#fff" stroke-width="2"/>
+    <rect x="320" y="302" width="160" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#6ee7b7" stroke-width="1.2"/>
+    <text x="400" y="315" text-anchor="middle" font-size="9" font-weight="bold" fill="#065f46">反尼腓利人</text>
+    <text x="400" y="326" text-anchor="middle" font-size="7.5" fill="#059669">埋剑盟约 · 不再流血 · 迁往耶肖纳</text>
+
+    <!-- Jershon / Stripling Warriors -->
+    <circle cx="680" cy="240" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
+    <rect x="578" y="252" width="148" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.2"/>
+    <text x="652" y="265" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">耶肖纳·海法</text>
+    <text x="652" y="276" text-anchor="middle" font-size="7.5" fill="#7c3aed">两千条子 · 希拉曼统率</text>
+    <line x1="680" y1="247" x2="726" y2="258" stroke="#7c3aed" stroke-width="1"/>
+
+    <!-- Sons of Mosiah mission route -->
+    <path d="M 440,152 Q 380,220 310,290" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#alC)"/>
+    <text x="370" y="232" font-size="8" fill="#d97706" text-anchor="middle">摩赛亚四子<br/>传道之旅</text>
+
+    <!-- Captain Moroni fortification arrows -->
+    <path d="M 440,152 Q 540,160 600,175" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#alB)"/>
+    <text x="526" y="156" font-size="8" fill="#dc2626" text-anchor="middle">摩罗乃筑防</text>
+
+    <!-- Anti-Nephi-Lehies migration to Jershon -->
+    <path d="M 340,300 Q 480,280 640,240" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#alA)"/>
+    <text x="490" y="268" font-size="7.5" fill="#059669" text-anchor="middle">迁往耶肖纳</text>
+
+    <!-- Water labels -->
+    <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="28" y="208" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific</text>
+    <text x="820" y="280" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text x="820" y="292" fill="#2563eb" font-size="8" font-style="italic" text-anchor="middle">Caribbean</text>
+    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+
+    <!-- Territory labels -->
+    <text x="440" y="96" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">萨拉赫拉地</text>
+    <text x="310" y="364" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">尼腓地·反尼腓利</text>
+    <text x="164" y="298" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">拉曼人</text>
+
+    <!-- Title box -->
+    <rect x="6" y="6" width="240" height="36" rx="5" fill="rgba(255,255,255,0.94)" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="14" y="21" fill="#1e3a8a" font-size="11" font-weight="bold">阿尔玛书活动地图</text>
+    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Alma Activity Map · ~91–52 BC</text>
+
+    <!-- Chapter summary -->
+    <rect x="6" y="50" width="182" height="178" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="97" y="66" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">阿尔玛书（63章）</text>
+    <text x="14" y="82" font-size="8.5" fill="#475569">① 第1–4章　法官时代初期·阿尔玛传道</text>
+    <text x="14" y="95" font-size="8.5" fill="#475569">② 第5–16章 阿尔玛与阿米利克·安摩乃</text>
+    <text x="14" y="108" font-size="8.5" fill="#475569">③ 第17–27章 摩赛亚四子传教·反尼腓利</text>
+    <text x="14" y="121" font-size="8.5" fill="#475569">④ 第30章　科里候反基督者被击哑</text>
+    <text x="14" y="134" font-size="8.5" fill="#475569">⑤ 第32章　信仰如种子的布道</text>
+    <text x="14" y="147" font-size="8.5" fill="#475569">⑥ 第36–42章 阿尔玛教训儿子·离世</text>
+    <text x="14" y="160" font-size="8.5" fill="#475569">⑦ 第43–62章 摩罗乃上尉·自由幟·战争</text>
+    <text x="14" y="173" font-size="8.5" fill="#475569">⑧ 第53–58章 两千条子·希拉曼统率</text>
+    <text x="14" y="186" font-size="8.5" fill="#475569">⑨ 第63章　 希拉曼接管金版记录</text>
+    <line x1="12" y1="200" x2="30" y2="200" stroke="#dc2626" stroke-width="2" marker-end="url(#alB)"/>
+    <text x="36" y="204" fill="#475569" font-size="8">拉曼人攻击</text>
+    <line x1="12" y1="215" x2="30" y2="215" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#alA)"/>
+    <text x="36" y="219" fill="#475569" font-size="8">传教路线</text>
+  </svg>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+</div>
+
+<!-- ══ 法官时代初期 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text">法官<br>初期</div></div>
+<div class="n cya">
+  <div class="nd">约 公元前 91–83 年</div>
+  <div class="nt">第 1–4 章　法官时代开始，阿尔玛担任首席法官与大祭司</div>
+  <div class="ne">Alma as Chief Judge · Church Established Broadly · 萨拉赫拉</div>
+  <ul class="nl">
+    <li>小<b>阿尔玛（Alma the Younger）</b>同时身兼首席法官与大祭司，处理国家与教会的双重事务</li>
+    <li>一个自称先知的人<b>尼候（Nehor）</b>宣扬"人人得救无须悔改"，并杀死义人基蒂亚努——被判有罪处决</li>
+    <li>"尼候主义"（Nehorism）作为一种异端思想在此后贯穿整个阿尔玛书，成为教会腐败的根源</li>
+    <li>阿尔玛见教会日渐骄傲、放纵，内部争斗，毅然辞去首席法官职位，全心投入传道事工</li>
+    <li>他的辞职宣言："我见神的子民苦难，使我心痛胜过因失去王位"——将灵魂的拯救置于政治权力之上</li>
+    <li>尼腓亚（Nephihah）接任首席法官，阿尔玛开始在全地各城巡回布道</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="cnote">
+    <div class="sn">尼候主义</div>
+    <div class="se">Nehorism · 第 1章</div>
+    <div class="sd">宣扬：神爱所有<br>人，无须悔改<br>神职人员该<br>得民众供养<br>→ 贯穿全书的<br>教会腐败源头</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 阿尔玛与阿米利克 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">安摩乃<br>殉道</div></div>
+<div class="n ros">
+  <div class="nd">约 公元前 82–81 年</div>
+  <div class="nt">第 8–16 章　阿尔玛在安摩乃城，与阿米利克同传，信徒被焚殉道</div>
+  <div class="ne">Ammonihah · Alma &amp; Amulek · Martyrs Burned · Zeezrom's Conversion</div>
+  <ul class="nl">
+    <li>阿尔玛被天使引导重返<b>安摩乃城（Ammonihah）</b>，在那里遇见准备好接待他的<b>阿米利克（Amulek）</b></li>
+    <li>两人合力传道，法庭上与学识渊博的<b>泽赛若（Zeezrom）</b>辩论，最终泽赛若被说服信主并悔改</li>
+    <li>城中信徒（以妇女和儿童为主）被收集成堆，当着阿尔玛的面活活烧死——阿尔玛拒绝以神力阻止，"这是对他们罪恶的见证"</li>
+    <li>阿尔玛与阿米利克被投入监狱，受到凌辱捆绑；他们祷告后，地震动，监狱墙壁倒塌，迫害者全被压死</li>
+    <li>两人从废墟中走出，无人敢近前——他们徒步离开，到丘伦城被接纳，泽赛若在那里归改受洗并康复</li>
+    <li>拉曼人后来摧毁安摩乃城（应验阿尔玛的预言）；该城被称为<b>"反叛之地"（Desolation of Nehors）</b></li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sb">
+    <div class="sn">监狱神迹</div>
+    <div class="se">Prison Miracle · 第 14章</div>
+    <div class="sd">祷告之中<br>绳索断裂<br>监狱倒塌<br>迫害者全被<br>压死而亡<br>——神为见证<br>者彰显大能</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 摩赛亚四子传教 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">四子<br>传教</div></div>
+<div class="n tea">
+  <div class="nd">约 公元前 91–77 年</div>
+  <div class="nt">第 17–27 章　摩赛亚四子在拉曼人中传道十四年，阿们归改拉曼王</div>
+  <div class="ne">Sons of Mosiah · Ammon among Lamanites · King Lamoni · Anti-Nephi-Lehies</div>
+  <ul class="nl">
+    <li><b>阿蒙（Ammon）</b>主动前往拉曼王<b>拉蒙尼（Lamoni）</b>的宫廷，自愿为王看守羊群</li>
+    <li>当强盗袭击羊群时，阿蒙以神奇武力独力击退，砍断多人手臂——拉蒙尼王大为惊异，以为他是神</li>
+    <li>阿蒙趁机传讲基督，拉蒙尼与全宫廷倒在圣灵的大能中——三日后复苏，见证了基督的荣耀</li>
+    <li>阿蒙的兄弟<b>亚伦（Aaron）</b>在另一个地方向拉蒙尼之父（大王）传道并使他归改</li>
+    <li>归改的拉曼人自称<b>反尼腓利人（Anti-Nephi-Lehies）</b>，立下不再流人血的盟约，将武器深埋地下</li>
+    <li>敌对的拉曼人屠杀了一千名宁死不抗拒的反尼腓利人——目睹者深受感动，反而有更多人归改</li>
+    <li>反尼腓利人被允许迁往尼腓人的耶肖纳地（Jershon），受尼腓军队保护，后改名为<b>阿蒙人（People of Ammon）</b></li>
+  </ul>
+</div>
+<div class="si">
+  <div class="sym">
+    <div class="sn">埋剑盟约</div>
+    <div class="se">Covenant of Peace · 第 24章</div>
+    <div class="sd">反尼腓利人<br>宁可被杀<br>也不违誓言<br>他们的殉道<br>使更多人<br>归改——比<br>战剑更有力</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 科里候反基督 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">科里候<br>反基督</div></div>
+<div class="n amb">
+  <div class="nd">约 公元前 74 年</div>
+  <div class="nt">第 30–33 章　科里候否认基督，被击哑；信仰如种子的经典教导</div>
+  <div class="ne">Korihor the Anti-Christ · Struck Dumb · Alma's Sermon on Faith as a Seed</div>
+  <ul class="nl">
+    <li><b>科里候（Korihor）</b>宣扬：没有基督，没有赎罪，死后灵魂消亡，人的命运由自己的才能决定——是摩尔门经最系统的反基督论述</li>
+    <li>阿尔玛反驳："你有什么证据神不存在？"——科里候要求神迹；阿尔玛指向星辰大地，"万物见证神存在"</li>
+    <li>科里候被击哑（无法说话），最终以书面承认他知道神存在，只是被魔鬼欺骗，内心失去平静</li>
+    <li>他后来在被踩踏而死之前，仍未获神的宽恕——成为书中对傲慢心灵的最沉痛警示</li>
+    <li>第 32 章：阿尔玛向佐拉枯人传道，宣讲<b>"信仰如种子"</b>——信仰不是全知，而是用良善的心尝试、让它发芽生长</li>
+    <li>阿玛谢牧（Amulek）在第 34 章宣讲：基督的无限赎罪将赎尽世上所有罪——是最经典的赎罪神学讲道</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">信仰如种子</div>
+    <div class="se">Faith as a Seed · 第 32:28</div>
+    <div class="sd">若是你只有<br>一点希望——<br>将那字句<br>种入心中<br>若是良善的<br>它会膨胀<br>扎根·成长<br>→ 信仰的本质</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 摩罗乃上尉·自由幟 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">摩罗乃<br>自由幟</div></div>
+<div class="n blu">
+  <div class="nd">约 公元前 73–57 年</div>
+  <div class="nt">第 43–62 章　摩罗乃上尉，举起自由幟，抵御拉曼大军与内部叛徒</div>
+  <div class="ne">Captain Moroni · Title of Liberty · Wars · Amalickiah · Fortifications</div>
+  <ul class="nl">
+    <li><b>摩罗乃上尉（Captain Moroni）</b>，约 25 岁，被任命统率尼腓全军——他以信仰、而非仅军事才能著称</li>
+    <li>他将斗篷撕裂，写上"为神、自由、国家、平安"，制成<b>自由幟（Title of Liberty）</b>，召集百姓立约</li>
+    <li>野心家<b>阿马利卡亚（Amalickiah）</b>出逃投靠拉曼人，用计谋成为拉曼人的王，率大军攻打尼腓人</li>
+    <li>摩罗乃在海岸、山区、战略要道修建大量土木防御工事（壕沟、土堤、木栅），极大提升了守城能力</li>
+    <li>摩罗乃致信后方首席法官<b>帕和沦（Pahoran）</b>，斥责政府不支援前线——帕和沦回信揭露首都被叛军占领</li>
+    <li>摩罗乃一边与北方拉曼军对峙，一边分兵帮帕和沦收复首都，重建政府——双线作战，终获胜利</li>
+    <li>约公元前 57 年，战争结束，摩罗乃将指挥权交给儿子莫罗尼伊，自己退休回家，不久去世</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="note">
+    <div class="sn">摩罗乃的评价</div>
+    <div class="se">Mormon's Tribute · 第 48:17</div>
+    <div class="sd">摩尔门写道：<br>"若众人皆如<br>摩罗乃，地狱<br>的权势将永不<br>能动摇神的<br>百姓"——他是<br>全书最高度<br>赞扬的人物</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">🏳</span>
+  <div>
+    <div>摩罗乃举起自由幟——"为神、为自由、为我们的国家、为平安"，誓死抵御暴君</div>
+    <div class="ev-date">约 公元前 73 年 · 第 46:13 · 摩罗乃跪地祷告，全民立约效忠</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 两千条子 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">两千<br>条子</div></div>
+<div class="n vio">
+  <div class="nd">约 公元前 65–57 年</div>
+  <div class="nt">第 53–58 章　两千条子（阿蒙人少年），奇迹生还无一阵亡</div>
+  <div class="ne">2,000 Stripling Warriors · Sons of Helaman · "Mothers' Faith" · Miraculous Survival</div>
+  <ul class="nl">
+    <li>阿蒙人（反尼腓利人）因埋剑盟约不能从军；他们的<b>儿子</b>却未立过此誓，自愿组成一支军队保卫故乡</li>
+    <li>共<b>两千名少年</b>在<b>希拉曼（Helaman，阿尔玛之子）</b>的率领下上阵——他们亲切称他"父亲"</li>
+    <li>他们在战场上表现出超乎常人的勇猛，因为"他们的母亲曾教导他们：若不怀疑，神必拯救他们"</li>
+    <li>他们参与多场险仗，每次战后都有人负伤，但<b>无一人阵亡</b>——希拉曼相信这是神的奇迹</li>
+    <li>又有六十名少年加入，总数达 2060 人，仍无一阵亡（虽有超过 200 人次受伤）</li>
+    <li>希拉曼在给摩罗乃的信中写道："我从未见过如此强烈的勇气……这不是因为他们自己，而是因为他们信靠神"</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="vnote">
+    <div class="sn">母亲的教导</div>
+    <div class="se">Mothers' Faith · 第 56:47</div>
+    <div class="sd">少年们说：<br>"我们的母亲<br>教导我们——<br>若不怀疑<br>神必拯救"<br>母亲的信仰<br>在战场上<br>保护了儿子</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 阿尔玛离世 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text">阿尔玛<br>离世</div></div>
+<div class="n cya">
+  <div class="nd">约 公元前 73 年前后</div>
+  <div class="nt">第 36–45 章　阿尔玛向三子教导，将金版交付希拉曼，神秘失踪</div>
+  <div class="ne">Alma's Last Teachings · Passes Records to Helaman · Taken by the Lord</div>
+  <ul class="nl">
+    <li>阿尔玛向三个儿子分别作最后嘱托：希拉曼（接管金版）、塞布隆（忠信布道者）、柯里安顿（因道德失足受严厉教训）</li>
+    <li>他对柯里安顿宣讲赎罪与复活的深刻神学，教导灵魂的永恒状态——这是摩尔门经最精深的末世论段落</li>
+    <li>他告诉希拉曼："我若未从神领受吩咐，就决不告诉你那些器物被藏在哪里"——神圣记录的保守</li>
+    <li>阿尔玛离开萨拉赫拉前往萨克拉芒地，此后<b>再未被人看见</b>——摩尔门记录他"依神的话语被接走，如摩西一样"</li>
+    <li>他担任首席法官九年，此后专注传道约二十年，是摩尔门经最具影响力的神学家与布道家</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="cnote">
+    <div class="sn">神秘失踪</div>
+    <div class="se">Taken by God · 第 45:19</div>
+    <div class="sd">摩尔门写道：<br>阿尔玛"依<br>神的话语被<br>接走"——没有<br>普通的死亡<br>如先知摩西<br>被神取走<br>是否被译走？</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">✦</span>
+  <div>
+    <div>阿尔玛书结束——希拉曼接管金版，阿尔玛神秘离世，法官时代的宗教、军事叙事交由下一代承继</div>
+    <div class="ev-date">约 公元前 52 年 · 第 63章 · 希拉曼书续接叙事</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- legend -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#ecfeff;border-color:#67e8f9"></div>法官时代初期·阿尔玛离世</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>安摩乃殉道·战争</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>四子传教·反尼腓利人</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>科里候·信仰如种子</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>摩罗乃上尉·自由幟</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>两千条子·希拉曼</div>
+</div>
+
+<!-- ── Key figures relationship diagram ── -->
+<div class="rel">
+  <div class="rel-title">主要人物关系 · KEY FIGURES OF ALMA</div>
+  <svg viewBox="0 0 860 310" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+    <defs>
+      <marker id="fA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#0e7490"/></marker>
+      <marker id="fR" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/></marker>
+      <marker id="fG" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#059669"/></marker>
+      <marker id="fV" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
+    </defs>
+
+    <!-- 阿尔玛（小） -->
+    <rect x="20" y="14" width="140" height="48" rx="6" fill="#ecfeff" stroke="#0e7490" stroke-width="2.5"/>
+    <text x="90" y="34" text-anchor="middle" font-size="12" font-weight="bold" fill="#164e63">小阿尔玛</text>
+    <text x="90" y="47" text-anchor="middle" font-size="8.5" fill="#0e7490">Alma the Younger</text>
+    <text x="90" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">首席法官→大祭司→传教士</text>
+
+    <!-- 阿米利克 -->
+    <rect x="180" y="14" width="120" height="48" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="240" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">阿米利克</text>
+    <text x="240" y="47" text-anchor="middle" font-size="8.5" fill="#2563eb">Amulek</text>
+    <text x="240" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">阿尔玛的传道伙伴</text>
+    <line x1="160" y1="38" x2="180" y2="38" stroke="#0e7490" stroke-width="1.5" marker-end="url(#fA)"/>
+
+    <!-- 摩罗乃上尉 -->
+    <rect x="322" y="14" width="148" height="48" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="396" y="34" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">摩罗乃上尉</text>
+    <text x="396" y="47" text-anchor="middle" font-size="8.5" fill="#2563eb">Captain Moroni · 自由幟</text>
+    <text x="396" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">军事天才·信仰捍卫者</text>
+
+    <!-- 希拉曼 -->
+    <rect x="490" y="14" width="130" height="48" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="555" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">希拉曼</text>
+    <text x="555" y="47" text-anchor="middle" font-size="8.5" fill="#7c3aed">Helaman (Alma's son)</text>
+    <text x="555" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">两千条子之父·金版继承者</text>
+    <line x1="160" y1="55" x2="180" y2="62" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+
+    <!-- 阿蒙 (Son of Mosiah) -->
+    <rect x="640" y="14" width="110" height="48" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="695" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">阿蒙</text>
+    <text x="695" y="47" text-anchor="middle" font-size="8.5" fill="#059669">Ammon</text>
+    <text x="695" y="58" text-anchor="middle" font-size="7.5" fill="#94a3b8">向拉蒙尼王传教</text>
+
+    <!-- 反尼腓利人 -->
+    <rect x="490" y="98" width="160" height="48" rx="6" fill="#f0fdf9" stroke="#059669" stroke-width="1.5"/>
+    <text x="570" y="118" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">反尼腓利人</text>
+    <text x="570" y="131" text-anchor="middle" font-size="8.5" fill="#059669">Anti-Nephi-Lehies</text>
+    <text x="570" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">埋剑盟约·迁往耶肖纳</text>
+    <line x1="695" y1="62" x2="620" y2="98" stroke="#059669" stroke-width="1.5" marker-end="url(#fG)"/>
+
+    <!-- 两千条子 -->
+    <rect x="490" y="178" width="160" height="48" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="570" y="198" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">两千条子</text>
+    <text x="570" y="211" text-anchor="middle" font-size="8.5" fill="#7c3aed">2,000 Stripling Warriors</text>
+    <text x="570" y="222" text-anchor="middle" font-size="7.5" fill="#94a3b8">反尼腓利人之子·无一阵亡</text>
+    <line x1="570" y1="146" x2="570" y2="178" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#fV)"/>
+
+    <!-- 科里候 -->
+    <rect x="322" y="98" width="130" height="48" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="387" y="118" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">科里候</text>
+    <text x="387" y="131" text-anchor="middle" font-size="8.5" fill="#b45309">Korihor · 反基督</text>
+    <text x="387" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">被击哑·踩踏而死</text>
+
+    <!-- 阿马利卡亚 -->
+    <rect x="182" y="98" width="120" height="48" rx="6" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="242" y="118" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">阿马利卡亚</text>
+    <text x="242" y="131" text-anchor="middle" font-size="8.5" fill="#be123c">Amalickiah</text>
+    <text x="242" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">叛逃·成拉曼王·最大敌人</text>
+    <line x1="396" y1="62" x2="322" y2="98" stroke="#dc2626" stroke-width="1.5" marker-end="url(#fR)"/>
+
+    <!-- Summary bar -->
+    <rect x="22" y="248" width="816" height="48" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="430" y="264" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#475569">阿尔玛书三大主轴：① 传道使命（阿尔玛·阿蒙·四子）② 军事捍卫（摩罗乃·希拉曼）③ 信仰神学（信仰如种子·赎罪·灵魂不朽）</text>
+    <text x="430" y="278" text-anchor="middle" font-size="8.5" fill="#94a3b8">63章横跨约40年，是摩尔门经中篇幅最大、人物最多、神学最深的叙事；其核心命题是：真正的自由来自福音，真正的力量来自信仰</text>
+    <text x="430" y="290" text-anchor="middle" font-size="8" fill="#94a3b8">两千条子的故事（母亲的信仰）是全摩尔门经最为人传颂、最具感召力的故事段落</text>
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

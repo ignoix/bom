@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摩尔门经叙事 · 摩尔门语</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
+
+header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
+.hb{font-size:11px;color:#94a3b8}
+.hs{color:#cbd5e1}
+.hn{font-size:14px;font-weight:700;color:#1e293b}
+.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+.he{font-size:11px;color:#94a3b8;font-style:italic}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.nav::-webkit-scrollbar{height:0}
+.tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.tab.on{color:#7c2d12;background:#fff7ed;border-color:#fdba74}
+.tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
+.tab.dim{opacity:.3;cursor:default;pointer-events:none}
+
+.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+
+.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
+.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
+.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
+.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+
+.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
+.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
+.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph-sp{grid-column:1}
+
+.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
+.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+
+.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
+.n:hover{filter:brightness(.97)}
+.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
+.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
+.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
+.nl{list-style:none;padding:0}
+.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
+.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.ora{background:#fff7ed;border-color:#fdba74}.ora .nt{color:#7c2d12}.ora .ne{color:#c2410c}
+
+.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
+.ev-icon{font-size:16px;flex-shrink:0}
+.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+
+.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
+.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
+.sb+.sb{margin-top:7px}
+.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
+.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
+.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+.si-sp{grid-column:3}
+
+.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
+.sym .sn{color:#065f46}.sym .se{color:#059669}
+.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
+.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
+.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
+.warn .sn{color:#92400e}.warn .se{color:#b45309}
+.onote{background:#fff;border:1.5px solid #fdba74;border-radius:7px;padding:8px 10px}
+.onote .sn{color:#7c2d12}.onote .se{color:#c2410c}
+
+.legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
+.lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
+.lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
+
+.rel{grid-column:1/-1;margin-top:28px}
+.rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
+.rel svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-btn" href="index.html">← 時間線</a>
+  <span class="hb">摩尔门经</span><span class="hs">/</span>
+  <span class="hn">摩尔门语</span>
+  <span class="he">Words of Mormon · Mormon's Editorial Bridge Across 500 Years</span>
+  <nav class="nav">
+    <a class="tab" href="bom.html">一书</a>
+    <a class="tab" href="bom2.html">二书</a>
+    <a class="tab" href="bom-jacob.html">雅各</a>
+    <a class="tab" href="bom-enos.html">以挪士</a>
+    <a class="tab" href="bom-jarom.html">雅龙</a>
+    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab on" href="bom-wom.html">摩语</a>
+    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
+    <a class="tab" href="bom-alma.html">阿尔玛</a>
+    <a class="tab" href="bom-helaman.html">希拉曼</a>
+    <a class="tab" href="bom-3nephi.html">三书</a>
+    <a class="tab" href="bom-4nephi.html">四书</a>
+    <a class="tab" href="bom-mormon.html">摩尔门</a>
+    <a class="tab dim">以帖</a>
+    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+  </nav>
+</header>
+
+<div class="page">
+
+<!-- intro -->
+<div class="intro">
+  <div class="intro-sup">BOOK OF MORMON · EDITORIAL BRIDGE · WRITTEN BY MORMON HIMSELF</div>
+  <div class="intro-h">摩尔门语 · Words of Mormon</div>
+  <div class="intro-en">Mormon's own preface — bridging the Small Plates (~600–130 BC) and the Large Plates abridgment (~130 BC – AD 385)</div>
+  <div class="intro-meta">
+    <span class="im">写作时间 <b>约公元后 385 年</b></span>
+    <span class="im">记述时代 <b>约公元前 130 年（本雅明王）</b></span>
+    <span class="im">章节 <b>1 章 · 18 节</b></span>
+    <span class="im">核心 <b>偶获小版 · 信托神旨 · 本雅明联民 · 过渡摩赛亚</b></span>
+  </div>
+</div>
+
+<!-- ── activity map ── -->
+<div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP（双时间层：公元前 130 年 ＋ 公元后 385 年）</div>
+  <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
+    <defs>
+      <marker id="wmA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#c2410c"/>
+      </marker>
+      <marker id="wmB" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/>
+      </marker>
+      <marker id="wmC" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#1d4ed8"/>
+      </marker>
+    </defs>
+
+    <rect width="860" height="430" fill="#bfdbfe" rx="8"/>
+    <polygon points="20,0 200,0 420,0 640,0 810,20 850,90 845,200 820,300 780,370 700,415 590,420 490,420 390,420 290,410 200,380 140,335 100,275 70,210 50,140 30,70 20,0" fill="#bbf7d0"/>
+    <ellipse cx="700" cy="78" rx="118" ry="54" fill="#bfdbfe" opacity="0.93"/>
+
+    <!-- Lamanite territory (Benjamin's era, ~130 BC) -->
+    <ellipse cx="164" cy="320" rx="58" ry="64" fill="rgba(254,202,202,0.45)" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+    <!-- Land of Zarahemla (Benjamin's capital, ~130 BC) - orange border for this era -->
+    <ellipse cx="440" cy="155" rx="112" ry="74" fill="rgba(255,247,237,0.65)" stroke="#fdba74" stroke-width="2.2" stroke-dasharray="6,3"/>
+
+    <!-- Lamanite attack arrows (Benjamin's era battles, vs 12-15) -->
+    <path d="M 148,300 Q 224,240 340,185" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#wmB)"/>
+    <path d="M 140,340 Q 218,310 330,240" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#wmB)"/>
+
+    <!-- Benjamin victory shield / temple -->
+    <polygon points="432,120 452,120 452,140 442,132 432,140" fill="#c2410c" stroke="#fff" stroke-width="1.5"/>
+    <rect x="456" y="114" width="152" height="32" rx="4" fill="rgba(255,255,255,0.94)" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="532" y="127" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#7c2d12">本雅明王 · 萨拉赫拉</text>
+    <text x="532" y="139" text-anchor="middle" font-size="8" fill="#c2410c">King Benjamin · 圣洁君王 · 驱逐假先知</text>
+    <line x1="452" y1="130" x2="456" y2="127" stroke="#c2410c" stroke-width="1.2"/>
+
+    <!-- Warfare label (Benjamin's battles) -->
+    <rect x="18" y="210" width="126" height="30" rx="4" fill="rgba(255,255,255,0.92)" stroke="#fca5a5"/>
+    <text x="81" y="223" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#9f1239">拉曼战争（约公元前 130 年）</text>
+    <text x="81" y="234" text-anchor="middle" font-size="7.5" fill="#f87171">摩尔门语 节 12–15</text>
+
+    <!-- Hill Cumorah marker (Mormon's writing era, ~AD 385) -->
+    <circle cx="580" cy="68" r="8" fill="#c2410c" stroke="#fff" stroke-width="2.5"/>
+    <text x="580" y="64" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">卡</text>
+    <rect x="592" y="50" width="184" height="34" rx="4" fill="rgba(255,247,237,0.96)" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="684" y="64" text-anchor="middle" font-size="9" font-weight="bold" fill="#7c2d12">★ 卡默拉山（约公元后 385 年）</text>
+    <text x="684" y="76" text-anchor="middle" font-size="8" fill="#c2410c">摩尔门在此写摩尔门语 · 藏版之地</text>
+    <line x1="588" y1="68" x2="592" y2="68" stroke="#c2410c" stroke-width="1.2"/>
+
+    <!-- Dashed "time connection" from Cumorah back to Zarahemla (Mormon looking back) -->
+    <path d="M 574,76 Q 540,110 500,135" fill="none" stroke="#c2410c" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#wmA)"/>
+    <text x="568" y="118" font-size="8" fill="#c2410c" text-anchor="middle">摩尔门回顾小版</text>
+    <text x="568" y="129" font-size="7.5" fill="#ea580c" text-anchor="middle">约 500 年的跨越</text>
+
+    <!-- Water labels -->
+    <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="28" y="208" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific</text>
+    <text x="820" y="280" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text x="820" y="292" fill="#2563eb" font-size="8" font-style="italic" text-anchor="middle">Caribbean</text>
+    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text x="700" y="78" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text>
+
+    <!-- Territory labels -->
+    <text x="164" y="284" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text x="164" y="297" text-anchor="middle" font-size="8" fill="#f87171">Lamanites</text>
+    <text x="440" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">萨拉赫拉地</text>
+    <text x="440" y="113" text-anchor="middle" font-size="8.5" fill="#c2410c">Land of Zarahemla · 本雅明王时代</text>
+
+    <!-- Two-era banner -->
+    <rect x="6" y="6" width="276" height="48" rx="5" fill="rgba(255,255,255,0.94)" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="14" y="20" fill="#7c2d12" font-size="11" font-weight="bold">摩尔门语活动地图（双时间层）</text>
+    <text x="14" y="33" fill="#c2410c" font-size="8.5">▶ 橙色虚线区 = 约公元前 130 年（本雅明王时代）</text>
+    <text x="14" y="45" fill="#94a3b8" font-size="8.5">▶ 卡默拉山 ★ = 约公元后 385 年（摩尔门写作）</text>
+
+    <!-- Legend -->
+    <rect x="6" y="62" width="148" height="110" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <polygon points="18,78 29,78 29,90 23.5,84 18,90" fill="#c2410c"/>
+    <text x="34" y="87" fill="#475569" font-size="9">本雅明王宫/圣殿</text>
+    <circle cx="22" cy="106" r="6" fill="#c2410c" stroke="#fff" stroke-width="1.5"/>
+    <text x="34" y="110" fill="#475569" font-size="9">卡默拉山（藏版）</text>
+    <ellipse cx="22" cy="126" rx="10" ry="7" fill="rgba(255,247,237,0.65)" stroke="#fdba74" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="36" y="130" fill="#475569" font-size="9">萨拉赫拉地</text>
+    <line x1="12" y1="148" x2="30" y2="148" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#wmB)"/>
+    <text x="36" y="152" fill="#475569" font-size="9">拉曼入侵</text>
+
+    <!-- Chapter summary -->
+    <rect x="396" y="330" width="456" height="90" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="624" y="345" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">摩尔门语 · 约公元后 385 年写作（1章18节）</text>
+    <text x="408" y="361" font-size="9" fill="#475569">① 节 1–5　偶获小版：摩尔门编辑大版时意外发现小版，喜悦于基督内容</text>
+    <text x="408" y="374" font-size="9" fill="#475569">② 节 5–9　信托神旨：不解为何保存却信任神智慧 · 称颂神的作为</text>
+    <text x="408" y="387" font-size="9" fill="#475569">③ 节 10–15 本雅明联民：本雅明驱假先知 · 凭信打败拉曼人 · 重建和平</text>
+    <text x="408" y="400" font-size="9" fill="#475569">④ 节 15–18 过渡说明：本雅明传摩赛亚 · 衔接小版与大版的叙事</text>
+    <text x="408" y="413" font-size="9" fill="#ea580c">★ 此书由摩尔门于约公元后 385 年写成，回顾公元前 130 年的事，跨越约 500 年</text>
+  </svg>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+</div>
+
+<!-- ══ 偶获小版 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#c2410c"></div><div class="ph-text">偶获小版</div></div>
+<div class="n ora">
+  <div class="nd">约 公元后 385 年</div>
+  <div class="nt">节 1–5　摩尔门偶然发现小版，决定纳入</div>
+  <div class="ne">Mormon Discovers Small Plates · 写于卡默拉山附近</div>
+  <ul class="nl">
+    <li>摩尔门正在按照神的命令，从尼腓人的大版中缩编历史——这是他毕生的编辑工作</li>
+    <li>在编辑过程中，他偶然发现了<b>小版的尼腓人记录</b>（即从尼腓一世到亚玛来的部分）</li>
+    <li>他仔细阅读，深受感动，因为这些记录"广泛而清晰地传讲基督"，充满先知性的见证</li>
+    <li>摩尔门决定将整套小版原版附在他的缩编本之后，而不是另作摘要</li>
+    <li>这个决定是神意的！约公元 1828 年，约瑟·史密斯翻译的早期记录（大版前部分）丢失，正是小版填补了这段空白</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="onote">
+    <div class="sn">神意的保存</div>
+    <div class="se">Providential Preservation</div>
+    <div class="sd">摩尔门不知道<br>为何要附上小版<br>——但 1400 年后<br>原稿丢失时<br>小版救了场<br>（摩尔门语 节 7）</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 信托神旨 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">信托神旨</div></div>
+<div class="n amb">
+  <div class="nd">约 公元后 385 年</div>
+  <div class="nt">节 5–9　不解其意，仍信神的智慧</div>
+  <div class="ne">Trust in God's Wisdom · 摩尔门的信仰告白</div>
+  <ul class="nl">
+    <li>摩尔门坦承：他不知道神为什么要他将小版附上，但他确信这有神圣目的</li>
+    <li>"我知道主使一切事情都为爱祂的人造就益处"——这是全书最感人的信仰宣告</li>
+    <li>他将小版原版封存，附在他的大版缩编之后，连同其余的记录一并保管</li>
+    <li>他为神赐给他写作的能力而称颂神：编辑、缩编、翻译这些古代记录是他一生的神圣使命</li>
+    <li>摩尔门在接近生命终点时写下这些话语，充满感恩与对后人的深切期望</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="warn">
+    <div class="sn">摩尔门的信仰</div>
+    <div class="se">Mormon's Testimony · 节 7</div>
+    <div class="sd">"我知道主使一切<br>事情都为爱祂的<br>人造就益处"<br>——摩尔门（节 7）<br>即使不明白，<br>仍完全信赖神</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
+
+<!-- ══ 本雅明联民 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#1d4ed8"></div><div class="ph-text">本雅明<br>联民</div></div>
+<div class="n blu">
+  <div class="nd">记述约 公元前 130 年</div>
+  <div class="nt">节 10–18　本雅明王驱假先知，联合两族</div>
+  <div class="ne">King Benjamin Unites the People · ~130 BC · 萨拉赫拉地</div>
+  <ul class="nl">
+    <li>摩尔门简述他从大版中缩编至本雅明王时代的内容：本雅明是"圣洁、公义"的君王</li>
+    <li>本雅明的时代有许多人争论、讲道、有假基督兴起，也有人行巫术和施魔法——信仰危机严重</li>
+    <li>本雅明凭借圣灵的大能，与众多圣洁先知一起，用话语的力量对付假先知和争论</li>
+    <li>他也亲身带领军队，以剑打败拉曼人的入侵，保护了萨拉赫拉的百姓</li>
+    <li>在圣洁先知们的帮助下，本雅明最终使百姓和好，恢复和平，建立秩序</li>
+    <li>摩尔门将话语过渡至<b>摩赛亚（Mosiah，本雅明之子）</b>的记录，为摩赛亚书做铺垫</li>
+  </ul>
+</div>
+<div class="si">
+  <div class="note">
+    <div class="sn">本雅明的双重角色</div>
+    <div class="se">King Benjamin · 节 13–18</div>
+    <div class="sd">圣徒君王<br>既用话语<br>（驱假先知）<br>又用刀剑<br>（胜拉曼人）<br>二者皆神圣使命</div>
+  </div>
+</div>
+
+<div class="ph-sp"></div>
+<div class="ev">
+  <span class="ev-icon">✦</span>
+  <div>
+    <div>摩尔门语结束，叙事无缝衔接摩赛亚书——小版与大版在此汇合成一本经典</div>
+    <div class="ev-date">节 18 · 过渡到摩赛亚书 · 大版叙事正式开始</div>
+  </div>
+</div>
+<div class="si-sp"></div>
+
+<!-- legend -->
+<div class="legend">
+  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff7ed;border-color:#fdba74"></div>偶获小版·摩尔门编辑决定</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>信托神旨·不解但顺从</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>本雅明联民·驱逐假先知·战胜拉曼</div>
+</div>
+
+<!-- ── 1000-year time bridge diagram ── -->
+<div class="rel">
+  <div class="rel-title">千年时间桥 · 1000-YEAR EDITORIAL BRIDGE（公元前 600 年 — 公元后 400 年）</div>
+  <svg viewBox="0 0 860 250" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+
+    <!-- Background -->
+    <rect width="860" height="250" rx="8" fill="#f8fafc"/>
+
+    <!-- Scale: 740px / 1000 years = 0.74 px/year, x=60 at -600, x=800 at +400 -->
+    <!-- -600: x=60 -->
+    <!-- -130: x=60+470*0.74=408 -->
+    <!-- 0 AD: x=60+600*0.74=504 -->
+    <!-- +385: x=60+985*0.74=789 -->
+
+    <!-- Zone 1: Small plates era (-600 to -130) — indigo tint -->
+    <rect x="60" y="90" width="348" height="34" rx="3" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.2"/>
+    <text x="234" y="112" text-anchor="middle" font-size="9" font-weight="bold" fill="#312e81">小版时代（公元前 600–130 年）</text>
+
+    <!-- Zone 2: Large plates era (-130 to +385) — teal tint -->
+    <rect x="408" y="90" width="381" height="34" rx="3" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.2"/>
+    <text x="598" y="112" text-anchor="middle" font-size="9" font-weight="bold" fill="#065f46">大版时代（公元前 130 — 公元后 385 年）</text>
+
+    <!-- Axis line -->
+    <line x1="60" y1="127" x2="800" y2="127" stroke="#cbd5e1" stroke-width="1.5"/>
+    <path d="M 796,123 L 804,127 L 796,131" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+
+    <!-- Tick marks -->
+    <!-- -600: x=60 -->
+    <line x1="60" y1="124" x2="60" y2="140" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="60" y="153" text-anchor="middle" font-size="9" fill="#64748b">-600</text>
+
+    <!-- -500: x=60+100*0.74=134 -->
+    <line x1="134" y1="124" x2="134" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="134" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">-500</text>
+
+    <!-- -400: x=60+200*0.74=208 -->
+    <line x1="208" y1="124" x2="208" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="208" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">-400</text>
+
+    <!-- -300: x=60+300*0.74=282 -->
+    <line x1="282" y1="124" x2="282" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="282" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">-300</text>
+
+    <!-- -200: x=60+400*0.74=356 -->
+    <line x1="356" y1="124" x2="356" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="356" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">-200</text>
+
+    <!-- -130: x=408 (small plates end) -->
+    <line x1="408" y1="90" x2="408" y2="160" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="408" y="172" text-anchor="middle" font-size="9" fill="#7c3aed">-130</text>
+    <text x="408" y="183" text-anchor="middle" font-size="8" fill="#7c3aed">小版终结</text>
+
+    <!-- 0 AD: x=504 -->
+    <line x1="504" y1="124" x2="504" y2="140" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="504" y="153" text-anchor="middle" font-size="9" fill="#64748b">公元 0</text>
+
+    <!-- +100: x=60+700*0.74=578 -->
+    <line x1="578" y1="124" x2="578" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="578" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">+100</text>
+
+    <!-- +200: x=60+800*0.74=652 -->
+    <line x1="652" y1="124" x2="652" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="652" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">+200</text>
+
+    <!-- +300: x=60+900*0.74=726 -->
+    <line x1="726" y1="124" x2="726" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="726" y="150" text-anchor="middle" font-size="8" fill="#94a3b8">+300</text>
+
+    <!-- +385: x=789 (Mormon writes) -->
+    <line x1="789" y1="78" x2="789" y2="165" stroke="#c2410c" stroke-width="2" stroke-dasharray="4,2"/>
+    <circle cx="789" cy="78" r="7" fill="#c2410c" stroke="#fff" stroke-width="2"/>
+    <text x="789" y="178" text-anchor="middle" font-size="9" fill="#c2410c">+385</text>
+    <text x="789" y="189" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#c2410c">摩尔门写作</text>
+
+    <!-- Events above axis -->
+    <!-- Lehi leaves (-600) -->
+    <line x1="60" y1="90" x2="60" y2="60" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="8" y="34" width="104" height="28" rx="3" fill="rgba(255,255,255,0.95)" stroke="#e2e8f0"/>
+    <text x="60" y="47" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e293b">里海离耶路撒冷</text>
+    <text x="60" y="57" text-anchor="middle" font-size="7.5" fill="#94a3b8">Lehi leaves Jerusalem</text>
+
+    <!-- Small plates end / Benjamin (-130) -->
+    <line x1="408" y1="90" x2="408" y2="52" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="320" y="28" width="176" height="26" rx="3" fill="rgba(245,243,255,0.95)" stroke="#c4b5fd"/>
+    <text x="408" y="41" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#4c1d95">亚玛来 → 本雅明王</text>
+    <text x="408" y="52" text-anchor="middle" font-size="7.5" fill="#7c3aed">小版移交 · 大版叙事开始</text>
+
+    <!-- Mormon writes (+385) -->
+    <line x1="789" y1="78" x2="789" y2="42" stroke="#c2410c" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="700" y="16" width="152" height="28" rx="3" fill="rgba(255,247,237,0.95)" stroke="#fdba74"/>
+    <text x="776" y="28" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c2d12">★ 摩尔门写《摩尔门语》</text>
+    <text x="776" y="39" text-anchor="middle" font-size="7.5" fill="#c2410c">将小版原版并入大版缩编</text>
+
+    <!-- Long arc arrow: Mormon looks back to small plates -->
+    <path d="M 780,105 Q 590,65 420,95" fill="none" stroke="#c2410c" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#wmA)"/>
+    <text x="620" y="70" text-anchor="middle" font-size="8.5" fill="#c2410c">摩尔门发现并纳入小版</text>
+
+    <!-- Sub-labels inside zones -->
+    <text x="100" y="204" font-size="8" fill="#312e81">小版记录者：尼腓→雅各→以挪士→雅龙→奥·阿·基·亚比·亚玛来（约 470 年）</text>
+    <text x="420" y="204" font-size="8" fill="#065f46">大版叙事：摩赛亚→阿尔玛→希拉曼→三书→四书→摩尔门→以帖→摩罗乃（约 515 年）</text>
+
+  </svg>
+</div>
+
+<!-- ── Book of Mormon plate structure diagram ── -->
+<div class="rel" style="margin-top:24px">
+  <div class="rel-title">摩尔门经的组成结构 · STRUCTURE OF THE BOOK OF MORMON</div>
+  <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
+    <defs>
+      <marker id="stA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#94a3b8"/>
+      </marker>
+      <marker id="stB" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L9,3.5 z" fill="#c2410c"/>
+      </marker>
+    </defs>
+
+    <!-- Title band -->
+    <rect x="0" y="0" width="860" height="260" rx="8" fill="#f8fafc"/>
+
+    <!-- Column 1: Small Plates (unabridged, original) -->
+    <rect x="20" y="18" width="198" height="214" rx="7" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
+    <text x="119" y="36" text-anchor="middle" font-size="10" font-weight="bold" fill="#312e81">小版（原版，未缩编）</text>
+    <text x="119" y="48" text-anchor="middle" font-size="8" fill="#6366f1">Small Plates · Unabridged Original</text>
+    <rect x="32" y="56" width="174" height="20" rx="4" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="119" y="70" text-anchor="middle" font-size="9" fill="#1e3a8a">尼腓一书 · 1 Nephi</text>
+    <rect x="32" y="80" width="174" height="20" rx="4" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="119" y="94" text-anchor="middle" font-size="9" fill="#1e3a8a">尼腓二书 · 2 Nephi</text>
+    <rect x="32" y="104" width="174" height="20" rx="4" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="119" y="118" text-anchor="middle" font-size="9" fill="#1e3a8a">雅各书 · Jacob</text>
+    <rect x="32" y="128" width="174" height="20" rx="4" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="119" y="142" text-anchor="middle" font-size="9" fill="#1e3a8a">以挪士 · 雅龙 · 奥姆尼</text>
+    <!-- Words of Mormon (bridge) -->
+    <rect x="32" y="152" width="174" height="26" rx="4" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+    <text x="119" y="166" text-anchor="middle" font-size="9" font-weight="bold" fill="#7c2d12">★ 摩尔门语</text>
+    <text x="119" y="177" text-anchor="middle" font-size="7.5" fill="#c2410c">Words of Mormon · 编辑注</text>
+    <text x="119" y="218" text-anchor="middle" font-size="8.5" fill="#6366f1">约 公元前 600–130 年记录</text>
+    <text x="119" y="230" text-anchor="middle" font-size="8" fill="#94a3b8">由亚玛来→本雅明→摩尔门保管</text>
+
+    <!-- Column 2: Mormon's Abridgment (large plates) -->
+    <rect x="238" y="18" width="388" height="214" rx="7" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="2"/>
+    <text x="432" y="36" text-anchor="middle" font-size="10" font-weight="bold" fill="#065f46">大版缩编（摩尔门编辑）</text>
+    <text x="432" y="48" text-anchor="middle" font-size="8" fill="#059669">Mormon's Abridgment of Large Plates</text>
+
+    <rect x="250" y="56" width="174" height="20" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+    <text x="337" y="70" text-anchor="middle" font-size="9" fill="#065f46">摩赛亚书 · Mosiah</text>
+    <rect x="250" y="80" width="174" height="20" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+    <text x="337" y="94" text-anchor="middle" font-size="9" fill="#065f46">阿尔玛书 · Alma</text>
+    <rect x="250" y="104" width="174" height="20" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+    <text x="337" y="118" text-anchor="middle" font-size="9" fill="#065f46">希拉曼书 · Helaman</text>
+    <rect x="250" y="128" width="174" height="20" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+    <text x="337" y="142" text-anchor="middle" font-size="9" fill="#065f46">尼腓三书 · 3 Nephi</text>
+    <rect x="250" y="152" width="174" height="20" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+    <text x="337" y="166" text-anchor="middle" font-size="9" fill="#065f46">尼腓四书 · 4 Nephi</text>
+    <rect x="250" y="176" width="174" height="20" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+    <text x="337" y="190" text-anchor="middle" font-size="9" fill="#065f46">摩尔门书 1–7 · Mormon 1–7</text>
+
+    <!-- Moroni's additions column (inside abridgment block) -->
+    <rect x="440" y="56" width="174" height="60" rx="4" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="527" y="72" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">摩尔门 8–9</text>
+    <text x="527" y="84" text-anchor="middle" font-size="8.5" fill="#4c1d95">Mormon 8–9</text>
+    <text x="527" y="96" text-anchor="middle" font-size="8" fill="#7c3aed">摩罗乃续写父工</text>
+    <text x="527" y="108" text-anchor="middle" font-size="7.5" fill="#94a3b8">约公元后 400 年</text>
+
+    <rect x="440" y="122" width="174" height="50" rx="4" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="527" y="138" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">以帖书 · Ether</text>
+    <text x="527" y="150" text-anchor="middle" font-size="8" fill="#7c3aed">雅列人历史</text>
+    <text x="527" y="162" text-anchor="middle" font-size="7.5" fill="#94a3b8">摩罗乃缩编</text>
+
+    <rect x="440" y="178" width="174" height="38" rx="4" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+    <text x="527" y="194" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">摩罗乃书 · Moroni</text>
+    <text x="527" y="206" text-anchor="middle" font-size="8" fill="#7c3aed">摩罗乃最终见证</text>
+
+    <text x="432" y="226" text-anchor="middle" font-size="8.5" fill="#059669">约公元前 130 年 — 公元后 385 年（摩尔门）→ 公元后 421 年（摩罗乃最后封存）</text>
+
+    <!-- Column 3: Result -->
+    <rect x="646" y="18" width="196" height="214" rx="7" fill="#fffbeb" stroke="#fdba74" stroke-width="2.5"/>
+    <text x="744" y="36" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">摩尔门经</text>
+    <text x="744" y="48" text-anchor="middle" font-size="8" fill="#c2410c">Book of Mormon · 最终成书</text>
+
+    <text x="744" y="80" text-anchor="middle" font-size="8.5" fill="#475569">约公元 1830 年</text>
+    <text x="744" y="93" text-anchor="middle" font-size="8.5" fill="#475569">约瑟·史密斯翻译</text>
+    <text x="744" y="106" text-anchor="middle" font-size="8.5" fill="#475569">Joseph Smith translates</text>
+    <text x="744" y="126" text-anchor="middle" font-size="8.5" fill="#94a3b8">共 531 页 · 15 本书</text>
+    <text x="744" y="139" text-anchor="middle" font-size="8.5" fill="#94a3b8">涵盖约 2600 年历史</text>
+    <text x="744" y="152" text-anchor="middle" font-size="8.5" fill="#94a3b8">从雅列人到摩罗乃</text>
+
+    <rect x="660" y="168" width="168" height="42" rx="5" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="744" y="183" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c2d12">★ 摩尔门语的角色</text>
+    <text x="744" y="195" text-anchor="middle" font-size="8" fill="#c2410c">连接小版与大版</text>
+    <text x="744" y="207" text-anchor="middle" font-size="8" fill="#c2410c">是整部经典的钥石</text>
+
+    <!-- Arrows -->
+    <line x1="218" y1="130" x2="238" y2="130" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#stA)"/>
+    <line x1="626" y1="130" x2="646" y2="130" stroke="#c2410c" stroke-width="1.5" marker-end="url(#stB)"/>
+
+  </svg>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>
