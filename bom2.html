@@ -16,60 +16,66 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
 .back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
 
-.he{font-size:11px;color:#94a3b8;font-style:italic}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.he{font-size:10px;color:#cbd5e1}
+.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#92400e;background:#fef3c7;border-color:#fde68a}
 .tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
 .tab.dim{opacity:.3;cursor:default;pointer-events:none}
 
-/* page grid */
-.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+/* page grid: phase(56px) | main(1fr) | side(160px) */
+.page{max-width:860px;margin:0 auto;padding:16px 16px 36px;display:grid;grid-template-columns:56px 1fr 160px;align-items:start;row-gap:0}
 
 /* intro banner */
-.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
-.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
-.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
-.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
-.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+.intro{grid-column:1/-1;text-align:center;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:3px}
+.intro-h{font-size:20px;font-weight:300;letter-spacing:2px;margin-bottom:1px}
+.intro-en{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.intro-meta{display:flex;justify-content:center;gap:16px}
+.im{font-size:10.5px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
 
 /* phase label */
-.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
-.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
-.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+.ph{grid-column:1;padding-top:9px;display:flex;flex-direction:column;align-items:flex-end;padding-right:12px}
+.ph-dot{width:7px;height:7px;border-radius:50%;margin-bottom:3px}
+.ph-text{font-size:9px;color:#94a3b8;letter-spacing:.5px}
 .ph-sp{grid-column:1}
 
 /* arrow */
-.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
-.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+.arr{grid-column:2;display:flex;justify-content:center;padding:1px 0}
+.arr::before{content:'';display:block;width:1.5px;height:10px;background:#d1d5db}
 
 /* node */
-.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
-.n:hover{filter:brightness(.97)}
-.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
-.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
-.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
-.nl{list-style:none;padding:0}
-.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
-.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+.n{grid-column:2;border-radius:8px;padding:8px 11px;border:1.5px solid transparent;cursor:default;transition:box-shadow .2s}
+.n:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.nh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.nl{display:flex;align-items:baseline;gap:6px;min-width:0}
+.nt{font-size:13.5px;font-weight:700;margin:0;white-space:nowrap}
+.nw{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap}
+.nc{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap;flex-shrink:0}
+.np{font-size:12px;color:#374151;line-height:1.8;letter-spacing:.3px;margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
+.n:hover .np{max-height:700px;opacity:1}
+.nms{padding:5px 8px;background:#fff;border:1.5px solid #e2e8f0;border-radius:6px}
+.nm{font-size:10px;color:#475569;padding:2px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f8fafc}
+.nm:last-child{border-bottom:none}
+.nm span{font-size:8.5px;color:#94a3b8;font-style:italic}
 
 /* node colour themes */
-.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
-.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
-.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
-.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
-.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}
 
 /* major event marker */
-.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
-.ev-icon{font-size:16px;flex-shrink:0}
-.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+.ev{grid-column:2;margin:1px 0;padding:6px 10px;border-radius:6px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:11.5px;color:#92400e;display:flex;align-items:center;gap:8px}
+.ev-icon{font-size:14px;flex-shrink:0}
+.ev-date{font-size:9.5px;color:#b45309;font-style:italic;margin-top:1px}
 
 /* side note */
-.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
-.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
+.si{grid-column:3;margin-left:11px;padding-top:8px;position:relative}
+.si::before{content:'';position:absolute;left:-8px;top:18px;width:8px;border-top:1.5px dashed #e2e8f0}
 .sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
 .sb+.sb{margin-top:7px}
 .sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
@@ -101,9 +107,9 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <header>
   <a class="back-btn" href="index.html">← 時間線</a>
-  <span class="hb">摩尔门经</span><span class="hs">/</span>
-  <span class="hn">尼腓二书</span>
-  <span class="he">2 Nephi · Prophecy, Division, Isaiah &amp; Doctrine of Christ</span>
+  <div class="h-info">
+    <span class="hb">摩尔门经</span><span class="hs">/</span><span class="hn">尼腓二书</span>
+  </div>
   <nav class="nav">
     <a class="tab" href="bom.html">一书</a>
     <a class="tab on" href="bom2.html">二书</a>
@@ -127,12 +133,12 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">BOOK OF MORMON · SMALL PLATES OF NEPHI</div>
-  <div class="intro-h">尼腓二书 · 2 Nephi</div>
-  <div class="intro-en">Record of Nephi — Farewell, Division, Isaiah, and the Doctrine of Christ</div>
+  <div class="intro-sup">摩尔门经 · 尼腓小版</div>
+  <div class="intro-h">尼腓二书</div>
+  <div class="intro-en">尼腓的记录——别离、分裂、以赛亚与基督教义</div>
   <div class="intro-meta">
     <span class="im">时间 <b>约公元前 589–544 年</b></span>
-    <span class="im">地点 <b>应许之地 Promised Land（美洲 Americas）</b></span>
+    <span class="im">地点 <b>应许之地（美洲）</b></span>
     <span class="im">章节 <b>33 章</b></span>
     <span class="im">核心 <b>以赛亚引文 · 救赎计划 · 基督教义</b></span>
   </div>
@@ -140,7 +146,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ── Americas activity map ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · 尼腓二书</div>
   <svg viewBox="0 0 860 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="bA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -173,24 +179,21 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <ellipse cx="530" cy="226" rx="12" ry="6" fill="#bbf7d0" opacity="0.76"/>
 
     <!-- ── Water labels ── -->
-    <text x="98" y="342" fill="#2563eb" font-size="12" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="98" y="356" fill="#2563eb" font-size="9" font-style="italic" text-anchor="middle">Pacific Ocean</text>
+    <text x="98" y="348" fill="#2563eb" font-size="12" font-style="italic" text-anchor="middle">太平洋</text>
     <text x="462" y="222" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
-    <text x="432" y="250" fill="#2563eb" font-size="7" font-style="italic" text-anchor="middle" opacity="0.85">加勒比海 Caribbean</text>
-    <text x="700" y="362" fill="#2563eb" font-size="12" font-style="italic" text-anchor="middle">大西洋</text>
-    <text x="700" y="376" fill="#2563eb" font-size="9" font-style="italic" text-anchor="middle">Atlantic Ocean</text>
+    <text x="432" y="250" fill="#2563eb" font-size="7" font-style="italic" text-anchor="middle" opacity="0.85">加勒比海</text>
+    <text x="700" y="368" fill="#2563eb" font-size="12" font-style="italic" text-anchor="middle">大西洋</text>
 
     <!-- ── Continent labels ── -->
-    <text x="570" y="116" fill="#64748b" font-size="11" text-anchor="middle" opacity="0.62">北美洲 North America</text>
-    <text x="415" y="372" fill="#64748b" font-size="10" text-anchor="middle" opacity="0.62">南美洲 South America</text>
+    <text x="570" y="116" fill="#64748b" font-size="11" text-anchor="middle" opacity="0.62">北美洲</text>
+    <text x="415" y="372" fill="#64748b" font-size="10" text-anchor="middle" opacity="0.62">南美洲</text>
     <!-- Central America label (story area) -->
     <text x="298" y="272" fill="#64748b" font-size="8.5" text-anchor="middle" opacity="0.6">中美洲</text>
 
     <!-- ── Pacific arrival arrow (from 1 Nephi voyage) ── -->
     <path d="M 26,322 Q 100,285 188,262 T 272,230" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="8,5" marker-end="url(#bA)"/>
-    <rect x="5" y="304" width="120" height="30" rx="3" fill="rgba(255,255,255,0.90)"/>
-    <text x="65" y="316" fill="#92400e" font-size="8.5" text-anchor="middle">来自丰美之地</text>
-    <text x="65" y="328" fill="#92400e" font-size="7.5" text-anchor="middle">From Bountiful (1 Nephi)</text>
+    <rect x="5" y="304" width="120" height="20" rx="3" fill="rgba(255,255,255,0.90)"/>
+    <text x="65" y="318" fill="#92400e" font-size="8.5" text-anchor="middle">来自丰美之地（一书）</text>
 
     <!-- ── Territory zones (semi-transparent halo) ── -->
     <!-- Lamanite: coastal Pacific -->
@@ -206,57 +209,52 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── Location markers ── -->
     <!-- 1. First Settlement (coastal, Lamanites) -->
     <circle cx="272" cy="230" r="6" fill="#f97316" stroke="#fff" stroke-width="2"/>
-    <rect x="70" y="206" width="188" height="40" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
-    <text x="164" y="219" fill="#9f1239" font-size="9.5" font-weight="bold" text-anchor="middle">初居地 · 太平洋海岸</text>
-    <text x="164" y="230" fill="#9f1239" font-size="8.5" text-anchor="middle">Land of First Inheritance</text>
-    <text x="164" y="241" fill="#f87171" font-size="8" text-anchor="middle">拉曼人 留守此地</text>
+    <rect x="70" y="206" width="188" height="30" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="164" y="220" fill="#9f1239" font-size="9.5" font-weight="bold" text-anchor="middle">初居地 · 太平洋海岸</text>
+    <text x="164" y="232" fill="#f87171" font-size="8" text-anchor="middle">拉曼人留守此地</text>
     <line x1="258" y1="226" x2="266" y2="228" stroke="#f97316" stroke-width="1.2"/>
 
     <!-- 2. Land of Nephi (inland, Nephites) -->
     <circle cx="322" cy="250" r="6" fill="#1d4ed8" stroke="#fff" stroke-width="2"/>
     <rect x="338" y="228" width="188" height="40" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
-    <text x="432" y="241" fill="#1e3a8a" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓地 Land of Nephi</text>
+    <text x="432" y="241" fill="#1e3a8a" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓地</text>
     <text x="432" y="252" fill="#2563eb" font-size="8.5" text-anchor="middle">尼腓建圣殿 · 立王制 · 繁荣</text>
-    <text x="432" y="262" fill="#3b82f6" font-size="8" text-anchor="middle">Nephite Kingdom · ~前 587 BC</text>
+    <text x="432" y="262" fill="#3b82f6" font-size="8" text-anchor="middle">尼腓王国 · 约前 587 年</text>
     <line x1="336" y1="248" x2="328" y2="249" stroke="#1d4ed8" stroke-width="1.2"/>
 
     <!-- ── Title box ── -->
     <rect x="6" y="6" width="232" height="38" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
     <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="bold">尼腓二书活动地图</text>
-    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">2 Nephi Activity Map · Not to Scale</text>
+    <text x="14" y="35" fill="#94a3b8" font-size="8.5">尼腓二书 · 非实际比例</text>
 
     <!-- ── Legend ── -->
     <rect x="6" y="354" width="238" height="78" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
     <circle cx="20" cy="369" r="5" fill="#f97316"/>
-    <text x="30" y="373" fill="#475569" font-size="9">初居地（拉曼人）First Inheritance</text>
+    <text x="30" y="373" fill="#475569" font-size="9">初居地（拉曼人）</text>
     <circle cx="20" cy="387" r="5" fill="#1d4ed8"/>
-    <text x="30" y="391" fill="#475569" font-size="9">尼腓地（尼腓人）Land of Nephi</text>
+    <text x="30" y="391" fill="#475569" font-size="9">尼腓地（尼腓人）</text>
     <line x1="12" y1="403" x2="30" y2="408" stroke="#d97706" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#bA)"/>
-    <text x="35" y="410" fill="#475569" font-size="9">太平洋航行抵达 Pacific Arrival</text>
+    <text x="35" y="410" fill="#475569" font-size="9">太平洋航行抵达</text>
     <line x1="12" y1="422" x2="28" y2="422" stroke="#1d4ed8" stroke-width="2.5" marker-end="url(#bC)"/>
     <text x="35" y="426" fill="#475569" font-size="9">第 5 章 两族迁移分裂</text>
   </svg>
-  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，确切地点学术上仍有争议；主流观点倾向中美洲理论 · Mesoamerica hypothesis shown; locations are debated</div>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，确切地点学术上仍有争议；主流观点倾向中美洲理论</div>
 </div>
 
 <!-- ══ 告别 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">告别</div></div>
 <div class="n amb">
-  <div class="nd">约 公元前 589 年</div>
-  <div class="nt">第 1–3 章　李海的临终嘱咐</div>
-  <div class="ne">Lehi's Final Counsel · 应许之地 Promised Land</div>
-  <ul class="nl">
-    <li>李海 Lehi 嘱咐众子：在应许之地若遵诫命必得眷顾，违背者将被割除</li>
-    <li>引古约瑟（埃及）预言：后裔中将兴起"选定的先见"，如摩西引领人归向神</li>
-    <li>赐福小儿子雅各 Jacob 与约瑟 Joseph；嘱咐柔各 Zoram 忠心跟随尼腓</li>
-    <li>警告拉曼、利曼：不悔改则失去应许之地的一切祝福</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">父嘱诸子</div><div class="nw">应许之地 · 第 1–3 章</div></div>
+    <div class="nc">约前 589 年</div>
+  </div>
+  <p class="np">李海老矣，临终召诸子训示。言此乃神赐应许之地，遵诫命则蒙眷顾，悖逆则被割除，一如往昔之例。引古约瑟（埃及）之预言：后裔中将兴"选定的先见"，如摩西然，以神的话语引众人归向神，约二千四百年后于约瑟·斯密身上应验。赐福幼子雅各与约瑟；命卓伦忠心跟随尼腓同甘共苦。</p>
 </div>
 <div class="si">
-  <div class="warn">
-    <div class="sn">约瑟·斯密预言</div>
-    <div class="se">Choice Seer · 2 Nephi 3:15</div>
-    <div class="sd">此"先见"约 2400 年后<br>应验于约瑟·斯密，<br>以翻译摩尔门经为使命</div>
+  <div class="nms">
+    <div class="nm">雅各 <span>Jacob · 幼子受福</span></div>
+    <div class="nm">约瑟 <span>Joseph · 幼子受福</span></div>
+    <div class="nm">卓伦 <span>Zoram · 盟友</span></div>
   </div>
 </div>
 
@@ -265,7 +263,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ev">
   <span class="ev-icon">✦</span>
   <div>
-    <div>李海 Lehi 于应许之地安息</div>
+    <div>李海于应许之地安息</div>
     <div class="ev-date">约 公元前 587 年 · 第 4 章前</div>
   </div>
 </div>
@@ -275,21 +273,15 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n amb">
-  <div class="nd">约 公元前 587 年</div>
-  <div class="nt">第 4 章　尼腓诗篇</div>
-  <div class="ne">Nephi's Psalm · 应许之地 Promised Land</div>
-  <ul class="nl">
-    <li>父亲去世后尼腓悲痛，写下全书最个人化的段落</li>
-    <li>"哦，我这可悲的人！我的心何等软弱，何等易受欺诱"——坦诚自身软弱</li>
-    <li>转而宣告信心："主是我的磐石，是我的力量……他必从仇敌手中救我"</li>
-    <li>起誓不再因软弱而悲叹，以神过去的拯救为凭据重燃信心</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">尼腓诗篇</div><div class="nw">应许之地 · 第 4 章</div></div>
+    <div class="nc">约前 587 年</div>
+  </div>
+  <p class="np">父殁，尼腓悲恸难胜，援笔自诉："哦，我这可悲的人！我心何其软弱，易受欺诱。"继而转以信心："主是我的磐石，我的力量……他必救我脱离仇敌之手。"起誓不再沉溺于软弱，以神历代拯救之恩为凭，重燃坚守之志。此乃全书最具诗意、最见心迹的段落。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">尼腓诗篇</div>
-    <div class="se">Nephi's Psalm</div>
-    <div class="sd">"哦，主啊，我信靠你！<br>你赎我脱离地狱之坑。"<br>全书最具诗意的段落</div>
+  <div class="nms">
+    <div class="nm">尼腓诗篇 <span>第 4 章 · 全书最感人</span></div>
   </div>
 </div>
 
@@ -298,26 +290,17 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">分裂</div></div>
 <div class="n ros">
-  <div class="nd">约 公元前 587 年</div>
-  <div class="nt">第 5 章　两族决裂</div>
-  <div class="ne">The Great Division · 应许之地 → 尼腓地 Land of Nephi</div>
-  <ul class="nl">
-    <li>拉曼、利曼再度密谋杀害尼腓；神警告尼腓立即带同行者离开</li>
-    <li>尼腓率信徒迁往新地，称"尼腓地"——两族正式分裂，从此世代对立</li>
-    <li>尼腓人建圣殿（效仿所罗门殿）、发展工艺农业，欣欣向荣</li>
-    <li>人民立尼腓为王，是为尼腓王朝之始；神使拉曼人肤色有别，成为分辨标记</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">两族决裂</div><div class="nw">应许之地 → 尼腓地 · 第 5 章</div></div>
+    <div class="nc">约前 587 年</div>
+  </div>
+  <p class="np">拉曼、雷米尔再谋杀害尼腓，神警告尼腓即刻率信众迁离。尼腓带同道别立新土，名曰"尼腓地"，两族由此正式决裂，世代对立。尼腓效仿所罗门圣殿建筑之制，治理农工，众人欣欣向荣。人民立尼腓为王，尼腓王朝由此肇始。神使拉曼人肤色有别，以为世代分辨之记。</p>
 </div>
 <div class="si">
-  <div class="sb">
-    <div class="sn">两族对立</div>
-    <div class="se">Nephites vs. Lamanites</div>
-    <div class="sd">此后千年历史的起点<br>尼腓人：守律法 · 建圣殿<br>拉曼人：游牧 · 好战</div>
-  </div>
-  <div class="note" style="margin-top:7px">
-    <div class="sn">尼腓一世</div>
-    <div class="se">First Nephite King</div>
-    <div class="sd">尼腓成为第一位尼腓王<br>建立延续数百年的王制</div>
+  <div class="nms">
+    <div class="nm">拉曼 <span>Laman · 叛逆留守</span></div>
+    <div class="nm">雷米尔 <span>Lemuel · 随兄</span></div>
+    <div class="nm">尼腓 <span>Nephi · 首位尼腓王</span></div>
   </div>
 </div>
 
@@ -326,21 +309,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">以赛亚</div></div>
 <div class="n tea">
-  <div class="nd">约 公元前 580 年</div>
-  <div class="nt">第 6–8 章　雅各在圣殿的讲道</div>
-  <div class="ne">Jacob's Temple Sermon · 尼腓地圣殿 Temple in Land of Nephi</div>
-  <ul class="nl">
-    <li>大祭司雅各在圣殿宣讲，引用以赛亚书 49–50 章</li>
-    <li>以色列被驱散至万邦，但在末日将"被背于肩上，被抱于怀中"归聚</li>
-    <li>外邦君王将低头，救主将来作他们的救赎者</li>
-    <li>"母亲能忘记婴孩吗？我却不会忘记你"——神对以色列的永恒承诺</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">雅各圣殿讲道</div><div class="nw">尼腓地圣殿 · 第 6–8 章</div></div>
+    <div class="nc">约前 580 年</div>
+  </div>
+  <p class="np">大祭司雅各于尼腓地圣殿宣讲，引以赛亚书四十九、五十章。言以色列被驱散万邦，然于末日必"被背于肩上、被抱于怀中"归聚故土。外邦君王将低头，救主来作其救赎者。"母亲能忘记婴孩吗？我却不会忘记你"——神对以色列的永恒承诺，振聋发聩。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">雅各 Jacob</div>
-    <div class="se">High Priest · Prophet</div>
-    <div class="sd">尼腓的弟弟<br>首席大祭司，后承接记录<br>著有《雅各书》</div>
+  <div class="nms">
+    <div class="nm">雅各 <span>Jacob · 大祭司先知</span></div>
+    <div class="nm">以赛亚 <span>Isaiah · 古以色列先知</span></div>
   </div>
 </div>
 
@@ -348,21 +326,17 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n tea">
-  <div class="nd">约 公元前 580 年</div>
-  <div class="nt">第 9 章　救赎的伟大计划</div>
-  <div class="ne">The Great Plan of Redemption · 尼腓地圣殿</div>
-  <ul class="nl">
-    <li>雅各宣讲核心神学："哦，神的计划何等伟大！"</li>
-    <li>肉身死亡与属灵死亡均由基督的救赎克服——复活必将临到每一个人</li>
-    <li>若无救赎，我们将永沦为邪恶；但因基督，公义的审判成为可能</li>
-    <li>"哦，我们神的良善，他的怜悯与恩典！"——全段情感最高潮</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">救赎的伟大计划</div><div class="nw">尼腓地圣殿 · 第 9 章</div></div>
+    <div class="nc">约前 580 年</div>
+  </div>
+  <p class="np">雅各宣讲神学核心，言曰："哦，神的计划何等伟大！"肉身死亡与属灵死亡，皆由基督之无限赎罪克服。复活必临于每一个人；若无救赎，人将永沦于邪恶；因基督，公义的审判得以成为可能。"哦，我们神的良善，他的怜悯与恩典！"情感至此达于高潮。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">神学核心</div>
-    <div class="se">Core Doctrines</div>
-    <div class="sd">无限赎罪<br>肉身复活<br>属灵第二次死亡</div>
+  <div class="nms">
+    <div class="nm">无限赎罪 <span>Infinite Atonement</span></div>
+    <div class="nm">肉身复活 <span>Resurrection</span></div>
+    <div class="nm">属灵死亡 <span>Spiritual Death</span></div>
   </div>
 </div>
 
@@ -370,14 +344,11 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n tea">
-  <div class="nd">约 公元前 580 年</div>
-  <div class="nt">第 10 章　应许之地的宪章</div>
-  <div class="ne">Charter of the Promised Land · 尼腓地圣殿</div>
-  <ul class="nl">
-    <li>基督将降生于耶路撒冷；犹太人将拒绝并钉死他，之后被驱散万国</li>
-    <li>应许之地（美洲）将成"自由之地"，神不允许在此建立世俗王制</li>
-    <li>外邦人若归向神，将被接纳为以色列的一部分，同蒙应许</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">应许之地宪章</div><div class="nw">尼腓地圣殿 · 第 10 章</div></div>
+    <div class="nc">约前 580 年</div>
+  </div>
+  <p class="np">基督将降生于耶路撒冷；犹太人将拒绝并钉死他，之后被驱散万国。应许之地（美洲）乃神所赐"自由之地"，神明令此地不得建立世俗王制。外邦人若归向神，将被接纳为以色列之一份，同蒙应许，共享末日之荣耀。</p>
 </div>
 <div class="si-sp"></div>
 
@@ -385,14 +356,11 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n tea">
-  <div class="nd">约 公元前 570 年</div>
-  <div class="nt">第 11 章　为何引用以赛亚</div>
-  <div class="ne">Why Nephi Loves Isaiah · 尼腓地</div>
-  <ul class="nl">
-    <li>尼腓说明大量引用以赛亚的原因：以赛亚亲自见过救主，与自己灵意相通</li>
-    <li>"万物预示基督"——天地、日月、被创造的一切都指向他</li>
-    <li>这些话语将在末日成真，为所有人作见证</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">以赛亚之缘</div><div class="nw">尼腓地 · 第 11 章</div></div>
+    <div class="nc">约前 570 年</div>
+  </div>
+  <p class="np">尼腓阐明大量引用以赛亚之缘由：以赛亚亲见救主，与己灵意相通，所言之事与己所见若合符节。"万物预示基督"——天地、日月、被创造之一切，皆指向他。此诸话语将于末日应验成真，为所有人作见证。</p>
 </div>
 <div class="si-sp"></div>
 
@@ -400,21 +368,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n tea">
-  <div class="nd">约 公元前 570 年</div>
-  <div class="nt">第 12–24 章　以赛亚书大篇引文</div>
-  <div class="ne">Isaiah Chapters 2–14 (Quoted in Full) · 尼腓地</div>
-  <ul class="nl">
-    <li>几乎逐字引用以赛亚书 2–14 章（共 13 章）</li>
-    <li>末世景象：主的殿将建于诸山之巅，万国涌来归聚；刀剑化为犁头</li>
-    <li>童贞女怀孕生子，名以马内利 Immanuel——弥赛亚降临的预言（以赛亚书 7 章）</li>
-    <li>巴比伦覆灭、以色列被掳后归回；撒旦因傲慢从天陨落（以赛亚书 14 章）</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">以赛亚大篇引录</div><div class="nw">尼腓地 · 第 12–24 章</div></div>
+    <div class="nc">约前 570 年</div>
+  </div>
+  <p class="np">几乎逐字引录以赛亚书二至十四章，凡十三章之多。末世景象：主的殿将建于诸山之巅，万国涌来归聚，刀剑化为犁头。童贞女怀孕生子，名以马内利——弥赛亚降临之预言。巴比伦覆灭，以色列被掳后归回；撒旦因傲慢从天陨落。所引文本与死海古卷（以赛亚书抄卷）高度吻合，早于现有抄本逾千年。</p>
 </div>
 <div class="si">
-  <div class="note">
-    <div class="sn">文本证据</div>
-    <div class="se">Textual Evidence</div>
-    <div class="sd">所引文本与死海古卷<br>（Isaiah Scroll）高度吻合<br>早于现有抄本 1000 年</div>
+  <div class="nms">
+    <div class="nm">死海古卷 <span>以赛亚书抄卷</span></div>
+    <div class="nm">以赛亚书 <span>第 2–14 章引录</span></div>
   </div>
 </div>
 
@@ -423,21 +386,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">末世</div></div>
 <div class="n blu">
-  <div class="nd">约 公元前 570 年</div>
-  <div class="nt">第 25–27 章　尼腓解说末世预言</div>
-  <div class="ne">Nephi Explains the Last Days · 尼腓地</div>
-  <ul class="nl">
-    <li>尼腓用"简明话语"解说以赛亚：基督将来，犹太人拒绝他，被驱散至外邦</li>
-    <li>末日，犹太人将信基督，被从各国召回；神的话语将在那时应验</li>
-    <li>神将在"最后诸日"行奇事——一本书将出现：有人看见书时说"我不识字"（预指 Joseph Smith 前）</li>
-    <li>三位见证人将为这本书作证；书中的话语将在审判台前对众人说话</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">尼腓解说末世</div><div class="nw">尼腓地 · 第 25–27 章</div></div>
+    <div class="nc">约前 570 年</div>
+  </div>
+  <p class="np">尼腓以"简明话语"解说以赛亚：基督将来，犹太人拒绝并钉死他，随后被驱散于外邦。末日，犹太人将信基督，被从各国召回。神将在"最后诸日"行奇事——一书将出，有人见之曰"我不识字"。三位见证人将为此书作证；此书中的话语将于审判台前对众人说话。</p>
 </div>
 <div class="si">
-  <div class="note">
-    <div class="sn">三位见证人</div>
-    <div class="se">Three Witnesses</div>
-    <div class="sd">约 2400 年后应验：<br>考德里、惠特默、哈里斯<br>见证金版并签名为证</div>
+  <div class="nms">
+    <div class="nm">三位见证人 <span>约 2400 年后应验</span></div>
+    <div class="nm">以色列归聚 <span>末世大归聚预言</span></div>
   </div>
 </div>
 
@@ -445,21 +403,15 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n blu">
-  <div class="nd">约 公元前 570 年</div>
-  <div class="nt">第 28–30 章　末世的背道与复兴</div>
-  <div class="ne">Last Days — Apostasy &amp; Restoration · 尼腓地</div>
-  <ul class="nl">
-    <li>末世警告：教会将背道，人们宣称"锡安一切都好，没有魔鬼"——属灵自满</li>
-    <li>许多教会"为了金钱而宣讲"，教义混乱，不接受圣经以外的真理</li>
-    <li>神将向"以色列余民"（美洲原住民后裔）传送福音，使他们归向神</li>
-    <li>福音最终将遍及犹太人、外邦人和以色列失落支派——末世大归聚</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">末世背道与复兴</div><div class="nw">尼腓地 · 第 28–30 章</div></div>
+    <div class="nc">约前 570 年</div>
+  </div>
+  <p class="np">末世警告：教会将背道，人们宣称"锡安一切都好，没有魔鬼"，属灵自满。许多教会为金钱宣讲，教义混乱，拒绝圣经以外的真理。神将向以色列余民（美洲原住民后裔）传送福音，使之归向神。福音终将遍及犹太人、外邦人与以色列失落支派，末世大归聚。</p>
 </div>
 <div class="si">
-  <div class="sb" style="border-color:#fde68a">
-    <div class="sn" style="color:#92400e">背道与复兴</div>
-    <div class="se" style="color:#b45309">Apostasy &amp; Restoration</div>
-    <div class="sd">全面背道 → 复原运动<br>这一预言是后期圣徒<br>教会成立的神学根基</div>
+  <div class="nms">
+    <div class="nm">全面背道 <span>后期圣徒神学根基</span></div>
   </div>
 </div>
 
@@ -468,21 +420,19 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">结语</div></div>
 <div class="n vio">
-  <div class="nd">约 公元前 544 年</div>
-  <div class="nt">第 31–32 章　基督的教义</div>
-  <div class="ne">The Doctrine of Christ · 尼腓地</div>
-  <ul class="nl">
-    <li>尼腓用"简单语言"陈述最终信息：基督的教义，一点不多，一点不少</li>
-    <li>五个步骤：信心 → 悔改 → 洗礼（如同基督的模式）→ 圣灵 → 坚忍到底</li>
-    <li>"这是父和子所定的教义；任何多于或少于此的，都是邪恶的来源"</li>
-    <li>"以基督的话语为粮食……它能告诉你一切所当做之事"</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">基督教义五步</div><div class="nw">尼腓地 · 第 31–32 章</div></div>
+    <div class="nc">约前 544 年</div>
+  </div>
+  <p class="np">尼腓以"简单语言"陈述最终信息，是为基督的教义，一点不多，一点不少。其法有五：信心、悔改、洗礼（效法基督之模式）、接受圣灵、坚忍到底。"这是父和子所定的教义；任何多于或少于此的，皆出自邪恶。以基督的话语为粮食，它能告诉你一切所当做之事。"</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">基督教义五步</div>
-    <div class="se">Doctrine of Christ</div>
-    <div class="sd">① 信心 Faith<br>② 悔改 Repentance<br>③ 洗礼 Baptism<br>④ 圣灵 Holy Ghost<br>⑤ 坚忍到底 Endure</div>
+  <div class="nms">
+    <div class="nm">信心 <span>Faith</span></div>
+    <div class="nm">悔改 <span>Repentance</span></div>
+    <div class="nm">洗礼 <span>Baptism</span></div>
+    <div class="nm">圣灵 <span>Holy Ghost</span></div>
+    <div class="nm">坚忍到底 <span>Endure to the End</span></div>
   </div>
 </div>
 
@@ -490,26 +440,21 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n vio">
-  <div class="nd">约 公元前 544 年</div>
-  <div class="nt">第 33 章　尼腓告别</div>
-  <div class="ne">Nephi's Farewell · 尼腓地</div>
-  <ul class="nl">
-    <li>尼腓说他不能再多写了；这些话语是真实的，将在末日审判时对众人说话</li>
-    <li>"我希望你们中许多人能得救……我将在神的宝座前为你们的益处祷告"</li>
-    <li>"我在永恒别离中向你们道别，直到我们在基督的审判台前再次相见"</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">永恒别离</div><div class="nw">尼腓地 · 第 33 章</div></div>
+    <div class="nc">约前 544 年</div>
+  </div>
+  <p class="np">尼腓言不能再多写，此卷话语是真实的，将于末日审判时对众人说话。"我希望你们中许多人能得救……我将在神的宝座前为你们的益处祷告。"末语道："我在永恒别离中向你们道别，直到我们在基督的审判台前再次相见。"尼腓作为小版最核心的记录者，就此搁笔。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">永恒别离</div>
-    <div class="se">An Everlasting Farewell</div>
-    <div class="sd">尼腓一书与二书<br>是小版（Small Plates）<br>最核心的记录者</div>
+  <div class="nms">
+    <div class="nm">尼腓小版 <span>摩尔门经核心史料</span></div>
   </div>
 </div>
 
 <!-- ══ 图例 ══ -->
 <div class="legend">
-  <div class="legend-title">图例 LEGEND</div>
+  <div class="legend-title">图例</div>
   <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>告别阶段</div>
   <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>分裂阶段</div>
   <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>以赛亚阶段</div>
@@ -520,7 +465,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ══ 人物关系图 ══ -->
 <div class="rel">
-  <div class="rel-title">人物关系图 · CHARACTER MAP · 尼腓二书 2 Nephi</div>
+  <div class="rel-title">人物关系图 · 尼腓二书</div>
   <svg viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg" style="background:#fff;border-radius:10px;border:1px solid #e2e8f0">
     <defs>
       <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
@@ -539,14 +484,14 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- ── Parents (deceased, greyed) ── -->
     <rect x="296" y="14" width="80" height="32" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="336" y="29" text-anchor="middle" font-size="11" fill="#94a3b8">李海 Lehi</text>
+    <text x="336" y="29" text-anchor="middle" font-size="11" fill="#94a3b8">李海</text>
     <text x="336" y="41" text-anchor="middle" font-size="8.5" fill="#cbd5e1">† 约前 587 年</text>
 
     <text x="392" y="34" text-anchor="middle" font-size="10" fill="#cbd5e1">━━</text>
 
     <rect x="406" y="14" width="106" height="32" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="459" y="29" text-anchor="middle" font-size="11" fill="#94a3b8">撒利亚 Sariah</text>
-    <text x="459" y="41" text-anchor="middle" font-size="8.5" fill="#cbd5e1">母亲 · Mother</text>
+    <text x="459" y="29" text-anchor="middle" font-size="11" fill="#94a3b8">撒拉亚</text>
+    <text x="459" y="41" text-anchor="middle" font-size="8.5" fill="#cbd5e1">母亲</text>
 
     <!-- parent → children connector -->
     <line x1="400" y1="46" x2="400" y2="64" stroke="#e2e8f0" stroke-width="1.5"/>
@@ -554,8 +499,8 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- ── Dividing line between Lamanites and Nephites ── -->
     <line x1="266" y1="58" x2="266" y2="230" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="5,3"/>
-    <text x="130" y="76" text-anchor="middle" font-size="9" fill="#f87171" letter-spacing="1">拉曼人 LAMANITES</text>
-    <text x="500" y="76" text-anchor="middle" font-size="9" fill="#3b82f6" letter-spacing="1">尼腓人 NEPHITES</text>
+    <text x="130" y="76" text-anchor="middle" font-size="9" fill="#f87171" letter-spacing="1">拉曼人</text>
+    <text x="500" y="76" text-anchor="middle" font-size="9" fill="#3b82f6" letter-spacing="1">尼腓人</text>
 
     <!-- drop lines from parent bar to children -->
     <line x1="56"  y1="64" x2="56"  y2="86" stroke="#e2e8f0" stroke-width="1.5"/>
@@ -568,55 +513,55 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── Laman (red) ── -->
     <rect x="12" y="86" width="88" height="34" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
     <text x="56" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">拉曼</text>
-    <text x="56" y="113" text-anchor="middle" font-size="9" fill="#f87171">Laman · 叛逆长兄</text>
+    <text x="56" y="113" text-anchor="middle" font-size="9" fill="#f87171">叛逆长兄</text>
 
     <!-- ── Lemuel (red) ── -->
     <rect x="120" y="86" width="88" height="34" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="164" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">利曼</text>
-    <text x="164" y="113" text-anchor="middle" font-size="9" fill="#f87171">Lemuel · 随兄叛逆</text>
+    <text x="164" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">雷米尔</text>
+    <text x="164" y="113" text-anchor="middle" font-size="9" fill="#f87171">随兄叛逆</text>
 
     <!-- ── Sam (grey) ── -->
     <rect x="268" y="86" width="84" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-    <text x="310" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">参姆</text>
-    <text x="310" y="113" text-anchor="middle" font-size="9" fill="#94a3b8">Sam · 忠心跟随</text>
+    <text x="310" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">赛姆</text>
+    <text x="310" y="113" text-anchor="middle" font-size="9" fill="#94a3b8">忠心跟随</text>
 
     <!-- ── Nephi (blue, king) ── -->
     <rect x="374" y="86" width="92" height="34" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
     <text x="420" y="102" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">尼腓</text>
-    <text x="420" y="113" text-anchor="middle" font-size="9" fill="#3b82f6">Nephi · 王 · 先知</text>
+    <text x="420" y="113" text-anchor="middle" font-size="9" fill="#3b82f6">王 · 先知</text>
 
     <!-- ── Jacob (teal, prophet) ── -->
     <rect x="484" y="86" width="92" height="34" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="2"/>
     <text x="530" y="102" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">雅各</text>
-    <text x="530" y="113" text-anchor="middle" font-size="9" fill="#059669">Jacob · 大祭司</text>
+    <text x="530" y="113" text-anchor="middle" font-size="9" fill="#059669">大祭司</text>
 
     <!-- ── Joseph (amber) ── -->
     <rect x="594" y="86" width="88" height="34" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
     <text x="638" y="102" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">约瑟</text>
-    <text x="638" y="113" text-anchor="middle" font-size="9" fill="#b45309">Joseph · 幼子</text>
+    <text x="638" y="113" text-anchor="middle" font-size="9" fill="#b45309">幼子</text>
 
     <!-- ── Lamanites arrow downward ── -->
     <line x1="108" y1="120" x2="108" y2="175" stroke="#fca5a5" stroke-width="1.2"/>
     <rect x="20" y="175" width="176" height="30" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
     <text x="108" y="190" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">拉曼人王国</text>
-    <text x="108" y="201" text-anchor="middle" font-size="8.5" fill="#f87171">Lamanite Kingdom · 游牧 · 好战</text>
+    <text x="108" y="201" text-anchor="middle" font-size="8.5" fill="#f87171">游牧 · 好战</text>
 
     <!-- ── Nephites arrow downward ── -->
     <line x1="474" y1="120" x2="474" y2="175" stroke="#93c5fd" stroke-width="1.2"/>
     <rect x="310" y="175" width="220" height="30" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
     <text x="420" y="190" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">尼腓地王国</text>
-    <text x="420" y="201" text-anchor="middle" font-size="8.5" fill="#3b82f6">Land of Nephi · 圣殿 · 法律 · 繁荣</text>
+    <text x="420" y="201" text-anchor="middle" font-size="8.5" fill="#3b82f6">圣殿 · 法律 · 繁荣</text>
 
     <!-- ── Choice Seer prophecy arrow from Joseph ── -->
     <line x1="638" y1="120" x2="638" y2="152" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,2.5" marker-end="url(#arr-amber)"/>
     <rect x="594" y="155" width="176" height="36" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
     <text x="682" y="169" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">选定的先见</text>
-    <text x="682" y="181" text-anchor="middle" font-size="8.5" fill="#b45309">约瑟·斯密 · 约 1830 AD</text>
+    <text x="682" y="181" text-anchor="middle" font-size="8.5" fill="#b45309">约瑟·斯密 · 约 1830 年</text>
 
     <!-- ── Isaiah: external prophet (quoted) ── -->
     <rect x="700" y="86" width="108" height="34" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
     <text x="754" y="102" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">以赛亚</text>
-    <text x="754" y="113" text-anchor="middle" font-size="9" fill="#7c3aed">Isaiah · 古以色列先知</text>
+    <text x="754" y="113" text-anchor="middle" font-size="9" fill="#7c3aed">古以色列先知</text>
 
     <!-- Isaiah → Nephi/Jacob: quotation connection -->
     <line x1="700" y1="103" x2="576" y2="103" stroke="#c4b5fd" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr)"/>
@@ -624,19 +569,19 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- ── Zoram: ally ── -->
     <rect x="186" y="175" width="88" height="30" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="230" y="189" text-anchor="middle" font-size="10" font-weight="bold" fill="#065f46">柔各</text>
-    <text x="230" y="200" text-anchor="middle" font-size="8.5" fill="#059669">Zoram · 随尼腓人</text>
+    <text x="230" y="189" text-anchor="middle" font-size="10" font-weight="bold" fill="#065f46">卓伦</text>
+    <text x="230" y="200" text-anchor="middle" font-size="8.5" fill="#059669">随尼腓人</text>
 
     <!-- ── legend ── -->
     <rect x="10" y="250" width="390" height="38" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
     <rect x="20" y="260" width="10" height="10" rx="2" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.2"/>
-    <text x="34" y="269" font-size="9" fill="#64748b">拉曼人后裔 Lamanite Descendants</text>
+    <text x="34" y="269" font-size="9" fill="#64748b">拉曼人后裔</text>
     <rect x="190" y="260" width="10" height="10" rx="2" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2"/>
-    <text x="204" y="269" font-size="9" fill="#64748b">尼腓人后裔 Nephite Descendants</text>
+    <text x="204" y="269" font-size="9" fill="#64748b">尼腓人后裔</text>
     <rect x="20" y="276" width="10" height="10" rx="2" fill="#fefce8" stroke="#fde68a" stroke-width="1.2"/>
-    <text x="34" y="285" font-size="9" fill="#64748b">含预言 Prophecy</text>
+    <text x="34" y="285" font-size="9" fill="#64748b">含预言</text>
     <rect x="190" y="276" width="10" height="10" rx="2" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" stroke-dasharray="4,2"/>
-    <text x="204" y="285" font-size="9" fill="#64748b">引用关系 Quotation Link</text>
+    <text x="204" y="285" font-size="9" fill="#64748b">引用关系</text>
   </svg>
 </div>
 
