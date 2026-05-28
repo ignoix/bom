@@ -8,78 +8,81 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#f7f6f3;color:#1e293b;font-family:-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;font-size:13.5px}
 
+/* header */
 header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;align-items:center;gap:10px;padding:0 28px;position:sticky;top:0;z-index:99}
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
 .back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
 .back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
-
-.he{font-size:11px;color:#94a3b8;font-style:italic}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
+.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#92400e;background:#fef3c7;border-color:#fde68a}
 .tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
 .tab.dim{opacity:.3;cursor:default;pointer-events:none}
 
-.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+/* page grid: phase(56px) | main(1fr) | side(160px) */
+.page{max-width:860px;margin:0 auto;padding:16px 16px 36px;display:grid;grid-template-columns:56px 1fr 160px;align-items:start;row-gap:0}
 
-.intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
-.intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
-.intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
-.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
-.intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
+/* intro banner */
+.intro{grid-column:1/-1;text-align:center;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid #e2e8f0}
+.intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:3px}
+.intro-h{font-size:20px;font-weight:300;letter-spacing:2px;margin-bottom:1px}
+.intro-en{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.intro-meta{display:flex;justify-content:center;gap:16px}
+.im{font-size:10.5px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
 
-.ph{grid-column:1;padding-top:16px;display:flex;flex-direction:column;align-items:flex-end;padding-right:14px}
-.ph-dot{width:8px;height:8px;border-radius:50%;margin-bottom:4px}
-.ph-text{font-size:10px;color:#94a3b8;letter-spacing:.5px}
+/* phase label */
+.ph{grid-column:1;padding-top:9px;display:flex;flex-direction:column;align-items:flex-end;padding-right:12px}
+.ph-dot{width:7px;height:7px;border-radius:50%;margin-bottom:3px}
+.ph-text{font-size:9px;color:#94a3b8;letter-spacing:.5px}
 .ph-sp{grid-column:1}
 
-.arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
-.arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
+/* arrow */
+.arr{grid-column:2;display:flex;justify-content:center;padding:1px 0}
+.arr::before{content:'';display:block;width:1.5px;height:10px;background:#d1d5db}
 
-.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
-.n:hover{filter:brightness(.97)}
-.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
-.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
-.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
-.nl{list-style:none;padding:0}
-.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
-.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+/* node */
+.n{grid-column:2;border-radius:8px;padding:8px 11px;border:1.5px solid transparent;cursor:default;transition:box-shadow .2s}
+.n:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.nh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.nl{display:flex;align-items:baseline;gap:6px;min-width:0}
+.nt{font-size:13.5px;font-weight:700;margin:0;white-space:nowrap}
+.nw{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap}
+.nc{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap;flex-shrink:0}
+.np{font-size:12px;color:#374151;line-height:1.8;letter-spacing:.3px;margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
+.n:hover .np{max-height:700px;opacity:1}
+.nms{padding:5px 8px;background:#fff;border:1.5px solid #e2e8f0;border-radius:6px}
+.nm{font-size:10px;color:#475569;padding:2px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f8fafc}
+.nm:last-child{border-bottom:none}
+.nm span{font-size:8.5px;color:#94a3b8;font-style:italic}
 
-.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
-.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
-.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
-.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
-.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
+/* node colour themes */
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}
 
-.ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
-.ev-icon{font-size:16px;flex-shrink:0}
-.ev-date{font-size:10px;color:#b45309;font-style:italic;margin-top:2px}
+/* major event marker */
+.ev{grid-column:2;margin:1px 0;padding:6px 10px;border-radius:6px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:11.5px;color:#92400e;display:flex;align-items:center;gap:8px}
+.ev-icon{font-size:14px;flex-shrink:0}
+.ev-date{font-size:9.5px;color:#b45309;font-style:italic;margin-top:1px}
 
-.si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
-.si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
-.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
-.sb+.sb{margin-top:7px}
-.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
-.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
-.sd{font-size:11px;color:#94a3b8;line-height:1.5}
+/* side note */
+.si{grid-column:3;margin-left:11px;padding-top:8px;position:relative}
+.si::before{content:'';position:absolute;left:-8px;top:18px;width:8px;border-top:1.5px dashed #e2e8f0}
 .si-sp{grid-column:3}
 
-.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
-.sym .sn{color:#065f46}.sym .se{color:#059669}
-.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
-.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
-.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
-.warn .sn{color:#92400e}.warn .se{color:#b45309}
-
+/* legend */
 .legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
 .legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
 .lg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#64748b}
 .lg-box{width:14px;height:14px;border-radius:3px;border:1.5px solid transparent;flex-shrink:0}
 
+/* relationship diagram */
 .rel{grid-column:1/-1;margin-top:28px}
 .rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
 .rel svg{width:100%;height:auto;display:block}
@@ -89,9 +92,9 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <header>
   <a class="back-btn" href="index.html">← 時間線</a>
-  <span class="hb">摩尔门经</span><span class="hs">/</span>
-  <span class="hn">以挪士书</span>
-  <span class="he">Enos · A Soul's Wrestle with God</span>
+  <div class="h-info">
+    <span class="hb">摩尔门经</span><span class="hs">/</span><span class="hn">以挪士书</span>
+  </div>
   <nav class="nav">
     <a class="tab" href="bom.html">一书</a>
     <a class="tab" href="bom2.html">二书</a>
@@ -115,9 +118,9 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">BOOK OF MORMON · SMALL PLATES OF NEPHI</div>
-  <div class="intro-h">以挪士书 · Enos</div>
-  <div class="intro-en">Record of Enos — A Soul's Wrestle, Three-fold Intercession &amp; a Life of Witness</div>
+  <div class="intro-sup">摩尔门经 · 尼腓小版</div>
+  <div class="intro-h">以挪士书</div>
+  <div class="intro-en">以挪士的记录——灵魂摔跤、三层代祷与一生见证</div>
   <div class="intro-meta">
     <span class="im">时间 <b>约公元前 420–399 年</b></span>
     <span class="im">地点 <b>尼腓地 · 旷野森林</b></span>
@@ -128,7 +131,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ── activity map ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · 以挪士书</div>
   <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="enA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -157,27 +160,20 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- Wilderness boundary -->
     <path d="M 220,90 Q 222,200 220,390" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="9,4"/>
-    <text x="225" y="82" font-size="9" fill="#16a34a">旷野</text>
-    <text x="225" y="93" font-size="8" fill="#16a34a">Wilderness</text>
+    <text x="225" y="88" font-size="9" fill="#16a34a">旷野</text>
 
     <!-- Water labels -->
-    <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="28" y="208" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific</text>
-    <text x="820" y="280" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="820" y="292" fill="#2563eb" font-size="8" font-style="italic" text-anchor="middle">Caribbean</text>
-    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
-    <text x="700" y="78" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text>
+    <text x="28" y="202" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text x="820" y="286" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text x="700" y="73" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
 
     <!-- Continent label -->
     <text x="510" y="230" fill="#64748b" font-size="11" text-anchor="middle" opacity="0.50">北美洲 / 中美洲</text>
 
     <!-- Territory labels -->
-    <text x="164" y="262" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">拉曼人</text>
-    <text x="164" y="275" text-anchor="middle" font-size="8.5" fill="#f87171">Lamanites</text>
-    <text x="330" y="180" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">尼腓地</text>
-    <text x="330" y="193" text-anchor="middle" font-size="8.5" fill="#3b82f6">Land of Nephi</text>
-    <text x="234" y="256" text-anchor="middle" font-size="9" font-weight="bold" fill="#92400e">旷野森林</text>
-    <text x="234" y="267" text-anchor="middle" font-size="8" fill="#b45309">Wilderness Forest</text>
+    <text x="164" y="268" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text x="330" y="187" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">尼腓地</text>
+    <text x="234" y="262" text-anchor="middle" font-size="9" font-weight="bold" fill="#92400e">旷野森林</text>
 
     <!-- ── Location markers ── -->
 
@@ -191,23 +187,21 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- Label box -->
     <rect x="262" y="272" width="244" height="48" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fde68a" stroke-width="1.3"/>
     <text x="384" y="287" fill="#92400e" font-size="9.5" font-weight="bold" text-anchor="middle">旷野祈祷处</text>
-    <text x="384" y="299" fill="#b45309" font-size="8.5" text-anchor="middle">以挪士打猎时在此跪祷全日夜</text>
-    <text x="384" y="310" fill="#b45309" font-size="8" text-anchor="middle">Enos wrestled with God · vs. 1–17</text>
+    <text x="384" y="304" fill="#b45309" font-size="8.5" text-anchor="middle">以挪士打猎时在此跪祷全日夜</text>
     <line x1="252" y1="289" x2="262" y2="289" stroke="#d97706" stroke-width="1.2"/>
 
     <!-- 2. City / Temple of Nephi -->
     <polygon points="322,232 344,232 344,248 333,242 322,248" fill="#1d4ed8" stroke="#fff" stroke-width="1.5"/>
     <rect x="325" y="246" width="16" height="10" fill="#1d4ed8"/>
     <rect x="356" y="218" width="210" height="38" rx="4" fill="rgba(255,255,255,0.93)" stroke="#93c5fd" stroke-width="1.2"/>
-    <text x="461" y="232" fill="#1e3a8a" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓城 · 以挪士传道一生</text>
-    <text x="461" y="244" fill="#3b82f6" font-size="8.5" text-anchor="middle">City of Nephi · Enos's lifelong ministry</text>
+    <text x="461" y="238" fill="#1e3a8a" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓城 · 以挪士传道一生</text>
     <line x1="344" y1="241" x2="356" y2="235" stroke="#1d4ed8" stroke-width="1.2"/>
 
     <!-- 3. First Inheritance (coastal Lamanite) -->
     <circle cx="152" cy="338" r="7" fill="#f97316" stroke="#fff" stroke-width="2"/>
     <rect x="20" y="362" width="230" height="36" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
     <text x="135" y="376" fill="#9f1239" font-size="9.5" font-weight="bold" text-anchor="middle">初居地 · 拉曼人领域</text>
-    <text x="135" y="388" fill="#f87171" font-size="8.5" text-anchor="middle">Land of First Inheritance (Lamanites)</text>
+    <text x="135" y="388" fill="#f87171" font-size="8.5" text-anchor="middle">拉曼人留守</text>
     <line x1="152" y1="345" x2="140" y2="362" stroke="#f97316" stroke-width="1.2"/>
 
     <!-- 4. Prayer direction arrow (forest → God) -->
@@ -217,8 +211,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- Title box -->
     <rect x="6" y="6" width="232" height="36" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
-    <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="bold">以挪士书活动地图</text>
-    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Enos Activity Map · Not to Scale</text>
+    <text x="14" y="27" fill="#1e293b" font-size="11" font-weight="bold">以挪士书 · 非实际比例</text>
 
     <!-- Legend -->
     <rect x="6" y="52" width="134" height="112" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
@@ -248,21 +241,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 灵魂饥渴 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">灵魂</div></div>
 <div class="n amb">
-  <div class="nd">约 公元前 420 年</div>
-  <div class="nt">节 1–5　灵魂饥渴与至诚祈求</div>
-  <div class="ne">The Soul's Hunger · 旷野森林 Wilderness Forest</div>
-  <ul class="nl">
-    <li>以挪士回忆父亲雅各的教导不断萦绕心中——"他所说的关于永生和我灵魂喜乐之话语"</li>
-    <li>独自在旷野打猎时，灵魂深处忽然升起强烈的饥渴感——非为肉身，乃为灵魂</li>
-    <li>以挪士跪下，"向神呼求"；他祈祷了整整一天，又祈祷到夜里——全力摔跤</li>
-    <li>他不知道将要发生什么，只是带着全然渴慕的心向神呼求——这种祈祷本身便是信仰</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">灵魂饥渴</div><div class="nw">旷野森林 · 节 1–5</div></div>
+    <div class="nc">约前 420 年</div>
+  </div>
+  <p class="np">以挪士忆起父雅各教诲，所言永生与灵魂喜乐之语萦绕心中，久久不去。独于旷野猎时，灵魂深处忽起饥渴——非肉身之渴，乃属灵之求。遂跪地向神呼求，祈祷经整日复至夜深，如力士摔跤不肯放手。此祷不知将有何事，唯以全然渴慕之心叩求——这种祈祷本身，便是信仰。</p>
 </div>
 <div class="si">
-  <div class="warn">
-    <div class="sn">"摔跤"的隐喻</div>
-    <div class="se">Soul Wrestle · Enos 1:2</div>
-    <div class="sd">原文 wrestle（摔跤）<br>呼应旧约雅各与<br>神的使者摔跤<br>（创世记 32 章）<br>——同为以挪士之父</div>
+  <div class="nms">
+    <div class="nm">以挪士 <span>Enos · 祈祷者</span></div>
+    <div class="nm">雅各 <span>Jacob · 父亲的教诲</span></div>
   </div>
 </div>
 
@@ -271,21 +259,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 三层代祷 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">代祷</div></div>
 <div class="n tea">
-  <div class="nd">约 公元前 420 年</div>
-  <div class="nt">节 6–8　第一层：为己祈求，罪得宽恕</div>
-  <div class="ne">First Prayer — Personal Forgiveness · 旷野森林</div>
-  <ul class="nl">
-    <li>神的声音来了："以挪士，你的罪宽恕了。"——简洁而有力</li>
-    <li>以挪士问："主啊，这怎么可能？"——他自知有罪，难以置信</li>
-    <li>神回答："因为你信我儿基督，你必在基督里得救。"——恩典的根基</li>
-    <li>以挪士说：罪疚感从我心里消失了——不是逐渐消退，而是立刻消失</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">第一层·为己祈求</div><div class="nw">旷野森林 · 节 6–8</div></div>
+    <div class="nc">约前 420 年</div>
+  </div>
+  <p class="np">祷告既久，神之声音来临：「以挪士，你的罪宽恕了。」简洁而有力。以挪士惊问：「主啊，这怎么可能？」自知有罪，难以置信。神答：「因你信我儿基督，你必在基督里得救。」此乃恩典之根基。以挪士言：罪疚感立时从心消散——非渐退，乃顷刻消失。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">信心的机制</div>
-    <div class="se">Faith → Forgiveness · Enos 1:8</div>
-    <div class="sd">信基督 → 祈求<br>→ 宽恕宣告<br>→ 罪疚消除<br>成为摩尔门经<br>救恩教义示范</div>
+  <div class="nms">
+    <div class="nm">以挪士 <span>Enos · 得赦罪</span></div>
+    <div class="nm">基督 <span>Christ · 恩典根基</span></div>
   </div>
 </div>
 
@@ -293,15 +276,11 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n tea">
-  <div class="nd">约 公元前 420 年（同日）</div>
-  <div class="nt">节 9–10　第二层：为尼腓人代求</div>
-  <div class="ne">Second Prayer — Intercession for Nephites · 旷野森林</div>
-  <ul class="nl">
-    <li>罪疚消除后，以挪士的心转向族人尼腓人——爱由己扩展至他人</li>
-    <li>他为族人的灵魂福祉向神祈求，恳求神赐福与守护</li>
-    <li>神应许：按照他们的信仰，我必施恩——信仰是得福的条件</li>
-    <li>以挪士记录：这信心的原则是真实可靠的</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">第二层·为尼腓人代求</div><div class="nw">旷野森林 · 节 9–10</div></div>
+    <div class="nc">约前 420 年（同日）</div>
+  </div>
+  <p class="np">罪疚既消，以挪士之心转向族人——爱由己扩至他人。他为尼腓人的灵魂福祉向神恳求，祈神赐福守护。神应许：按他们的信仰，我必施恩。信仰是得福之条件。以挪士记：此信心原则真实可靠。</p>
 </div>
 <div class="si-sp"></div>
 
@@ -309,22 +288,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div>
 <div class="n tea">
-  <div class="nd">约 公元前 420 年（整夜祷告）</div>
-  <div class="nt">节 11–17　第三层：为拉曼人立约保存经文</div>
-  <div class="ne">Third Prayer — Covenant for Lamanites &amp; Scriptures · 旷野森林</div>
-  <ul class="nl">
-    <li>以挪士继续祈祷，为当时仇视他族的拉曼人代求——将爱扩展至敌人</li>
-    <li>神知道以挪士担心：若尼腓人被毁灭，铜版和金版怎么办？</li>
-    <li>神的应许：<b>若尼腓人堕落被灭，这些记录必将保存，在末世临到拉曼人手中</b></li>
-    <li>以挪士对此深信不疑——他为自己从未见过的未来世代的拉曼人代祷</li>
-    <li>这个约成为摩尔门经神圣使命的根基：跨越千年保存，终达末世读者</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">第三层·为拉曼人立约</div><div class="nw">旷野森林 · 节 11–17</div></div>
+    <div class="nc">约前 420 年（整夜）</div>
+  </div>
+  <p class="np">以挪士继续祈祷，为时时仇视之拉曼人代求——将爱扩至仇敌。神知其忧：若尼腓人被灭，铜版金版将何归？神立约：若尼腓人堕落被灭，这些记录必将保存，末世临到拉曼人手中。以挪士深信不疑——为从未谋面的未来世代代祷。此约成为摩尔门经神圣使命之根基：跨越千年保存，终达末世读者。</p>
 </div>
 <div class="si">
-  <div class="sb">
-    <div class="sn">铜版保存之约</div>
-    <div class="se">The Covenant · Enos 1:16–17</div>
-    <div class="sd">此约成真：<br>摩爾門 → 摩羅乃<br>→ 约瑟·斯密翻译<br>→ 拉曼人后裔读到<br>（约 2400 年后）</div>
+  <div class="nms">
+    <div class="nm">铜版 <span>Brass Plates · 被立约保存</span></div>
+    <div class="nm">拉曼人 <span>Lamanites · 被代祷</span></div>
   </div>
 </div>
 
@@ -333,23 +306,17 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 一生见证 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">见证</div></div>
 <div class="n blu">
-  <div class="nd">约 公元前 420–399 年</div>
-  <div class="nt">节 18–26　一生传道与尼腓—拉曼的持续冲突</div>
-  <div class="ne">A Life of Witness · 尼腓地 Land of Nephi</div>
-  <ul class="nl">
-    <li>以挪士此后一生向尼腓人传道——他们"心硬"，常需以强硬的言辞和预言才能打动</li>
-    <li>描述尼腓人：勤于农耕、冶金、饲养牲畜，重视律法与制度</li>
-    <li>描述拉曼人：居旷野，茹毛饮血，头剃光，追逐走兽——与尼腓人截然不同</li>
-    <li>尼腓人持续尝试使拉曼人"文明化"，屡遭拒绝——战争不断</li>
-    <li>以挪士的喜乐：在信仰中传道的一生，胜过一切财富；他等候见到主</li>
-    <li>自离开耶路撒冷已过<b>一百七十九年</b>（从公元前 600 年算起，约前 421 年）</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">一生传道</div><div class="nw">尼腓地 · 节 18–26</div></div>
+    <div class="nc">约前 420–399 年</div>
+  </div>
+  <p class="np">以挪士此后一生向尼腓人传道，然他们心硬，常须严词预言方能打动。尼腓人：勤于农耕冶金，饲养牲畜，重视律法制度，文字精细。拉曼人：居旷野，茹毛饮血，头剃光，追逐走兽——两族文化截然相异。尼腓人屡尝使拉曼人归化，屡遭拒绝，战争不断。以挪士以信仰中传道为一生喜乐，胜过一切财富，翘首等候见主之日。离开耶路撒冷已过一百七十九年。</p>
 </div>
 <div class="si">
-  <div class="note">
-    <div class="sn">尼腓—拉曼文化对比</div>
-    <div class="se">Cultural Contrast · Enos 1:20–21</div>
-    <div class="sd">尼腓：农耕·文字<br>律法·精细工艺<br>———<br>拉曼：游猎·旷野<br>无文字·尚武</div>
+  <div class="nms">
+    <div class="nm">以挪士 <span>Enos · 传道者</span></div>
+    <div class="nm">尼腓人 <span>Nephites · 被传道</span></div>
+    <div class="nm">拉曼人 <span>Lamanites · 文化对比</span></div>
   </div>
 </div>
 
@@ -358,22 +325,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 传位离世 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">传位</div></div>
 <div class="n vio">
-  <div class="nd">约 公元前 399 年</div>
-  <div class="nt">节 27　年老离世，将记录传于雅龙</div>
-  <div class="ne">Final Words &amp; Record Transfer · 尼腓地</div>
-  <ul class="nl">
-    <li>"我已年老，即将归入我先祖的安息之所。"——以挪士坦然面对死亡</li>
-    <li>"我曾在我神面前保守信仰；我欢欣盼望在祂那里与祂见面。"</li>
-    <li>将金版传给儿子<b>雅龙 Jarom</b>——记录的接力棒传递下去</li>
-    <li>"再会，直到我们在我们主基督里得蒙救赎的那荣耀日子相见。"</li>
-    <li>以挪士书是摩尔门经篇幅最短的书之一，却包含最深刻的个人祷告神学</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">传位离世</div><div class="nw">尼腓地 · 节 27</div></div>
+    <div class="nc">约前 399 年</div>
+  </div>
+  <p class="np">「我已年老，即将归入先祖的安息之所。」以挪士坦然面对死亡。「我曾在神面前保守信仰；我欢欣盼望在祂那里与祂见面。」将金版传给儿子雅龙，记录的接力棒继续传递。「再会，直到我们在主基督里得蒙救赎的荣耀日子相见。」以挪士书仅一章二十七节，篇幅最短，却蕴含摩尔门经最深刻的个人祷告神学。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">小版接力</div>
-    <div class="se">Record Lineage</div>
-    <div class="sd">尼腓 → 雅各<br>→ 以挪士<br>→ 雅龙 Jarom<br>→ 奥姆尼...<br>→ 摩尔门整理</div>
+  <div class="nms">
+    <div class="nm">以挪士 <span>Enos · 著者/先知</span></div>
+    <div class="nm">雅龙 <span>Jarom · 继任者</span></div>
   </div>
 </div>
 
@@ -382,7 +343,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ev">
   <span class="ev-icon">✦</span>
   <div>
-    <div>以挪士年老去世，将金版传给儿子雅龙；小版记录接力继续</div>
+    <div>以挪士年老去世，将金版传给儿子雅龙，小版记录接力继续</div>
     <div class="ev-date">约 公元前 399 年 · 第 1 章第 27 节</div>
   </div>
 </div>
@@ -390,7 +351,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- legend -->
 <div class="legend">
-  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="legend-title">图例</div>
   <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>灵魂饥渴·初祷</div>
   <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>三层代祷（己·尼腓·拉曼）</div>
   <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>一生传道·文化对比</div>
@@ -399,7 +360,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ── prayer intercession diagram ── -->
 <div class="rel">
-  <div class="rel-title">三层代祷结构 · THREE-FOLD INTERCESSION OF ENOS (1:6–17)</div>
+  <div class="rel-title">三层代祷结构 · 以挪士书第 1 章</div>
   <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#fffbeb">
     <defs>
       <marker id="pArr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
@@ -425,14 +386,14 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- ── Middle ring text (top band) ── -->
     <text x="430" y="66" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">尼腓人</text>
-    <text x="430" y="79" text-anchor="middle" font-size="9.5" fill="#2563eb">Nephites · 第二层代祷</text>
+    <text x="430" y="79" text-anchor="middle" font-size="9.5" fill="#2563eb">第二层代祷</text>
     <text x="430" y="91" text-anchor="middle" font-size="9" fill="#2563eb">神应许：按信仰施恩</text>
     <!-- Bottom of middle ring -->
     <text x="430" y="232" text-anchor="middle" font-size="8.5" fill="#2563eb">愿族人在信仰中蒙福</text>
 
     <!-- ── Outer ring text (top band) ── -->
     <text x="430" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#9f1239">拉曼人</text>
-    <text x="430" y="30" text-anchor="middle" font-size="9.5" fill="#f87171">Lamanites · 第三层代祷（整夜）</text>
+    <text x="430" y="30" text-anchor="middle" font-size="9.5" fill="#f87171">第三层代祷（整夜）</text>
     <text x="430" y="42" text-anchor="middle" font-size="9" fill="#f87171">神立约：记录保存至末日</text>
     <!-- Bottom of outer ring -->
     <text x="430" y="271" text-anchor="middle" font-size="8.5" fill="#f87171">为仇人代祷 · 约在两千年后应验</text>
@@ -457,7 +418,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ── lineage & character diagram ── -->
 <div class="rel" style="margin-top:24px">
-  <div class="rel-title">人物关系与记录传承 · KEY FIGURES &amp; RECORD LINEAGE</div>
+  <div class="rel-title">人物关系与记录传承 · 以挪士书</div>
   <svg viewBox="0 0 860 310" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="lArr" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -477,17 +438,17 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── 记录传承链（中央纵线）── -->
     <!-- 里海 Lehi (great-great-grandparent) -->
     <rect x="370" y="10" width="120" height="32" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5,3"/>
-    <text x="430" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#64748b">李海 · 撒利亚</text>
-    <text x="430" y="36" text-anchor="middle" font-size="8.5" fill="#94a3b8">Lehi &amp; Sariah · 已逝</text>
+    <text x="430" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#64748b">李海 · 撒拉亚</text>
+    <text x="430" y="36" text-anchor="middle" font-size="8.5" fill="#94a3b8">已逝</text>
 
     <!-- 尼腓 + 雅各 (grandparent generation) -->
     <rect x="216" y="66" width="96" height="32" rx="5" fill="#f1f5f9" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="264" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">尼腓</text>
-    <text x="264" y="91" text-anchor="middle" font-size="8.5" fill="#94a3b8">Nephi · 已逝</text>
+    <text x="264" y="91" text-anchor="middle" font-size="8.5" fill="#94a3b8">已逝</text>
 
     <rect x="370" y="66" width="120" height="32" rx="5" fill="#f1f5f9" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="430" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">雅各</text>
-    <text x="430" y="91" text-anchor="middle" font-size="8.5" fill="#94a3b8">Jacob · 父亲 · 已逝</text>
+    <text x="430" y="91" text-anchor="middle" font-size="8.5" fill="#94a3b8">父亲 · 已逝</text>
 
     <!-- 连线：李海 → 雅各 -->
     <line x1="430" y1="42" x2="430" y2="66" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#lArr)"/>
@@ -500,7 +461,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── 以挪士（主角）── -->
     <rect x="358" y="128" width="144" height="44" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
     <text x="430" y="148" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">以挪士</text>
-    <text x="430" y="162" text-anchor="middle" font-size="9.5" fill="#b45309">Enos · 著者 · 先知</text>
+    <text x="430" y="162" text-anchor="middle" font-size="9.5" fill="#b45309">著者 · 先知</text>
 
     <!-- 以挪士 → 雅龙 -->
     <line x1="430" y1="172" x2="430" y2="206" stroke="#059669" stroke-width="1.5" marker-end="url(#lGrn)"/>
@@ -509,7 +470,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── 雅龙 Jarom（儿子，下一位）── -->
     <rect x="358" y="206" width="144" height="36" rx="5" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
     <text x="430" y="223" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">雅龙</text>
-    <text x="430" y="234" text-anchor="middle" font-size="9" fill="#059669">Jarom · 以挪士之子 · 下一记录者</text>
+    <text x="430" y="234" text-anchor="middle" font-size="9" fill="#059669">以挪士之子 · 下一记录者</text>
 
     <!-- 往下省略 -->
     <line x1="430" y1="242" x2="430" y2="268" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2"/>
@@ -518,7 +479,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── 左侧：拉曼人 ── -->
     <rect x="22" y="128" width="108" height="44" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
     <text x="76" y="147" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">拉曼人</text>
-    <text x="76" y="159" text-anchor="middle" font-size="8.5" fill="#f87171">Lamanites · 仇敌</text>
+    <text x="76" y="159" text-anchor="middle" font-size="8.5" fill="#f87171">仇敌</text>
     <!-- 以挪士为拉曼人代祷 -->
     <line x1="358" y1="150" x2="130" y2="150" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="4,2.5" marker-end="url(#lRed)"/>
     <text x="244" y="144" text-anchor="middle" font-size="8" fill="#f87171">三层代祷</text>
@@ -527,7 +488,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── 右侧：神/基督 ── -->
     <rect x="730" y="106" width="116" height="66" rx="8" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
     <text x="788" y="127" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">神 / 基督</text>
-    <text x="788" y="140" text-anchor="middle" font-size="9" fill="#b45309">God / Christ</text>
+    <text x="788" y="140" text-anchor="middle" font-size="9" fill="#b45309">回应祷告</text>
     <text x="788" y="153" text-anchor="middle" font-size="8.5" fill="#b45309">回应祷告</text>
     <text x="788" y="164" text-anchor="middle" font-size="8.5" fill="#b45309">宣告宽恕·立约</text>
     <!-- 以挪士 ↔ 神 -->
@@ -537,7 +498,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- ── 右下：铜版/金版 ── -->
     <rect x="630" y="206" width="136" height="52" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
     <text x="698" y="224" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">铜版 · 金版</text>
-    <text x="698" y="236" text-anchor="middle" font-size="8.5" fill="#7c3aed">Brass &amp; Gold Plates</text>
+    <text x="698" y="236" text-anchor="middle" font-size="8.5" fill="#7c3aed">被立约保存至末世</text>
     <text x="698" y="247" text-anchor="middle" font-size="8.5" fill="#7c3aed">约 1:16 立约保存</text>
     <!-- 神 → 铜版约 -->
     <line x1="788" y1="172" x2="740" y2="206" stroke="#c4b5fd" stroke-width="1.2" stroke-dasharray="4,2.5" marker-end="url(#lArr)"/>
