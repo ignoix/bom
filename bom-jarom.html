@@ -14,8 +14,8 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hn{font-size:14px;font-weight:700;color:#1e293b}
 .back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
 .back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
 
-.he{font-size:11px;color:#94a3b8;font-style:italic}
 .nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:600px}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
@@ -23,12 +23,11 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .tab:hover:not(.on):not(.dim){background:#f1f5f9;color:#64748b}
 .tab.dim{opacity:.3;cursor:default;pointer-events:none}
 
-.page{max-width:860px;margin:0 auto;padding:32px 16px 72px;display:grid;grid-template-columns:68px 1fr 176px;align-items:start}
+.page{max-width:860px;margin:0 auto;padding:16px 16px 36px;display:grid;grid-template-columns:56px 1fr 160px;align-items:start;row-gap:0}
 
 .intro{grid-column:1/-1;text-align:center;padding-bottom:28px;margin-bottom:6px;border-bottom:1px solid #e2e8f0}
 .intro-sup{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-bottom:5px}
 .intro-h{font-size:24px;font-weight:300;letter-spacing:2px;margin-bottom:2px}
-.intro-en{font-size:12px;font-style:italic;color:#94a3b8;margin-bottom:12px}
 .intro-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
 .im{font-size:11px;color:#94a3b8}.im b{color:#64748b;font-weight:600}
 
@@ -40,21 +39,26 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .arr{grid-column:2;display:flex;justify-content:center;padding:4px 0}
 .arr::before{content:'';display:block;width:1.5px;height:20px;background:#d1d5db}
 
-.n{grid-column:2;border-radius:9px;padding:13px 15px;border:1.5px solid transparent;position:relative}
-.n:hover{filter:brightness(.97)}
-.nd{position:absolute;top:9px;right:11px;font-size:10px;color:#94a3b8;font-style:italic}
-.nt{font-size:14.5px;font-weight:700;padding-right:90px;margin-bottom:1px}
-.ne{font-size:10.5px;font-style:italic;margin-bottom:7px;opacity:.6}
-.nl{list-style:none;padding:0}
-.nl li{font-size:12px;color:#475569;line-height:1.6;padding-left:12px;position:relative}
-.nl li::before{content:'·';position:absolute;left:2px;color:#94a3b8}
+.n{grid-column:2;border-radius:8px;padding:8px 11px;border:1.5px solid transparent;cursor:default;transition:box-shadow .2s}
+.n:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.nh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.nl{display:flex;align-items:baseline;gap:6px;min-width:0}
+.nt{font-size:13.5px;font-weight:700;margin:0;white-space:nowrap}
+.nw{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap}
+.nc{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap;flex-shrink:0}
+.np{font-size:12px;color:#374151;line-height:1.8;letter-spacing:.3px;margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
+.n:hover .np{max-height:700px;opacity:1}
+.nms{padding:5px 8px;background:#fff;border:1.5px solid #e2e8f0;border-radius:6px}
+.nm{font-size:10px;color:#475569;padding:2px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f8fafc}
+.nm:last-child{border-bottom:none}
+.nm span{font-size:8.5px;color:#94a3b8;font-style:italic}
 
-.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
-.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}.vio .ne{color:#6d28d9}
-.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}.tea .ne{color:#0d9488}
-.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}.blu .ne{color:#2563eb}
-.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}.ros .ne{color:#be123c}
-.lim{background:#f7fee7;border-color:#bef264}.lim .nt{color:#3f6212}.lim .ne{color:#4d7c0f}
+.amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}
+.vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}
+.tea{background:#f0fdf9;border-color:#6ee7b7}.tea .nt{color:#065f46}
+.blu{background:#eff6ff;border-color:#93c5fd}.blu .nt{color:#1e3a8a}
+.ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}
+.lim{background:#f7fee7;border-color:#bef264}.lim .nt{color:#3f6212}
 
 .ev{grid-column:2;margin:2px 0;padding:9px 13px;border-radius:7px;background:#fffbeb;border:1.5px dashed #f59e0b;font-size:12px;color:#92400e;display:flex;align-items:center;gap:10px}
 .ev-icon{font-size:16px;flex-shrink:0}
@@ -62,21 +66,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 .si{grid-column:3;margin-left:14px;padding-top:12px;position:relative}
 .si::before{content:'';position:absolute;left:-10px;top:24px;width:10px;border-top:1.5px dashed #e2e8f0}
-.sb{background:#fff;border:1.5px solid #fecaca;border-radius:7px;padding:9px 10px}
-.sb+.sb{margin-top:7px}
-.sn{font-size:12.5px;font-weight:700;color:#9f1239;margin-bottom:1px}
-.se{font-size:10px;font-style:italic;color:#f87171;margin-bottom:4px}
-.sd{font-size:11px;color:#94a3b8;line-height:1.5}
 .si-sp{grid-column:3}
-
-.sym{background:#fff;border:1.5px solid #6ee7b7;border-radius:7px;padding:8px 10px}
-.sym .sn{color:#065f46}.sym .se{color:#059669}
-.note{background:#fff;border:1.5px solid #93c5fd;border-radius:7px;padding:8px 10px}
-.note .sn{color:#1e3a8a}.note .se{color:#3b82f6}
-.warn{background:#fff;border:1.5px solid #fde68a;border-radius:7px;padding:8px 10px}
-.warn .sn{color:#92400e}.warn .se{color:#b45309}
-.lnote{background:#fff;border:1.5px solid #bef264;border-radius:7px;padding:8px 10px}
-.lnote .sn{color:#3f6212}.lnote .se{color:#65a30d}
 
 .legend{grid-column:1/-1;margin-top:28px;padding:16px 18px;background:#fff;border-radius:9px;border:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
 .legend-title{font-size:10px;letter-spacing:2px;color:#94a3b8;width:100%;margin-bottom:2px}
@@ -92,9 +82,9 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <header>
   <a class="back-btn" href="index.html">← 時間線</a>
-  <span class="hb">摩尔门经</span><span class="hs">/</span>
-  <span class="hn">雅龙书</span>
-  <span class="he">Jarom · War, Prosperity &amp; Faithful Brevity</span>
+  <div class="h-info">
+    <span class="hb">摩尔门经</span><span class="hs">/</span><span class="hn">雅龙书</span>
+  </div>
   <nav class="nav">
     <a class="tab" href="bom.html">一书</a>
     <a class="tab" href="bom2.html">二书</a>
@@ -118,12 +108,11 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">BOOK OF MORMON · SMALL PLATES OF NEPHI</div>
-  <div class="intro-h">雅龙书 · Jarom</div>
-  <div class="intro-en">Record of Jarom — War, Prosperity, Prophetic Sharpness &amp; the 200-Year Milestone</div>
+  <div class="intro-sup">摩尔门经 · 尼腓小版</div>
+  <div class="intro-h">雅龙书</div>
   <div class="intro-meta">
     <span class="im">时间 <b>约公元前 399–361 年</b></span>
-    <span class="im">地点 <b>尼腓地 Land of Nephi</b></span>
+    <span class="im">地点 <b>尼腓地</b></span>
     <span class="im">章节 <b>1 章 · 15 节</b></span>
     <span class="im">核心 <b>战争胜利 · 物质繁荣 · 离耶路撒冷两百年</b></span>
   </div>
@@ -131,7 +120,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ── activity map ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意</div>
   <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="jaA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -140,87 +129,62 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
       <marker id="jaB" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
         <path d="M0,0 L0,7 L9,3.5 z" fill="#65a30d"/>
       </marker>
-      <marker id="jaC" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
-        <path d="M0,0 L0,7 L9,3.5 z" fill="#1d4ed8"/>
-      </marker>
     </defs>
 
     <rect width="860" height="430" fill="#bfdbfe" rx="8"/>
     <polygon points="20,0 200,0 420,0 640,0 810,20 850,90 845,200 820,300 780,370 700,415 590,420 490,420 390,420 290,410 200,380 140,335 100,275 70,210 50,140 30,70 20,0" fill="#bbf7d0"/>
     <ellipse cx="700" cy="78" rx="118" ry="54" fill="#bfdbfe" opacity="0.93"/>
 
-    <!-- Territory zones -->
     <ellipse cx="164" cy="312" rx="56" ry="68" fill="rgba(254,202,202,0.48)" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6,3"/>
     <ellipse cx="330" cy="248" rx="92" ry="80" fill="rgba(220,252,231,0.55)" stroke="#86efac" stroke-width="1.8" stroke-dasharray="6,3"/>
 
-    <!-- Wilderness boundary -->
     <path d="M 220,90 Q 222,200 220,390" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="9,4"/>
-    <text x="225" y="82" font-size="9" fill="#16a34a">旷野</text>
-    <text x="225" y="93" font-size="8" fill="#16a34a">Wilderness</text>
+    <text x="225" y="86" font-size="9" fill="#16a34a">旷野</text>
 
-    <!-- ── Battle/military frontier indicators ── -->
-    <!-- Lamanite attack vectors (arrows into Nephite territory) -->
     <path d="M 148,280 Q 190,268 238,256" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#jaA)"/>
     <path d="M 136,320 Q 178,308 222,296" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#jaA)"/>
     <path d="M 142,355 Q 185,336 228,316" fill="none" stroke="#dc2626" stroke-width="2.2" marker-end="url(#jaA)"/>
-    <!-- Nephite counter-defense (green arrows) -->
     <path d="M 255,250 Q 218,270 184,288" fill="none" stroke="#65a30d" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#jaB)"/>
 
-    <!-- Military frontier label -->
-    <rect x="22" y="212" width="118" height="28" rx="4" fill="rgba(255,255,255,0.90)" stroke="#fca5a5"/>
+    <rect x="22" y="212" width="118" height="20" rx="4" fill="rgba(255,255,255,0.90)" stroke="#fca5a5"/>
     <text x="81" y="225" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#9f1239">拉曼人多次入侵</text>
-    <text x="81" y="235" text-anchor="middle" font-size="8" fill="#f87171">Repeated Lamanite Attacks</text>
 
-    <!-- Water labels -->
     <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="28" y="208" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle">Pacific</text>
     <text x="820" y="280" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="820" y="292" fill="#2563eb" font-size="8" font-style="italic" text-anchor="middle">Caribbean</text>
-    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
-    <text x="700" y="78" fill="#2563eb" font-size="7.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text>
+    <text x="700" y="72" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
     <text x="510" y="225" fill="#64748b" font-size="10" text-anchor="middle" opacity="0.45">北美洲 / 中美洲</text>
 
-    <!-- Territory labels -->
-    <text x="164" y="258" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">拉曼人</text>
-    <text x="164" y="271" text-anchor="middle" font-size="8.5" fill="#f87171">Lamanites</text>
-    <text x="330" y="178" text-anchor="middle" font-size="10" font-weight="bold" fill="#3f6212">尼腓地</text>
-    <text x="330" y="191" text-anchor="middle" font-size="8.5" fill="#65a30d">Land of Nephi · 繁荣</text>
+    <text x="164" y="262" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text x="330" y="182" text-anchor="middle" font-size="10" font-weight="bold" fill="#3f6212">尼腓地</text>
+    <text x="330" y="195" text-anchor="middle" font-size="8.5" fill="#65a30d">繁荣建设</text>
 
-    <!-- ── Nephite city / Temple ── -->
     <polygon points="322,232 344,232 344,248 333,242 322,248" fill="#1d4ed8" stroke="#fff" stroke-width="1.5"/>
     <rect x="325" y="246" width="16" height="10" fill="#1d4ed8"/>
-    <rect x="356" y="218" width="268" height="52" rx="5" fill="rgba(255,255,255,0.93)" stroke="#86efac" stroke-width="1.3"/>
-    <text x="490" y="232" fill="#3f6212" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓城 · 繁荣建设</text>
-    <text x="490" y="244" fill="#4d7c0f" font-size="8.5" text-anchor="middle">金·银·铁·铜·钢·丝·麻·建筑·城墙</text>
-    <text x="490" y="256" fill="#65a30d" font-size="8" text-anchor="middle">City of Nephi · Prosperity &amp; Building · Jarom 1:8</text>
-    <line x1="344" y1="241" x2="356" y2="236" stroke="#1d4ed8" stroke-width="1.2"/>
+    <rect x="356" y="222" width="268" height="36" rx="5" fill="rgba(255,255,255,0.93)" stroke="#86efac" stroke-width="1.3"/>
+    <text x="490" y="236" fill="#3f6212" font-size="9.5" font-weight="bold" text-anchor="middle">尼腓城 · 繁荣建设</text>
+    <text x="490" y="250" fill="#4d7c0f" font-size="8.5" text-anchor="middle">金·银·铁·铜·钢·丝·麻·建筑·城墙</text>
+    <line x1="344" y1="241" x2="356" y2="238" stroke="#1d4ed8" stroke-width="1.2"/>
 
-    <!-- First Inheritance marker -->
     <circle cx="152" cy="338" r="7" fill="#f97316" stroke="#fff" stroke-width="2"/>
-    <rect x="20" y="362" width="224" height="34" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
-    <text x="132" y="376" fill="#9f1239" font-size="9.5" font-weight="bold" text-anchor="middle">初居地 · 拉曼人领域</text>
-    <text x="132" y="388" fill="#f87171" font-size="8.5" text-anchor="middle">Land of First Inheritance (Lamanites)</text>
+    <rect x="20" y="362" width="186" height="20" rx="4" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="113" y="375" fill="#9f1239" font-size="9.5" font-weight="bold" text-anchor="middle">初居地 · 拉曼人领域</text>
     <line x1="152" y1="345" x2="140" y2="362" stroke="#f97316" stroke-width="1.2"/>
 
-    <!-- Title box -->
-    <rect x="6" y="6" width="228" height="36" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
-    <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="bold">雅龙书活动地图</text>
-    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Jarom Activity Map · ~399–361 BC</text>
+    <rect x="6" y="6" width="200" height="22" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <text x="14" y="21" fill="#1e293b" font-size="11" font-weight="bold">雅龙书 · 约公元前 399–361</text>
 
-    <!-- Legend -->
-    <rect x="6" y="52" width="140" height="112" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
-    <circle cx="20" cy="69" r="5" fill="#f97316"/>
-    <text x="30" y="73" fill="#475569" font-size="9">初居地（拉曼）</text>
-    <polygon points="20,82 31,82 31,94 25.5,88 20,94" fill="#1d4ed8"/>
-    <text x="36" y="91" fill="#475569" font-size="9">尼腓城</text>
-    <ellipse cx="20" cy="110" rx="10" ry="7" fill="rgba(254,202,202,0.5)" stroke="#fca5a5" stroke-width="1.2" stroke-dasharray="4,2"/>
-    <text x="34" y="114" fill="#475569" font-size="9">拉曼人领域</text>
-    <ellipse cx="20" cy="130" rx="10" ry="7" fill="rgba(220,252,231,0.55)" stroke="#86efac" stroke-width="1.2" stroke-dasharray="4,2"/>
-    <text x="34" y="134" fill="#475569" font-size="9">尼腓人领域</text>
-    <line x1="12" y1="148" x2="32" y2="148" stroke="#dc2626" stroke-width="2" marker-end="url(#jaA)"/>
-    <text x="36" y="152" fill="#475569" font-size="9">拉曼入侵</text>
+    <rect x="6" y="34" width="140" height="108" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
+    <circle cx="20" cy="51" r="5" fill="#f97316"/>
+    <text x="30" y="55" fill="#475569" font-size="9">初居地（拉曼）</text>
+    <polygon points="20,64 31,64 31,76 25.5,70 20,76" fill="#1d4ed8"/>
+    <text x="36" y="73" fill="#475569" font-size="9">尼腓城</text>
+    <ellipse cx="20" cy="92" rx="10" ry="7" fill="rgba(254,202,202,0.5)" stroke="#fca5a5" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="34" y="96" fill="#475569" font-size="9">拉曼人领域</text>
+    <ellipse cx="20" cy="112" rx="10" ry="7" fill="rgba(220,252,231,0.55)" stroke="#86efac" stroke-width="1.2" stroke-dasharray="4,2"/>
+    <text x="34" y="116" fill="#475569" font-size="9">尼腓人领域</text>
+    <line x1="12" y1="130" x2="32" y2="130" stroke="#dc2626" stroke-width="2" marker-end="url(#jaA)"/>
+    <text x="36" y="134" fill="#475569" font-size="9">拉曼入侵</text>
 
-    <!-- Chapter summary -->
     <rect x="396" y="312" width="456" height="106" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
     <text x="624" y="327" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">雅龙书 · 约公元前 399–361 年（1章15节）</text>
     <text x="408" y="343" font-size="9" fill="#475569">① 节 1–3　 开篇：目的简短 · 尼腓人守摩西律法</text>
@@ -236,22 +200,17 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 开篇 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">开篇</div></div>
 <div class="n amb">
-  <div class="nd">约 公元前 399 年</div>
-  <div class="nt">节 1–3　简短开篇：使命与信仰</div>
-  <div class="ne">Brief Introduction · 尼腓地 Land of Nephi</div>
-  <ul class="nl">
-    <li>雅龙坦言：他所写的话语不多，因为父祖们的预言已足够；他不打算重复</li>
-    <li>"我若写出我的预言或启示，恐怕在世人眼中显得太大；因这些事情都已足够了。"——谦逊的自我定位</li>
-    <li>雅龙写作目的：为父祖们的益处而写，并要铜版上有所记录</li>
-    <li>尼腓人信守摩西律法，守安息日为圣，在神的律例命令中行走</li>
-    <li>先知们与众多启示者在民间传道；他们所敬拜的弥赛亚必要来临</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">简短开篇：使命与信仰</div><div class="nw">尼腓地 · 节 1–3</div></div>
+    <div class="nc">约公元前 399 年</div>
+  </div>
+  <p class="np">雅龙坦言言语不多——父祖们的预言已足够，他不欲重复。「我若写出我的预言或启示，恐怕在世人眼中显得太大；因这些事情都已足够了。」此乃谦逊之自我定位，亦是小版记录者中最简短的声明。其写作目的：为父祖之益处，使铜版有所记录。尼腓人信守摩西律法，守安息日为圣，在神的律例命令中行走。先知们与诸多启示者在民间传道——他们所敬拜的弥赛亚必要来临，信仰之灯未曾熄灭。</p>
 </div>
 <div class="si">
-  <div class="lnote">
-    <div class="sn">刻意的简短</div>
-    <div class="se">Intentional Brevity · Jarom 1:2</div>
-    <div class="sd">雅龙明确说：<br>他"言语不多"，<br>也不打算预言——<br>这是小版记录者<br>中最简短的声明</div>
+  <div class="nms">
+    <div class="nm">雅龙 <span>Jarom · 简短著者</span></div>
+    <div class="nm">铜版 <span>Brass Plates · 已足够</span></div>
+    <div class="nm">先知群 <span>Prophets · 传道民间</span></div>
   </div>
 </div>
 
@@ -260,22 +219,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 战争 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">战争</div></div>
 <div class="n ros">
-  <div class="nd">约 公元前 399–361 年</div>
-  <div class="nt">节 4–7　拉曼人多次入侵，尼腓人凭信得胜</div>
-  <div class="ne">Wars with Lamanites · 尼腓地边境</div>
-  <ul class="nl">
-    <li>拉曼人来了又来，屡次向尼腓人发动战争——这是一代又一代人的持续冲突</li>
-    <li>尼腓的诸王与领袖都是信仰坚定的大能人；他们教导并劝勉人民</li>
-    <li>这些领袖命令百姓记念主，"期望我们的救赎者，以信心、极大的喜乐来相信祂的到来"</li>
-    <li>拉曼人在极大的损失下被击退；神保护尼腓人，使他们不被灭绝</li>
-    <li>战争极为惨烈——双方都承受了重大伤亡；这是真实的流血冲突</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">拉曼人多次入侵，尼腓人凭信得胜</div><div class="nw">尼腓地边境 · 节 4–7</div></div>
+    <div class="nc">约公元前 399–361 年</div>
+  </div>
+  <p class="np">拉曼人来了又来，屡次向尼腓人发动战争——这是代代相续的持续冲突。尼腓的诸王与领袖皆为信仰坚定的大能人；他们教导并劝勉人民：「当记念主，以信心、极大的喜乐来期待我们救赎者之到来。」拉曼人在极大损失下被击退；神保护尼腓人，使其不被灭绝。战争极为惨烈——双方都承受了重大伤亡，是真实的流血冲突。军事胜利并非归因于人数之众，乃归于信仰之力——将军事叙事嵌入神学框架，是雅龙书独特的见证。</p>
 </div>
 <div class="si">
-  <div class="sb">
-    <div class="sn">信仰与军事</div>
-    <div class="se">Faith &amp; Warfare · Jarom 1:7</div>
-    <div class="sd">尼腓人的军事<br>胜利被归因于<br>信仰而非人数——<br>将军事叙事嵌入<br>神学框架</div>
+  <div class="nms">
+    <div class="nm">拉曼人 <span>Lamanites · 多次入侵</span></div>
+    <div class="nm">尼腓诸王 <span>Nephite Kings · 凭信得胜</span></div>
   </div>
 </div>
 
@@ -284,28 +237,18 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 繁荣 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#65a30d"></div><div class="ph-text">繁荣</div></div>
 <div class="n lim">
-  <div class="nd">约 公元前 399–361 年</div>
-  <div class="nt">节 8–9　物质繁荣：金属、农业与建设</div>
-  <div class="ne">Material Prosperity · 尼腓地</div>
-  <ul class="nl">
-    <li>尼腓人大大繁荣兴旺：他们播种、收割、饲养牲畜，各样丰收</li>
-    <li>拥有各类金属：<b>黄金、白银、铁、铜、黄铜、钢铁</b>——精通冶金技术</li>
-    <li>有丝绸和精制亚麻布；建造了许多建筑物</li>
-    <li>建造城墙和塔楼，并为防御而装备武器——在战争压力下发展了防御工程</li>
-    <li>这是尼腓人自立国以来物质条件最完整的一次记录</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">物质繁荣：金属、农业与建设</div><div class="nw">尼腓地 · 节 8–9</div></div>
+    <div class="nc">约公元前 399–361 年</div>
+  </div>
+  <p class="np">尼腓人大大繁荣兴旺：播种、收割、饲养牲畜，各样丰收。拥有各类金属——黄金、白银、铁、铜、黄铜、钢铁——精通冶金之术。有丝绸与精制亚麻布；建造了许多建筑物。建城墙、立塔楼，为防御而装备兵器——在战争压力下发展了坚固的防御工程。这是尼腓人自立国以来物质条件最完整的一次记录，尽见一个在患难中仍大得兴旺之民族的生命力。</p>
 </div>
 <div class="si">
-  <div class="lnote">
-    <div class="sn">尼腓文明物产</div>
-    <div class="se">Nephite Civilization · 1:8</div>
-    <div class="sd">
-      金·银·铁·铜<br>
-      黄铜·钢铁<br>
-      丝绸·亚麻<br>
-      建筑·城墙·塔<br>
-      农业·牧业
-    </div>
+  <div class="nms">
+    <div class="nm">金·银·铁·铜 <span>冶金 · 节 8</span></div>
+    <div class="nm">黄铜·钢铁 <span>合金技术</span></div>
+    <div class="nm">丝绸·亚麻 <span>纺织工艺</span></div>
+    <div class="nm">建筑·城墙 <span>防御工程</span></div>
   </div>
 </div>
 
@@ -314,32 +257,26 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 先知 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">先知</div></div>
 <div class="n tea">
-  <div class="nd">约 公元前 380 年前后</div>
-  <div class="nt">节 10–12　先知以严厉话语坚固人民</div>
-  <div class="ne">Prophets with Sharpness · 尼腓地</div>
-  <ul class="nl">
-    <li>许多先知在民间传道，必须以"极大的尖锐和严厉"劝诫人民——人心刚硬</li>
-    <li>若无诸先知持续提醒，尼腓人必会迅速走入灭亡——说明人民需要不断的外部督促</li>
-    <li>先知们用律法来对付硬心之人：律法的诫命加上先见的预言，二者共同维系信仰</li>
-    <li>摩西律法并非目的，而是方法：它使人期待并相信基督——律法指向基督作为中保</li>
-    <li><b>节 12 里程碑</b>：雅龙记录"自离开耶路撒冷，已过了二百年"——约公元前 400 年</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">先知以严厉话语坚固人民</div><div class="nw">尼腓地 · 节 10–12</div></div>
+    <div class="nc">约公元前 380 年前后</div>
+  </div>
+  <p class="np">许多先知在民间传道，必须以「极大的尖锐和严厉」劝诫人民——人心刚硬，若无诸先知持续提醒，尼腓人必会迅速走入灭亡。先知们以律法对付硬心之人：律法的诫命加上先见的预言，二者共同维系信仰。摩西律法并非最终目的，乃是方法：它使人期待并相信基督，律法指向基督作为中保。节 12 里程碑：雅龙记录「自离开耶路撒冷，已过了二百年」——约公元前 400 年，历史在此留下庄严的时间印记。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">律法与基督</div>
-    <div class="se">Law → Christ · Jarom 1:11</div>
-    <div class="sd">摩西律法不是<br>最终目的——<br>它是指向基督<br>的影子与预表<br>（与以下相连：<br>雅各 4·摩赛亚 13）</div>
+  <div class="nms">
+    <div class="nm">诸先知 <span>Prophets · 严厉劝诫</span></div>
+    <div class="nm">摩西律法 <span>指向基督 · 节 11</span></div>
+    <div class="nm">200年里程碑 <span>节 12 · 历史印记</span></div>
   </div>
 </div>
 
-<!-- 200-year milestone event -->
 <div class="ph-sp"></div>
 <div class="ev">
   <span class="ev-icon">✦</span>
   <div>
-    <div>里程碑：自先知里海离开耶路撒冷，已过了整整两百年</div>
-    <div class="ev-date">约 公元前 400 年 · 节 12 · 见证历史的连续性</div>
+    <div>里程碑：自先知李海离开耶路撒冷，已过了整整两百年</div>
+    <div class="ev-date">约公元前 400 年 · 节 12 · 见证历史的连续性</div>
   </div>
 </div>
 <div class="si-sp"></div>
@@ -349,21 +286,17 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <!-- ══ 传位 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">传位</div></div>
 <div class="n vio">
-  <div class="nd">约 公元前 361 年</div>
-  <div class="nt">节 13–15　简短收尾，金版传给奥姆尼</div>
-  <div class="ne">Record Transfer to Omni · 尼腓地</div>
-  <ul class="nl">
-    <li>雅龙说明：他的事记在大版上比小版更多——小版专为属灵内容而设</li>
-    <li>他命令在其他版片上刻写更多的事（大版），以补充小版所略去的历史</li>
-    <li>将金版（小版）传给儿子<b>奥姆尼 Omni</b>，记录就此延续</li>
-    <li>雅龙书是摩尔门经中仅次于以挪士书的第二短书，却完整呈现了一个时代的风貌</li>
-  </ul>
+  <div class="nh">
+    <div class="nl"><div class="nt">简短收尾，金版传给奥姆尼</div><div class="nw">尼腓地 · 节 13–15</div></div>
+    <div class="nc">约公元前 361 年</div>
+  </div>
+  <p class="np">雅龙说明：他的事记在大版上远比小版为多——小版专为属灵内容而设，他不欲以俗事充塞。他命令在其他版片上刻写更多的事，以补充小版所略去的历史。将金版（小版）传给儿子奥姆尼，记录就此延续，血脉与信仰的薪火代代相传。雅龙书是摩尔门经中仅次于以挪士书的第二短书，全书仅 15 节——然而在简短的文字中，一个时代的战争、繁荣、先知呼声与历史里程碑，已完整呈现。</p>
 </div>
 <div class="si">
-  <div class="sym">
-    <div class="sn">小版传承</div>
-    <div class="se">Small Plates Chain</div>
-    <div class="sd">雅各 → 以挪士<br>→ 雅龙 → 奥姆尼<br>→ 多人 → 亚玛利<br>→ 摩尔门整理<br>→ 摩尔门经</div>
+  <div class="nms">
+    <div class="nm">雅龙 <span>Jarom · 著者</span></div>
+    <div class="nm">奥姆尼 <span>Omni · 雅龙之子</span></div>
+    <div class="nm">大版 <span>Large Plates · 历史记录</span></div>
   </div>
 </div>
 
@@ -372,14 +305,14 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   <span class="ev-icon">✦</span>
   <div>
     <div>雅龙将金版传给儿子奥姆尼，完成使命</div>
-    <div class="ev-date">约 公元前 361 年 · 节 15</div>
+    <div class="ev-date">约公元前 361 年 · 节 15</div>
   </div>
 </div>
 <div class="si-sp"></div>
 
 <!-- legend -->
 <div class="legend">
-  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
+  <div class="legend-title">图例</div>
   <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>开篇·使命</div>
   <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>战争·入侵</div>
   <div class="lg-item"><div class="lg-box" style="background:#f7fee7;border-color:#bef264"></div>物质繁荣</div>
@@ -387,102 +320,76 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>传位离世</div>
 </div>
 
-<!-- ── 200-year timeline diagram ── -->
+<!-- ── 小版时间线 ── -->
 <div class="rel">
-  <div class="rel-title">小版时间线 · SMALL PLATES TIMELINE（公元前 600 — 361 年）</div>
+  <div class="rel-title">小版时间线（公元前 600 — 361 年）</div>
   <svg viewBox="0 0 860 230" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
 
-    <!-- ── Horizontal axis ── -->
     <line x1="60" y1="130" x2="820" y2="130" stroke="#cbd5e1" stroke-width="1.5"/>
-    <!-- Arrow head on axis -->
     <path d="M 816,126 L 824,130 L 816,134" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
 
-    <!-- ── Book bands on axis ── -->
-    <!-- 1 Nephi + 2 Nephi territory: -600 to -544 (x=80 to x=244) -->
     <rect x="80" y="118" width="164" height="24" rx="3" fill="#fca5a5" opacity="0.7"/>
     <text x="162" y="134" text-anchor="middle" font-size="8" font-weight="bold" fill="#7f1d1d">一书/二书</text>
 
-    <!-- Jacob: -544 to -421 (x=244 to x=603) -->
     <rect x="244" y="118" width="359" height="24" rx="3" fill="#6ee7b7" opacity="0.7"/>
     <text x="423" y="134" text-anchor="middle" font-size="8" font-weight="bold" fill="#065f46">雅各书</text>
 
-    <!-- Enos: -421 to -399 (x=603 to x=667) -->
     <rect x="603" y="118" width="64" height="24" rx="3" fill="#fde68a" opacity="0.8"/>
     <text x="635" y="134" text-anchor="middle" font-size="7.5" font-weight="bold" fill="#78350f">以挪士</text>
 
-    <!-- Jarom: -399 to -361 (x=667 to x=778) — highlighted -->
     <rect x="667" y="112" width="111" height="36" rx="4" fill="#bef264" opacity="0.85" stroke="#65a30d" stroke-width="1.5"/>
     <text x="722" y="132" text-anchor="middle" font-size="9" font-weight="bold" fill="#3f6212">雅龙书</text>
     <text x="722" y="143" text-anchor="middle" font-size="7.5" fill="#4d7c0f">← 当前</text>
 
-    <!-- ── Year tick marks ── -->
-    <!-- -600 → x=80 -->
     <line x1="80" y1="127" x2="80" y2="145" stroke="#94a3b8" stroke-width="1.2"/>
     <text x="80" y="158" text-anchor="middle" font-size="9" fill="#64748b">-600</text>
 
-    <!-- -570 → x=168 (Nephi-Lamanite split) -->
     <line x1="168" y1="127" x2="168" y2="145" stroke="#94a3b8" stroke-width="1"/>
     <text x="168" y="158" text-anchor="middle" font-size="8.5" fill="#94a3b8">-570</text>
 
-    <!-- -544 → x=244 (Jacob starts) -->
     <line x1="244" y1="118" x2="244" y2="145" stroke="#94a3b8" stroke-width="1.2"/>
     <text x="244" y="158" text-anchor="middle" font-size="9" fill="#64748b">-544</text>
 
-    <!-- -421 → x=603 (Enos starts) -->
     <line x1="603" y1="118" x2="603" y2="148" stroke="#94a3b8" stroke-width="1.2"/>
     <text x="603" y="161" text-anchor="middle" font-size="9" fill="#64748b">-421</text>
 
-    <!-- -400 → x=667 ≈ -399 → x=667 milestone -->
     <line x1="667" y1="112" x2="667" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="667" y="180" text-anchor="middle" font-size="9" fill="#dc2626">-399</text>
 
-    <!-- -361 → x=778 (Jarom ends) -->
     <line x1="778" y1="112" x2="778" y2="148" stroke="#94a3b8" stroke-width="1.2"/>
     <text x="778" y="161" text-anchor="middle" font-size="9" fill="#64748b">-361</text>
 
-    <!-- ── Events above axis ── -->
-    <!-- -600: Lehi leaves Jerusalem -->
     <line x1="80" y1="118" x2="80" y2="86" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
-    <rect x="10" y="60" width="140" height="28" rx="3" fill="rgba(255,255,255,0.9)" stroke="#e2e8f0"/>
-    <text x="80" y="73" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e293b">里海离开耶路撒冷</text>
-    <text x="80" y="83" text-anchor="middle" font-size="8" fill="#94a3b8">Lehi leaves Jerusalem</text>
+    <rect x="10" y="60" width="140" height="22" rx="3" fill="rgba(255,255,255,0.9)" stroke="#e2e8f0"/>
+    <text x="80" y="75" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e293b">李海离开耶路撒冷</text>
 
-    <!-- -589: Lehi family arrives Americas -->
     <line x1="112" y1="118" x2="112" y2="86" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="112" y="55" text-anchor="middle" font-size="7.5" fill="#64748b">-589 到达美洲</text>
 
-    <!-- -570: Nephi-Lamanite split -->
     <line x1="168" y1="118" x2="168" y2="72" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="168" y="65" text-anchor="middle" font-size="7.5" fill="#64748b">-570 两族分裂</text>
 
-    <!-- 200-year milestone -->
     <line x1="667" y1="112" x2="667" y2="68" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
     <rect x="590" y="38" width="156" height="32" rx="4" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5"/>
     <text x="668" y="52" text-anchor="middle" font-size="9" font-weight="bold" fill="#92400e">✦ 200年里程碑</text>
     <text x="668" y="63" text-anchor="middle" font-size="8.5" fill="#b45309">约公元前 400 年（节 12）</text>
 
-    <!-- ── Record keepers labels below axis ── -->
     <text x="162" y="195" text-anchor="middle" font-size="8.5" fill="#94a3b8">记录者：尼腓</text>
     <text x="423" y="195" text-anchor="middle" font-size="8.5" fill="#065f46">记录者：雅各</text>
     <text x="635" y="195" text-anchor="middle" font-size="8" fill="#78350f">以挪士</text>
     <text x="722" y="195" text-anchor="middle" font-size="9" font-weight="bold" fill="#3f6212">记录者：雅龙</text>
     <text x="810" y="195" text-anchor="middle" font-size="8" fill="#64748b">→奥姆尼</text>
 
-    <!-- Duration labels -->
     <text x="162" y="208" text-anchor="middle" font-size="7.5" fill="#cbd5e1">约 56 年</text>
     <text x="423" y="208" text-anchor="middle" font-size="7.5" fill="#cbd5e1">约 123 年</text>
     <text x="635" y="208" text-anchor="middle" font-size="7.5" fill="#cbd5e1">约 21 年</text>
     <text x="722" y="208" text-anchor="middle" font-size="8" fill="#65a30d">约 38 年</text>
-
-    <!-- Right label -->
-    <text x="838" y="133" font-size="9" fill="#94a3b8">→</text>
-    <text x="845" y="133" font-size="8" fill="#94a3b8" writing-mode="vertical-lr"> </text>
   </svg>
 </div>
 
-<!-- ── character / lineage diagram ── -->
+<!-- ── 人物关系图 ── -->
 <div class="rel" style="margin-top:24px">
-  <div class="rel-title">人物关系与世代传承 · KEY FIGURES &amp; LINEAGE</div>
+  <div class="rel-title">人物关系与世代传承</div>
   <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="lnA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -496,81 +403,63 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
       </marker>
     </defs>
 
-    <!-- ── Ancestry chain (top row, greyed) ── -->
-    <!-- 李海 -->
     <rect x="62" y="14" width="90" height="30" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="107" y="28" text-anchor="middle" font-size="10" font-weight="bold" fill="#64748b">李海</text>
-    <text x="107" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">Lehi · 已逝</text>
+    <text x="107" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">已逝</text>
 
-    <!-- 尼腓 -->
     <rect x="188" y="14" width="90" height="30" rx="5" fill="#f1f5f9" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="233" y="28" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">尼腓</text>
-    <text x="233" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">Nephi · 已逝</text>
+    <text x="233" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">已逝</text>
 
-    <!-- 雅各 -->
     <rect x="314" y="14" width="90" height="30" rx="5" fill="#f1f5f9" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="359" y="28" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">雅各</text>
-    <text x="359" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">Jacob · 祖父·已逝</text>
+    <text x="359" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">祖父·已逝</text>
 
-    <!-- 以挪士 -->
     <rect x="440" y="14" width="90" height="30" rx="5" fill="#f1f5f9" stroke="#fde68a" stroke-width="1.5" stroke-dasharray="4,2"/>
     <text x="485" y="28" text-anchor="middle" font-size="10" font-weight="bold" fill="#475569">以挪士</text>
-    <text x="485" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">Enos · 父亲·已逝</text>
+    <text x="485" y="39" text-anchor="middle" font-size="8" fill="#94a3b8">父亲·已逝</text>
 
-    <!-- Chain arrows -->
     <line x1="152" y1="29" x2="188" y2="29" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#lnA)"/>
     <line x1="278" y1="29" x2="314" y2="29" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#lnA)"/>
     <line x1="404" y1="29" x2="440" y2="29" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#lnA)"/>
 
-    <!-- Down arrow: 以挪士 → 雅龙 -->
     <line x1="485" y1="44" x2="485" y2="78" stroke="#65a30d" stroke-width="1.5" marker-end="url(#lnG)"/>
     <text x="500" y="64" font-size="8.5" fill="#65a30d">金版传承</text>
 
-    <!-- ── 雅龙（main figure） ── -->
     <rect x="423" y="78" width="124" height="44" rx="8" fill="#f7fee7" stroke="#65a30d" stroke-width="2.5"/>
     <text x="485" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#3f6212">雅龙</text>
-    <text x="485" y="112" text-anchor="middle" font-size="9.5" fill="#65a30d">Jarom · 著者 · 记录者</text>
+    <text x="485" y="112" text-anchor="middle" font-size="9.5" fill="#65a30d">著者 · 记录者</text>
 
-    <!-- Down arrow: 雅龙 → 奥姆尼 -->
     <line x1="485" y1="122" x2="485" y2="160" stroke="#65a30d" stroke-width="1.5" marker-end="url(#lnG)"/>
     <text x="502" y="144" font-size="8.5" fill="#65a30d">金版传承</text>
 
-    <!-- ── 奥姆尼 Omni (son, next) ── -->
     <rect x="423" y="160" width="124" height="36" rx="5" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
     <text x="485" y="177" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">奥姆尼</text>
-    <text x="485" y="189" text-anchor="middle" font-size="9" fill="#059669">Omni · 雅龙之子 · 下一记录者</text>
+    <text x="485" y="189" text-anchor="middle" font-size="9" fill="#059669">雅龙之子 · 下一记录者</text>
 
-    <!-- continuation -->
     <line x1="485" y1="196" x2="485" y2="220" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,2"/>
     <text x="485" y="232" text-anchor="middle" font-size="9" fill="#94a3b8">→ 奥姆尼书（多位记录者）→ 摩尔门整理</text>
 
-    <!-- ── Left: Nephite kings/prophets ── -->
     <rect x="100" y="78" width="148" height="44" rx="6" fill="#f7fee7" stroke="#bef264" stroke-width="1.5"/>
     <text x="174" y="96" text-anchor="middle" font-size="11" font-weight="bold" fill="#3f6212">尼腓诸王与先知</text>
-    <text x="174" y="108" text-anchor="middle" font-size="8.5" fill="#65a30d">Kings &amp; Prophets · 节 4–11</text>
+    <text x="174" y="108" text-anchor="middle" font-size="8.5" fill="#65a30d">节 4–11</text>
     <text x="174" y="119" text-anchor="middle" font-size="8" fill="#4d7c0f">凭信打仗 · 以严厉话语教导</text>
 
-    <!-- ── Right: Lamanites ── -->
     <rect x="626" y="78" width="116" height="44" rx="6" fill="#fff5f5" stroke="#fca5a5" stroke-width="1.5"/>
     <text x="684" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">拉曼人</text>
-    <text x="684" y="110" text-anchor="middle" font-size="8.5" fill="#f87171">Lamanites</text>
     <text x="684" y="121" text-anchor="middle" font-size="8" fill="#f87171">多次入侵 · 被击退</text>
 
-    <!-- connections: 雅龙 ↔ 诸王 -->
     <line x1="423" y1="100" x2="248" y2="100" stroke="#bef264" stroke-width="1.2" stroke-dasharray="4,2"/>
     <text x="336" y="95" text-anchor="middle" font-size="8" fill="#65a30d">属同一时代</text>
 
-    <!-- 雅龙 ↔ 拉曼人 (war) -->
     <line x1="547" y1="100" x2="626" y2="100" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#lnR)"/>
     <text x="586" y="95" text-anchor="middle" font-size="8" fill="#dc2626">持续战争</text>
 
-    <!-- ── 200-year note ── -->
     <rect x="62" y="155" width="284" height="50" rx="5" fill="#fef9c3" stroke="#fde68a" stroke-width="1.5"/>
     <text x="204" y="170" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">✦ 200年里程碑 · 节 12</text>
-    <text x="204" y="183" text-anchor="middle" font-size="9" fill="#b45309">自里海离开耶路撒冷，已过了二百年</text>
+    <text x="204" y="183" text-anchor="middle" font-size="9" fill="#b45309">自李海离开耶路撒冷，已过了二百年</text>
     <text x="204" y="195" text-anchor="middle" font-size="8.5" fill="#b45309">约公元前 400 年 · 历史的连续见证</text>
 
-    <!-- ── Legend ── -->
     <rect x="640" y="158" width="206" height="70" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
     <rect x="650" y="168" width="10" height="10" rx="2" fill="#f7fee7" stroke="#65a30d" stroke-width="1.5"/>
     <text x="664" y="177" font-size="9" fill="#64748b">雅龙书核心人物</text>
@@ -583,69 +472,55 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   </svg>
 </div>
 
-<!-- Nephite prosperity infographic -->
+<!-- ── 尼腓文明物产 ── -->
 <div class="rel" style="margin-top:24px">
-  <div class="rel-title">尼腓文明物产（约公元前 399–361 年）· NEPHITE MATERIAL CIVILIZATION</div>
+  <div class="rel-title">尼腓文明物产（约公元前 399–361 年）</div>
   <svg viewBox="0 0 860 170" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f7fee7">
 
-    <!-- Title band -->
     <rect x="0" y="0" width="860" height="170" rx="8" fill="#f7fee7"/>
 
-    <!-- ── 6 category boxes ── -->
-    <!-- 1. Metals -->
     <rect x="20" y="22" width="126" height="128" rx="7" fill="#fff" stroke="#bef264" stroke-width="1.5"/>
     <text x="83" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#3f6212">金属冶炼</text>
-    <text x="83" y="52" text-anchor="middle" font-size="8.5" fill="#65a30d">Metallurgy</text>
     <text x="83" y="69" text-anchor="middle" font-size="11">⚙️</text>
     <text x="83" y="87" text-anchor="middle" font-size="9" fill="#475569">黄金 · 白银</text>
     <text x="83" y="100" text-anchor="middle" font-size="9" fill="#475569">铁 · 铜 · 黄铜</text>
     <text x="83" y="113" text-anchor="middle" font-size="9" fill="#475569">钢铁</text>
     <text x="83" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">节 8</text>
 
-    <!-- 2. Agriculture -->
     <rect x="162" y="22" width="126" height="128" rx="7" fill="#fff" stroke="#bef264" stroke-width="1.5"/>
     <text x="225" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#3f6212">农牧业</text>
-    <text x="225" y="52" text-anchor="middle" font-size="8.5" fill="#65a30d">Agriculture</text>
     <text x="225" y="69" text-anchor="middle" font-size="11">🌾</text>
     <text x="225" y="87" text-anchor="middle" font-size="9" fill="#475569">播种 · 收割</text>
     <text x="225" y="100" text-anchor="middle" font-size="9" fill="#475569">各样谷物</text>
     <text x="225" y="113" text-anchor="middle" font-size="9" fill="#475569">饲养牲畜</text>
     <text x="225" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">节 8</text>
 
-    <!-- 3. Textiles -->
     <rect x="304" y="22" width="126" height="128" rx="7" fill="#fff" stroke="#bef264" stroke-width="1.5"/>
     <text x="367" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#3f6212">纺织工艺</text>
-    <text x="367" y="52" text-anchor="middle" font-size="8.5" fill="#65a30d">Textiles</text>
     <text x="367" y="69" text-anchor="middle" font-size="11">🧵</text>
     <text x="367" y="87" text-anchor="middle" font-size="9" fill="#475569">丝绸</text>
     <text x="367" y="100" text-anchor="middle" font-size="9" fill="#475569">精制亚麻</text>
     <text x="367" y="113" text-anchor="middle" font-size="9" fill="#475569">细织品</text>
     <text x="367" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">节 8</text>
 
-    <!-- 4. Construction -->
     <rect x="446" y="22" width="126" height="128" rx="7" fill="#fff" stroke="#bef264" stroke-width="1.5"/>
     <text x="509" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#3f6212">建筑工程</text>
-    <text x="509" y="52" text-anchor="middle" font-size="8.5" fill="#65a30d">Construction</text>
     <text x="509" y="69" text-anchor="middle" font-size="11">🏛️</text>
     <text x="509" y="87" text-anchor="middle" font-size="9" fill="#475569">许多建筑物</text>
     <text x="509" y="100" text-anchor="middle" font-size="9" fill="#475569">城墙</text>
     <text x="509" y="113" text-anchor="middle" font-size="9" fill="#475569">塔楼</text>
     <text x="509" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">节 8</text>
 
-    <!-- 5. Military -->
     <rect x="588" y="22" width="126" height="128" rx="7" fill="#fff" stroke="#fca5a5" stroke-width="1.5"/>
     <text x="651" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">军事防御</text>
-    <text x="651" y="52" text-anchor="middle" font-size="8.5" fill="#f87171">Military</text>
     <text x="651" y="69" text-anchor="middle" font-size="11">⚔️</text>
     <text x="651" y="87" text-anchor="middle" font-size="9" fill="#475569">各类兵器</text>
     <text x="651" y="100" text-anchor="middle" font-size="9" fill="#475569">凭信打仗</text>
     <text x="651" y="113" text-anchor="middle" font-size="9" fill="#475569">多次击退敌人</text>
     <text x="651" y="130" text-anchor="middle" font-size="8" fill="#94a3b8">节 4–7</text>
 
-    <!-- 6. Religion -->
     <rect x="730" y="22" width="114" height="128" rx="7" fill="#fff" stroke="#c4b5fd" stroke-width="1.5"/>
     <text x="787" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#4c1d95">信仰礼仪</text>
-    <text x="787" y="52" text-anchor="middle" font-size="8.5" fill="#7c3aed">Religion</text>
     <text x="787" y="69" text-anchor="middle" font-size="11">📜</text>
     <text x="787" y="87" text-anchor="middle" font-size="9" fill="#475569">守摩西律法</text>
     <text x="787" y="100" text-anchor="middle" font-size="9" fill="#475569">守安息日</text>
