@@ -49,17 +49,19 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 /* node */
 .n{grid-column:2;border-radius:8px;padding:8px 11px;border:1.5px solid transparent;cursor:default;transition:box-shadow .2s}
 .n:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
-.nh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
-.nl{display:flex;align-items:baseline;gap:6px;min-width:0}
-.nt{font-size:13.5px;font-weight:700;margin:0;white-space:nowrap}
-.nw{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap}
-.nc{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap;flex-shrink:0}
-.np{font-size:12px;color:#374151;line-height:1.8;letter-spacing:.3px;margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
+.nh{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.nl{font-size:11.5px;font-weight:700;color:#94a3b8;letter-spacing:1px}
+.nt{font-size:14px;font-weight:700;flex:1}
+.nw{font-size:11px;color:#64748b}
+.nc{font-size:10.5px;color:#94a3b8;margin-left:auto}
+.np{margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
 .n:hover .np{max-height:700px;opacity:1}
+ul.np{padding:0}
+.np li{font-size:12px;color:#475569;line-height:1.7;padding-left:1em;text-indent:-1em;list-style:none}
+.np li::before{content:'· ';color:#94a3b8}
 .nms{padding:5px 8px;background:#fff;border:1.5px solid #e2e8f0;border-radius:6px}
-.nm{font-size:10px;color:#475569;padding:2px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f8fafc}
-.nm:last-child{border-bottom:none}
-.nm span{font-size:8.5px;color:#94a3b8;font-style:italic}
+.nm{font-size:10px;display:flex;justify-content:space-between;gap:4px;padding:2px 0}
+.nm span{color:#94a3b8}
 
 /* node colour themes */
 .amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}
@@ -116,7 +118,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <a class="tab on" href="bom-jacob.html">雅各</a>
     <a class="tab" href="bom-enos.html">以挪士</a>
     <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-omni.html">奥姆乃</a>
     <a class="tab" href="bom-wom.html">摩语</a>
     <a class="tab" href="bom-mosiah.html">摩赛亚</a>
     <a class="tab" href="bom-alma.html">阿尔玛</a>
@@ -135,8 +137,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="intro">
   <div class="intro-sup">摩尔门经 · 尼腓小版</div>
   <div class="intro-h">雅各书</div>
-  <div class="intro-en">雅各的记录——圣殿训道、徐纳斯橄榄树比喻与反基督歇雷</div>
-  <div class="intro-meta">
+<div class="intro-meta">
     <span class="im">时间 <b>约公元前 544–421 年</b></span>
     <span class="im">地点 <b>尼腓地（美洲）</b></span>
     <span class="im">章节 <b>7 章</b></span>
@@ -375,26 +376,30 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">传承</div></div>
 <div class="n amb">
   <div class="nh">
-    <div class="nl"><div class="nt">传承开篇</div><div class="nw">尼腓地 · 第 1 章</div></div>
-    <div class="nc">约前 544 年</div>
+    <span class="nl">第 1 章</span>
+    <span class="nt">授职承版</span>
+    <span class="nc">约前 544 年</span>
   </div>
-  <p class="np">尼腓在世，亲自膏立雅各为祭司与教师，受命执掌小版，专录属灵之言。尼腓既逝，众民哀恸，以之为保护者与引领者。离耶路撒冷已五十余载，尼腓人与拉曼人战争不息，幸得保全土地。雅各明言：小版专录最宝贵之属灵内容，世俗史事另载大版；他誓以忠心履此重托，不敢相负。</p>
+  <ul class="np">
+    <li>尼腓逝，授雅各祭司</li>
+    <li>掌小版，专录属灵</li>
+    <li>离圣城五十载，战不息</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">雅各 <span>Jacob · 主著者</span></div>
-    <div class="nm">尼腓 <span>Nephi · 前任记录者</span></div>
+    <div class="nm">雅各 <span>Jacob · 著者</span></div>
+    <div class="nm">尼腓 <span>Nephi · 已逝</span></div>
     <div class="nm">以挪士 <span>Enos · 继任者</span></div>
   </div>
 </div>
 
-<!-- 重大事件：尼腓逝世 -->
 <div class="ph-sp"></div>
 <div class="ev">
   <span class="ev-icon">✦</span>
   <div>
     <div>先知尼腓于尼腓地辞世，众人悲恸</div>
-    <div class="ev-date">约 公元前 544 年 · 第 1 章</div>
+    <div class="ev-date">约公元前 544 年 · 第 1 章</div>
   </div>
 </div>
 <div class="si-sp"></div>
@@ -405,33 +410,22 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">训道</div></div>
 <div class="n ros">
   <div class="nh">
-    <div class="nl"><div class="nt">圣殿训道（上）</div><div class="nw">尼腓圣殿 · 第 2 章</div></div>
-    <div class="nc">约前 540 年</div>
+    <span class="nl">第 2–3 章</span>
+    <span class="nt">圣殿双诫</span>
+    <span class="nc">约前 540 年</span>
   </div>
-  <p class="np">神命雅各召集全族——男女老幼齐集圣殿，神亦在场见证。训诫其一：因财自骄，衣华而轻贫兄，此乃首罪，神深恶之。训诫其二：部分男子效大卫所罗门之多妻，是为淫行，妻儿因此哀号，神为之痛心。明训：各人当守一妻，惟神特命者方可例外。女儿们的祷告与眼泪，神皆垂听于上。</p>
+  <ul class="np">
+    <li>戒财骄，神恶之</li>
+    <li>禁多妻，妻儿泪神垂听</li>
+    <li>以拉曼守一妻为鉴</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
     <div class="nm">雅各 <span>Jacob · 大祭司</span></div>
     <div class="nm">大卫 <span>David · 被批评</span></div>
     <div class="nm">所罗门 <span>Solomon · 被批评</span></div>
-  </div>
-</div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n ros">
-  <div class="nh">
-    <div class="nl"><div class="nt">圣殿训道（下）</div><div class="nw">尼腓圣殿 · 第 3 章</div></div>
-    <div class="nc">约前 540 年</div>
-  </div>
-  <p class="np">雅各以拉曼人为证：彼虽被诅咒，然恪守一夫一妻，忠于配偶，爱顾子女，在此德行上胜过尼腓人。严词警告淫乱者：汝等子孙将因此受苦，后代将反诅尔辈。雅各宣明：他以纯洁之心离去，衣裳不沾众人之罪——先知之无辜已得彰显于神前。</p>
-</div>
-<div class="si">
-  <div class="nms">
     <div class="nm">拉曼人 <span>婚姻忠贞为鉴</span></div>
-    <div class="nm">尼腓人 <span>被警诫</span></div>
   </div>
 </div>
 
@@ -441,10 +435,14 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">见证</div></div>
 <div class="n tea">
   <div class="nh">
-    <div class="nl"><div class="nt">基督见证</div><div class="nw">尼腓地 · 第 4 章</div></div>
-    <div class="nc">约前 540–530 年</div>
+    <span class="nl">第 4 章</span>
+    <span class="nt">见证救主</span>
+    <span class="nc">约前 540–530 年</span>
   </div>
-  <p class="np">刻写金版费力艰辛，故字字皆择最宝贵之语。藉圣灵之力，雅各确知基督将降、受难、复活，藉赎罪使神人和好。引以赛亚第二十八章：以色列人因拒绝基督这块磐石而绊倒——先见犹太人将拒弥赛亚之预言。「你们为何拒绝神的话？祂能刺穿被造之物所不能穿透的深处。」靠神的圣洁秩序，信心与悔改乃与神和好之道。</p>
+  <ul class="np">
+    <li>刻版艰，证基督降死复活成赎</li>
+    <li>引以赛亚：拒磐石而绊</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -459,10 +457,16 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">比喻</div></div>
 <div class="n vio">
   <div class="nh">
-    <div class="nl"><div class="nt">徐纳斯橄榄树比喻</div><div class="nw">全书最长章 · 第 5 章</div></div>
-    <div class="nc">约前 530–520 年</div>
+    <span class="nl">第 5–6 章</span>
+    <span class="nt">橄榄树喻</span>
+    <span class="nc">约前 530–520 年</span>
   </div>
-  <p class="np">雅各大量引用铜版上先知徐纳斯之预言——此先知不见于圣经，乃摩尔门经独有。家主（神）与仆人（先知）精心照料家橄榄树（以色列）。主树腐烂，将嫩枝接往野地各处（以色列散至四方），又将野枝接入主树（外邦归主）。历经多次修剪嫁接施肥，树或结好果或结坏果，记录各世代兴衰。末期家主仆人同下田收获，所有树木终皆结好果——全以色列末日归主之预言。此喻呼应保罗罗马书第十一章，然更为详尽，成为摩尔门神学以色列聚集之核心文本。</p>
+  <ul class="np">
+    <li>主树腐，嫩枝散四方</li>
+    <li>接野枝，外邦渐归</li>
+    <li>末日皆好果，以色列归主</li>
+    <li>门未闭，速悔改</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -473,26 +477,20 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
-<div class="ph-sp"></div>
-<div class="n vio">
-  <div class="nh">
-    <div class="nl"><div class="nt">比喻的应用</div><div class="nw">尼腓地 · 第 6 章</div></div>
-    <div class="nc">约前 520 年</div>
-  </div>
-  <p class="np">雅各援引徐纳斯之喻，劝诫众民：神已施展大能，祂之手伸向汝等，切勿拒绝。审判之日必至，好树得存，坏树将被斩断投入火中。当趁门尚开之时进入，否则审判日临，惟余悲哭叹息。「明智起来！凭灵魂所受之教导，而非凭人之智慧。」愿众人以信心回应，莫待悔恨。</p>
-</div>
-<div class="si-sp"></div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
 <!-- ══ 对抗 ══ -->
 <div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">对抗</div></div>
 <div class="n blu">
   <div class="nh">
-    <div class="nl"><div class="nt">歇雷反基督</div><div class="nw">尼腓地 · 第 7 章</div></div>
-    <div class="nc">约前 500–421 年</div>
+    <span class="nl">第 7 章</span>
+    <span class="nt">歇雷对证</span>
+    <span class="nc">约前 500–421 年</span>
   </div>
-  <p class="np">歇雷能言善辩、博学多才，公开宣称无基督——以律法否定预言，诡辩惑众。质问雅各：如何知道未来之事？汝歪曲了律法！雅各答：所有先知皆见证基督；若无赎罪，律法毫无意义。歇雷求神迹，雅各言：若神所愿，祂自会显现——歇雷当场被神能击倒。卧床数日后，临终召集众民，公开认罪：基督是真实的，魔鬼欺骗了我。歇雷既逝，众人深受震动，信仰大得复苏。雅各年迈，将金版传给儿子以挪士，留下最后话语：「再会，直到我因神恩典得以再见汝等。」</p>
+  <ul class="np">
+    <li>歇雷否基督，质问雅各</li>
+    <li>雅各答：先知皆证，赎罪乃律法之的</li>
+    <li>歇雷求迹被击，临终认罪逝</li>
+    <li>传版以挪士，留别语辞</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -502,13 +500,12 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   </div>
 </div>
 
-<!-- 重大事件：雅各传位 -->
 <div class="ph-sp"></div>
 <div class="ev">
   <span class="ev-icon">✦</span>
   <div>
     <div>雅各年迈，将金版传给儿子以挪士，结束记录</div>
-    <div class="ev-date">约 公元前 421 年 · 第 7 章末</div>
+    <div class="ev-date">约公元前 421 年 · 第 7 章末</div>
   </div>
 </div>
 <div class="si-sp"></div>
