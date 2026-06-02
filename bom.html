@@ -49,17 +49,19 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 /* node */
 .n{grid-column:2;border-radius:8px;padding:8px 11px;border:1.5px solid transparent;cursor:default;transition:box-shadow .2s}
 .n:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
-.nh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
-.nl{display:flex;align-items:baseline;gap:6px;min-width:0}
-.nt{font-size:13.5px;font-weight:700;margin:0;white-space:nowrap}
-.nw{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap}
-.nc{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap;flex-shrink:0}
-.np{font-size:12px;color:#374151;line-height:1.8;letter-spacing:.3px;margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
+.nh{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.nl{font-size:11.5px;font-weight:700;color:#94a3b8;letter-spacing:1px}
+.nt{font-size:14px;font-weight:700;flex:1}
+.nw{font-size:11px;color:#64748b}
+.nc{font-size:10.5px;color:#94a3b8;margin-left:auto}
+.np{margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
 .n:hover .np{max-height:700px;opacity:1}
+ul.np{padding:0}
+.np li{font-size:12px;color:#475569;line-height:1.7;padding-left:1em;text-indent:-1em;list-style:none}
+.np li::before{content:'· ';color:#94a3b8}
 .nms{padding:5px 8px;background:#fff;border:1.5px solid #e2e8f0;border-radius:6px}
-.nm{font-size:10px;color:#475569;padding:2px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f8fafc}
-.nm:last-child{border-bottom:none}
-.nm span{font-size:8.5px;color:#94a3b8;font-style:italic}
+.nm{font-size:10px;display:flex;justify-content:space-between;gap:4px;padding:2px 0}
+.nm span{color:#94a3b8}
 
 /* node colour themes */
 .amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}.amb .ne{color:#b45309}
@@ -113,7 +115,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <a class="tab" href="bom-jacob.html">雅各</a>
     <a class="tab" href="bom-enos.html">以挪士</a>
     <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-omni.html">奥姆乃</a>
     <a class="tab" href="bom-wom.html">摩语</a>
     <a class="tab" href="bom-mosiah.html">摩赛亚</a>
     <a class="tab" href="bom-alma.html">阿尔玛</a>
@@ -132,7 +134,6 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="intro">
   <div class="intro-sup">摩尔门经 · 尼腓小版</div>
   <div class="intro-h">尼腓一书</div>
-  <div class="intro-en">尼腓的记录——从耶路撒冷到应许之地</div>
   <div class="intro-meta">
     <span class="im">时间 <b>约公元前 600–589 年</b></span>
     <span class="im">起点 <b>耶路撒冷</b></span>
@@ -264,10 +265,13 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">启程</div></div>
 <div class="n amb">
   <div class="nh">
-    <div class="nl"><div class="nt">李海出走</div><div class="nw">耶路撒冷 → 红海 · 第 1–2 章</div></div>
-    <div class="nc">约前 600 年</div>
+    <span class="nl">第1–2章</span><span class="nt">弃城出奔</span><span class="nw">耶路撒冷 → 红海</span><span class="nc">约前 600 年</span>
   </div>
-  <p class="np">李海，耶路撒冷先知。得天启，见神宝座，知城将倾，奉命出奔。弃金银财货，携妻撒拉亚与四子，营于红海之滨。长子拉曼、次子雷米尔怨声载道，斥父为妄人。</p>
+  <ul class="np">
+    <li>李海得启，知城将亡，奉命出奔</li>
+    <li>弃财货，携家营红海之滨</li>
+    <li>拉曼雷米尔怨，斥父为妄人</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -280,36 +284,23 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
-<!-- ══ 取经 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">取经</div></div>
+<!-- ══ 取版 ══ -->
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">取版</div></div>
 <div class="n vio">
   <div class="nh">
-    <div class="nl"><div class="nt">三索铜版</div><div class="nw">耶路撒冷 · 第 3–5 章</div></div>
-    <div class="nc">约前 600 年</div>
+    <span class="nl">第3–7章</span><span class="nt">取版聚众</span><span class="nw">耶路撒冷 → 旷野</span><span class="nc">约前 600–598 年</span>
   </div>
-  <p class="np">神命取铜版——祖先律法与族谱之书，藏于拉班之手。兄弟前后三往，拉班贪财抢劫，又遣人追杀。拉曼意欲放弃，尼腓独入城，遇拉班醉卧街头，从天意杀之，易服取版而出。仆人卓伦识破，誓约同行。</p>
+  <ul class="np">
+    <li>神命取铜版，三往，拉班追杀</li>
+    <li>尼腓独入，从天意杀拉班，易服取版</li>
+    <li>卓伦识破，誓约同行；迎以实玛利家</li>
+    <li>拉曼叛逆缚尼腓，女儿求情获释</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
     <div class="nm">拉班 <span>Laban · 铜版主</span></div>
     <div class="nm">卓伦 <span>Zoram · 仆→盟</span></div>
-    <div class="nm">赛姆 <span>Sam · 三子</span></div>
-    <div class="nm">尼腓 <span>Nephi · 四子</span></div>
-  </div>
-</div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n vio">
-  <div class="nh">
-    <div class="nl"><div class="nt">聚众起行</div><div class="nw">耶路撒冷 → 旷野 · 第 6–7 章</div></div>
-    <div class="nc">约前 598 年</div>
-  </div>
-  <p class="np">尼腓另造小版，专记属灵，此即今日摩尔门经小版之源。复返耶路撒冷，迎以实玛利一家同行，以为婚配。途中拉曼叛逆，缚住尼腓；以实玛利女儿求情，方才获释。诸子各娶其女，两族合而为一行。</p>
-</div>
-<div class="si">
-  <div class="nms">
     <div class="nm">以实玛利 <span>Ishmael · 友族</span></div>
   </div>
 </div>
@@ -320,10 +311,14 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">异象</div></div>
 <div class="n tea">
   <div class="nh">
-    <div class="nl"><div class="nt">父梦生命树</div><div class="nw">旷野 · 第 8 章</div></div>
-    <div class="nc">约前 597 年</div>
+    <span class="nl">第8章</span><span class="nt">父梦生命树</span><span class="nw">旷野</span><span class="nc">约前 597 年</span>
   </div>
-  <p class="np">李海得梦：见白色大树，果实明亮甘甜。有铁杆沿窄路延伸，雾霭弥漫，迷失者众，落入污水。远处宽大楼宇，其中人嘲笑趋树之辈。拉曼、雷米尔拒不前往。</p>
+  <ul class="np">
+    <li>李海得梦，见白树，果实甘甜</li>
+    <li>铁杆沿窄路，雾中迷失者落入污水</li>
+    <li>宽大楼宇悬空，其中人嘲笑趋树之辈</li>
+    <li>拉曼雷米尔拒往</li>
+  </ul>
   <div class="np" style="margin-top:8px">
   <svg viewBox="0 0 860 272" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:6px;border:1px solid #e2e8f0">
     <defs>
@@ -566,29 +561,21 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph-sp"></div>
 <div class="n tea">
   <div class="nh">
-    <div class="nl"><div class="nt">六百年之言</div><div class="nw">旷野 · 第 9–10 章</div></div>
-    <div class="nc">约前 597 年</div>
+    <span class="nl">第9–15章</span><span class="nt">先知异象</span><span class="nw">旷野 · 高山</span><span class="nc">约前 597 年</span>
   </div>
-  <p class="np">李海预言：六百年后，救主降临，施洗约翰先行开路。弥赛亚受洗、传道、受难、复活。以色列散如橄榄枝，末日必聚。尼腓深受感动，渴慕亲见，遂独上高山祈祷。</p>
+  <ul class="np">
+    <li>李海言：六百年后救主降，约翰先行</li>
+    <li>尼腓登山，圣灵携观天地</li>
+    <li>见童贞女怀婴，基督受难复活</li>
+    <li>铁杆即神话，至此昭然</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">弥赛亚 <span>Messiah · 救主</span></div>
+    <div class="nm">弥赛亚 <span>Messiah</span></div>
     <div class="nm">施洗约翰 <span>John the Baptist</span></div>
   </div>
 </div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n tea">
-  <div class="nh">
-    <div class="nl"><div class="nt">登山观天地</div><div class="nw">高山 · 第 11–15 章</div></div>
-    <div class="nc">约前 597 年</div>
-  </div>
-  <p class="np">圣灵携尼腓登高山，示天地异象：见童贞女怀婴，知此即神子降世；见基督受洗、传道、被钉、复活；又见大叛道与末日聚集。铁杆即神之话语，至此昭然。</p>
-</div>
-<div class="si-sp"></div>
 
 <!-- ══ 旅程 ══ -->
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
@@ -596,40 +583,18 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">旅程</div></div>
 <div class="n blu">
   <div class="nh">
-    <div class="nl"><div class="nt">折弓神珠</div><div class="nw">阿拉伯旷野 · 第 16 章</div></div>
-    <div class="nc">约前 597–592 年</div>
+    <span class="nl">第16–17章</span><span class="nt">旷野历程</span><span class="nw">阿拉伯旷野 → 丰美之地</span><span class="nc">约前 597–592 年</span>
   </div>
-  <p class="np">帐篷门口现神造指南珠利阿贺拿，随信心指引方向。尼腓弓折，众人嗷嗷，怨声又起。尼腓默制新弓，借珠觅猎，得食而归。</p>
+  <ul class="np">
+    <li>利阿贺拿现，随信心指引</li>
+    <li>弓折众怨，制新弓，借珠觅食</li>
+    <li>以实玛利逝葬奈洪，八年抵丰美之地</li>
+    <li>神命造船，拉曼嘲，震慑方才助工</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
     <div class="nm">利阿贺拿 <span>Liahona · 指南珠</span></div>
-    <div class="nm">奈洪 <span>Nahom</span></div>
-  </div>
-</div>
-
-<div class="ph-sp"></div>
-<div class="ev">
-  <span class="ev-icon">✦</span>
-  <div>
-    <div>以实玛利病逝旷野，葬于奈洪</div>
-    <div class="ev-date">约 公元前 595 年 · 第 16章 · 其女儿们哀哭，拉曼再度抱怨</div>
-  </div>
-</div>
-<div class="si-sp"></div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n blu">
-  <div class="nh">
-    <div class="nl"><div class="nt">神命造舟</div><div class="nw">丰美之地 · 第 17 章</div></div>
-    <div class="nc">约前 592 年</div>
-  </div>
-  <p class="np">跋涉八年，抵丰美之地——滨海果树繁盛之处。神命尼腓依神法造船，不依世俗惯例。拉曼、雷米尔嘲笑讥刺；神能力震慑，方才助工完成。</p>
-</div>
-<div class="si">
-  <div class="nms">
     <div class="nm">丰美之地 <span>Bountiful</span></div>
   </div>
 </div>
@@ -640,22 +605,14 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">航行</div></div>
 <div class="n ros">
   <div class="nh">
-    <div class="nl"><div class="nt">叛于海上</div><div class="nw">太平洋 · 第 18 章</div></div>
-    <div class="nc">约前 589 年</div>
+    <span class="nl">第18–22章</span><span class="nt">航行登陆</span><span class="nw">太平洋 → 应许之地</span><span class="nc">约前 589 年</span>
   </div>
-  <p class="np">扬帆渡洋，兄弟放纵，尼腓规劝，遭缚四日。利阿贺拿失效，狂风大作，船逆行。拉曼惧而求饶，释尼腓；祷告既毕，风平浪静，续航至岸。</p>
-</div>
-<div class="si-sp"></div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n ros">
-  <div class="nh">
-    <div class="nl"><div class="nt">登陆播种</div><div class="nw">应许之地（美洲）· 第 19–22 章</div></div>
-    <div class="nc">约前 589 年</div>
-  </div>
-  <p class="np">安然登陆，种植耕作，发现金银铜矿，应许之地名实相符。尼腓诵以赛亚书，预言神之话语将从锡安与耶路撒冷并出，以色列末日必聚。</p>
+  <ul class="np">
+    <li>扬帆渡洋，兄弟放纵，尼腓遭缚四日</li>
+    <li>珠失效，狂风大作，拉曼惧释尼腓</li>
+    <li>登陆耕种发矿，应许之地名实相符</li>
+    <li>诵以赛亚，言以色列末日必聚</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -666,14 +623,13 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 <!-- ══ 图例 ══ -->
 <div class="legend">
-  <div class="legend-title">图例 LEGEND</div>
+  <div class="legend-title">图例</div>
   <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>启程阶段</div>
-  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>取经阶段</div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>取版聚众</div>
   <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>异象阶段</div>
-  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>旅程阶段</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>航行/抵达</div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>旷野旅程</div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>航行登陆</div>
   <div class="lg-item"><div class="lg-box" style="background:#fffbeb;border-color:#f59e0b"></div>✦ 重大事件</div>
-  <div class="lg-item"><span style="font-size:14px;color:#e2e8f0">┄┄</span>&nbsp;支线叙事</div>
 </div>
 
 <!-- ══ 人物关系图 ══ -->

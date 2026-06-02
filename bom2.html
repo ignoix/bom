@@ -49,17 +49,19 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 /* node */
 .n{grid-column:2;border-radius:8px;padding:8px 11px;border:1.5px solid transparent;cursor:default;transition:box-shadow .2s}
 .n:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
-.nh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
-.nl{display:flex;align-items:baseline;gap:6px;min-width:0}
-.nt{font-size:13.5px;font-weight:700;margin:0;white-space:nowrap}
-.nw{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap}
-.nc{font-size:9px;color:#94a3b8;letter-spacing:.3px;white-space:nowrap;flex-shrink:0}
-.np{font-size:12px;color:#374151;line-height:1.8;letter-spacing:.3px;margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
+.nh{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.nl{font-size:11.5px;font-weight:700;color:#94a3b8;letter-spacing:1px}
+.nt{font-size:14px;font-weight:700;flex:1}
+.nw{font-size:11px;color:#64748b}
+.nc{font-size:10.5px;color:#94a3b8;margin-left:auto}
+.np{margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
 .n:hover .np{max-height:700px;opacity:1}
+ul.np{padding:0}
+.np li{font-size:12px;color:#475569;line-height:1.7;padding-left:1em;text-indent:-1em;list-style:none}
+.np li::before{content:'· ';color:#94a3b8}
 .nms{padding:5px 8px;background:#fff;border:1.5px solid #e2e8f0;border-radius:6px}
-.nm{font-size:10px;color:#475569;padding:2px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f8fafc}
-.nm:last-child{border-bottom:none}
-.nm span{font-size:8.5px;color:#94a3b8;font-style:italic}
+.nm{font-size:10px;display:flex;justify-content:space-between;gap:4px;padding:2px 0}
+.nm span{color:#94a3b8}
 
 /* node colour themes */
 .amb{background:#fefce8;border-color:#fde68a}.amb .nt{color:#92400e}
@@ -116,7 +118,7 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <a class="tab" href="bom-jacob.html">雅各</a>
     <a class="tab" href="bom-enos.html">以挪士</a>
     <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆尼</a>
+    <a class="tab" href="bom-omni.html">奥姆乃</a>
     <a class="tab" href="bom-wom.html">摩语</a>
     <a class="tab" href="bom-mosiah.html">摩赛亚</a>
     <a class="tab" href="bom-alma.html">阿尔玛</a>
@@ -135,7 +137,6 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="intro">
   <div class="intro-sup">摩尔门经 · 尼腓小版</div>
   <div class="intro-h">尼腓二书</div>
-  <div class="intro-en">尼腓的记录——别离、分裂、以赛亚与基督教义</div>
   <div class="intro-meta">
     <span class="im">时间 <b>约公元前 589–544 年</b></span>
     <span class="im">地点 <b>应许之地（美洲）</b></span>
@@ -245,10 +246,13 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">告别</div></div>
 <div class="n amb">
   <div class="nh">
-    <div class="nl"><div class="nt">父嘱诸子</div><div class="nw">应许之地 · 第 1–3 章</div></div>
-    <div class="nc">约前 589 年</div>
+    <span class="nl">第1–4章</span><span class="nt">父嘱与诗篇</span><span class="nw">应许之地</span><span class="nc">约前 589–587 年</span>
   </div>
-  <p class="np">李海老矣，临终召诸子训示。言此乃神赐应许之地，遵诫命则蒙眷顾，悖逆则被割除，一如往昔之例。引古约瑟（埃及）之预言：后裔中将兴"选定的先见"，如摩西然，以神的话语引众人归向神，约二千四百年后于约瑟·斯密身上应验。赐福幼子雅各与约瑟；命卓伦忠心跟随尼腓同甘共苦。</p>
+  <ul class="np">
+    <li>李海临终嘱，言选定先见将出如摩西</li>
+    <li>赐福雅各约瑟，命卓伦随尼腓，逝</li>
+    <li>尼腓援笔自诉，吟诗倚赖神</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -258,48 +262,23 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   </div>
 </div>
 
-<!-- 重大事件：李海逝世 -->
-<div class="ph-sp"></div>
-<div class="ev">
-  <span class="ev-icon">✦</span>
-  <div>
-    <div>李海于应许之地安息</div>
-    <div class="ev-date">约 公元前 587 年 · 第 4 章前</div>
-  </div>
-</div>
-<div class="si-sp"></div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n amb">
-  <div class="nh">
-    <div class="nl"><div class="nt">尼腓诗篇</div><div class="nw">应许之地 · 第 4 章</div></div>
-    <div class="nc">约前 587 年</div>
-  </div>
-  <p class="np">父殁，尼腓悲恸难胜，援笔自诉："哦，我这可悲的人！我心何其软弱，易受欺诱。"继而转以信心："主是我的磐石，我的力量……他必救我脱离仇敌之手。"起誓不再沉溺于软弱，以神历代拯救之恩为凭，重燃坚守之志。此乃全书最具诗意、最见心迹的段落。</p>
-</div>
-<div class="si">
-  <div class="nms">
-    <div class="nm">尼腓诗篇 <span>第 4 章 · 全书最感人</span></div>
-  </div>
-</div>
-
 <!-- ══ 分裂 ══ -->
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">分裂</div></div>
 <div class="n ros">
   <div class="nh">
-    <div class="nl"><div class="nt">两族决裂</div><div class="nw">应许之地 → 尼腓地 · 第 5 章</div></div>
-    <div class="nc">约前 587 年</div>
+    <span class="nl">第5章</span><span class="nt">两族决裂</span><span class="nw">应许之地 → 尼腓地</span><span class="nc">约前 587 年</span>
   </div>
-  <p class="np">拉曼、雷米尔再谋杀害尼腓，神警告尼腓即刻率信众迁离。尼腓带同道别立新土，名曰"尼腓地"，两族由此正式决裂，世代对立。尼腓效仿所罗门圣殿建筑之制，治理农工，众人欣欣向荣。人民立尼腓为王，尼腓王朝由此肇始。神使拉曼人肤色有别，以为世代分辨之记。</p>
+  <ul class="np">
+    <li>拉曼谋害，神示率众迁</li>
+    <li>立尼腓地，建圣殿，众立尼腓为王</li>
+    <li>两族决裂，世代对立</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
     <div class="nm">拉曼 <span>Laman · 叛逆留守</span></div>
-    <div class="nm">雷米尔 <span>Lemuel · 随兄</span></div>
     <div class="nm">尼腓 <span>Nephi · 首位尼腓王</span></div>
   </div>
 </div>
@@ -310,15 +289,19 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">以赛亚</div></div>
 <div class="n tea">
   <div class="nh">
-    <div class="nl"><div class="nt">雅各圣殿讲道</div><div class="nw">尼腓地圣殿 · 第 6–8 章</div></div>
-    <div class="nc">约前 580 年</div>
+    <span class="nl">第6–11章</span><span class="nt">圣殿讲道</span><span class="nw">尼腓地圣殿</span><span class="nc">约前 580 年</span>
   </div>
-  <p class="np">大祭司雅各于尼腓地圣殿宣讲，引以赛亚书四十九、五十章。言以色列被驱散万邦，然于末日必"被背于肩上、被抱于怀中"归聚故土。外邦君王将低头，救主来作其救赎者。"母亲能忘记婴孩吗？我却不会忘记你"——神对以色列的永恒承诺，振聋发聩。</p>
+  <ul class="np">
+    <li>雅各引以赛亚，言以色列末日归聚</li>
+    <li>无限赎罪克服死亡，公义审判得成</li>
+    <li>应许之地禁立王，外邦归神可入以色列</li>
+    <li>万物预示基督，以赛亚亲见救主</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">雅各 <span>Jacob · 大祭司先知</span></div>
-    <div class="nm">以赛亚 <span>Isaiah · 古以色列先知</span></div>
+    <div class="nm">雅各 <span>Jacob · 大祭司</span></div>
+    <div class="nm">以赛亚 <span>Isaiah · 先知</span></div>
   </div>
 </div>
 
@@ -327,91 +310,39 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph-sp"></div>
 <div class="n tea">
   <div class="nh">
-    <div class="nl"><div class="nt">救赎的伟大计划</div><div class="nw">尼腓地圣殿 · 第 9 章</div></div>
-    <div class="nc">约前 580 年</div>
+    <span class="nl">第12–24章</span><span class="nt">以赛亚大篇</span><span class="nw">尼腓地</span><span class="nc">约前 570 年</span>
   </div>
-  <p class="np">雅各宣讲神学核心，言曰："哦，神的计划何等伟大！"肉身死亡与属灵死亡，皆由基督之无限赎罪克服。复活必临于每一个人；若无救赎，人将永沦于邪恶；因基督，公义的审判得以成为可能。"哦，我们神的良善，他的怜悯与恩典！"情感至此达于高潮。</p>
+  <ul class="np">
+    <li>逐字引录以赛亚书二至十四章</li>
+    <li>末世：主殿建山巅，刀剑化犁头</li>
+    <li>童贞女生以马内利；撒旦因傲慢陨落</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">无限赎罪 <span>Infinite Atonement</span></div>
-    <div class="nm">肉身复活 <span>Resurrection</span></div>
-    <div class="nm">属灵死亡 <span>Spiritual Death</span></div>
-  </div>
-</div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n tea">
-  <div class="nh">
-    <div class="nl"><div class="nt">应许之地宪章</div><div class="nw">尼腓地圣殿 · 第 10 章</div></div>
-    <div class="nc">约前 580 年</div>
-  </div>
-  <p class="np">基督将降生于耶路撒冷；犹太人将拒绝并钉死他，之后被驱散万国。应许之地（美洲）乃神所赐"自由之地"，神明令此地不得建立世俗王制。外邦人若归向神，将被接纳为以色列之一份，同蒙应许，共享末日之荣耀。</p>
-</div>
-<div class="si-sp"></div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n tea">
-  <div class="nh">
-    <div class="nl"><div class="nt">以赛亚之缘</div><div class="nw">尼腓地 · 第 11 章</div></div>
-    <div class="nc">约前 570 年</div>
-  </div>
-  <p class="np">尼腓阐明大量引用以赛亚之缘由：以赛亚亲见救主，与己灵意相通，所言之事与己所见若合符节。"万物预示基督"——天地、日月、被创造之一切，皆指向他。此诸话语将于末日应验成真，为所有人作见证。</p>
-</div>
-<div class="si-sp"></div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n tea">
-  <div class="nh">
-    <div class="nl"><div class="nt">以赛亚大篇引录</div><div class="nw">尼腓地 · 第 12–24 章</div></div>
-    <div class="nc">约前 570 年</div>
-  </div>
-  <p class="np">几乎逐字引录以赛亚书二至十四章，凡十三章之多。末世景象：主的殿将建于诸山之巅，万国涌来归聚，刀剑化为犁头。童贞女怀孕生子，名以马内利——弥赛亚降临之预言。巴比伦覆灭，以色列被掳后归回；撒旦因傲慢从天陨落。所引文本与死海古卷（以赛亚书抄卷）高度吻合，早于现有抄本逾千年。</p>
-</div>
-<div class="si">
-  <div class="nms">
+    <div class="nm">以赛亚书 <span>第2–14章引录</span></div>
     <div class="nm">死海古卷 <span>以赛亚书抄卷</span></div>
-    <div class="nm">以赛亚书 <span>第 2–14 章引录</span></div>
   </div>
 </div>
 
-<!-- ══ 末世预言 ══ -->
+<!-- ══ 末世 ══ -->
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">末世</div></div>
 <div class="n blu">
   <div class="nh">
-    <div class="nl"><div class="nt">尼腓解说末世</div><div class="nw">尼腓地 · 第 25–27 章</div></div>
-    <div class="nc">约前 570 年</div>
+    <span class="nl">第25–30章</span><span class="nt">末世预言</span><span class="nw">尼腓地</span><span class="nc">约前 570 年</span>
   </div>
-  <p class="np">尼腓以"简明话语"解说以赛亚：基督将来，犹太人拒绝并钉死他，随后被驱散于外邦。末日，犹太人将信基督，被从各国召回。神将在"最后诸日"行奇事——一书将出，有人见之曰"我不识字"。三位见证人将为此书作证；此书中的话语将于审判台前对众人说话。</p>
+  <ul class="np">
+    <li>基督降，犹太人拒而钉死，后被驱散</li>
+    <li>末世出一书，三见证人作证</li>
+    <li>教会将背道；福音终遍及犹太外邦失落支派</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">三位见证人 <span>约 2400 年后应验</span></div>
-    <div class="nm">以色列归聚 <span>末世大归聚预言</span></div>
-  </div>
-</div>
-
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n blu">
-  <div class="nh">
-    <div class="nl"><div class="nt">末世背道与复兴</div><div class="nw">尼腓地 · 第 28–30 章</div></div>
-    <div class="nc">约前 570 年</div>
-  </div>
-  <p class="np">末世警告：教会将背道，人们宣称"锡安一切都好，没有魔鬼"，属灵自满。许多教会为金钱宣讲，教义混乱，拒绝圣经以外的真理。神将向以色列余民（美洲原住民后裔）传送福音，使之归向神。福音终将遍及犹太人、外邦人与以色列失落支派，末世大归聚。</p>
-</div>
-<div class="si">
-  <div class="nms">
-    <div class="nm">全面背道 <span>后期圣徒神学根基</span></div>
+    <div class="nm">三位见证人 <span>约2400年后应验</span></div>
+    <div class="nm">以色列归聚 <span>末世大归聚</span></div>
   </div>
 </div>
 
@@ -421,10 +352,13 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 <div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">结语</div></div>
 <div class="n vio">
   <div class="nh">
-    <div class="nl"><div class="nt">基督教义五步</div><div class="nw">尼腓地 · 第 31–32 章</div></div>
-    <div class="nc">约前 544 年</div>
+    <span class="nl">第31–33章</span><span class="nt">教义别语</span><span class="nw">尼腓地</span><span class="nc">约前 544 年</span>
   </div>
-  <p class="np">尼腓以"简单语言"陈述最终信息，是为基督的教义，一点不多，一点不少。其法有五：信心、悔改、洗礼（效法基督之模式）、接受圣灵、坚忍到底。"这是父和子所定的教义；任何多于或少于此的，皆出自邪恶。以基督的话语为粮食，它能告诉你一切所当做之事。"</p>
+  <ul class="np">
+    <li>教义五步：信心、悔改、洗礼、圣灵、坚忍到底</li>
+    <li>此卷话语真实，末日将对众人说话</li>
+    <li>「在永恒别离中道别」——尼腓搁笔</li>
+  </ul>
 </div>
 <div class="si">
   <div class="nms">
@@ -436,22 +370,6 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   </div>
 </div>
 
-<div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
-
-<div class="ph-sp"></div>
-<div class="n vio">
-  <div class="nh">
-    <div class="nl"><div class="nt">永恒别离</div><div class="nw">尼腓地 · 第 33 章</div></div>
-    <div class="nc">约前 544 年</div>
-  </div>
-  <p class="np">尼腓言不能再多写，此卷话语是真实的，将于末日审判时对众人说话。"我希望你们中许多人能得救……我将在神的宝座前为你们的益处祷告。"末语道："我在永恒别离中向你们道别，直到我们在基督的审判台前再次相见。"尼腓作为小版最核心的记录者，就此搁笔。</p>
-</div>
-<div class="si">
-  <div class="nms">
-    <div class="nm">尼腓小版 <span>摩尔门经核心史料</span></div>
-  </div>
-</div>
-
 <!-- ══ 图例 ══ -->
 <div class="legend">
   <div class="legend-title">图例</div>
@@ -460,7 +378,6 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>以赛亚阶段</div>
   <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>末世预言</div>
   <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>结语阶段</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fffbeb;border-color:#f59e0b"></div>✦ 重大事件</div>
 </div>
 
 <!-- ══ 人物关系图 ══ -->
