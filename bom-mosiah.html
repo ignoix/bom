@@ -262,7 +262,7 @@ ul.np{padding:0}
 <!-- ── 章节梗概分布 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
   <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节梗概分布 · CHAPTER OVERVIEW</div>
-  <svg viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+  <svg viewBox="0 0 860 316" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
     <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">六段叙事（摩赛亚书 29 章分布）</text>
@@ -354,6 +354,43 @@ ul.np{padding:0}
 
     <!-- 注释 -->
     <text x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩赛亚书第 7–25 章为双线叙事：柴雷罕拉现在时序 与 尼腓地回溯时序 交织进行</text>
+
+    <!-- timeline section -->
+    <line x1="50" y1="210" x2="810" y2="210" stroke="#f1f5f9" stroke-width="1"/>
+    <text x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 200–91 年（含回溯）</text>
+
+    <!-- axis (760px / 109yr ≈ 6.97px/yr, x = 50 + (200 - year_BC) * 6.97) -->
+    <line x1="50" y1="268" x2="810" y2="268" stroke="#d1d5db" stroke-width="1.5"/>
+
+    <!-- BC 200 · above -->
+    <circle cx="50"  cy="268" r="3.5" fill="#7c3aed"/>
+    <line x1="50"  y1="254" x2="50"  y2="264" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="50"  y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">BC 200</text>
+    <text x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">西尼夫率众南征建国</text>
+
+    <!-- BC 150 · below -->
+    <circle cx="399" cy="268" r="3.5" fill="#be123c"/>
+    <line x1="399" y1="272" x2="399" y2="284" stroke="#be123c" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="399" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#be123c">BC 150</text>
+    <text x="399" y="305" text-anchor="middle" font-size="7.5" fill="#475569">阿宾纳代火中殉道</text>
+
+    <!-- BC 130 · above -->
+    <circle cx="538" cy="268" r="3.5" fill="#d97706"/>
+    <line x1="538" y1="254" x2="538" y2="264" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="538" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">BC 130</text>
+    <text x="538" y="240" text-anchor="middle" font-size="7.5" fill="#475569">便雅悯王圣约大会</text>
+
+    <!-- BC 121 · below -->
+    <circle cx="601" cy="268" r="3.5" fill="#047857"/>
+    <line x1="601" y1="272" x2="601" y2="284" stroke="#047857" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="601" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#047857">BC 121</text>
+    <text x="601" y="305" text-anchor="middle" font-size="7.5" fill="#475569">两批归民返柴雷罕拉</text>
+
+    <!-- BC 91 · above -->
+    <circle cx="810" cy="268" r="3.5" fill="#0e7490"/>
+    <line x1="810" y1="254" x2="810" y2="264" stroke="#0e7490" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="810" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">BC 91</text>
+    <text x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">废王建法判·阿尔玛首任</text>
   </svg>
 </div>
 

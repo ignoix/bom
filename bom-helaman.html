@@ -241,7 +241,7 @@ ul.np{padding:0}
 <!-- ── 章节梗概分布图 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
   <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节梗概分布 · CHAPTER OVERVIEW</div>
-  <svg viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+  <svg viewBox="0 0 860 316" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
     <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（希拉曼书  16 章分布）</text>
@@ -319,6 +319,43 @@ ul.np{padding:0}
 
     <!-- 注释 -->
     <text x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 色块宽度按章数比例绘制：第16章仅1章（最短），第7–12章共6章占全书38%（最长）</text>
+
+    <!-- timeline section -->
+    <line x1="50" y1="210" x2="810" y2="210" stroke="#f1f5f9" stroke-width="1"/>
+    <text x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 52–1 年</text>
+
+    <!-- axis (760px / 51yr ≈ 14.9px/yr, x = 50 + (52 - year_BC) * 14.9) -->
+    <line x1="50" y1="268" x2="810" y2="268" stroke="#d1d5db" stroke-width="1.5"/>
+
+    <!-- BC 52 · above -->
+    <circle cx="50"  cy="268" r="3.5" fill="#dc2626"/>
+    <line x1="50"  y1="254" x2="50"  y2="264" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="50"  y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">BC 52</text>
+    <text x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">甘大安敦匪帮兴起</text>
+
+    <!-- BC 30 · below -->
+    <circle cx="378" cy="268" r="3.5" fill="#7c3aed"/>
+    <line x1="378" y1="272" x2="378" y2="284" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="378" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">BC 30</text>
+    <text x="378" y="305" text-anchor="middle" font-size="7.5" fill="#475569">神火环绕·三百归改</text>
+
+    <!-- BC 23 · above -->
+    <circle cx="482" cy="268" r="3.5" fill="#2563eb"/>
+    <line x1="482" y1="254" x2="482" y2="264" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="482" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#2563eb">BC 23</text>
+    <text x="482" y="240" text-anchor="middle" font-size="7.5" fill="#475569">尼腓二世获封印权柄</text>
+
+    <!-- BC 6 · below -->
+    <circle cx="735" cy="268" r="3.5" fill="#d97706"/>
+    <line x1="735" y1="272" x2="735" y2="284" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="735" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">BC 6</text>
+    <text x="735" y="305" text-anchor="middle" font-size="7.5" fill="#475569">撒母耳登城墙预言</text>
+
+    <!-- BC 1 · above -->
+    <circle cx="810" cy="268" r="3.5" fill="#059669"/>
+    <line x1="810" y1="254" x2="810" y2="264" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="810" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#059669">BC 1</text>
+    <text x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">预兆渐现·静候黎明</text>
   </svg>
 </div>
 

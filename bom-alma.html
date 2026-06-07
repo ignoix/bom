@@ -325,7 +325,7 @@ ul.np{padding:0}
 <!-- ── 章节梗概分布图 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
   <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节梗概分布 · CHAPTER OVERVIEW</div>
-  <svg viewBox="0 0 860 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+  <svg viewBox="0 0 860 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
     <text x="430" y="20" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">十段叙事（阿尔玛书  63 章分布）</text>
@@ -421,6 +421,49 @@ ul.np{padding:0}
 
     <!-- 注释 -->
     <text x="430" y="170" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 色块宽度按章数比例绘制：第5–7章仅3章（最短），第43–52章共10章占全书16%（最长）</text>
+
+    <!-- timeline section -->
+    <line x1="50" y1="184" x2="810" y2="184" stroke="#f1f5f9" stroke-width="1"/>
+    <text x="430" y="199" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 91–52 年</text>
+
+    <!-- axis (760px / 39yr ≈ 19.5px/yr, x = 50 + (91 - year_BC) * 19.5) -->
+    <line x1="50" y1="242" x2="810" y2="242" stroke="#d1d5db" stroke-width="1.5"/>
+
+    <!-- BC 91 · above -->
+    <circle cx="50"  cy="242" r="3.5" fill="#0e7490"/>
+    <line x1="50"  y1="228" x2="50"  y2="238" stroke="#0e7490" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="50"  y="224" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">BC 91</text>
+    <text x="50"  y="214" text-anchor="middle" font-size="7.5" fill="#475569">法判制立·阿尔玛就任</text>
+
+    <!-- BC 83 · below -->
+    <circle cx="206" cy="242" r="3.5" fill="#dc2626"/>
+    <line x1="206" y1="246" x2="206" y2="258" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="206" y="269" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">BC 83</text>
+    <text x="206" y="279" text-anchor="middle" font-size="7.5" fill="#475569">艾蒙乃哈殉道·监狱神迹</text>
+
+    <!-- BC 77 · above -->
+    <circle cx="323" cy="242" r="3.5" fill="#7c3aed"/>
+    <line x1="323" y1="228" x2="323" y2="238" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="323" y="224" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">BC 77</text>
+    <text x="323" y="214" text-anchor="middle" font-size="7.5" fill="#475569">安太尼腓李海人埋剑立誓</text>
+
+    <!-- BC 73 · below -->
+    <circle cx="401" cy="242" r="3.5" fill="#dc2626"/>
+    <line x1="401" y1="246" x2="401" y2="258" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="401" y="269" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">BC 73</text>
+    <text x="401" y="279" text-anchor="middle" font-size="7.5" fill="#475569">摩罗乃举自由幟·战争始</text>
+
+    <!-- BC 66 · above -->
+    <circle cx="537" cy="242" r="3.5" fill="#6d28d9"/>
+    <line x1="537" y1="228" x2="537" y2="238" stroke="#6d28d9" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="537" y="224" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#6d28d9">BC 66</text>
+    <text x="537" y="214" text-anchor="middle" font-size="7.5" fill="#475569">两千条子出征·无一阵亡</text>
+
+    <!-- BC 52 · below -->
+    <circle cx="810" cy="242" r="3.5" fill="#059669"/>
+    <line x1="810" y1="246" x2="810" y2="258" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="810" y="269" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#059669">BC 52</text>
+    <text x="810" y="279" text-anchor="middle" font-size="7.5" fill="#475569">金版传给希拉曼</text>
   </svg>
 </div>
 
