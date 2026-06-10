@@ -264,11 +264,22 @@ h1 {
 .fp-all   { color: #f0e0c0; font-weight: 600; }
 .fp-hr    { border: none; border-top: 1px solid #2d2015; margin: 6px 0; }
 input[type="checkbox"] { cursor: pointer; accent-color: #c9a84c; flex-shrink: 0; }
+
+/* ── bilingual toggle ── */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+.lang-btn{
+  background:#1e1810;border:1px solid #3d2b1f;color:#b89060;
+  border-radius:5px;padding:0 10px;height:28px;font-size:11px;cursor:pointer;
+  transition:all .15s;font-family:inherit;font-weight:600;letter-spacing:.3px
+}
+.lang-btn:hover{background:#3d2b1f;color:#e8d5b7}
 </style>
 </head>
 <body>
 
-<h1>Historical Timeline &nbsp;·&nbsp; 歷史時間線</h1>
+<h1><span lang="en">Historical Timeline</span><span lang="zh">歷史時間線</span></h1>
 
 <!-- ════ 工具列（縮放 + 紀元跳轉 + 視窗範圍，全部一行）════ -->
 <div class="toolbar">
@@ -276,11 +287,11 @@ input[type="checkbox"] { cursor: pointer; accent-color: #c9a84c; flex-shrink: 0;
   <input  class="zoom-slider" type="range" id="zoomSlider" min="0" max="6" step="1" value="2">
   <button class="ctrl-btn" id="zoomIn" title="放大">＋</button>
   <span   class="zoom-label" id="zoomLabel">1×</span>
-  <button class="ctrl-reset" id="zoomReset">重置</button>
+  <button class="ctrl-reset" id="zoomReset"><span lang="en">Reset</span><span lang="zh">重置</span></button>
 
   <div class="tb-sep"></div>
 
-  <span class="era-lbl">跳至</span>
+  <span class="era-lbl"><span lang="en">Jump to</span><span lang="zh">跳至</span></span>
   <button class="era-btn" data-year="-2900">2900 BC</button>
   <button class="era-btn" data-year="-1200">1200 BC</button>
   <button class="era-btn" data-year="-500">500 BC</button>
@@ -289,6 +300,8 @@ input[type="checkbox"] { cursor: pointer; accent-color: #c9a84c; flex-shrink: 0;
 
   <div class="tb-sep"></div>
   <span class="viewport-years" id="viewportYears"></span>
+  <div class="tb-sep"></div>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </div>
 
 <!-- ════ 分組篩選列 ════ -->
@@ -310,12 +323,12 @@ input[type="checkbox"] { cursor: pointer; accent-color: #c9a84c; flex-shrink: 0;
     <div id="mpEn"></div>
     <div id="mpYears"></div>
   </div>
-  <div id="mpLoading">載入中⋯</div>
-  <img id="mpImg" alt="歷史地圖">
+  <div id="mpLoading"><span lang="en">Loading...</span><span lang="zh">載入中⋯</span></div>
+  <img id="mpImg" alt="">
   <div id="mpDesc"></div>
   <div id="mpFoot">
     <a id="mpWiki" href="#" target="_blank" rel="noopener">Wikipedia ↗</a>
-    <button id="mpClose">關閉</button>
+    <button id="mpClose"><span lang="en">Close</span><span lang="zh">關閉</span></button>
   </div>
 </div>
 <div id="crosshair"></div>
@@ -330,12 +343,27 @@ input[type="checkbox"] { cursor: pointer; accent-color: #c9a84c; flex-shrink: 0;
 <script src="bible/bible.js"></script>
 
 <script>
+// ── language init ──
+(function(){
+  var l=localStorage.getItem('bom-lang')||'en';
+  if(l==='zh')document.body.classList.add('lang-zh');
+  var b=document.getElementById('langBtn');
+  if(b)b.textContent=l==='zh'?'English':'中文';
+})();
+function switchLang(){
+  var z=document.body.classList.toggle('lang-zh');
+  localStorage.setItem('bom-lang',z?'zh':'en');
+  document.getElementById('langBtn').textContent=z?'English':'中文';
+  refresh();
+}
+function t(zh,en){return document.body.classList.contains('lang-zh')?zh:en;}
+
 // ════════════════════════════════════════════════════════
 //  分組定義（篩選列的四個地區分組）
 // ════════════════════════════════════════════════════════
 const SECTION_GROUPS = [
-  { key: 'asia',     label: '亞洲', color: '#10b981' },
-  { key: 'religion', label: '宗教', color: '#a78bfa' },
+  { key: 'asia',     label: '亞洲', labelEn: 'Asia',     color: '#10b981' },
+  { key: 'religion', label: '宗教', labelEn: 'Religion', color: '#a78bfa' },
 ];
 
 // ════════════════════════════════════════════════════════
@@ -344,8 +372,10 @@ const SECTION_GROUPS = [
 const SECTIONS = [
   {
     title:          '中國歷史',
+    titleEn:        'Chinese History',
     group:          'asia',
     evtLabel:       '歷史事件',
+    evtLabelEn:     'Events',
     evtColor:       '#c9a84c',
     evtBg:          'rgba(201,168,76,0.04)',
     pinned:         true,
@@ -356,9 +386,11 @@ const SECTIONS = [
   },
   {
     title:          '聖經',
+    titleEn:        'Bible',
     group:          'religion',
     defaultOn:      true,
     evtLabel:       '聖經事件',
+    evtLabelEn:     'Events',
     evtColor:       '#7dd3fc',
     evtBg:          'rgba(125,211,252,0.04)',
     sepColor:       '#bae6fd',
@@ -371,9 +403,11 @@ const SECTIONS = [
   },
   {
     title:          '摩爾門經',
+    titleEn:        'Book of Mormon',
     group:          'religion',
     defaultOn:      true,
     evtLabel:       '經文事件',
+    evtLabelEn:     'Events',
     evtColor:       '#c4b5fd',
     evtBg:          'rgba(196,181,253,0.04)',
     sepColor:       '#ddd6fe',
@@ -395,7 +429,9 @@ const ZOOM_LABELS = ['0.25×', '0.5×', '1×', '2×', '5×', '10×', '20×'];
 let zoomIdx = 2, PPY = 1;
 
 const toX     = y => (y - START) * PPY;
-const fmtYear = y => y < 0 ? `西元前 ${Math.abs(y)} 年` : (y >= NOW_YEAR ? '至今' : `西元 ${y} 年`);
+const fmtYear = y => y < 0
+  ? t(`西元前 ${Math.abs(y)} 年`, `${Math.abs(y)} BC`)
+  : (y >= NOW_YEAR ? t('至今', 'Present') : t(`西元 ${y} 年`, `AD ${y}`));
 
 function groupByYear(arr) {
   const m = new Map();
@@ -452,9 +488,9 @@ async function showMapPanel(d) {
   mpName.textContent  = d.name;
   mpName.style.color  = d.color;
   mpEn.textContent    = d.en;
-  mpYears.textContent = fmtYear(d.start) + ' – ' + fmtYear(d.end) + '　共 ' + (d.end - d.start) + ' 年';
+  mpYears.textContent = fmtYear(d.start) + ' – ' + fmtYear(d.end) + t('　共 ' + (d.end - d.start) + ' 年', '  (' + (d.end - d.start) + ' years)');
 
-  mpLoad.textContent  = '載入中⋯';
+  mpLoad.textContent  = t('載入中⋯', 'Loading...');
   mpLoad.style.display= 'block';
   mpImg.style.display = 'none';
   mpImg.src           = '';
@@ -464,7 +500,7 @@ async function showMapPanel(d) {
 
   panel.style.display = 'flex';
 
-  if (!d.wikiEn) { mpLoad.textContent = '暫無 Wikipedia 條目連結'; return; }
+  if (!d.wikiEn) { mpLoad.textContent = t('暫無 Wikipedia 條目連結', 'No Wikipedia link'); return; }
 
   mpWiki.href = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(d.wikiEn);
 
@@ -477,9 +513,9 @@ async function showMapPanel(d) {
       mpImg.src           = data.thumbnail.source;
       mpImg.style.display = 'block';
     }
-    mpDesc.textContent = data.extract || '無摘要資料。';
+    mpDesc.textContent = data.extract || t('無摘要資料。', 'No description available.');
   } catch (err) {
-    mpLoad.textContent = '載入失敗（請確認網路連線）';
+    mpLoad.textContent = t('載入失敗（請確認網路連線）', 'Failed to load (check connection)');
   }
 }
 
@@ -514,7 +550,7 @@ function buildFilters() {
     const lbl = document.createElement('span');
     lbl.className = 'fg-label';
     lbl.style.color = grp.color;
-    lbl.textContent = grp.label;
+    lbl.textContent = t(grp.label, grp.labelEn);
     row.appendChild(lbl);
 
     SECTIONS.forEach((sec, sIdx) => {
@@ -537,14 +573,14 @@ function buildFilters() {
       }
 
       const name = document.createElement('span');
-      name.textContent = sec.title;
+      name.textContent = t(sec.title, sec.titleEn);
       tog.appendChild(name);
       wrap.appendChild(tog);
 
       const more = document.createElement('button');
       more.className = 'fchip-more';
       more.textContent = '▾';
-      more.title = '調整顯示列';
+      more.title = t('調整顯示列', 'Show/hide rows');
       more.addEventListener('click', e => { e.stopPropagation(); openPanel(sIdx, more); });
       wrap.appendChild(more);
 
@@ -557,7 +593,7 @@ function buildFilters() {
   spacer.style.cssText = 'flex:1;min-width:12px;';
   row.appendChild(spacer);
 
-  ['全部展開', '全部收起'].forEach((label, i) => {
+  [t('全部展開','Expand all'), t('全部收起','Collapse all')].forEach((label, i) => {
     const btn = document.createElement('button');
     btn.className = 'master-toggle';
     btn.textContent = label;
@@ -594,7 +630,7 @@ function openPanel(sIdx, anchor) {
   const titleDiv = document.createElement('div');
   titleDiv.className = 'fp-title';
   titleDiv.style.color = sec.evtColor;
-  titleDiv.textContent = sec.title;
+  titleDiv.textContent = t(sec.title, sec.titleEn);
   panel.appendChild(titleDiv);
 
   const syncAll = () => {
@@ -615,7 +651,7 @@ function openPanel(sIdx, anchor) {
     buildFilters(); refresh();
   });
   allLbl.appendChild(allCb);
-  allLbl.append(' 全部顯示');
+  allLbl.append(' ' + t('全部顯示', 'Show all'));
   panel.appendChild(allLbl);
 
   const hr = document.createElement('hr');
@@ -667,7 +703,7 @@ function buildLabels() {
         sep.className = 'lbl lbl-sep';
         sep.style.cssText = `color:${sec.sepColor};background:${sec.sepBg};border-top-color:${sec.sepBorder}`;
       }
-      sep.textContent = sec.title;
+      sep.textContent = t(sec.title, sec.titleEn);
       el.appendChild(sep);
     }
     prevGroup = sec.group;
@@ -675,7 +711,7 @@ function buildLabels() {
     const evtLbl = document.createElement('div');
     evtLbl.className = 'lbl lbl-evt';
     evtLbl.style.color = sec.evtColor;
-    evtLbl.textContent = sec.evtLabel;
+    evtLbl.textContent = t(sec.evtLabel, sec.evtLabelEn);
     el.appendChild(evtLbl);
     const vis = visibility[idx];
     sec.rowLabels.forEach((t, r) => {
@@ -726,16 +762,16 @@ function render() {
         sep.style.cssText = `background:${hexToRgba(gc, 0.08)};border-top-color:${gc};color:${gc}`;
         const gLbl = document.createElement('span');
         gLbl.className = 'sep-group-lbl';
-        gLbl.textContent = grpData ? grpData.label : '';
+        gLbl.textContent = grpData ? t(grpData.label, grpData.labelEn) : '';
         const tLbl = document.createElement('span');
         tLbl.className = 'sep-title-lbl';
-        tLbl.textContent = sec.title;
+        tLbl.textContent = t(sec.title, sec.titleEn);
         sep.appendChild(gLbl);
         sep.appendChild(tLbl);
       } else {
         sep.className = 'section-sep';
         sep.style.cssText = `background:${sec.sepBg};border-top-color:${sec.sepBorder};color:${sec.sepColor || sec.evtColor}`;
-        sep.textContent = sec.title;
+        sep.textContent = t(sec.title, sec.titleEn);
       }
       timeline.appendChild(sep);
     }
@@ -810,16 +846,16 @@ function render() {
             `<strong>${d.name}</strong>` +
             (d.personal ? `<span style="color:#b89060;font-size:11px">（${d.personal}）</span>` : '') +
             `<span class="sub">${d.en}</span>` +
-            (d.nianHao ? `<span style="color:#c9a84c;font-size:11px;display:block">年號：${d.nianHao}</span>` : '') +
-            `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">${d.nianHao !== undefined ? '在位' : d.row === 1 ? '在世' : '在位'} ${d.end - d.start} 年</span>` +
-            (d.wikiEn ? '<br><span style="color:#6a4a28;font-size:10px">點擊查看 Wikipedia ↗</span>' : '')
+            (d.nianHao ? `<span style="color:#c9a84c;font-size:11px;display:block">${t('年號：','Era: ')}${d.nianHao}</span>` : '') +
+            `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">${t(d.nianHao !== undefined ? '在位' : d.row === 1 ? '在世' : '在位', d.nianHao !== undefined ? 'Reign' : d.row === 1 ? 'Lifespan' : 'Reign')}: ${d.end - d.start}${t(' 年',' yrs')}</span>` +
+            (d.wikiEn ? `<br><span style="color:#6a4a28;font-size:10px">${t('點擊查看 Wikipedia ↗','Click for Wikipedia ↗')}</span>` : '')
           );
         } else {
           showTip(
             `<strong>${d.name}</strong><span class="sub">${d.en}</span>` +
-            `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">共 ${d.end - d.start} 年</span>` +
-            (d.link ? '<br><span style="color:#c9a84c;font-size:10px">點擊開啟敘事頁 ↗</span>' :
-              d.wikiEn ? '<br><span style="color:#6a4a28;font-size:10px">點擊查看 Wikipedia ↗</span>' : '')
+            `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">${t('共 ','')}${d.end - d.start}${t(' 年',' yrs')}</span>` +
+            (d.link ? `<br><span style="color:#c9a84c;font-size:10px">${t('點擊開啟敘事頁 ↗','Open narrative ↗')}</span>` :
+              d.wikiEn ? `<br><span style="color:#6a4a28;font-size:10px">${t('點擊查看 Wikipedia ↗','Click for Wikipedia ↗')}</span>` : '')
           );
         }
       });
