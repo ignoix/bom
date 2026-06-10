@@ -12,11 +12,15 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
-.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
-.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;flex-shrink:0;border:1px solid #e2e8f0;border-radius:7px;text-decoration:none;color:#64748b;transition:all .15s;font-size:0}
+.back-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+.back-btn::before{content:'';display:block;width:15px;height:12px;background-color:#64748b;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain}
+.back-btn:hover::before{background-color:#1e293b}
+.toggle-btn{position:fixed;bottom:24px;right:24px;z-index:200;font-size:12px;color:#fff;padding:7px 14px;border:none;border-radius:20px;background:#64748b;cursor:pointer;font-family:inherit;transition:background .15s,transform .1s;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.toggle-btn:hover{background:#475569;transform:translateY(-1px)}
 
-.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
+.h-info{display:none}
+.nav{flex:1;display:flex;gap:2px;overflow-x:auto}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#92400e;background:#fef3c7;border-color:#fde68a}
@@ -51,8 +55,9 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .nt{font-size:14px;font-weight:700;flex:1}
 .nw{font-size:11px;color:#64748b}
 .nc{font-size:10.5px;color:#94a3b8;margin-left:auto}
-.np{margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
-.n:hover .np{max-height:800px;opacity:1}
+.np{margin:7px 0 0;max-height:1000px;overflow:hidden;opacity:1;transition:max-height .35s ease,opacity .28s ease}
+.n:hover .np{max-height:1000px;opacity:1}
+body.all-collapsed .np{max-height:0;opacity:0}
 ul.np{padding:0}
 .np li{font-size:12px;color:#475569;line-height:1.7;padding-left:1.8em;text-indent:-1.8em;list-style:none}
 .np li::before{content:''}
@@ -89,51 +94,220 @@ ul.np{padding:0}
 .rel{grid-column:1/-1;margin-top:28px}
 .rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
 .rel svg{width:100%;height:auto;display:block}
+
+/* language toggle */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+div[lang="en"],ul[lang="en"]{display:block}
+div[lang="zh"],ul[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+body.lang-zh div[lang="en"],body.lang-zh ul[lang="en"]{display:none}
+body.lang-zh div[lang="zh"],body.lang-zh ul[lang="zh"]{display:block}
+.lang-btn{font-size:11px;color:#64748b;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;margin-left:8px}
+.lang-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+/* ── mobile base ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;
+  width:40px;height:40px;color:#1e293b;flex-shrink:0;border-radius:8px;
+  display:none;align-items:center;justify-content:center}
+.hamburger:active{background:#f1f5f9}
+
+/* drawer — dark slate */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;width:280px;max-width:88vw;height:100%;
+  background:#1e293b;z-index:201;display:flex;flex-direction:column;
+  transform:translateX(-110%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:8px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 16px;border-bottom:1px solid #334155;flex-shrink:0}
+.drawer-title{font-size:9px;font-weight:700;letter-spacing:3px;color:#475569;
+  text-transform:uppercase}
+.drawer-close{background:none;border:none;cursor:pointer;font-size:20px;
+  color:#475569;padding:2px 6px;line-height:1;border-radius:4px}
+.drawer-close:hover{color:#94a3b8}
+.drawer-links{overflow-y:auto;flex:1;padding:8px 0 36px}
+.drawer-tab{display:flex;align-items:center;padding:13px 22px;font-size:14px;
+  color:#94a3b8;text-decoration:none;border-left:3px solid transparent;
+  transition:background .12s;line-height:1.3;letter-spacing:.1px}
+.drawer-tab:active{background:rgba(255,255,255,.05)}
+.drawer-tab.on{color:#f1f5f9;font-weight:600;border-left-color:#94a3b8;
+  background:rgba(255,255,255,.07)}
+
+/* chapter summary cards (desktop: hidden) */
+.mob-ch{display:none}
+.mob-sec{border-radius:10px;padding:13px 14px;background:#fff;
+  display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid #e2e8f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.mob-nl{font-size:10px;color:#94a3b8;font-weight:700;letter-spacing:.6px}
+.mob-nt{font-size:13px;font-weight:700;color:#1e293b;line-height:1.25}
+.mob-nc{font-size:10px;color:#b0bac5;margin-top:1px}
+
+@media(max-width:640px){
+  /* ── global ── */
+  body{font-size:15px;background:#eef1f6}
+
+  /* ── header ── */
+  header{padding:0 14px 0 6px;gap:6px;height:54px;
+    border-bottom:1px solid #dde3ec;box-shadow:0 1px 0 #dde3ec}
+  .hamburger{display:flex}
+  .nav,.back-btn,.hb,.hs{display:none}
+  .h-info{display:flex;flex:1;justify-content:center;text-align:center}
+  .hn{font-size:15px;font-weight:600;letter-spacing:.3px;color:#1e293b}
+  .lang-btn{font-size:11px;padding:5px 10px;border-radius:7px;flex-shrink:0}
+  .drawer-overlay.open,.drawer.open{opacity:1;pointer-events:auto}
+  .drawer.open{transform:translateX(0)}
+
+  /* ── page grid ── */
+  .page{grid-template-columns:1fr;padding:14px 12px 96px;gap:0;background:#eef1f6}
+
+  /* ── intro ── */
+  .intro{text-align:left;padding:22px 18px 20px;border-radius:16px;border:none;
+    background:#fff;margin-bottom:14px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:10px}
+  .intro-h{font-size:28px;font-weight:300;letter-spacing:-.5px;line-height:1.1;
+    margin-bottom:14px;color:#1e293b}
+  .intro-meta{flex-direction:column;gap:7px;justify-content:flex-start}
+  .im{font-size:12px;display:flex;gap:7px;align-items:baseline;color:#64748b}
+  .im b{color:#1e293b;font-weight:600}
+  .intro-en{font-size:11px;margin-top:8px;padding-top:10px;border-top:1px solid #f1f5f9;
+    color:#94a3b8}
+
+  /* ── chapter summary cards ── */
+  .mob-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f2f6}
+  .intro+div:not([class]){display:none}
+
+  /* ── phase labels ── hidden; color carried by card left border */
+  .ph,.ph-sp,.arr,.si-sp{display:none}
+
+  /* ── section card ── */
+  .n{grid-column:1;
+    border-top:none!important;border-right:none!important;border-bottom:none!important;
+    border-left-width:4px!important;
+    border-radius:0 16px 16px 0;
+    padding:18px 17px 20px;margin-bottom:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .n:hover{filter:none}
+
+  /* ── section header: chapter → title → location · time ── */
+  .nh{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:14px;align-items:baseline}
+  .nl{order:1;flex:0 0 100%;font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:6px;flex-wrap:wrap}
+  .nt{order:2;flex:0 0 100%;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:8px;white-space:normal;overflow-wrap:break-word;letter-spacing:normal}
+  .nw{order:3;font-size:12px;white-space:normal}
+  .nc{order:4;font-size:12px;margin-left:0;white-space:normal}
+  .nc::before{content:' · '}
+
+  /* ── scripture list ── */
+  .np{padding:0;margin:0}
+  .np li{font-size:14.5px;color:#374151;line-height:1.85;
+    padding-left:2.4em;text-indent:-2.4em;
+    padding-top:7px;padding-bottom:7px;
+    border-bottom:1px solid rgba(0,0,0,.05)}
+  .np li:last-child{border-bottom:none;padding-bottom:0}
+  .cn{display:inline-block;width:1.8em;font-size:11px;font-weight:700;
+    color:#94a3b8;letter-spacing:0;text-align:right;margin-right:6px}
+  .ns{font-size:14.5px;line-height:1.85;color:#374151}
+
+  /* ── event box ── */
+  .ev{grid-column:1;border-radius:12px;
+    border-style:solid!important;border-width:1px!important;
+    padding:12px 16px;margin-bottom:4px;font-size:13px;line-height:1.6}
+  .ev-icon{display:none}
+  .ev-date{font-size:9px;letter-spacing:1.5px;font-weight:700;margin-bottom:5px}
+
+  /* ── sidebar ── */
+  .si{grid-column:1;padding:0;margin-bottom:20px}
+  .si::before{display:none}
+  .nms{background:#fff;border-radius:12px;padding:14px 16px;
+    border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .nms+.nms{margin-top:8px}
+  .nm-title{font-size:9px;font-weight:700;letter-spacing:2px;color:#94a3b8;
+    text-transform:uppercase;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #f0f2f6}
+  .nm{display:grid;grid-template-columns:84px 1fr;gap:4px;
+    padding:6px 0;border-top:1px solid #f6f8fb;
+    align-items:baseline;line-height:1.45}
+  .nm:first-of-type{border-top:none;padding-top:0}
+  .nm b{font-size:12px;font-weight:600;color:#334155}
+  .nm span{font-size:12px;color:#64748b}
+
+  /* 1/2 Nephi character sidebar cards */
+  .sb{background:#f8fafc;border-radius:10px;padding:10px 13px;
+    border:1px solid #f0f2f6;margin-bottom:6px}
+  .sn{font-size:13.5px;font-weight:700;color:#1e293b}
+  .se{font-size:10.5px;color:#94a3b8;margin-top:1px}
+  .sd{font-size:12px;color:#475569;line-height:1.5;margin-top:5px}
+
+  /* ── legend ── */
+  .legend{grid-column:1;background:#fff;border-radius:12px;
+    padding:14px 16px;border:1px solid #dde3ec;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .legend-title{font-size:9px;letter-spacing:2px;color:#94a3b8;margin-bottom:10px}
+  .lg-item{font-size:12px;color:#475569}
+
+  /* ── arc / character SVG ── scale to fit, card container */
+  .rel{grid-column:1;margin:0 0 20px;overflow:hidden;
+    border:1px solid #dde3ec;border-radius:14px;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .rel-title{font-size:9px;letter-spacing:2px;color:#94a3b8;
+    padding:14px 16px 0;margin-bottom:6px;text-align:left}
+  .rel svg{width:100%;height:auto;min-width:0;display:block}
+
+  /* ── activity maps & other no-class SVG divs ── */
+  .page>div:not([class]) svg{
+    width:100%!important;height:auto!important;min-width:0;display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-btn" href="index.html">← 時間線</a>
+  <a class="back-btn" href="index.html">← <span lang="en">Timeline</span><span lang="zh">时间线</span></a>
   <div class="h-info">
-    <span class="hb">摩尔门经</span><span class="hs">/</span><span class="hn">摩赛亚书</span>
+    <span class="hb"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span></span><span class="hs">/</span><span class="hn"><span lang="en">Mosiah</span><span lang="zh">摩赛亚书</span></span>
   </div>
   <nav class="nav">
-    <a class="tab" href="bom.html">一书</a>
-    <a class="tab" href="bom2.html">二书</a>
-    <a class="tab" href="bom-jacob.html">雅各</a>
-    <a class="tab" href="bom-enos.html">以挪士</a>
-    <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆乃</a>
-    <a class="tab" href="bom-wom.html">摩语</a>
-    <a class="tab on" href="bom-mosiah.html">摩赛亚</a>
-    <a class="tab" href="bom-alma.html">阿尔玛</a>
-    <a class="tab" href="bom-helaman.html">希拉曼</a>
-    <a class="tab" href="bom-3nephi.html">三书</a>
-    <a class="tab" href="bom-4nephi.html">四书</a>
-    <a class="tab" href="bom-mormon.html">摩尔门</a>
-    <a class="tab" href="bom-ether.html">以帖</a>
-    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+    <a class="tab" href="bom.html"><span lang="en">1 Nephi</span><span lang="zh">一书</span></a>
+    <a class="tab" href="bom2.html"><span lang="en">2 Nephi</span><span lang="zh">二书</span></a>
+    <a class="tab" href="bom-jacob.html"><span lang="en">Jacob</span><span lang="zh">雅各</span></a>
+    <a class="tab" href="bom-enos.html"><span lang="en">Enos</span><span lang="zh">以挪士</span></a>
+    <a class="tab" href="bom-jarom.html"><span lang="en">Jarom</span><span lang="zh">雅龙</span></a>
+    <a class="tab" href="bom-omni.html"><span lang="en">Omni</span><span lang="zh">奥姆乃</span></a>
+    <a class="tab" href="bom-wom.html"><span lang="en">W of M</span><span lang="zh">摩语</span></a>
+    <a class="tab on" href="bom-mosiah.html"><span lang="en">Mosiah</span><span lang="zh">摩赛亚</span></a>
+    <a class="tab" href="bom-alma.html"><span lang="en">Alma</span><span lang="zh">阿尔玛</span></a>
+    <a class="tab" href="bom-helaman.html"><span lang="en">Helaman</span><span lang="zh">希拉曼</span></a>
+    <a class="tab" href="bom-3nephi.html"><span lang="en">3 Nephi</span><span lang="zh">三书</span></a>
+    <a class="tab" href="bom-4nephi.html"><span lang="en">4 Nephi</span><span lang="zh">四书</span></a>
+    <a class="tab" href="bom-mormon.html"><span lang="en">Mormon</span><span lang="zh">摩尔门</span></a>
+    <a class="tab" href="bom-ether.html"><span lang="en">Ether</span><span lang="zh">以帖</span></a>
+    <a class="tab" href="bom-moroni.html"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </header>
 
 <div class="page">
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">摩尔门经 · 大版缩编</div>
-  <div class="intro-h">摩赛亚书</div>
+  <div class="intro-sup"><span lang="en">Book of Mormon · Abridgment of Large Plates</span><span lang="zh">摩尔门经 · 大版缩编</span></div>
+  <div class="intro-h"><span lang="en">Mosiah</span><span lang="zh">摩赛亚书</span></div>
   <div class="intro-meta">
-    <span class="im">时间 <b>约公元前 130–91 年</b></span>
-    <span class="im">地点 <b>柴雷罕拉 · 尼腓地 · 摩门水域</b></span>
-    <span class="im">章节 <b>29 章</b></span>
-    <span class="im">核心 <b>便雅悯圣约 · 阿宾纳代殉道 · 摩门立教 · 王制终结</b></span>
+    <span class="im"><span lang="en">Period <b>c. 130–91 BC</b></span><span lang="zh">时间 <b>约公元前 130–91 年</b></span></span>
+    <span class="im"><span lang="en">Places <b>Zarahemla · Land of Nephi · Waters of Mormon</b></span><span lang="zh">地点 <b>柴雷罕拉 · 尼腓地 · 摩门水域</b></span></span>
+    <span class="im"><span lang="en">Chapters <b>29</b></span><span lang="zh">章节 <b>29 章</b></span></span>
+    <span class="im"><span lang="en">Theme <b>Benjamin's Covenant · Abinadi's Martyrdom · Church Founded · End of Kingship</b></span><span lang="zh">核心 <b>便雅悯圣约 · 阿宾纳代殉道 · 摩门立教 · 王制终结</b></span></span>
   </div>
 </div>
 
 <!-- ── activity map ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · 摩赛亚书</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Activity Map · Mosiah</span><span lang="zh">活动地图示意 · 摩赛亚书</span></div>
   <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="msA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -165,30 +339,30 @@ ul.np{padding:0}
 
     <!-- Waters of Mormon (inside Land of Nephi, slightly east) -->
     <ellipse cx="380" cy="330" rx="28" ry="18" fill="rgba(186,230,253,0.7)" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="380" y="325" text-anchor="middle" font-size="8" fill="#0369a1">摩门</text>
-    <text x="380" y="335" text-anchor="middle" font-size="7.5" fill="#0369a1">水域</text>
+    <text lang="en" x="380" y="325" text-anchor="middle" font-size="8" fill="#0369a1">Waters</text><text lang="zh" x="380" y="325" text-anchor="middle" font-size="8" fill="#0369a1">摩门</text>
+    <text lang="en" x="380" y="335" text-anchor="middle" font-size="7.5" fill="#0369a1">of Mormon</text><text lang="zh" x="380" y="335" text-anchor="middle" font-size="7.5" fill="#0369a1">水域</text>
 
     <!-- Zarahemla temple/city marker (cyan) -->
     <polygon points="432,118 452,118 452,138 442,130 432,138" fill="#0e7490" stroke="#fff" stroke-width="1.5"/>
     <rect x="456" y="112" width="148" height="30" rx="4" fill="rgba(255,255,255,0.94)" stroke="#67e8f9" stroke-width="1.5"/>
-    <text x="530" y="125" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">柴雷罕拉圣殿</text>
-    <text x="530" y="136" text-anchor="middle" font-size="8" fill="#0e7490">便雅悯王讲道 · 立摩赛亚二世为王</text>
+    <text lang="en" x="530" y="125" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">Temple of Zarahemla</text><text lang="zh" x="530" y="125" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">柴雷罕拉圣殿</text>
+    <text lang="en" x="530" y="136" text-anchor="middle" font-size="8" fill="#0e7490">King Benjamin preaches · crowns Mosiah II</text><text lang="zh" x="530" y="136" text-anchor="middle" font-size="8" fill="#0e7490">便雅悯王讲道 · 立摩赛亚二世为王</text>
     <line x1="452" y1="128" x2="456" y2="124" stroke="#0e7490" stroke-width="1.2"/>
 
     <!-- City of Nephi / Noah's palace marker -->
     <circle cx="318" cy="295" r="7" fill="#dc2626" stroke="#fff" stroke-width="2"/>
     <rect x="328" y="282" width="148" height="38" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fca5a5" stroke-width="1.2"/>
-    <text x="402" y="295" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">尼腓城（挪亚王宫）</text>
-    <text x="402" y="307" text-anchor="middle" font-size="7.5" fill="#c2410c">李海尼腓地</text>
+    <text lang="en" x="402" y="295" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">City of Nephi (Noah's Palace)</text><text lang="zh" x="402" y="295" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">尼腓城（挪亚王宫）</text>
+    <text lang="en" x="402" y="307" text-anchor="middle" font-size="7.5" fill="#c2410c">Land of Lehi-Nephi</text><text lang="zh" x="402" y="307" text-anchor="middle" font-size="7.5" fill="#c2410c">李海尼腓地</text>
 
 
     <!-- Escape route 1: Limhi's people → Zarahemla -->
     <path d="M 326,276 Q 350,230 400,195" fill="none" stroke="#0e7490" stroke-width="2.2" marker-end="url(#msA)"/>
-    <text x="352" y="236" font-size="8" fill="#0e7490" text-anchor="middle">林海逃回</text>
+    <text lang="en" x="352" y="236" font-size="8" fill="#0e7490" text-anchor="middle">Limhi escapes</text><text lang="zh" x="352" y="236" font-size="8" fill="#0e7490" text-anchor="middle">林海逃回</text>
 
     <!-- Escape route 2: Alma's people → Zarahemla (different path) -->
     <path d="M 368,318 Q 390,265 425,218" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#msC)"/>
-    <text x="410" y="265" font-size="8" fill="#d97706" text-anchor="middle">阿尔玛逃回</text>
+    <text lang="en" x="410" y="265" font-size="8" fill="#d97706" text-anchor="middle">Alma escapes</text><text lang="zh" x="410" y="265" font-size="8" fill="#d97706" text-anchor="middle">阿尔玛逃回</text>
 
     <!-- Lamanite attacks on Land of Nephi -->
     <path d="M 160,300 Q 218,296 298,296" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#msB)"/>
@@ -196,115 +370,115 @@ ul.np{padding:0}
 
     <!-- Ammon expedition: Zarahemla → Land of Nephi (to find Limhi) -->
     <path d="M 400,195 Q 380,245 340,270" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#msA)"/>
-    <text x="368" y="227" font-size="7.5" fill="#6366f1" text-anchor="middle">阿蒙南下寻人</text>
+    <text lang="en" x="368" y="227" font-size="7.5" fill="#6366f1" text-anchor="middle">Ammon heads south</text><text lang="zh" x="368" y="227" font-size="7.5" fill="#6366f1" text-anchor="middle">阿蒙南下寻人</text>
 
     <!-- Waters of Mormon baptism marker -->
     <circle cx="380" cy="350" r="6" fill="#0369a1" stroke="#fff" stroke-width="1.5"/>
     <rect x="392" y="360" width="160" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#38bdf8" stroke-width="1.2"/>
-    <text x="472" y="373" text-anchor="middle" font-size="9" font-weight="bold" fill="#0c4a6e">摩门水域洗礼</text>
-    <text x="472" y="383" text-anchor="middle" font-size="7.5" fill="#0369a1">阿尔玛立教 · 204人受洗</text>
+    <text lang="en" x="472" y="373" text-anchor="middle" font-size="9" font-weight="bold" fill="#0c4a6e">Baptisms at Waters of Mormon</text><text lang="zh" x="472" y="373" text-anchor="middle" font-size="9" font-weight="bold" fill="#0c4a6e">摩门水域洗礼</text>
+    <text lang="en" x="472" y="383" text-anchor="middle" font-size="7.5" fill="#0369a1">Alma founds church · 204 baptized</text><text lang="zh" x="472" y="383" text-anchor="middle" font-size="7.5" fill="#0369a1">阿尔玛立教 · 204人受洗</text>
     <line x1="380" y1="356" x2="392" y2="368" stroke="#0369a1" stroke-width="1"/>
 
     <!-- Water labels -->
-    <text x="28" y="202" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="820" y="285" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="700" y="72" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text lang="en" x="28" y="202" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">Pacific Ocean</text><text lang="zh" x="28" y="202" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text lang="en" x="820" y="285" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">Caribbean Sea</text><text lang="zh" x="820" y="285" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text lang="en" x="700" y="72" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text><text lang="zh" x="700" y="72" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
 
     <!-- Territory labels -->
-    <text x="164" y="295" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">拉曼人</text>
-    <text x="440" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">柴雷罕拉地</text>
-    <text x="440" y="114" text-anchor="middle" font-size="8.5" fill="#0e7490">便雅悯/摩赛亚二世</text>
-    <text x="310" y="368" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">尼腓地</text>
-    <text x="310" y="381" text-anchor="middle" font-size="8" fill="#f97316">曾倪夫·挪亚·林海</text>
+    <text lang="en" x="164" y="295" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">Lamanites</text><text lang="zh" x="164" y="295" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">拉曼人</text>
+    <text lang="en" x="440" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">Land of Zarahemla</text><text lang="zh" x="440" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">柴雷罕拉地</text>
+    <text lang="en" x="440" y="114" text-anchor="middle" font-size="8.5" fill="#0e7490">Benjamin / Mosiah II</text><text lang="zh" x="440" y="114" text-anchor="middle" font-size="8.5" fill="#0e7490">便雅悯/摩赛亚二世</text>
+    <text lang="en" x="310" y="368" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">Land of Nephi</text><text lang="zh" x="310" y="368" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">尼腓地</text>
+    <text lang="en" x="310" y="381" text-anchor="middle" font-size="8" fill="#f97316">Zeniff · Noah · Limhi</text><text lang="zh" x="310" y="381" text-anchor="middle" font-size="8" fill="#f97316">曾倪夫·挪亚·林海</text>
 
     <!-- Title box -->
     <rect x="6" y="6" width="246" height="36" rx="5" fill="rgba(255,255,255,0.94)" stroke="#67e8f9" stroke-width="1.5"/>
-    <text x="14" y="21" fill="#164e63" font-size="11" font-weight="bold">摩赛亚书活动地图</text>
-    <text x="14" y="35" fill="#94a3b8" font-size="8.5">约公元前 130–91 年</text>
+    <text lang="en" x="14" y="21" fill="#164e63" font-size="11" font-weight="bold">Mosiah Activity Map</text><text lang="zh" x="14" y="21" fill="#164e63" font-size="11" font-weight="bold">摩赛亚书活动地图</text>
+    <text lang="en" x="14" y="35" fill="#94a3b8" font-size="8.5">c. 130–91 BC</text><text lang="zh" x="14" y="35" fill="#94a3b8" font-size="8.5">约公元前 130–91 年</text>
 
     <!-- Legend -->
     <rect x="6" y="50" width="168" height="156" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
     <polygon points="18,66 29,66 29,78 23.5,72 18,78" fill="#0e7490"/>
-    <text x="34" y="75" fill="#475569" font-size="9">柴雷罕拉圣殿</text>
+    <text lang="en" x="34" y="75" fill="#475569" font-size="9">Temple of Zarahemla</text><text lang="zh" x="34" y="75" fill="#475569" font-size="9">柴雷罕拉圣殿</text>
     <circle cx="22" cy="93" r="5" fill="#dc2626" stroke="#fff" stroke-width="1.5"/>
-    <text x="32" y="97" fill="#475569" font-size="9">尼腓城·挪亚王宫</text>
+    <text lang="en" x="32" y="97" fill="#475569" font-size="9">City of Nephi · Noah's Palace</text><text lang="zh" x="32" y="97" fill="#475569" font-size="9">尼腓城·挪亚王宫</text>
     <circle cx="22" cy="111" r="5" fill="#0369a1" stroke="#fff" stroke-width="1.5"/>
-    <text x="32" y="115" fill="#475569" font-size="9">摩门水域</text>
+    <text lang="en" x="32" y="115" fill="#475569" font-size="9">Waters of Mormon</text><text lang="zh" x="32" y="115" fill="#475569" font-size="9">摩门水域</text>
     <ellipse cx="22" cy="130" rx="10" ry="7" fill="rgba(236,254,255,0.65)" stroke="#67e8f9" stroke-width="1.2" stroke-dasharray="4,2"/>
-    <text x="36" y="134" fill="#475569" font-size="9">柴雷罕拉地</text>
+    <text lang="en" x="36" y="134" fill="#475569" font-size="9">Land of Zarahemla</text><text lang="zh" x="36" y="134" fill="#475569" font-size="9">柴雷罕拉地</text>
     <ellipse cx="22" cy="150" rx="10" ry="7" fill="rgba(254,215,170,0.35)" stroke="#f97316" stroke-width="1.2" stroke-dasharray="4,2"/>
-    <text x="36" y="154" fill="#475569" font-size="9">尼腓地</text>
+    <text lang="en" x="36" y="154" fill="#475569" font-size="9">Land of Nephi</text><text lang="zh" x="36" y="154" fill="#475569" font-size="9">尼腓地</text>
     <line x1="12" y1="168" x2="30" y2="168" stroke="#0e7490" stroke-width="2" marker-end="url(#msA)"/>
-    <text x="36" y="172" fill="#475569" font-size="9">逃回柴雷罕拉</text>
+    <text lang="en" x="36" y="172" fill="#475569" font-size="9">Escape to Zarahemla</text><text lang="zh" x="36" y="172" fill="#475569" font-size="9">逃回柴雷罕拉</text>
     <line x1="12" y1="186" x2="30" y2="186" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#msB)"/>
-    <text x="36" y="190" fill="#475569" font-size="9">拉曼入侵</text>
+    <text lang="en" x="36" y="190" fill="#475569" font-size="9">Lamanite invasion</text><text lang="zh" x="36" y="190" fill="#475569" font-size="9">拉曼入侵</text>
 
     <!-- Sub-areas within Land of Nephi -->
     <!-- 夏隆地 (Shilom) - NW of City of Nephi, given to Zeniff's people -->
     <ellipse cx="272" cy="272" rx="30" ry="18" fill="rgba(254,235,200,0.55)" stroke="#f97316" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="272" y="270" text-anchor="middle" font-size="8" font-weight="bold" fill="#7c2d12">夏隆地</text>
-    <text x="272" y="280" text-anchor="middle" font-size="7" fill="#9a3412">曾倪夫殖居</text>
+    <text lang="en" x="272" y="270" text-anchor="middle" font-size="8" font-weight="bold" fill="#7c2d12">Land of Shilom</text><text lang="zh" x="272" y="270" text-anchor="middle" font-size="8" font-weight="bold" fill="#7c2d12">夏隆地</text>
+    <text lang="en" x="272" y="280" text-anchor="middle" font-size="7" fill="#9a3412">Zeniff's settlement</text><text lang="zh" x="272" y="280" text-anchor="middle" font-size="7" fill="#9a3412">曾倪夫殖居</text>
 
     <!-- 歇隆地 (Shemlon) - Lamanite-adjacent, SW of Nephi -->
     <ellipse cx="225" cy="336" rx="27" ry="16" fill="rgba(254,202,202,0.45)" stroke="#f87171" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="225" y="334" text-anchor="middle" font-size="8" font-weight="bold" fill="#991b1b">歇隆地</text>
-    <text x="225" y="344" text-anchor="middle" font-size="7" fill="#b91c1c">拉曼人所据</text>
+    <text lang="en" x="225" y="334" text-anchor="middle" font-size="8" font-weight="bold" fill="#991b1b">Land of Shemlon</text><text lang="zh" x="225" y="334" text-anchor="middle" font-size="8" font-weight="bold" fill="#991b1b">歇隆地</text>
+    <text lang="en" x="225" y="344" text-anchor="middle" font-size="7" fill="#b91c1c">Lamanite territory</text><text lang="zh" x="225" y="344" text-anchor="middle" font-size="7" fill="#b91c1c">拉曼人所据</text>
 
     <!-- 赫兰地 (Helam) - Alma's settlement, in the wilderness between territories -->
     <ellipse cx="452" cy="250" rx="36" ry="20" fill="rgba(253,230,138,0.5)" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4,2"/>
-    <text x="452" y="248" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e">希兰地</text>
-    <text x="452" y="259" text-anchor="middle" font-size="7" fill="#b45309">阿尔玛众所建</text>
+    <text lang="en" x="452" y="248" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e">Land of Helam</text><text lang="zh" x="452" y="248" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e">希兰地</text>
+    <text lang="en" x="452" y="259" text-anchor="middle" font-size="7" fill="#b45309">Alma's people's city</text><text lang="zh" x="452" y="259" text-anchor="middle" font-size="7" fill="#b45309">阿尔玛众所建</text>
 
   </svg>
-  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px"><span lang="en">※ Locations approximate; academically disputed; mainstream view favors Mesoamerica</span><span lang="zh">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</span></div>
 </div>
 
-<!-- ── 章节梗概分布 ── -->
+<!-- ── 章节概览 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节梗概分布 · CHAPTER OVERVIEW</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Chapter Overview</span><span lang="zh">章节概览</span></div>
   <svg viewBox="0 0 860 316" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
-    <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">六段叙事（摩赛亚书 29 章分布）</text>
+    <text lang="en" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">Six Narratives (Mosiah, 29 chapters)</text><text lang="zh" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">六段叙事（摩赛亚书 29 章分布）</text>
 
     <!-- 章数标签（在色块上方） -->
-    <text x="128" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">6章</text>
-    <text x="272" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">5章</text>
-    <text x="416" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#be123c">6章</text>
-    <text x="534" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4ed8">3章</text>
-    <text x="639" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#047857">5章</text>
-    <text x="757" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">4章</text>
+    <text lang="en" x="128" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">6 ch.</text><text lang="zh" x="128" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">6章</text>
+    <text lang="en" x="272" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">5 ch.</text><text lang="zh" x="272" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">5章</text>
+    <text lang="en" x="416" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#be123c">6 ch.</text><text lang="zh" x="416" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#be123c">6章</text>
+    <text lang="en" x="534" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4ed8">3 ch.</text><text lang="zh" x="534" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4ed8">3章</text>
+    <text lang="en" x="639" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#047857">5 ch.</text><text lang="zh" x="639" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#047857">5章</text>
+    <text lang="en" x="757" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">4 ch.</text><text lang="zh" x="757" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">4章</text>
 
     <!-- 色块（按章数等比，总宽760px，x从50起） -->
     <!-- S1: 第1–6章 (6/29=157px) -->
     <rect x="50"  y="60" width="157" height="52" fill="#fef9c3"/>
-    <text x="128" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#78350f">便雅悯圣约</text>
-    <text x="128" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">讲道·立约·嗣位</text>
+    <text lang="en" x="128" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#78350f">Benjamin's Covenant</text><text lang="zh" x="128" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#78350f">便雅悯圣约</text>
+    <text lang="en" x="128" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">Sermon · Covenant · Succession</text><text lang="zh" x="128" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">讲道·立约·嗣位</text>
 
     <!-- S2: 第7–11章 (5/29=131px) -->
     <rect x="207" y="60" width="131" height="52" fill="#f5f3ff"/>
-    <text x="272" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#4c1d95">南征·挪亚腐败</text>
-    <text x="272" y="97"  text-anchor="middle" font-size="8"    fill="#7c3aed">挪亚极恶横征</text>
+    <text lang="en" x="272" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#4c1d95">South Expedition · Noah's Corruption</text><text lang="zh" x="272" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#4c1d95">南征·挪亚腐败</text>
+    <text lang="en" x="272" y="97"  text-anchor="middle" font-size="8"    fill="#7c3aed">Noah's wickedness and heavy taxes</text><text lang="zh" x="272" y="97"  text-anchor="middle" font-size="8"    fill="#7c3aed">挪亚极恶横征</text>
 
     <!-- S3: 第12–17章 (6/29=157px) -->
     <rect x="338" y="60" width="157" height="52" fill="#fee2e2"/>
-    <text x="416" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#9f1239">阿宾纳代殉道</text>
-    <text x="416" y="97"  text-anchor="middle" font-size="8"    fill="#be123c">先知·火中殉道</text>
+    <text lang="en" x="416" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#9f1239">Abinadi's Martyrdom</text><text lang="zh" x="416" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#9f1239">阿宾纳代殉道</text>
+    <text lang="en" x="416" y="97"  text-anchor="middle" font-size="8"    fill="#be123c">Prophet martyred in flames</text><text lang="zh" x="416" y="97"  text-anchor="middle" font-size="8"    fill="#be123c">先知·火中殉道</text>
 
     <!-- S4: 第18–20章 (3/29=79px) -->
     <rect x="495" y="60" width="79"  height="52" fill="#dbeafe"/>
-    <text x="534" y="81"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#1e3a8a">摩门立教</text>
-    <text x="534" y="97"  text-anchor="middle" font-size="7.5"  fill="#1d4ed8">立会受洗</text>
+    <text lang="en" x="534" y="81"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#1e3a8a">Church Founded</text><text lang="zh" x="534" y="81"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#1e3a8a">摩门立教</text>
+    <text lang="en" x="534" y="97"  text-anchor="middle" font-size="7.5"  fill="#1d4ed8">Organized & baptized</text><text lang="zh" x="534" y="97"  text-anchor="middle" font-size="7.5"  fill="#1d4ed8">立会受洗</text>
 
     <!-- S5: 第21–25章 (5/29=131px) -->
     <rect x="574" y="60" width="131" height="52" fill="#d1fae5"/>
-    <text x="639" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#065f46">两批苦难归回</text>
-    <text x="639" y="97"  text-anchor="middle" font-size="8"    fill="#059669">神减担·夜逃归</text>
+    <text lang="en" x="639" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#065f46">Two Groups Return</text><text lang="zh" x="639" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#065f46">两批苦难归回</text>
+    <text lang="en" x="639" y="97"  text-anchor="middle" font-size="8"    fill="#059669">God lightens burdens · night escape</text><text lang="zh" x="639" y="97"  text-anchor="middle" font-size="8"    fill="#059669">神减担·夜逃归</text>
 
     <!-- S6: 第26–29章 (4/29=105px) -->
     <rect x="705" y="60" width="105" height="52" fill="#cffafe"/>
-    <text x="757" y="81"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#164e63">归改·王制终结</text>
-    <text x="757" y="97"  text-anchor="middle" font-size="8"    fill="#0e7490">废王立法</text>
+    <text lang="en" x="757" y="81"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#164e63">Conversion · End of Kingship</text><text lang="zh" x="757" y="81"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#164e63">归改·王制终结</text>
+    <text lang="en" x="757" y="97"  text-anchor="middle" font-size="8"    fill="#0e7490">King abolished; judges established</text><text lang="zh" x="757" y="97"  text-anchor="middle" font-size="8"    fill="#0e7490">废王立法</text>
 
     <!-- 分隔线（色块接缝处白线） -->
     <line x1="207" y1="60" x2="207" y2="112" stroke="#fff" stroke-width="1.5"/>
@@ -317,47 +491,47 @@ ul.np{padding:0}
 
     <!-- 色块下方：人物·章节·梗概 -->
     <!-- S1 -->
-    <text x="128" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#78350f">便雅悯王</text>
-    <text x="128" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1–6 章</text>
-    <text x="128" y="154" text-anchor="middle" font-size="8"   fill="#64748b">大会圣约·立摩赛亚为王</text>
-    <text x="128" y="166" text-anchor="middle" font-size="8"   fill="#64748b">约前 130–121 年</text>
+    <text lang="en" x="128" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#78350f">King Benjamin</text><text lang="zh" x="128" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#78350f">便雅悯王</text>
+    <text lang="en" x="128" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 1–6</text><text lang="zh" x="128" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1–6 章</text>
+    <text lang="en" x="128" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Great assembly covenant · crowns Mosiah</text><text lang="zh" x="128" y="154" text-anchor="middle" font-size="8"   fill="#64748b">大会圣约·立摩赛亚为王</text>
+    <text lang="en" x="128" y="166" text-anchor="middle" font-size="8"   fill="#64748b">c. 130–121 BC</text><text lang="zh" x="128" y="166" text-anchor="middle" font-size="8"   fill="#64748b">约前 130–121 年</text>
 
     <!-- S2 -->
-    <text x="272" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">西尼夫 · 挪亚</text>
-    <text x="272" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 7–11 章</text>
-    <text x="272" y="154" text-anchor="middle" font-size="8"   fill="#64748b">南归建国·挪亚腐败横征</text>
-    <text x="272" y="166" text-anchor="middle" font-size="8"   fill="#64748b">约前 200–150 年（回溯）</text>
+    <text lang="en" x="272" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Zeniff · Noah</text><text lang="zh" x="272" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">西尼夫 · 挪亚</text>
+    <text lang="en" x="272" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 7–11</text><text lang="zh" x="272" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 7–11 章</text>
+    <text lang="en" x="272" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Return south; build nation; Noah corrupts</text><text lang="zh" x="272" y="154" text-anchor="middle" font-size="8"   fill="#64748b">南归建国·挪亚腐败横征</text>
+    <text lang="en" x="272" y="166" text-anchor="middle" font-size="8"   fill="#64748b">c. 200–150 BC (flashback)</text><text lang="zh" x="272" y="166" text-anchor="middle" font-size="8"   fill="#64748b">约前 200–150 年（回溯）</text>
 
     <!-- S3 -->
-    <text x="416" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">阿宾纳代</text>
-    <text x="416" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 12–17 章</text>
-    <text x="416" y="154" text-anchor="middle" font-size="8"   fill="#64748b">先知被捕·引以赛亚证道</text>
-    <text x="416" y="166" text-anchor="middle" font-size="8"   fill="#64748b">火中殉道·阿尔玛逃立教</text>
+    <text lang="en" x="416" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">Abinadi</text><text lang="zh" x="416" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">阿宾纳代</text>
+    <text lang="en" x="416" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 12–17</text><text lang="zh" x="416" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 12–17 章</text>
+    <text lang="en" x="416" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Prophet arrested · quotes Isaiah</text><text lang="zh" x="416" y="154" text-anchor="middle" font-size="8"   fill="#64748b">先知被捕·引以赛亚证道</text>
+    <text lang="en" x="416" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Martyred in fire · Alma founds church</text><text lang="zh" x="416" y="166" text-anchor="middle" font-size="8"   fill="#64748b">火中殉道·阿尔玛逃立教</text>
 
     <!-- S4 -->
-    <text x="534" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">阿尔玛长老</text>
-    <text x="534" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 18–20 章</text>
-    <text x="534" y="154" text-anchor="middle" font-size="8"   fill="#64748b">摩门水域 204 人受洗</text>
-    <text x="534" y="166" text-anchor="middle" font-size="8"   fill="#64748b">逃祭司掳妻·两族议和</text>
+    <text lang="en" x="534" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">Alma the Elder</text><text lang="zh" x="534" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">阿尔玛长老</text>
+    <text lang="en" x="534" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 18–20</text><text lang="zh" x="534" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 18–20 章</text>
+    <text lang="en" x="534" y="154" text-anchor="middle" font-size="8"   fill="#64748b">204 baptized at Waters of Mormon</text><text lang="zh" x="534" y="154" text-anchor="middle" font-size="8"   fill="#64748b">摩门水域 204 人受洗</text>
+    <text lang="en" x="534" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Escaped priests kidnap women; peace made</text><text lang="zh" x="534" y="166" text-anchor="middle" font-size="8"   fill="#64748b">逃祭司掳妻·两族议和</text>
 
     <!-- S5 -->
-    <text x="639" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">林海 · 阿尔玛众</text>
-    <text x="639" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 21–25 章</text>
-    <text x="639" y="154" text-anchor="middle" font-size="8"   fill="#64748b">两批归民返柴雷罕拉</text>
-    <text x="639" y="166" text-anchor="middle" font-size="8"   fill="#64748b">神减担·守卫眠·夜逃脱</text>
+    <text lang="en" x="639" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">Limhi · Alma's people</text><text lang="zh" x="639" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">林海 · 阿尔玛众</text>
+    <text lang="en" x="639" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 21–25</text><text lang="zh" x="639" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 21–25 章</text>
+    <text lang="en" x="639" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Both groups return to Zarahemla</text><text lang="zh" x="639" y="154" text-anchor="middle" font-size="8"   fill="#64748b">两批归民返柴雷罕拉</text>
+    <text lang="en" x="639" y="166" text-anchor="middle" font-size="8"   fill="#64748b">God lightens burdens; guards sleep; escape</text><text lang="zh" x="639" y="166" text-anchor="middle" font-size="8"   fill="#64748b">神减担·守卫眠·夜逃脱</text>
 
     <!-- S6 -->
-    <text x="757" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">摩赛亚二世</text>
-    <text x="757" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 26–29 章</text>
-    <text x="757" y="154" text-anchor="middle" font-size="8"   fill="#64748b">小阿归改·废王建法官制</text>
-    <text x="757" y="166" text-anchor="middle" font-size="8"   fill="#64748b">约前 100–91 年</text>
+    <text lang="en" x="757" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">Mosiah II</text><text lang="zh" x="757" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">摩赛亚二世</text>
+    <text lang="en" x="757" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 26–29</text><text lang="zh" x="757" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 26–29 章</text>
+    <text lang="en" x="757" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Alma the Younger converts; judges established</text><text lang="zh" x="757" y="154" text-anchor="middle" font-size="8"   fill="#64748b">小阿归改·废王建法官制</text>
+    <text lang="en" x="757" y="166" text-anchor="middle" font-size="8"   fill="#64748b">c. 100–91 BC</text><text lang="zh" x="757" y="166" text-anchor="middle" font-size="8"   fill="#64748b">约前 100–91 年</text>
 
     <!-- 注释 -->
-    <text x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩赛亚书第 7–25 章为双线叙事：柴雷罕拉现在时序 与 尼腓地回溯时序 交织进行</text>
+    <text lang="en" x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ Mosiah chs. 7–25 weave two narrative threads: the present in Zarahemla and a flashback in the Land of Nephi</text><text lang="zh" x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩赛亚书第 7–25 章为双线叙事：柴雷罕拉现在时序 与 尼腓地回溯时序 交织进行</text>
 
     <!-- timeline section -->
     <line x1="50" y1="210" x2="810" y2="210" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 200–91 年（含回溯）</text>
+    <text lang="en" x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Timeline · 200–91 BC (including flashback)</text><text lang="zh" x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 200–91 年（含回溯）</text>
 
     <!-- axis (760px / 109yr ≈ 6.97px/yr, x = 50 + (200 - year_BC) * 6.97) -->
     <line x1="50" y1="268" x2="810" y2="268" stroke="#d1d5db" stroke-width="1.5"/>
@@ -366,196 +540,196 @@ ul.np{padding:0}
     <circle cx="50"  cy="268" r="3.5" fill="#7c3aed"/>
     <line x1="50"  y1="254" x2="50"  y2="264" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="50"  y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">BC 200</text>
-    <text x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">西尼夫率众南征建国</text>
+    <text lang="en" x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">Zeniff leads people south to build nation</text><text lang="zh" x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">西尼夫率众南征建国</text>
 
     <!-- BC 150 · below -->
     <circle cx="399" cy="268" r="3.5" fill="#be123c"/>
     <line x1="399" y1="272" x2="399" y2="284" stroke="#be123c" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="399" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#be123c">BC 150</text>
-    <text x="399" y="305" text-anchor="middle" font-size="7.5" fill="#475569">阿宾纳代火中殉道</text>
+    <text lang="en" x="399" y="305" text-anchor="middle" font-size="7.5" fill="#475569">Abinadi martyred in flames</text><text lang="zh" x="399" y="305" text-anchor="middle" font-size="7.5" fill="#475569">阿宾纳代火中殉道</text>
 
     <!-- BC 130 · above -->
     <circle cx="538" cy="268" r="3.5" fill="#d97706"/>
     <line x1="538" y1="254" x2="538" y2="264" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="538" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">BC 130</text>
-    <text x="538" y="240" text-anchor="middle" font-size="7.5" fill="#475569">便雅悯王圣约大会</text>
+    <text lang="en" x="538" y="240" text-anchor="middle" font-size="7.5" fill="#475569">King Benjamin's covenant assembly</text><text lang="zh" x="538" y="240" text-anchor="middle" font-size="7.5" fill="#475569">便雅悯王圣约大会</text>
 
     <!-- BC 121 · below -->
     <circle cx="601" cy="268" r="3.5" fill="#047857"/>
     <line x1="601" y1="272" x2="601" y2="284" stroke="#047857" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="601" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#047857">BC 121</text>
-    <text x="601" y="305" text-anchor="middle" font-size="7.5" fill="#475569">两批归民返柴雷罕拉</text>
+    <text lang="en" x="601" y="305" text-anchor="middle" font-size="7.5" fill="#475569">Both groups return to Zarahemla</text><text lang="zh" x="601" y="305" text-anchor="middle" font-size="7.5" fill="#475569">两批归民返柴雷罕拉</text>
 
     <!-- BC 91 · above -->
     <circle cx="810" cy="268" r="3.5" fill="#0e7490"/>
     <line x1="810" y1="254" x2="810" y2="264" stroke="#0e7490" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="810" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">BC 91</text>
-    <text x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">废王建法判·阿尔玛首任</text>
+    <text lang="en" x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">Kingship ends; Alma first chief judge</text><text lang="zh" x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">废王建法判·阿尔玛首任</text>
   </svg>
 </div>
 
 <!-- ══ 便雅悯圣约 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">讲道</div></div>
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text"><span lang="en">Sermon</span><span lang="zh">讲道</span></div></div>
 <div class="n amb">
   <div class="nh">
-    <span class="nl">第1–6章</span><span class="nt">便雅悯圣约</span><span class="nw">柴雷罕拉圣殿</span><span class="nc">约前 124 年</span>
+    <span class="nl"><span lang="en">Ch.1–6</span><span lang="zh">第1–6章</span></span><span class="nt"><span lang="en">Benjamin's Covenant</span><span lang="zh">便雅悯圣约</span></span><span class="nw"><span lang="en">Temple in Zarahemla</span><span lang="zh">柴雷罕拉圣殿</span></span><span class="nc"><span lang="en">c. 124 BC</span><span lang="zh">约前 124 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">1</span>便雅衰年，命摩赛亚聚民于殿，授古版，立为新王</li>
-    <li><span class="cn">2</span>民帐环殿，便雅演道：事神如役主，众皆乞丐，莫夸己善</li>
-    <li><span class="cn">3</span>天使临，示基督将降：受难·复活·救世，自然人须赖赎恩</li>
-    <li><span class="cn">4</span>众感恩倒地，罪得赦；便雅训：济贫持信，勿轻断乞丐</li>
-    <li><span class="cn">5</span>众立约担基督名；便雅训：恒守者名录生命册</li>
-    <li><span class="cn">6</span>摩赛亚嗣位，录众盟名；便雅三载后薨</li>
+    <li><span class="cn">1</span><span lang="en">Benjamin in old age commands Mosiah to gather the people at the temple; passes on the ancient records; makes him king</span><span lang="zh">便雅衰年，命摩赛亚聚民于殿，授古版，立为新王</span></li>
+    <li><span class="cn">2</span><span lang="en">People camp around the temple; Benjamin teaches: serve God as your master; all are beggars before God; do not boast of goodness</span><span lang="zh">民帐环殿，便雅演道：事神如役主，众皆乞丐，莫夸己善</span></li>
+    <li><span class="cn">3</span><span lang="en">An angel reveals Christ will come: his suffering, resurrection, and redemption; the natural man must rely on the Atonement</span><span lang="zh">天使临，示基督将降：受难·复活·救世，自然人须赖赎恩</span></li>
+    <li><span class="cn">4</span><span lang="en">The people fall to earth in gratitude; sins forgiven; Benjamin teaches: care for the poor; do not judge beggars</span><span lang="zh">众感恩倒地，罪得赦；便雅训：济贫持信，勿轻断乞丐</span></li>
+    <li><span class="cn">5</span><span lang="en">The people covenant to take Christ's name; Benjamin teaches: the faithful will be recorded in the book of life</span><span lang="zh">众立约担基督名；便雅训：恒守者名录生命册</span></li>
+    <li><span class="cn">6</span><span lang="en">Mosiah succeeds to the throne; names of the covenanters recorded; Benjamin dies three years later</span><span lang="zh">摩赛亚嗣位，录众盟名；便雅三载后薨</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">便雅悯 <span>Benjamin · 义王</span></div>
-    <div class="nm">摩赛亚二世 <span>Mosiah II</span></div>
+    <div class="nm"><span lang="en">Benjamin</span><span lang="zh">便雅悯</span> <span><span lang="en">righteous king</span><span lang="zh">义王</span></span></div>
+    <div class="nm"><span lang="en">Mosiah II</span><span lang="zh">摩赛亚二世</span> <span><span lang="en">last king</span><span lang="zh">末代王</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 南征·挪亚腐败 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">南征</div></div>
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text"><span lang="en">South</span><span lang="zh">南征</span></div></div>
 <div class="n vio">
   <div class="nh">
-    <span class="nl">第7–11章</span><span class="nt">南征·挪亚腐败</span><span class="nw">柴雷罕拉→李海尼腓地</span><span class="nc">约前 200–100 年</span>
+    <span class="nl"><span lang="en">Ch.7–11</span><span lang="zh">第7–11章</span></span><span class="nt"><span lang="en">Southern Expedition · Noah's Corruption</span><span lang="zh">南征·挪亚腐败</span></span><span class="nw"><span lang="en">Zarahemla → Land of Lehi-Nephi</span><span lang="zh">柴雷罕拉→李海尼腓地</span></span><span class="nc"><span lang="en">c. 200–100 BC</span><span lang="zh">约前 200–100 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">7</span>摩赛亚遣阿蒙十六人南下；被禁获释，见林海，叹民陷苦役</li>
-    <li><span class="cn">8</span>林海示二十四金版；阿蒙论先见之职，约请摩赛亚以解释者译之</li>
-    <li><span class="cn">9</span>曾倪夫述：立约得尼腓地，拉曼毁盟，首战大胜</li>
-    <li><span class="cn">10</span>再战拉曼大胜；溯两族积怨之源；曾倪夫年迈禅位</li>
-    <li><span class="cn">11</span>挪亚重税纵淫，宫台沉酒色；阿宾纳代初来警世，遭缉出逃</li>
+    <li><span class="cn">7</span><span lang="en">Mosiah sends Ammon and sixteen men south; they are imprisoned then freed; find King Limhi who laments his people's bondage</span><span lang="zh">摩赛亚遣阿蒙十六人南下；被禁获释，见林海，叹民陷苦役</span></li>
+    <li><span class="cn">8</span><span lang="en">Limhi shows the twenty-four gold plates; Ammon explains the gift of seers; they plan to have Mosiah translate them</span><span lang="zh">林海示二十四金版；阿蒙论先见之职，约请摩赛亚以解释者译之</span></li>
+    <li><span class="cn">9</span><span lang="en">Zeniff's record: they covenanted for the Land of Nephi; Lamanites broke the treaty; they won the first battle</span><span lang="zh">曾倪夫述：立约得尼腓地，拉曼毁盟，首战大胜</span></li>
+    <li><span class="cn">10</span><span lang="en">Another great victory; the origins of both peoples' grievances explored; aging Zeniff abdicates</span><span lang="zh">再战拉曼大胜；溯两族积怨之源；曾倪夫年迈禅位</span></li>
+    <li><span class="cn">11</span><span lang="en">Noah taxes heavily and indulges in wickedness; towers and palaces given to debauchery; Abinadi first comes to warn and is pursued, then flees</span><span lang="zh">挪亚重税纵淫，宫台沉酒色；阿宾纳代初来警世，遭缉出逃</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">阿蒙 <span>Ammon · 16人领队 · 非四子</span></div>
-    <div class="nm">亚玛力 <span>Amaleki</span></div>
-    <div class="nm">希连 <span>Helem</span></div>
-    <div class="nm">海姆 <span>Hem</span></div>
-    <div class="nm">林海 <span>Limhi · 曾倪夫之孙</span></div>
-    <div class="nm">曾倪夫 <span>Zeniff · 建国者</span></div>
-    <div class="nm">挪亚 <span>Noah · 极恶</span></div>
+    <div class="nm"><span lang="en">Ammon</span><span lang="zh">阿蒙</span> <span><span lang="en">leader of 16 · not Mosiah's son</span><span lang="zh">16人领队·非四子</span></span></div>
+    <div class="nm"><span lang="en">Amaleki</span><span lang="zh">亚玛力</span> <span><span lang="en">expedition member</span><span lang="zh">探险队员</span></span></div>
+    <div class="nm"><span lang="en">Helem</span><span lang="zh">希连</span> <span><span lang="en">expedition member</span><span lang="zh">探险队员</span></span></div>
+    <div class="nm"><span lang="en">Hem</span><span lang="zh">海姆</span> <span><span lang="en">expedition member</span><span lang="zh">探险队员</span></span></div>
+    <div class="nm"><span lang="en">Limhi</span><span lang="zh">林海</span> <span><span lang="en">Zeniff's grandson</span><span lang="zh">曾倪夫之孙</span></span></div>
+    <div class="nm"><span lang="en">Zeniff</span><span lang="zh">曾倪夫</span> <span><span lang="en">founder</span><span lang="zh">建国者</span></span></div>
+    <div class="nm"><span lang="en">Noah</span><span lang="zh">挪亚</span> <span><span lang="en">wicked king</span><span lang="zh">极恶之王</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 阿宾纳代殉道 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">殉道</div></div>
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text"><span lang="en">Martyr</span><span lang="zh">殉道</span></div></div>
 <div class="n ros">
   <div class="nh">
-    <span class="nl">第12–17章</span><span class="nt">阿宾纳代殉道</span><span class="nw">尼腓城</span><span class="nc">约前 150 年</span>
+    <span class="nl"><span lang="en">Ch.12–17</span><span lang="zh">第12–17章</span></span><span class="nt"><span lang="en">Abinadi's Martyrdom</span><span lang="zh">阿宾纳代殉道</span></span><span class="nw"><span lang="en">City of Nephi</span><span lang="zh">尼腓城</span></span><span class="nc"><span lang="en">c. 150 BC</span><span lang="zh">约前 150 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">12</span>阿宾纳代乔装重临，被捕下狱；当庭斥众祭司不识救世之道</li>
-    <li><span class="cn">13</span>圣灵护体，众不能伤；颂十诫，论祭司盲于救主</li>
-    <li><span class="cn">14</span>诵以赛亚书，论弥赛亚受难，替众担罪之义</li>
-    <li><span class="cn">15</span>论基督为父亦为子；义者借赎罪复活蒙救</li>
-    <li><span class="cn">16</span>论复活与末日审判；信者蒙救，顽抗者永沉苦</li>
-    <li><span class="cn">17</span>挪亚命焚；阿宾纳代预言其亦死于火；阿尔玛求情遭逐；火中殉道</li>
+    <li><span class="cn">12</span><span lang="en">Abinadi returns in disguise; arrested and imprisoned; rebukes the priests in court for not knowing the way of salvation</span><span lang="zh">阿宾纳代乔装重临，被捕下狱；当庭斥众祭司不识救世之道</span></li>
+    <li><span class="cn">13</span><span lang="en">Transfigured by the Spirit, they cannot harm him; recites the Ten Commandments; rebukes priests for blindness to the Redeemer</span><span lang="zh">圣灵护体，众不能伤；颂十诫，论祭司盲于救主</span></li>
+    <li><span class="cn">14</span><span lang="en">Quotes Isaiah; teaches on the Messiah's suffering and vicarious atonement</span><span lang="zh">诵以赛亚书，论弥赛亚受难，替众担罪之义</span></li>
+    <li><span class="cn">15</span><span lang="en">Teaches that Christ is both Father and Son; the righteous are resurrected and saved through the Atonement</span><span lang="zh">论基督为父亦为子；义者借赎罪复活蒙救</span></li>
+    <li><span class="cn">16</span><span lang="en">On resurrection and final judgment; believers are saved; the stubborn are condemned</span><span lang="zh">论复活与末日审判；信者蒙救，顽抗者永沉苦</span></li>
+    <li><span class="cn">17</span><span lang="en">Noah commands him burned; Abinadi prophesies Noah will also die by fire; Alma pleads for him and is expelled; Abinadi is martyred in the flames</span><span lang="zh">挪亚命焚；阿宾纳代预言其亦死于火；阿尔玛求情遭逐；火中殉道</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">阿宾纳代 <span>Abinadi · 先知殉道</span></div>
-    <div class="nm">阿尔玛（长老）<span>Alma the Elder</span></div>
+    <div class="nm"><span lang="en">Abinadi</span><span lang="zh">阿宾纳代</span> <span><span lang="en">martyred prophet</span><span lang="zh">先知殉道</span></span></div>
+    <div class="nm"><span lang="en">Alma Sr.</span><span lang="zh">阿尔玛（长老）</span><span><span lang="en">church founder</span><span lang="zh">立教者</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 摩门立教·挪亚之终 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#0369a1"></div><div class="ph-text">立教</div></div>
+<div class="ph"><div class="ph-dot" style="background:#0369a1"></div><div class="ph-text"><span lang="en">Church</span><span lang="zh">立教</span></div></div>
 <div class="n blu">
   <div class="nh">
-    <span class="nl">第18–20章</span><span class="nt">摩门立教·挪亚之终</span><span class="nw">摩门水域·尼腓地</span><span class="nc">约前 147 年</span>
+    <span class="nl"><span lang="en">Ch.18–20</span><span lang="zh">第18–20章</span></span><span class="nt"><span lang="en">Church Founded · End of Noah</span><span lang="zh">摩门立教·挪亚之终</span></span><span class="nw"><span lang="en">Waters of Mormon · Land of Nephi</span><span lang="zh">摩门水域·尼腓地</span></span><span class="nc"><span lang="en">c. 147 BC</span><span lang="zh">约前 147 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">18</span>阿尔玛于摩门水域秘立教会；希兰首受洗，204人入水，立会众</li>
-    <li><span class="cn">19</span>拉曼压境；挪亚令弃妻逃，基甸举刃阻；妻女跪感拉曼；众怒焚挪亚，林海嗣位</li>
-    <li><span class="cn">20</span>逃祭司掳拉曼女，祸嫁林海；基甸析明祸源，两族议和</li>
+    <li><span class="cn">18</span><span lang="en">Alma secretly establishes the church at the Waters of Mormon; Helam is first baptized; 204 people are baptized and the church is organized</span><span lang="zh">阿尔玛于摩门水域秘立教会；希兰首受洗，204人入水，立会众</span></li>
+    <li><span class="cn">19</span><span lang="en">Lamanites attack; Noah orders men to abandon their wives; Gideon draws his sword to stop Noah; the women plead with the Lamanites; the angry people burn Noah; Limhi succeeds</span><span lang="zh">拉曼压境；挪亚令弃妻逃，基甸举刃阻；妻女跪感拉曼；众怒焚挪亚，林海嗣位</span></li>
+    <li><span class="cn">20</span><span lang="en">Noah's escaped priests kidnap Lamanite women; blame falls on Limhi; Gideon explains the true cause; the two peoples make peace</span><span lang="zh">逃祭司掳拉曼女，祸嫁林海；基甸析明祸源，两族议和</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">希兰 <span>Helam · 首受洗者</span></div>
-    <div class="nm">基甸 <span>Gideon · 义勇</span></div>
-    <div class="nm">林海 <span>Limhi · 挪亚之子</span></div>
-    <div class="nm">阿尔玛（长老）<span>Alma the Elder</span></div>
+    <div class="nm"><span lang="en">Helam</span><span lang="zh">希兰</span> <span><span lang="en">first baptized</span><span lang="zh">首受洗者</span></span></div>
+    <div class="nm"><span lang="en">Gideon</span><span lang="zh">基甸</span> <span><span lang="en">righteous champion</span><span lang="zh">义勇之士</span></span></div>
+    <div class="nm"><span lang="en">Limhi</span><span lang="zh">林海</span> <span><span lang="en">Noah's son</span><span lang="zh">挪亚之子</span></span></div>
+    <div class="nm"><span lang="en">Alma Sr.</span><span lang="zh">阿尔玛（长老）</span><span><span lang="en">leads converts</span><span lang="zh">领归改众</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 两批苦难归回 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">归回</div></div>
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text"><span lang="en">Return</span><span lang="zh">归回</span></div></div>
 <div class="n tea">
   <div class="nh">
-    <span class="nl">第21–25章</span><span class="nt">两批苦难归回</span><span class="nw">尼腓地→柴雷罕拉</span><span class="nc">约前 121–91 年</span>
+    <span class="nl"><span lang="en">Ch.21–25</span><span lang="zh">第21–25章</span></span><span class="nt"><span lang="en">Two Groups Return Through Hardship</span><span lang="zh">两批苦难归回</span></span><span class="nw"><span lang="en">Land of Nephi → Zarahemla</span><span lang="zh">尼腓地→柴雷罕拉</span></span><span class="nc"><span lang="en">c. 121–91 BC</span><span lang="zh">约前 121–91 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">21</span>林海三战皆溃，重赋苦撑；阿蒙至，众欢泣，谋逃归</li>
-    <li><span class="cn">22</span>基甸献醉卒之计；众趁夜携家北逃，归入柴雷罕拉</li>
-    <li><span class="cn">23</span>阿尔玛众建希兰地；拉曼来附，艾缪伦掌权，众沦为奴</li>
-    <li><span class="cn">24</span>艾缪伦禁祷，众心祷；神减其担，守卫沉睡，众夜逃脱困</li>
-    <li><span class="cn">25</span>两批归民聚柴雷罕拉；摩赛亚诵众记，命阿尔玛立众会</li>
+    <li><span class="cn">21</span><span lang="en">Limhi loses three battles; survives under heavy tribute; Ammon arrives; the people rejoice and weep; they plan their escape</span><span lang="zh">林海三战皆溃，重赋苦撑；阿蒙至，众欢泣，谋逃归</span></li>
+    <li><span class="cn">22</span><span lang="en">Gideon devises the plan to intoxicate the guards; the people flee north at night with their families and reach Zarahemla</span><span lang="zh">基甸献醉卒之计；众趁夜携家北逃，归入柴雷罕拉</span></li>
+    <li><span class="cn">23</span><span lang="en">Alma's people build the city of Helam; Lamanites arrive; Amulon gains power; the people are enslaved</span><span lang="zh">阿尔玛众建希兰地；拉曼来附，艾缪伦掌权，众沦为奴</span></li>
+    <li><span class="cn">24</span><span lang="en">Amulon forbids prayer; the people pray in their hearts; God lightens their burdens; the guards fall asleep; the people escape in the night</span><span lang="zh">艾缪伦禁祷，众心祷；神减其担，守卫沉睡，众夜逃脱困</span></li>
+    <li><span class="cn">25</span><span lang="en">Both groups of refugees gather in Zarahemla; Mosiah reads their records to the people; commands Alma to establish churches throughout the land</span><span lang="zh">两批归民聚柴雷罕拉；摩赛亚诵众记，命阿尔玛立众会</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">林海 <span>Limhi · 义王</span></div>
-    <div class="nm">阿蒙 <span>Ammon · 救援者</span></div>
-    <div class="nm">基甸 <span>Gideon · 谋略者</span></div>
-    <div class="nm">艾缪伦 <span>Amulon · 前祭司</span></div>
+    <div class="nm"><span lang="en">Limhi</span><span lang="zh">林海</span> <span><span lang="en">righteous king</span><span lang="zh">义王</span></span></div>
+    <div class="nm"><span lang="en">Ammon</span><span lang="zh">阿蒙</span> <span><span lang="en">rescuer</span><span lang="zh">救援者</span></span></div>
+    <div class="nm"><span lang="en">Gideon</span><span lang="zh">基甸</span> <span><span lang="en">strategist</span><span lang="zh">谋略者</span></span></div>
+    <div class="nm"><span lang="en">Amulon</span><span lang="zh">艾缪伦</span> <span><span lang="en">former priest · persecutor</span><span lang="zh">前祭司·迫害者</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 归改·王制终结 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text">终结</div></div>
+<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text"><span lang="en">End</span><span lang="zh">终结</span></div></div>
 <div class="n cya">
   <div class="nh">
-    <span class="nl">第26–29章</span><span class="nt">归改·王制终结</span><span class="nw">柴雷罕拉</span><span class="nc">约前 100–91 年</span>
+    <span class="nl"><span lang="en">Ch.26–29</span><span lang="zh">第26–29章</span></span><span class="nt"><span lang="en">Conversion · End of Kingship</span><span lang="zh">归改·王制终结</span></span><span class="nw"><span lang="en">Zarahemla</span><span lang="zh">柴雷罕拉</span></span><span class="nc"><span lang="en">c. 100–91 BC</span><span lang="zh">约前 100–91 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">26</span>少壮不信，犯者聚讼；神示阿尔玛：信者入会，不悔者逐出</li>
-    <li><span class="cn">27</span>小阿与四子迫害教会；天使降，小阿昏倒三日，醒而归改，四子亦转化</li>
-    <li><span class="cn">28</span>摩赛亚译二十四金版；四子辞王位，赴拉曼传道</li>
-    <li><span class="cn">29</span>废世袭，立法官制；民选小阿任首席法官；摩赛亚逝，寿六十三</li>
+    <li><span class="cn">26</span><span lang="en">Youth don't believe; offenders are brought to court; God reveals to Alma: believers join the church; the unrepentant are excommunicated</span><span lang="zh">少壮不信，犯者聚讼；神示阿尔玛：信者入会，不悔者逐出</span></li>
+    <li><span class="cn">27</span><span lang="en">Alma the Younger and the four sons of Mosiah persecute the church; an angel descends; Alma the Younger falls unconscious three days; awakes and repents; the four sons are also converted</span><span lang="zh">小阿与四子迫害教会；天使降，小阿昏倒三日，醒而归改，四子亦转化</span></li>
+    <li><span class="cn">28</span><span lang="en">Mosiah translates the twenty-four gold plates; the four sons relinquish their claim to the throne and go to preach among the Lamanites</span><span lang="zh">摩赛亚译二十四金版；四子辞王位，赴拉曼传道</span></li>
+    <li><span class="cn">29</span><span lang="en">Hereditary kingship abolished; a system of judges established; the people elect Alma the Younger as chief judge; Mosiah dies at age sixty-three</span><span lang="zh">废世袭，立法官制；民选小阿任首席法官；摩赛亚逝，寿六十三</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">小阿尔玛 <span>Alma the Younger</span></div>
-    <div class="nm">艾蒙 <span>Ammon · 四子之首</span></div>
-    <div class="nm">亚伦 <span>Aaron</span></div>
-    <div class="nm">奥姆纳 <span>Omner</span></div>
-    <div class="nm">海姆乃 <span>Himni</span></div>
-    <div class="nm">摩赛亚二世 <span>Mosiah II · 末代王</span></div>
+    <div class="nm"><span lang="en">Alma the Younger</span><span lang="zh">小阿尔玛</span> <span><span lang="en">chief judge · high priest</span><span lang="zh">首席法官·大祭司</span></span></div>
+    <div class="nm"><span lang="en">Ammon</span><span lang="zh">艾蒙</span> <span><span lang="en">eldest of four sons</span><span lang="zh">四子之首</span></span></div>
+    <div class="nm"><span lang="en">Aaron</span><span lang="zh">亚伦</span> <span><span lang="en">son of Mosiah</span><span lang="zh">摩赛亚之子</span></span></div>
+    <div class="nm"><span lang="en">Omner</span><span lang="zh">奥姆纳</span> <span><span lang="en">son of Mosiah</span><span lang="zh">摩赛亚之子</span></span></div>
+    <div class="nm"><span lang="en">Himni</span><span lang="zh">海姆乃</span> <span><span lang="en">son of Mosiah</span><span lang="zh">摩赛亚之子</span></span></div>
+    <div class="nm"><span lang="en">Mosiah II</span><span lang="zh">摩赛亚二世</span> <span><span lang="en">last king</span><span lang="zh">末代王</span></span></div>
   </div>
 </div>
 
 <!-- ══ 图例 ══ -->
 <div class="legend">
-  <div class="legend-title">图例</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>便雅悯圣约</div>
-  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>南征·挪亚腐败</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>阿宾纳代殉道</div>
-  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>摩门立教·挪亚终</div>
-  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>两批苦难归回</div>
-  <div class="lg-item"><div class="lg-box" style="background:#ecfeff;border-color:#67e8f9"></div>归改·王制终结</div>
+  <div class="legend-title"><span lang="en">Legend</span><span lang="zh">图例</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div><span lang="en">Benjamin's Covenant</span><span lang="zh">便雅悯圣约</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div><span lang="en">Southern Expedition · Noah</span><span lang="zh">南征·挪亚腐败</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div><span lang="en">Abinadi's Martyrdom</span><span lang="zh">阿宾纳代殉道</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div><span lang="en">Church Founded · Noah's End</span><span lang="zh">摩门立教·挪亚终</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div><span lang="en">Two Groups Return</span><span lang="zh">两批苦难归回</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#ecfeff;border-color:#67e8f9"></div><span lang="en">Conversion · End of Kingship</span><span lang="zh">归改·王制终结</span></div>
 </div>
 
 <!-- ── Key figures relationship diagram ── -->
 <div class="rel">
-  <div class="rel-title">主要人物关系 · KEY FIGURES OF MOSIAH</div>
+  <div class="rel-title"><span lang="en">Key Figures · Mosiah</span><span lang="zh">主要人物关系 · KEY FIGURES OF MOSIAH</span></div>
   <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="fgA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
@@ -574,80 +748,147 @@ ul.np{padding:0}
 
     <!-- ── Row 1: Zarahemla kings ── -->
     <rect x="20" y="14" width="120" height="44" rx="6" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
-    <text x="80" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">本雅明王</text>
-    <text x="80" y="45" text-anchor="middle" font-size="8.5" fill="#0e7490">King Benjamin</text>
-    <text x="80" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">圣洁·讲道·立约</text>
+    <text lang="en" x="80" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">King Benjamin</text><text lang="zh" x="80" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">本雅明王</text>
+    <text lang="en" x="80" y="45" text-anchor="middle" font-size="8.5" fill="#0e7490">righteous king · preacher</text><text lang="zh" x="80" y="45" text-anchor="middle" font-size="8.5" fill="#0e7490">义王·讲道者</text>
+    <text lang="en" x="80" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">holy · sermon · covenant</text><text lang="zh" x="80" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">圣洁·讲道·立约</text>
 
     <rect x="160" y="14" width="140" height="44" rx="6" fill="#ecfeff" stroke="#0e7490" stroke-width="2.5"/>
-    <text x="230" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">摩赛亚二世</text>
-    <text x="230" y="45" text-anchor="middle" font-size="8.5" fill="#0e7490">Mosiah II · 最后一位王</text>
-    <text x="230" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">翻译雅列版·建法官制</text>
+    <text lang="en" x="230" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">Mosiah II</text><text lang="zh" x="230" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">摩赛亚二世</text>
+    <text lang="en" x="230" y="45" text-anchor="middle" font-size="8.5" fill="#0e7490">last king · established judges</text><text lang="zh" x="230" y="45" text-anchor="middle" font-size="8.5" fill="#0e7490">最后一位王·建法官制</text>
+    <text lang="en" x="230" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">translates Jaredite plates · establishes judges</text><text lang="zh" x="230" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">翻译雅列版·建法官制</text>
     <line x1="140" y1="36" x2="160" y2="36" stroke="#0e7490" stroke-width="1.5" marker-end="url(#fgA)"/>
 
     <rect x="322" y="14" width="148" height="44" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="396" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">摩赛亚四子</text>
-    <text x="396" y="45" text-anchor="middle" font-size="8.5" fill="#7c3aed">Ammon·Aaron·Omner·Himni</text>
-    <text x="396" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">归改后赴拉曼人传教</text>
+    <text lang="en" x="396" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Mosiah's Four Sons</text><text lang="zh" x="396" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">摩赛亚四子</text>
+    <text lang="en" x="396" y="45" text-anchor="middle" font-size="8.5" fill="#7c3aed">Ammon · Aaron · Omner · Himni</text><text lang="zh" x="396" y="45" text-anchor="middle" font-size="8.5" fill="#7c3aed">艾蒙·亚伦·奥姆纳·海姆乃</text>
+    <text lang="en" x="396" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">after conversion, preach to Lamanites</text><text lang="zh" x="396" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">归改后赴拉曼人传教</text>
     <line x1="300" y1="36" x2="322" y2="36" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#fgV)"/>
 
     <!-- ── Row 2: Zeniff chain ── -->
     <rect x="20" y="98" width="110" height="44" rx="6" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
-    <text x="75" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">西尼夫</text>
-    <text x="75" y="129" text-anchor="middle" font-size="8.5" fill="#c2410c">Zeniff</text>
-    <text x="75" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">南归尼腓地</text>
+    <text lang="en" x="75" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">Zeniff</text><text lang="zh" x="75" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12">西尼夫</text>
+    <text lang="en" x="75" y="129" text-anchor="middle" font-size="8.5" fill="#c2410c">leads people south</text><text lang="zh" x="75" y="129" text-anchor="middle" font-size="8.5" fill="#c2410c">南归建国</text>
+    <text lang="en" x="75" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">returns to Land of Nephi</text><text lang="zh" x="75" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">南归尼腓地</text>
 
     <rect x="148" y="98" width="110" height="44" rx="6" fill="#fff1f2" stroke="#fca5a5" stroke-width="2"/>
-    <text x="203" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">挪亚王</text>
-    <text x="203" y="129" text-anchor="middle" font-size="8.5" fill="#be123c">King Noah · 极恶</text>
-    <text x="203" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">腐败·酗酒·横征</text>
+    <text lang="en" x="203" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">King Noah</text><text lang="zh" x="203" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#9f1239">挪亚王</text>
+    <text lang="en" x="203" y="129" text-anchor="middle" font-size="8.5" fill="#be123c">utterly wicked king</text><text lang="zh" x="203" y="129" text-anchor="middle" font-size="8.5" fill="#be123c">腐败极恶之王</text>
+    <text lang="en" x="203" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">corruption · drunkenness · heavy taxes</text><text lang="zh" x="203" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">腐败·酗酒·横征</text>
     <line x1="130" y1="120" x2="148" y2="120" stroke="#dc2626" stroke-width="1.5" marker-end="url(#fgR)"/>
 
     <rect x="276" y="98" width="110" height="44" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="331" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">林海王</text>
-    <text x="331" y="129" text-anchor="middle" font-size="8.5" fill="#059669">King Limhi</text>
-    <text x="331" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">挪亚之子·义王</text>
+    <text lang="en" x="331" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">King Limhi</text><text lang="zh" x="331" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">林海王</text>
+    <text lang="en" x="331" y="129" text-anchor="middle" font-size="8.5" fill="#059669">righteous king · Noah's son</text><text lang="zh" x="331" y="129" text-anchor="middle" font-size="8.5" fill="#059669">义王·挪亚之子</text>
+    <text lang="en" x="331" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">Noah's son · righteous king</text><text lang="zh" x="331" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">挪亚之子·义王</text>
     <line x1="258" y1="120" x2="276" y2="120" stroke="#059669" stroke-width="1.5" marker-end="url(#fgG)"/>
 
     <!-- ── Center-right: Abinadi & Alma ── -->
     <rect x="490" y="98" width="130" height="44" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="2"/>
-    <text x="555" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">阿比纳代</text>
-    <text x="555" y="129" text-anchor="middle" font-size="8.5" fill="#b45309">Abinadi · 先知殉道</text>
-    <text x="555" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">引述以赛亚·见证基督</text>
+    <text lang="en" x="555" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Abinadi</text><text lang="zh" x="555" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">阿比纳代</text>
+    <text lang="en" x="555" y="129" text-anchor="middle" font-size="8.5" fill="#b45309">prophet · martyr</text><text lang="zh" x="555" y="129" text-anchor="middle" font-size="8.5" fill="#b45309">先知·殉道者</text>
+    <text lang="en" x="555" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">quotes Isaiah · witnesses of Christ</text><text lang="zh" x="555" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">引述以赛亚·见证基督</text>
 
     <rect x="642" y="98" width="138" height="44" rx="6" fill="#ecfeff" stroke="#67e8f9" stroke-width="1.5"/>
-    <text x="711" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">阿尔玛长老</text>
-    <text x="711" y="129" text-anchor="middle" font-size="8.5" fill="#0e7490">Alma the Elder</text>
-    <text x="711" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">相信阿比纳代·立教</text>
+    <text lang="en" x="711" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">Alma the Elder</text><text lang="zh" x="711" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">阿尔玛长老</text>
+    <text lang="en" x="711" y="129" text-anchor="middle" font-size="8.5" fill="#0e7490">church founder</text><text lang="zh" x="711" y="129" text-anchor="middle" font-size="8.5" fill="#0e7490">立教者·阿尔玛</text>
+    <text lang="en" x="711" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">believed Abinadi · founded church</text><text lang="zh" x="711" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">相信阿比纳代·立教</text>
     <line x1="620" y1="120" x2="642" y2="120" stroke="#0e7490" stroke-width="1.5" marker-end="url(#fgA)"/>
-    <text x="631" y="114" text-anchor="middle" font-size="7.5" fill="#0e7490">信而逃</text>
+    <text lang="en" x="631" y="114" text-anchor="middle" font-size="7.5" fill="#0e7490">believed and fled</text><text lang="zh" x="631" y="114" text-anchor="middle" font-size="7.5" fill="#0e7490">信而逃</text>
 
     <!-- ── Row 3: Alma's son & church ── -->
     <rect x="590" y="194" width="156" height="50" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
-    <text x="668" y="214" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">小阿尔玛</text>
-    <text x="668" y="227" text-anchor="middle" font-size="8.5" fill="#7c3aed">Alma the Younger</text>
-    <text x="668" y="238" text-anchor="middle" font-size="7.5" fill="#94a3b8">天使显现·归改·首席法官</text>
+    <text lang="en" x="668" y="214" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">Alma the Younger</text><text lang="zh" x="668" y="214" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">小阿尔玛</text>
+    <text lang="en" x="668" y="227" text-anchor="middle" font-size="8.5" fill="#7c3aed">chief judge · converted</text><text lang="zh" x="668" y="227" text-anchor="middle" font-size="8.5" fill="#7c3aed">首席法官·归改者</text>
+    <text lang="en" x="668" y="238" text-anchor="middle" font-size="7.5" fill="#94a3b8">angel appears · converts · chief judge</text><text lang="zh" x="668" y="238" text-anchor="middle" font-size="7.5" fill="#94a3b8">天使显现·归改·首席法官</text>
     <line x1="711" y1="142" x2="711" y2="194" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#fgV)"/>
 
     <rect x="490" y="194" width="90" height="50" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
-    <text x="535" y="214" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">摩门水域</text>
-    <text x="535" y="227" text-anchor="middle" font-size="8" fill="#3b82f6">Waters of Mormon</text>
-    <text x="535" y="238" text-anchor="middle" font-size="7.5" fill="#94a3b8">204人受洗立教</text>
+    <text lang="en" x="535" y="214" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Waters of Mormon</text><text lang="zh" x="535" y="214" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">摩门水域</text>
+    <text lang="en" x="535" y="227" text-anchor="middle" font-size="8" fill="#3b82f6">sacred baptismal site</text><text lang="zh" x="535" y="227" text-anchor="middle" font-size="8" fill="#3b82f6">受洗圣地</text>
+    <text lang="en" x="535" y="238" text-anchor="middle" font-size="7.5" fill="#94a3b8">204 baptized, church founded</text><text lang="zh" x="535" y="238" text-anchor="middle" font-size="7.5" fill="#94a3b8">204人受洗立教</text>
     <line x1="711" y1="142" x2="570" y2="194" stroke="#0e7490" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#fgA)"/>
 
     <!-- Political transition -->
     <rect x="20" y="200" width="440" height="50" rx="6" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
-    <text x="240" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">政制转变：王制 → 法官制（约公元前 92 年）</text>
-    <text x="240" y="233" text-anchor="middle" font-size="9" fill="#0e7490">摩赛亚二世废除世袭王权 → 由人民选举法官 → 小阿尔玛为首任首席法官</text>
-    <text x="240" y="244" text-anchor="middle" font-size="8" fill="#94a3b8">摩赛亚 29章 · "众人的声音" · 民主元素的神学依据</text>
+    <text lang="en" x="240" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">Political Transition: Kingship → Judges (c. 92 BC)</text><text lang="zh" x="240" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">政制转变：王制 → 法官制（约公元前 92 年）</text>
+    <text lang="en" x="240" y="233" text-anchor="middle" font-size="9" fill="#0e7490">Mosiah II abolishes hereditary kingship → People elect judges → Alma the Younger becomes first chief judge</text><text lang="zh" x="240" y="233" text-anchor="middle" font-size="9" fill="#0e7490">摩赛亚二世废除世袭王权 → 由人民选举法官 → 小阿尔玛为首任首席法官</text>
+    <text lang="en" x="240" y="244" text-anchor="middle" font-size="8" fill="#94a3b8">Mosiah 29 · "Voice of the people" · theological basis of democratic principles</text><text lang="zh" x="240" y="244" text-anchor="middle" font-size="8" fill="#94a3b8">摩赛亚 29章 · "众人的声音" · 民主元素的神学依据</text>
 
     <!-- Legend -->
     <rect x="22" y="270" width="816" height="56" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
-    <text x="430" y="285" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">摩赛亚书三大叙事线：① 萨拉赫拉王室线（本雅明→摩赛亚二世）② 尼腓地苦难线（西尼夫→挪亚→林海）③ 阿比纳代－阿尔玛传道线</text>
-    <text x="430" y="298" text-anchor="middle" font-size="8.5" fill="#94a3b8">三条线在萨拉赫拉大团聚中汇合，共同建立法官制度，开启摩尔门经最长的叙事——阿尔玛书</text>
-    <text x="430" y="311" text-anchor="middle" font-size="8" fill="#94a3b8">本书跨越约 40 年，是摩尔门经大版中地理事件最密集、人物最丰富的叙事枢纽</text>
+    <text lang="en" x="430" y="285" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">Three narrative strands: ① Zarahemla royal line (Benjamin→Mosiah II) ② Land of Nephi suffering (Zeniff→Noah→Limhi) ③ Abinadi–Alma mission</text><text lang="zh" x="430" y="285" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">摩赛亚书三大叙事线：① 萨拉赫拉王室线（本雅明→摩赛亚二世）② 尼腓地苦难线（西尼夫→挪亚→林海）③ 阿比纳代－阿尔玛传道线</text>
+    <text lang="en" x="430" y="298" text-anchor="middle" font-size="8.5" fill="#94a3b8">All three strands converge at Zarahemla, establishing the reign of the judges — opening the longest narrative in the Book of Mormon: Alma</text><text lang="zh" x="430" y="298" text-anchor="middle" font-size="8.5" fill="#94a3b8">三条线在萨拉赫拉大团聚中汇合，共同建立法官制度，开启摩尔门经最长的叙事——阿尔玛书</text>
+    <text lang="en" x="430" y="311" text-anchor="middle" font-size="8" fill="#94a3b8">This book spans ~40 years and is the most geographically and character-dense narrative hub in the large plates</text><text lang="zh" x="430" y="311" text-anchor="middle" font-size="8" fill="#94a3b8">本书跨越约 40 年，是摩尔门经大版中地理事件最密集、人物最丰富的叙事枢纽</text>
   </svg>
 </div>
 
 </div><!-- .page -->
+<button class="toggle-btn" id="toggleBtn" onclick="toggleAll()"><span lang="en">Collapse All</span><span lang="zh">收起全部</span></button>
+<script>function toggleAll(){var b=document.getElementById("toggleBtn");var c=document.body.classList.toggle("all-collapsed");b.innerHTML=c?'<span lang="en">Expand All</span><span lang="zh">展开全部</span>':'<span lang="en">Collapse All</span><span lang="zh">收起全部</span>'}</script>
+<script>(function(){var l=localStorage.getItem('bom-lang')||'en';if(l==='zh')document.body.classList.add('lang-zh');var b=document.getElementById('langBtn');if(b)b.textContent=document.body.classList.contains('lang-zh')?'English':'中文'})();function switchLang(){var z=document.body.classList.toggle('lang-zh');localStorage.setItem('bom-lang',z?'zh':'en');document.getElementById('langBtn').textContent=z?'English':'中文'}</script>
+<script data-mob="3">(function(){
+  if(!window.matchMedia('(max-width:640px)').matches)return;
+  function mk(t,c){var e=document.createElement(t);if(c)e.className=c;return e;}
+
+  /* ── hamburger + dark drawer ── */
+  var ov=mk('div','drawer-overlay');
+  var dr=mk('nav','drawer');
+  var hd=mk('div','drawer-hd');
+  var tit=mk('span','drawer-title');
+  tit.innerHTML='<span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span>';
+  var cx=mk('button','drawer-close');
+  cx.setAttribute('aria-label','close');cx.textContent='×';
+  cx.addEventListener('click',closeDr);
+  hd.appendChild(tit);hd.appendChild(cx);
+  var lks=mk('div','drawer-links');
+  document.querySelectorAll('.nav .tab').forEach(function(a){
+    var l=mk('a','drawer-tab'+(a.classList.contains('on')?' on':''));
+    l.href=a.href;l.innerHTML=a.innerHTML;lks.appendChild(l);
+  });
+  dr.appendChild(hd);dr.appendChild(lks);
+  document.body.appendChild(ov);document.body.appendChild(dr);
+
+  var ham=mk('button','hamburger');
+  ham.setAttribute('aria-label','menu');
+  ham.innerHTML='<svg width="18" height="13" viewBox="0 0 18 13" fill="currentColor">'+
+    '<rect width="18" height="2" rx="1"/>'+
+    '<rect y="5.5" width="14" height="2" rx="1"/>'+
+    '<rect y="11" width="18" height="2" rx="1"/></svg>';
+  ham.addEventListener('click',openDr);
+  var hdr=document.querySelector('header');
+  hdr.insertBefore(ham,hdr.firstChild);
+  ov.addEventListener('click',closeDr);
+
+  function openDr(){
+    ov.classList.add('open');dr.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDr(){
+    ov.classList.remove('open');dr.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* ── chapter summary cards ── */
+  var CM={
+    vio:'#7c3aed',tea:'#0d9488',amb:'#d97706',
+    pin:'#be185d',ros:'#be123c',blu:'#2563eb',grn:'#16a34a'
+  };
+  var intro=document.querySelector('.intro');
+  if(!intro)return;
+  var ct=mk('div','mob-ch');
+  document.querySelectorAll('.page>.n').forEach(function(n){
+    var ck=Object.keys(CM).find(function(k){return n.classList.contains(k);});
+    var nl=n.querySelector('.nl'),nt=n.querySelector('.nt'),nc=n.querySelector('.nc');
+    if(!nl||!nt)return;
+    var c=mk('div','mob-sec');
+    c.style.borderLeftColor=ck?CM[ck]:'#64748b';
+    c.innerHTML=
+      '<span class="mob-nl">'+nl.innerHTML+'</span>'+
+      '<span class="mob-nt">'+nt.innerHTML+'</span>'+
+      (nc?'<span class="mob-nc">'+nc.innerHTML+'</span>':'');
+    ct.appendChild(c);
+  });
+  if(ct.children.length)intro.insertAdjacentElement('afterend',ct);
+})();</script>
 </body>
 </html>

@@ -12,10 +12,12 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
-.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
-.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
+.h-info{display:none}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;flex-shrink:0;border:1px solid #e2e8f0;border-radius:7px;text-decoration:none;color:#64748b;transition:all .15s;font-size:0}
+.back-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+.back-btn::before{content:'';display:block;width:15px;height:12px;background-color:#64748b;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain}
+.back-btn:hover::before{background-color:#1e293b}
+.nav{flex:1;display:flex;gap:2px;overflow-x:auto}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#9d174d;background:#fdf2f8;border-color:#f9a8d4}
@@ -68,46 +70,215 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
 .rel{grid-column:1/-1;margin-top:28px}
 .rel-title{font-size:10px;letter-spacing:2px;color:#94a3b8;margin-bottom:12px;text-align:center}
+
+/* language toggle */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+div[lang="en"],ul[lang="en"]{display:block}
+div[lang="zh"],ul[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+body.lang-zh div[lang="en"],body.lang-zh ul[lang="en"]{display:none}
+body.lang-zh div[lang="zh"],body.lang-zh ul[lang="zh"]{display:block}
+.lang-btn{font-size:11px;color:#64748b;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;margin-left:8px}
+.lang-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+/* ── mobile base ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;
+  width:40px;height:40px;color:#1e293b;flex-shrink:0;border-radius:8px;
+  display:none;align-items:center;justify-content:center}
+.hamburger:active{background:#f1f5f9}
+
+/* drawer — dark slate */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;width:280px;max-width:88vw;height:100%;
+  background:#1e293b;z-index:201;display:flex;flex-direction:column;
+  transform:translateX(-110%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:8px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 16px;border-bottom:1px solid #334155;flex-shrink:0}
+.drawer-title{font-size:9px;font-weight:700;letter-spacing:3px;color:#475569;
+  text-transform:uppercase}
+.drawer-close{background:none;border:none;cursor:pointer;font-size:20px;
+  color:#475569;padding:2px 6px;line-height:1;border-radius:4px}
+.drawer-close:hover{color:#94a3b8}
+.drawer-links{overflow-y:auto;flex:1;padding:8px 0 36px}
+.drawer-tab{display:flex;align-items:center;padding:13px 22px;font-size:14px;
+  color:#94a3b8;text-decoration:none;border-left:3px solid transparent;
+  transition:background .12s;line-height:1.3;letter-spacing:.1px}
+.drawer-tab:active{background:rgba(255,255,255,.05)}
+.drawer-tab.on{color:#f1f5f9;font-weight:600;border-left-color:#94a3b8;
+  background:rgba(255,255,255,.07)}
+
+/* chapter summary cards (desktop: hidden) */
+.mob-ch{display:none}
+.mob-sec{border-radius:10px;padding:13px 14px;background:#fff;
+  display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid #e2e8f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.mob-nl{font-size:10px;color:#94a3b8;font-weight:700;letter-spacing:.6px}
+.mob-nt{font-size:13px;font-weight:700;color:#1e293b;line-height:1.25}
+.mob-nc{font-size:10px;color:#b0bac5;margin-top:1px}
+
+@media(max-width:640px){
+  /* ── global ── */
+  body{font-size:15px;background:#eef1f6}
+
+  /* ── header ── */
+  header{padding:0 14px 0 6px;gap:6px;height:54px;
+    border-bottom:1px solid #dde3ec;box-shadow:0 1px 0 #dde3ec}
+  .hamburger{display:flex}
+  .nav,.back-btn,.hb,.hs{display:none}
+  .h-info{display:flex;flex:1;justify-content:center;text-align:center}
+  .hn{font-size:15px;font-weight:600;letter-spacing:.3px;color:#1e293b}
+  .lang-btn{font-size:11px;padding:5px 10px;border-radius:7px;flex-shrink:0}
+  .drawer-overlay.open,.drawer.open{opacity:1;pointer-events:auto}
+  .drawer.open{transform:translateX(0)}
+
+  /* ── page grid ── */
+  .page{grid-template-columns:1fr;padding:14px 12px 96px;gap:0;background:#eef1f6}
+
+  /* ── intro ── */
+  .intro{text-align:left;padding:22px 18px 20px;border-radius:16px;border:none;
+    background:#fff;margin-bottom:14px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:10px}
+  .intro-h{font-size:28px;font-weight:300;letter-spacing:-.5px;line-height:1.1;
+    margin-bottom:14px;color:#1e293b}
+  .intro-meta{flex-direction:column;gap:7px;justify-content:flex-start}
+  .im{font-size:12px;display:flex;gap:7px;align-items:baseline;color:#64748b}
+  .im b{color:#1e293b;font-weight:600}
+  .intro-en{font-size:11px;margin-top:8px;padding-top:10px;border-top:1px solid #f1f5f9;
+    color:#94a3b8}
+
+  /* ── chapter summary cards ── */
+  .mob-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f2f6}
+  .intro+div:not([class]){display:none}
+
+  /* ── phase labels ── hidden; color carried by card left border */
+  .ph,.ph-sp,.arr,.si-sp{display:none}
+
+  /* ── section card ── */
+  .n{grid-column:1;
+    border-top:none!important;border-right:none!important;border-bottom:none!important;
+    border-left-width:4px!important;
+    border-radius:0 16px 16px 0;
+    padding:18px 17px 20px;margin-bottom:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .n:hover{filter:none}
+
+  /* ── section header: chapter → title → location · time ── */
+  .nh{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:14px;align-items:baseline}
+  .nl{order:1;flex:0 0 100%;font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:6px;flex-wrap:wrap}
+  .nt{order:2;flex:0 0 100%;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:8px;white-space:normal;overflow-wrap:break-word;letter-spacing:normal}
+  .nw{order:3;font-size:12px;white-space:normal}
+  .nc{order:4;font-size:12px;margin-left:0;white-space:normal}
+  .nc::before{content:' · '}
+
+  /* ── scripture list ── */
+  .np{padding:0;margin:0}
+  .np li{font-size:14.5px;color:#374151;line-height:1.85;
+    padding-left:2.4em;text-indent:-2.4em;
+    padding-top:7px;padding-bottom:7px;
+    border-bottom:1px solid rgba(0,0,0,.05)}
+  .np li:last-child{border-bottom:none;padding-bottom:0}
+  .cn{display:inline-block;width:1.8em;font-size:11px;font-weight:700;
+    color:#94a3b8;letter-spacing:0;text-align:right;margin-right:6px}
+  .ns{font-size:14.5px;line-height:1.85;color:#374151}
+
+  /* ── event box ── */
+  .ev{grid-column:1;border-radius:12px;
+    border-style:solid!important;border-width:1px!important;
+    padding:12px 16px;margin-bottom:4px;font-size:13px;line-height:1.6}
+  .ev-icon{display:none}
+  .ev-date{font-size:9px;letter-spacing:1.5px;font-weight:700;margin-bottom:5px}
+
+  /* ── sidebar ── */
+  .si{grid-column:1;padding:0;margin-bottom:20px}
+  .si::before{display:none}
+  .nms{background:#fff;border-radius:12px;padding:14px 16px;
+    border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .nms+.nms{margin-top:8px}
+  .nm-title{font-size:9px;font-weight:700;letter-spacing:2px;color:#94a3b8;
+    text-transform:uppercase;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #f0f2f6}
+  .nm{display:grid;grid-template-columns:84px 1fr;gap:4px;
+    padding:6px 0;border-top:1px solid #f6f8fb;
+    align-items:baseline;line-height:1.45}
+  .nm:first-of-type{border-top:none;padding-top:0}
+  .nm b{font-size:12px;font-weight:600;color:#334155}
+  .nm span{font-size:12px;color:#64748b}
+
+  /* 1/2 Nephi character sidebar cards */
+  .sb{background:#f8fafc;border-radius:10px;padding:10px 13px;
+    border:1px solid #f0f2f6;margin-bottom:6px}
+  .sn{font-size:13.5px;font-weight:700;color:#1e293b}
+  .se{font-size:10.5px;color:#94a3b8;margin-top:1px}
+  .sd{font-size:12px;color:#475569;line-height:1.5;margin-top:5px}
+
+  /* ── legend ── */
+  .legend{grid-column:1;background:#fff;border-radius:12px;
+    padding:14px 16px;border:1px solid #dde3ec;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .legend-title{font-size:9px;letter-spacing:2px;color:#94a3b8;margin-bottom:10px}
+  .lg-item{font-size:12px;color:#475569}
+
+  /* ── arc / character SVG ── scale to fit, card container */
+  .rel{grid-column:1;margin:0 0 20px;overflow:hidden;
+    border:1px solid #dde3ec;border-radius:14px;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .rel-title{font-size:9px;letter-spacing:2px;color:#94a3b8;
+    padding:14px 16px 0;margin-bottom:6px;text-align:left}
+  .rel svg{width:100%;height:auto;min-width:0;display:block}
+
+  /* ── activity maps & other no-class SVG divs ── */
+  .page>div:not([class]) svg{
+    width:100%!important;height:auto!important;min-width:0;display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-btn" href="index.html">← 时间线</a>
+  <a class="back-btn" href="index.html">← <span lang="en">Timeline</span><span lang="zh">时间线</span></a>
   <div class="h-info">
-    <span class="hb">摩尔门经</span><span class="hs">/</span>
-    <span class="hn">摩罗乃书</span>
+    <span class="hb"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span></span><span class="hs">/</span>
+    <span class="hn"><span lang="en">Moroni</span><span lang="zh">摩罗乃书</span></span>
   </div>
   <nav class="nav">
-    <a class="tab" href="bom.html">一书</a>
-    <a class="tab" href="bom2.html">二书</a>
-    <a class="tab" href="bom-jacob.html">雅各</a>
-    <a class="tab" href="bom-enos.html">以挪士</a>
-    <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆乃</a>
-    <a class="tab" href="bom-wom.html">摩语</a>
-    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
-    <a class="tab" href="bom-alma.html">阿尔玛</a>
-    <a class="tab" href="bom-helaman.html">希拉曼</a>
-    <a class="tab" href="bom-3nephi.html">三书</a>
-    <a class="tab" href="bom-4nephi.html">四书</a>
-    <a class="tab" href="bom-mormon.html">摩尔门</a>
-    <a class="tab" href="bom-ether.html">以帖</a>
-    <a class="tab on" href="bom-moroni.html">摩罗乃</a>
+    <a class="tab" href="bom.html"><span lang="en">1 Nephi</span><span lang="zh">一书</span></a>
+    <a class="tab" href="bom2.html"><span lang="en">2 Nephi</span><span lang="zh">二书</span></a>
+    <a class="tab" href="bom-jacob.html"><span lang="en">Jacob</span><span lang="zh">雅各</span></a>
+    <a class="tab" href="bom-enos.html"><span lang="en">Enos</span><span lang="zh">以挪士</span></a>
+    <a class="tab" href="bom-jarom.html"><span lang="en">Jarom</span><span lang="zh">雅龙</span></a>
+    <a class="tab" href="bom-omni.html"><span lang="en">Omni</span><span lang="zh">奥姆乃</span></a>
+    <a class="tab" href="bom-wom.html"><span lang="en">W of M</span><span lang="zh">摩语</span></a>
+    <a class="tab" href="bom-mosiah.html"><span lang="en">Mosiah</span><span lang="zh">摩赛亚</span></a>
+    <a class="tab" href="bom-alma.html"><span lang="en">Alma</span><span lang="zh">阿尔玛</span></a>
+    <a class="tab" href="bom-helaman.html"><span lang="en">Helaman</span><span lang="zh">希拉曼</span></a>
+    <a class="tab" href="bom-3nephi.html"><span lang="en">3 Nephi</span><span lang="zh">三书</span></a>
+    <a class="tab" href="bom-4nephi.html"><span lang="en">4 Nephi</span><span lang="zh">四书</span></a>
+    <a class="tab" href="bom-mormon.html"><span lang="en">Mormon</span><span lang="zh">摩尔门</span></a>
+    <a class="tab" href="bom-ether.html"><span lang="en">Ether</span><span lang="zh">以帖</span></a>
+    <a class="tab on" href="bom-moroni.html"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </header>
 
 <div class="page">
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">摩尔门经 · 大版金片 · 摩罗乃自著</div>
-  <div class="intro-h">摩罗乃书</div>
+  <div class="intro-sup"><span lang="en">Book of Mormon · Large Plates · Written by Moroni</span><span lang="zh">摩尔门经 · 大版金片 · 摩罗乃自著</span></div>
+  <div class="intro-h"><span lang="en">Book of Moroni</span><span lang="zh">摩罗乃书</span></div>
   <div class="intro-meta">
-    <span class="im">时间 <b>约 AD 401–421 年</b></span>
-    <span class="im">时长 <b>流亡中历二十余年写就</b></span>
-    <span class="im">篇幅 <b>10 章</b></span>
-    <span class="im">核心 <b>独存见证 · 教规 · 摩罗乃应许</b></span>
+    <span class="im"><span lang="en">Date</span><span lang="zh">时间</span> <b>c. AD 401–421</b></span>
+    <span class="im"><span lang="en">Span</span><span lang="zh">时长</span> <b><span lang="en">Written over 20+ years in exile</span><span lang="zh">流亡中历二十余年写就</span></b></span>
+    <span class="im"><span lang="en">Length</span><span lang="zh">篇幅</span> <b>10 <span lang="en">chapters</span><span lang="zh">章</span></b></span>
+    <span class="im"><span lang="en">Core</span><span lang="zh">核心</span> <b><span lang="en">Lone Witness · Ordinances · Moroni's Promise</span><span lang="zh">独存见证 · 教规 · 摩罗乃应许</span></b></span>
   </div>
 </div>
 
@@ -116,33 +287,33 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
   <svg viewBox="0 0 860 316" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
-    <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">四段叙事（摩罗乃书 10 章分布）</text>
+    <text lang="en" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">Four Narratives (Moroni · 10 Chapters)</text><text lang="zh" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">四段叙事（摩罗乃书 10 章分布）</text>
 
     <!-- 章数标签 -->
-    <text x="88"  y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#5b21b6">1 章</text>
-    <text x="316" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">5 章</text>
-    <text x="620" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#b45309">3 章</text>
-    <text x="772" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9d174d">1 章</text>
+    <text lang="en" x="88"  y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#5b21b6">1 Ch.</text><text lang="zh" x="88"  y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#5b21b6">1 章</text>
+    <text lang="en" x="316" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">5 Ch.</text><text lang="zh" x="316" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">5 章</text>
+    <text lang="en" x="620" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#b45309">3 Ch.</text><text lang="zh" x="620" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#b45309">3 章</text>
+    <text lang="en" x="772" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9d174d">1 Ch.</text><text lang="zh" x="772" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9d174d">1 章</text>
 
     <!-- S1: 第1章 (1ch=76px, x=50) -->
     <rect x="50"  y="60" width="76"  height="52" fill="#f5f3ff"/>
-    <text x="88"  y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#4c1d95">独存</text>
-    <text x="88"  y="97"  text-anchor="middle" font-size="8"    fill="#6d28d9">旷野流亡</text>
+    <text lang="en" x="88"  y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#4c1d95">Sole Survivor</text><text lang="zh" x="88"  y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#4c1d95">独存</text>
+    <text lang="en" x="88"  y="97"  text-anchor="middle" font-size="8"    fill="#6d28d9">Exile in the wilderness</text><text lang="zh" x="88"  y="97"  text-anchor="middle" font-size="8"    fill="#6d28d9">旷野流亡</text>
 
     <!-- S2: 第2-6章 (5ch=380px, x=126) -->
     <rect x="126" y="60" width="380" height="52" fill="#f0fdf9"/>
-    <text x="316" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#065f46">教规五则</text>
-    <text x="316" y="97"  text-anchor="middle" font-size="8.5"  fill="#0d9488">圣灵·按立·圣餐·仁爱·会众</text>
+    <text lang="en" x="316" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#065f46">Five Ordinances</text><text lang="zh" x="316" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#065f46">教规五则</text>
+    <text lang="en" x="316" y="97"  text-anchor="middle" font-size="8.5"  fill="#0d9488">Spirit · Ordination · Sacrament · Charity · Church</text><text lang="zh" x="316" y="97"  text-anchor="middle" font-size="8.5"  fill="#0d9488">圣灵·按立·圣餐·仁爱·会众</text>
 
     <!-- S3: 第7-9章 (3ch=228px, x=506) -->
     <rect x="506" y="60" width="228" height="52" fill="#fffbeb"/>
-    <text x="620" y="81"  text-anchor="middle" font-size="12"   font-weight="bold" fill="#78350f">仁爱书信</text>
-    <text x="620" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">仁爱颂·幼洗之争·末世警训</text>
+    <text lang="en" x="620" y="81"  text-anchor="middle" font-size="12"   font-weight="bold" fill="#78350f">Epistles of Charity</text><text lang="zh" x="620" y="81"  text-anchor="middle" font-size="12"   font-weight="bold" fill="#78350f">仁爱书信</text>
+    <text lang="en" x="620" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">Hymn of charity · Infant baptism debate · Last-days warning</text><text lang="zh" x="620" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">仁爱颂·幼洗之争·末世警训</text>
 
     <!-- S4: 第10章 (1ch=76px, x=734) -->
     <rect x="734" y="60" width="76"  height="52" fill="#fdf2f8"/>
-    <text x="772" y="78"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#9d174d">摩罗乃</text>
-    <text x="772" y="94"  text-anchor="middle" font-size="9.5"  font-weight="bold" fill="#9d174d">应许</text>
+    <text lang="en" x="772" y="78"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#9d174d">Moroni's</text><text lang="zh" x="772" y="78"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#9d174d">摩罗乃</text>
+    <text lang="en" x="772" y="94"  text-anchor="middle" font-size="9.5"  font-weight="bold" fill="#9d174d">Promise</text><text lang="zh" x="772" y="94"  text-anchor="middle" font-size="9.5"  font-weight="bold" fill="#9d174d">应许</text>
 
     <!-- 分隔线 & 外框 -->
     <line x1="126" y1="60" x2="126" y2="112" stroke="#fff" stroke-width="1.5"/>
@@ -151,31 +322,31 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <rect x="50" y="60" width="760" height="52" fill="none" stroke="#e2e8f0" stroke-width="1" rx="2"/>
 
     <!-- 各段说明 -->
-    <text x="88"  y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">孤独见证</text>
-    <text x="88"  y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1 章</text>
-    <text x="88"  y="154" text-anchor="middle" font-size="8"   fill="#64748b">独存流亡·躲避追杀</text>
-    <text x="88"  y="166" text-anchor="middle" font-size="8"   fill="#64748b">圣灵感动·续父遗志</text>
+    <text lang="en" x="88"  y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Lone Witness</text><text lang="zh" x="88"  y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">孤独见证</text>
+    <text lang="en" x="88"  y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 1</text><text lang="zh" x="88"  y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1 章</text>
+    <text lang="en" x="88"  y="154" text-anchor="middle" font-size="8"   fill="#64748b">Sole survivor · fleeing and hiding</text><text lang="zh" x="88"  y="154" text-anchor="middle" font-size="8"   fill="#64748b">独存流亡·躲避追杀</text>
+    <text lang="en" x="88"  y="166" text-anchor="middle" font-size="8"   fill="#64748b">Spirit compels him · continues his father's work</text><text lang="zh" x="88"  y="166" text-anchor="middle" font-size="8"   fill="#64748b">圣灵感动·续父遗志</text>
 
-    <text x="316" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">教规建立</text>
-    <text x="316" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 2–6 章</text>
-    <text x="316" y="154" text-anchor="middle" font-size="8"   fill="#64748b">授圣灵·按立·圣餐祷词（原文照录）</text>
-    <text x="316" y="166" text-anchor="middle" font-size="8"   fill="#64748b">会众制度·名册·悔改机制</text>
+    <text lang="en" x="316" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">Ordinances Established</text><text lang="zh" x="316" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#065f46">教规建立</text>
+    <text lang="en" x="316" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 2–6</text><text lang="zh" x="316" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 2–6 章</text>
+    <text lang="en" x="316" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Gift of Holy Ghost · Ordinations · Sacrament prayers (verbatim)</text><text lang="zh" x="316" y="154" text-anchor="middle" font-size="8"   fill="#64748b">授圣灵·按立·圣餐祷词（原文照录）</text>
+    <text lang="en" x="316" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Church organization · membership rolls · repentance process</text><text lang="zh" x="316" y="166" text-anchor="middle" font-size="8"   fill="#64748b">会众制度·名册·悔改机制</text>
 
-    <text x="620" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">摩尔门训诫</text>
-    <text x="620" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 7–9 章</text>
-    <text x="620" y="154" text-anchor="middle" font-size="8"   fill="#64748b">仁爱为基督纯洁之爱·永不止息</text>
-    <text x="620" y="166" text-anchor="middle" font-size="8"   fill="#64748b">斥幼儿洗礼·末世不义警训</text>
+    <text lang="en" x="620" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">Mormon's Admonitions</text><text lang="zh" x="620" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">摩尔门训诫</text>
+    <text lang="en" x="620" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 7–9</text><text lang="zh" x="620" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 7–9 章</text>
+    <text lang="en" x="620" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Charity is the pure love of Christ · endures forever</text><text lang="zh" x="620" y="154" text-anchor="middle" font-size="8"   fill="#64748b">仁爱为基督纯洁之爱·永不止息</text>
+    <text lang="en" x="620" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Condemns infant baptism · warns of last-days wickedness</text><text lang="zh" x="620" y="166" text-anchor="middle" font-size="8"   fill="#64748b">斥幼儿洗礼·末世不义警训</text>
 
-    <text x="772" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9d174d">最后告别</text>
-    <text x="772" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 10 章</text>
-    <text x="772" y="154" text-anchor="middle" font-size="8"   fill="#64748b">以诚心祈问·圣灵必为证</text>
-    <text x="772" y="166" text-anchor="middle" font-size="8"   fill="#64748b">封版藏山·千年使命终</text>
+    <text lang="en" x="772" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9d174d">Final Farewell</text><text lang="zh" x="772" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9d174d">最后告别</text>
+    <text lang="en" x="772" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 10</text><text lang="zh" x="772" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 10 章</text>
+    <text lang="en" x="772" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Pray sincerely · the Holy Ghost will testify</text><text lang="zh" x="772" y="154" text-anchor="middle" font-size="8"   fill="#64748b">以诚心祈问·圣灵必为证</text>
+    <text lang="en" x="772" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Seal the plates in the hill · thousand-year mission ends</text><text lang="zh" x="772" y="166" text-anchor="middle" font-size="8"   fill="#64748b">封版藏山·千年使命终</text>
 
-    <text x="430" y="188" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩罗乃书是摩尔门经最后一卷：以最孤独的声音，写下最普世的邀请——真诚祈问，圣灵必为证</text>
+    <text lang="en" x="430" y="188" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ Moroni is the last book of the Book of Mormon: in the loneliest voice, it extends the most universal invitation — ask sincerely, and the Holy Ghost will testify</text><text lang="zh" x="430" y="188" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩罗乃书是摩尔门经最后一卷：以最孤独的声音，写下最普世的邀请——真诚祈问，圣灵必为证</text>
 
     <!-- 时间轴 -->
     <line x1="50" y1="202" x2="810" y2="202" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="430" y="217" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元 385 年 – 421 年</text>
+    <text lang="en" x="430" y="217" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Timeline · AD 385 – 421</text><text lang="zh" x="430" y="217" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元 385 年 – 421 年</text>
 
     <!-- axis (760/36 ≈ 21.11 px/yr; x = 50+(year-385)*21.11) -->
     <line x1="50" y1="258" x2="810" y2="258" stroke="#d1d5db" stroke-width="1.5"/>
@@ -184,145 +355,145 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <circle cx="50"  cy="258" r="3.5" fill="#9f1239"/>
     <line x1="50"  y1="244" x2="50"  y2="254" stroke="#9f1239" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="56"  y="240" text-anchor="start"  font-size="8.5" font-weight="bold" fill="#9f1239">AD 385</text>
-    <text x="56"  y="230" text-anchor="start"  font-size="7.5" fill="#475569">科莫拉·孤独幸存</text>
+    <text lang="en" x="56"  y="230" text-anchor="start"  font-size="7.5" fill="#475569">Ramah · sole survivor</text><text lang="zh" x="56"  y="230" text-anchor="start"  font-size="7.5" fill="#475569">科莫拉·孤独幸存</text>
 
     <!-- 约AD401 · below (x=50+16×21.11≈388) -->
     <circle cx="388" cy="258" r="3.5" fill="#7c3aed"/>
     <line x1="388" y1="262" x2="388" y2="274" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="388" y="285" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">约 AD 401</text>
-    <text x="388" y="295" text-anchor="middle" font-size="7.5" fill="#475569">续父志·开始写作</text>
+    <text lang="en" x="388" y="285" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">c. AD 401</text><text lang="zh" x="388" y="285" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">约 AD 401</text>
+    <text lang="en" x="388" y="295" text-anchor="middle" font-size="7.5" fill="#475569">Continues father's work · begins writing</text><text lang="zh" x="388" y="295" text-anchor="middle" font-size="7.5" fill="#475569">续父志·开始写作</text>
 
     <!-- 约AD405 · above (x=50+20×21.11≈472) -->
     <circle cx="472" cy="258" r="3.5" fill="#0e7490"/>
     <line x1="472" y1="244" x2="472" y2="254" stroke="#0e7490" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="472" y="240" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">约 AD 405</text>
-    <text x="472" y="230" text-anchor="middle" font-size="7.5" fill="#475569">教规·圣餐祷词成</text>
+    <text lang="en" x="472" y="240" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">c. AD 405</text><text lang="zh" x="472" y="240" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0e7490">约 AD 405</text>
+    <text lang="en" x="472" y="230" text-anchor="middle" font-size="7.5" fill="#475569">Ordinances · sacrament prayers completed</text><text lang="zh" x="472" y="230" text-anchor="middle" font-size="7.5" fill="#475569">教规·圣餐祷词成</text>
 
     <!-- 约AD414 · below (x=50+29×21.11≈662) -->
     <circle cx="662" cy="258" r="3.5" fill="#b45309"/>
     <line x1="662" y1="262" x2="662" y2="274" stroke="#b45309" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="662" y="285" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#b45309">约 AD 414</text>
-    <text x="662" y="295" text-anchor="middle" font-size="7.5" fill="#475569">仁爱颂·书信写就</text>
+    <text lang="en" x="662" y="285" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#b45309">c. AD 414</text><text lang="zh" x="662" y="285" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#b45309">约 AD 414</text>
+    <text lang="en" x="662" y="295" text-anchor="middle" font-size="7.5" fill="#475569">Hymn of charity · epistles completed</text><text lang="zh" x="662" y="295" text-anchor="middle" font-size="7.5" fill="#475569">仁爱颂·书信写就</text>
 
     <!-- AD421 · above (x=810) -->
     <circle cx="810" cy="258" r="3.5" fill="#9d174d"/>
     <line x1="810" y1="244" x2="810" y2="254" stroke="#9d174d" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="804" y="240" text-anchor="end"    font-size="8.5" font-weight="bold" fill="#9d174d">AD 421</text>
-    <text x="804" y="230" text-anchor="end"    font-size="7.5" fill="#475569">摩罗乃应许·封版</text>
+    <text lang="en" x="804" y="230" text-anchor="end"    font-size="7.5" fill="#475569">Moroni's Promise · plates sealed</text><text lang="zh" x="804" y="230" text-anchor="end"    font-size="7.5" fill="#475569">摩罗乃应许·封版</text>
   </svg>
 </div>
 
 <!-- ══ 孤独流亡 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#5b21b6"></div><div class="ph-text">孤独<br>流亡</div></div>
+<div class="ph"><div class="ph-dot" style="background:#5b21b6"></div><div class="ph-text"><span lang="en">Lone<br>Exile</span><span lang="zh">孤独<br>流亡</span></div></div>
 <div class="n vio">
   <div class="nh">
-    <span class="nl">第 1 章</span>
-    <span class="nt">独存续志</span>
-    <span class="nw">旷野</span>
-    <span class="nc">约 AD 401</span>
+    <span class="nl"><span lang="en">Ch. 1</span><span lang="zh">第 1 章</span></span>
+    <span class="nt"><span lang="en">Sole Survivor Continues</span><span lang="zh">独存续志</span></span>
+    <span class="nw"><span lang="en">Wilderness</span><span lang="zh">旷野</span></span>
+    <span class="nc"><span lang="en">c. AD 401</span><span lang="zh">约 AD 401</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">1</span>独存流亡，四处躲避拉曼人；本不欲再写，圣灵感动，遂取版续父遗志</li>
+    <li><span class="cn">1</span><span lang="en">Sole survivor in exile, hiding from the Lamanites; did not intend to write more, but the Spirit compelled him to take up the plates and continue his father's work</span><span lang="zh">独存流亡，四处躲避拉曼人；本不欲再写，圣灵感动，遂取版续父遗志</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">摩罗乃处境</div>
-    <div class="nm"><b>身份</b><span>最后一名尼腓人</span></div>
-    <div class="nm"><b>处境</b><span>流亡旷野</span></div>
-    <div class="nm"><b>危险</b><span>拉曼人追杀</span></div>
-    <div class="nm"><b>独存</b><span>约 36 年</span></div>
+    <div class="nm-title"><span lang="en">Moroni's Situation</span><span lang="zh">摩罗乃处境</span></div>
+    <div class="nm"><b><span lang="en">Identity</span><span lang="zh">身份</span></b><span><span lang="en">Last Nephite</span><span lang="zh">最后一名尼腓人</span></span></div>
+    <div class="nm"><b><span lang="en">Situation</span><span lang="zh">处境</span></b><span><span lang="en">Exiled in the wilderness</span><span lang="zh">流亡旷野</span></span></div>
+    <div class="nm"><b><span lang="en">Danger</span><span lang="zh">危险</span></b><span><span lang="en">Hunted by Lamanites</span><span lang="zh">拉曼人追杀</span></span></div>
+    <div class="nm"><b><span lang="en">Alone</span><span lang="zh">独存</span></b><span><span lang="en">c. 36 years</span><span lang="zh">约 36 年</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 教规建立 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text">教规<br>建立</div></div>
+<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text"><span lang="en">Ordinances<br>Established</span><span lang="zh">教规<br>建立</span></div></div>
 <div class="n tea">
   <div class="nh">
-    <span class="nl">第 2–6 章</span>
-    <span class="nt">教规五则</span>
-    <span class="nw">旷野中记录</span>
-    <span class="nc">约 AD 401–421</span>
+    <span class="nl"><span lang="en">Ch. 2–6</span><span lang="zh">第 2–6 章</span></span>
+    <span class="nt"><span lang="en">Five Ordinances</span><span lang="zh">教规五则</span></span>
+    <span class="nw"><span lang="en">Recorded in the wilderness</span><span lang="zh">旷野中记录</span></span>
+    <span class="nc"><span lang="en">c. AD 401–421</span><span lang="zh">约 AD 401–421</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">2</span>基督亲授：按手赐圣灵，奉圣父圣子圣灵之名</li>
-    <li><span class="cn">3</span>按立教职：奉基督之名按手，立祭司·教师</li>
-    <li><span class="cn">4</span>圣餐饼祷词：纪念基督之体，愿常记念他（原文照录）</li>
-    <li><span class="cn">5</span>圣餐水祷词：纪念基督之血，愿常守诫命（原文照录）</li>
-    <li><span class="cn">6</span>会众制度：受洗入册，常聚禁食祷告，不悔改者除名</li>
+    <li><span class="cn">2</span><span lang="en">Christ's instructions: gift of the Holy Ghost by laying on of hands, in the name of the Father, Son, and Holy Ghost</span><span lang="zh">基督亲授：按手赐圣灵，奉圣父圣子圣灵之名</span></li>
+    <li><span class="cn">3</span><span lang="en">Ordination to offices: laying on of hands in the name of Christ, ordaining priests and teachers</span><span lang="zh">按立教职：奉基督之名按手，立祭司·教师</span></li>
+    <li><span class="cn">4</span><span lang="en">Sacrament bread prayer: remembrance of Christ's body, willingness to always remember him (verbatim)</span><span lang="zh">圣餐饼祷词：纪念基督之体，愿常记念他（原文照录）</span></li>
+    <li><span class="cn">5</span><span lang="en">Sacrament water prayer: remembrance of Christ's blood, willingness to keep the commandments (verbatim)</span><span lang="zh">圣餐水祷词：纪念基督之血，愿常守诫命（原文照录）</span></li>
+    <li><span class="cn">6</span><span lang="en">Church organization: baptized members enrolled, regular gatherings for fasting and prayer, unrepentant members removed from rolls</span><span lang="zh">会众制度：受洗入册，常聚禁食祷告，不悔改者除名</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">圣餐祷词</div>
-    <div class="nm"><b>第 4 章</b><span>饼·纪念基督之体</span></div>
-    <div class="nm"><b>第 5 章</b><span>水·纪念基督之血</span></div>
-    <div class="nm"><b>沿用</b><span>至今每周诵读</span></div>
+    <div class="nm-title"><span lang="en">Sacrament Prayers</span><span lang="zh">圣餐祷词</span></div>
+    <div class="nm"><b><span lang="en">Ch. 4</span><span lang="zh">第 4 章</span></b><span><span lang="en">Bread · remembrance of Christ's body</span><span lang="zh">饼·纪念基督之体</span></span></div>
+    <div class="nm"><b><span lang="en">Ch. 5</span><span lang="zh">第 5 章</span></b><span><span lang="en">Water · remembrance of Christ's blood</span><span lang="zh">水·纪念基督之血</span></span></div>
+    <div class="nm"><b><span lang="en">Still used</span><span lang="zh">沿用</span></b><span><span lang="en">Recited each week to this day</span><span lang="zh">至今每周诵读</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 摩尔门训诫 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#b45309"></div><div class="ph-text">摩尔门<br>训诫</div></div>
+<div class="ph"><div class="ph-dot" style="background:#b45309"></div><div class="ph-text"><span lang="en">Mormon's<br>Teachings</span><span lang="zh">摩尔门<br>训诫</span></div></div>
 <div class="n amb">
   <div class="nh">
-    <span class="nl">第 7–9 章</span>
-    <span class="nt">仁爱与书信</span>
-    <span class="nw">摩尔门遗教</span>
-    <span class="nc">约 AD 401–421</span>
+    <span class="nl"><span lang="en">Ch. 7–9</span><span lang="zh">第 7–9 章</span></span>
+    <span class="nt"><span lang="en">Charity and Epistles</span><span lang="zh">仁爱与书信</span></span>
+    <span class="nw"><span lang="en">Mormon's Legacy Teachings</span><span lang="zh">摩尔门遗教</span></span>
+    <span class="nc"><span lang="en">c. AD 401–421</span><span lang="zh">约 AD 401–421</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">7</span>摩尔门讲道：信心生希望，希望生仁爱；仁爱为基督纯洁之爱，永不止息</li>
-    <li><span class="cn">8</span>摩尔门致书：斥幼儿洗礼为错谬，幼儿无罪，无需受洗</li>
-    <li><span class="cn">9</span>摩尔门再书：世人充满残忍，妇孺遭戮；警告不义者将遭审判</li>
+    <li><span class="cn">7</span><span lang="en">Mormon's sermon: faith begets hope, hope begets charity; charity is the pure love of Christ and endures forever</span><span lang="zh">摩尔门讲道：信心生希望，希望生仁爱；仁爱为基督纯洁之爱，永不止息</span></li>
+    <li><span class="cn">8</span><span lang="en">Mormon's letter: condemns infant baptism as error; infants are without sin and have no need of baptism</span><span lang="zh">摩尔门致书：斥幼儿洗礼为错谬，幼儿无罪，无需受洗</span></li>
+    <li><span class="cn">9</span><span lang="en">Mormon's second letter: the world is full of cruelty; women and children slaughtered; warns the wicked of coming judgment</span><span lang="zh">摩尔门再书：世人充满残忍，妇孺遭戮；警告不义者将遭审判</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">仁爱颂</div>
-    <div class="nm"><b>第 7:45</b><span>仁爱永不止息</span></div>
-    <div class="nm"><b>第 7:47</b><span>若无仁爱，枉然</span></div>
-    <div class="nm"><b>第 8 章</b><span>幼儿无罪无需洗</span></div>
+    <div class="nm-title"><span lang="en">Hymn of Charity</span><span lang="zh">仁爱颂</span></div>
+    <div class="nm"><b>7:45</b><span><span lang="en">Charity never faileth</span><span lang="zh">仁爱永不止息</span></span></div>
+    <div class="nm"><b>7:47</b><span><span lang="en">Without charity, nothing</span><span lang="zh">若无仁爱，枉然</span></span></div>
+    <div class="nm"><b><span lang="en">Ch. 8</span><span lang="zh">第 8 章</span></b><span><span lang="en">Infants sinless, no baptism needed</span><span lang="zh">幼儿无罪无需洗</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 应许告别 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#9d174d"></div><div class="ph-text">应许<br>告别</div></div>
+<div class="ph"><div class="ph-dot" style="background:#9d174d"></div><div class="ph-text"><span lang="en">Promise<br>and Farewell</span><span lang="zh">应许<br>告别</span></div></div>
 <div class="n pin">
   <div class="nh">
-    <span class="nl">第 10 章</span>
-    <span class="nt">摩罗乃应许</span>
-    <span class="nw">科莫拉山</span>
+    <span class="nl"><span lang="en">Ch. 10</span><span lang="zh">第 10 章</span></span>
+    <span class="nt"><span lang="en">Moroni's Promise</span><span lang="zh">摩罗乃应许</span></span>
+    <span class="nw"><span lang="en">Hill Cumorah</span><span lang="zh">科莫拉山</span></span>
     <span class="nc">AD 421</span>
   </div>
   <ul class="np">
-    <li><span class="cn">10</span>以诚心真意对基督之信心祈问神，圣灵必证此书为真；列众恩赐，永别读者，封版藏于科莫拉山</li>
+    <li><span class="cn">10</span><span lang="en">Ask God sincerely, with real intent and faith in Christ; the Holy Ghost will testify this book is true; lists spiritual gifts; bids the reader a final farewell; seals the plates at Hill Cumorah</span><span lang="zh">以诚心真意对基督之信心祈问神，圣灵必证此书为真；列众恩赐，永别读者，封版藏于科莫拉山</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">摩罗乃 10:4</div>
-    <div class="nm"><b>条件</b><span>诚心·真意·信心</span></div>
-    <div class="nm"><b>应许</b><span>圣灵必为证</span></div>
-    <div class="nm"><b>时间</b><span>AD 421 封版</span></div>
+    <div class="nm-title"><span lang="en">Moroni 10:4</span><span lang="zh">摩罗乃 10:4</span></div>
+    <div class="nm"><b><span lang="en">Condition</span><span lang="zh">条件</span></b><span><span lang="en">Sincerity · real intent · faith</span><span lang="zh">诚心·真意·信心</span></span></div>
+    <div class="nm"><b><span lang="en">Promise</span><span lang="zh">应许</span></b><span><span lang="en">The Holy Ghost will testify</span><span lang="zh">圣灵必为证</span></span></div>
+    <div class="nm"><b><span lang="en">Date</span><span lang="zh">时间</span></b><span><span lang="en">AD 421 · Plates Sealed</span><span lang="zh">AD 421 封版</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div>
 <div class="ev">
-  封版藏毕·千年使命终——从李海出走（BC 600）至摩罗乃藏版（AD 421），历时一千余年
-  <div class="ev-date">AD 421 · 科莫拉山 · 约 1400 年后天使摩罗乃向约瑟·斯密显现，金版重见天日</div>
+  <span lang="en">Plates sealed and hidden; a thousand-year mission complete — from Lehi's departure (BC 600) to Moroni's sealing (AD 421), over 1,000 years</span><span lang="zh">封版藏毕·千年使命终——从李海出走（BC 600）至摩罗乃藏版（AD 421），历时一千余年</span>
+  <div class="ev-date"><span lang="en">AD 421 · Hill Cumorah · c. 1,400 years later the angel Moroni appeared to Joseph Smith and the gold plates came to light</span><span lang="zh">AD 421 · 科莫拉山 · 约 1400 年后天使摩罗乃向约瑟·斯密显现，金版重见天日</span></div>
 </div>
 <div class="si-sp"></div>
 
 <!-- ── 摩尔门经全卷弧线 ── -->
 <div class="rel">
-  <div class="rel-title">摩尔门经全卷弧线 · 千年历史的终点</div>
+  <div class="rel-title"><span lang="en">Full Book of Mormon Arc · The End of a Thousand-Year History</span><span lang="zh">摩尔门经全卷弧线 · 千年历史的终点</span></div>
   <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
 
     <!-- 弧线 -->
@@ -331,59 +502,59 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- BC 600 李海出走 -->
     <circle cx="40" cy="190" r="7" fill="#dc2626"/>
     <text x="40" y="212" text-anchor="middle" font-size="8.5" fill="#9f1239" font-weight="bold">BC 600</text>
-    <text x="40" y="223" text-anchor="middle" font-size="7.5" fill="#94a3b8">李海出走</text>
+    <text lang="en" x="40" y="223" text-anchor="middle" font-size="7.5" fill="#94a3b8">Lehi's Departure</text><text lang="zh" x="40" y="223" text-anchor="middle" font-size="7.5" fill="#94a3b8">李海出走</text>
 
     <!-- BC 91 法判时代 -->
     <circle cx="185" cy="94" r="5" fill="#2563eb"/>
     <text x="185" y="84" text-anchor="middle" font-size="8" fill="#1e3a8a">BC 91</text>
-    <text x="185" y="74" text-anchor="middle" font-size="7" fill="#94a3b8">法判时代</text>
+    <text lang="en" x="185" y="74" text-anchor="middle" font-size="7" fill="#94a3b8">Judges Era</text><text lang="zh" x="185" y="74" text-anchor="middle" font-size="7" fill="#94a3b8">法判时代</text>
 
     <!-- AD 34 基督亲临（顶峰） -->
     <circle cx="430" cy="44" r="10" fill="#6d28d9" stroke="#fff" stroke-width="2"/>
     <text x="430" y="30" text-anchor="middle" font-size="9" fill="#4c1d95" font-weight="bold">AD 34</text>
-    <text x="430" y="18" text-anchor="middle" font-size="8" fill="#94a3b8">基督亲临</text>
-    <text x="430" y="8"  text-anchor="middle" font-size="7.5" fill="#94a3b8">全书顶峰</text>
+    <text lang="en" x="430" y="18" text-anchor="middle" font-size="8" fill="#94a3b8">Christ Visits</text><text lang="zh" x="430" y="18" text-anchor="middle" font-size="8" fill="#94a3b8">基督亲临</text>
+    <text lang="en" x="430" y="8"  text-anchor="middle" font-size="7.5" fill="#94a3b8">Zenith of Record</text><text lang="zh" x="430" y="8"  text-anchor="middle" font-size="7.5" fill="#94a3b8">全书顶峰</text>
 
     <!-- AD 200 骄傲渐炽 -->
     <circle cx="584" cy="56" r="5" fill="#d97706"/>
     <text x="614" y="50" text-anchor="middle" font-size="8" fill="#92400e">AD 200</text>
-    <text x="614" y="62" text-anchor="middle" font-size="7" fill="#94a3b8">骄傲渐炽</text>
+    <text lang="en" x="614" y="62" text-anchor="middle" font-size="7" fill="#94a3b8">Pride Intensifies</text><text lang="zh" x="614" y="62" text-anchor="middle" font-size="7" fill="#94a3b8">骄傲渐炽</text>
 
     <!-- AD 385 科莫拉 -->
     <circle cx="726" cy="130" r="7" fill="#9f1239"/>
     <text x="726" y="150" text-anchor="middle" font-size="8.5" fill="#9f1239" font-weight="bold">AD 385</text>
-    <text x="726" y="161" text-anchor="middle" font-size="7.5" fill="#94a3b8">科莫拉·亡族</text>
+    <text lang="en" x="726" y="161" text-anchor="middle" font-size="7.5" fill="#94a3b8">Ramah · Annihilation</text><text lang="zh" x="726" y="161" text-anchor="middle" font-size="7.5" fill="#94a3b8">科莫拉·亡族</text>
 
     <!-- AD 421 封版 -->
     <circle cx="820" cy="190" r="8" fill="#9d174d" stroke="#fff" stroke-width="2"/>
     <text x="820" y="212" text-anchor="middle" font-size="8.5" fill="#9d174d" font-weight="bold">AD 421</text>
-    <text x="820" y="223" text-anchor="middle" font-size="7.5" fill="#94a3b8">金版封印</text>
+    <text lang="en" x="820" y="223" text-anchor="middle" font-size="7.5" fill="#94a3b8">Plates Sealed</text><text lang="zh" x="820" y="223" text-anchor="middle" font-size="7.5" fill="#94a3b8">金版封印</text>
 
     <!-- 重大事件标注 -->
     <circle cx="80"  cy="159" r="3.5" fill="#dc2626"/>
     <line x1="80"  y1="163" x2="80"  y2="170" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="80"  y="176" text-anchor="middle" font-size="8"   font-weight="bold" fill="#9f1239">约 BC 545</text>
-    <text x="80"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">尼腓·拉曼两族分立</text>
+    <text lang="en" x="80"  y="176" text-anchor="middle" font-size="8"   font-weight="bold" fill="#9f1239">c. BC 545</text><text lang="zh" x="80"  y="176" text-anchor="middle" font-size="8"   font-weight="bold" fill="#9f1239">约 BC 545</text>
+    <text lang="en" x="80"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">Nephites and Lamanites separate</text><text lang="zh" x="80"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">尼腓·拉曼两族分立</text>
 
     <circle cx="260" cy="72"  r="3.5" fill="#1e3a8a"/>
     <line x1="260" y1="68"  x2="260" y2="62"  stroke="#1e3a8a" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="260" y="57"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#1e3a8a">约 BC 200</text>
-    <text x="260" y="47"  text-anchor="middle" font-size="7.5" fill="#475569">战争连绵·大将兴起</text>
+    <text lang="en" x="260" y="57"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#1e3a8a">c. BC 200</text><text lang="zh" x="260" y="57"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#1e3a8a">约 BC 200</text>
+    <text lang="en" x="260" y="47"  text-anchor="middle" font-size="7.5" fill="#475569">Continuous war · great captains arise</text><text lang="zh" x="260" y="47"  text-anchor="middle" font-size="7.5" fill="#475569">战争连绵·大将兴起</text>
 
     <circle cx="388" cy="47"  r="3.5" fill="#d97706"/>
     <line x1="388" y1="51"  x2="388" y2="57"  stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="388" y="63"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#d97706">约 BC 6</text>
-    <text x="388" y="73"  text-anchor="middle" font-size="7.5" fill="#475569">撒母耳城墙预言</text>
+    <text lang="en" x="388" y="63"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#d97706">c. BC 6</text><text lang="zh" x="388" y="63"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#d97706">约 BC 6</text>
+    <text lang="en" x="388" y="73"  text-anchor="middle" font-size="7.5" fill="#475569">Samuel's wall prophecy</text><text lang="zh" x="388" y="73"  text-anchor="middle" font-size="7.5" fill="#475569">撒母耳城墙预言</text>
 
     <circle cx="490" cy="44"  r="3.5" fill="#16a34a"/>
     <line x1="490" y1="48"  x2="490" y2="54"  stroke="#16a34a" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="490" y="60"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#16a34a">约 AD 100</text>
-    <text x="490" y="70"  text-anchor="middle" font-size="7.5" fill="#475569">黄金太平年代</text>
+    <text lang="en" x="490" y="60"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#16a34a">c. AD 100</text><text lang="zh" x="490" y="60"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#16a34a">约 AD 100</text>
+    <text lang="en" x="490" y="70"  text-anchor="middle" font-size="7.5" fill="#475569">Golden age of peace</text><text lang="zh" x="490" y="70"  text-anchor="middle" font-size="7.5" fill="#475569">黄金太平年代</text>
 
     <circle cx="640" cy="68"  r="3.5" fill="#b45309"/>
     <line x1="640" y1="72"  x2="640" y2="78"  stroke="#b45309" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="640" y="84"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#92400e">约 AD 260</text>
-    <text x="640" y="94"  text-anchor="middle" font-size="7.5" fill="#475569">骄傲重起·走向衰亡</text>
+    <text lang="en" x="640" y="84"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#92400e">c. AD 260</text><text lang="zh" x="640" y="84"  text-anchor="middle" font-size="8"   font-weight="bold" fill="#92400e">约 AD 260</text>
+    <text lang="en" x="640" y="94"  text-anchor="middle" font-size="7.5" fill="#475569">Pride returns · decline begins</text><text lang="zh" x="640" y="94"  text-anchor="middle" font-size="7.5" fill="#475569">骄傲重起·走向衰亡</text>
 
     <!-- 继位标注（点在弧线上）
          比例锚点：BC600=x40, BC91=x185, AD34=x430, AD385=x726, AD421=x820
@@ -394,45 +565,110 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <circle cx="154" cy="114" r="3" fill="#b45309"/>
     <line x1="154" y1="111" x2="154" y2="103" stroke="#b45309" stroke-width="0.8" stroke-dasharray="2,1"/>
     <text x="154" y="100" text-anchor="middle" font-size="7" fill="#92400e">BC 200</text>
-    <text x="154" y="90"  text-anchor="middle" font-size="7" fill="#92400e">摩赛亚一世 继</text>
+    <text lang="en" x="154" y="90"  text-anchor="middle" font-size="7" fill="#92400e">Mosiah I (succ.)</text><text lang="zh" x="154" y="90"  text-anchor="middle" font-size="7" fill="#92400e">摩赛亚一世 继</text>
 
     <!-- 法判: BC67 派贺蓝 (x=232, t≈0.537, y≈81) 标签向下避让上方事件标注 -->
     <circle cx="232" cy="81"  r="3" fill="#1d4ed8"/>
     <line x1="232" y1="84"  x2="232" y2="92"  stroke="#1d4ed8" stroke-width="0.8" stroke-dasharray="2,1"/>
     <text x="232" y="99"  text-anchor="middle" font-size="7" fill="#1e3a8a">BC 67</text>
-    <text x="232" y="109" text-anchor="middle" font-size="7" fill="#1e3a8a">派贺蓝 继</text>
+    <text lang="en" x="232" y="109" text-anchor="middle" font-size="7" fill="#1e3a8a">Pahoran (succ.)</text><text lang="zh" x="232" y="109" text-anchor="middle" font-size="7" fill="#1e3a8a">派贺蓝 继</text>
 
     <!-- 法判: BC39 希拉曼二世 (x=287, t≈0.673, y≈64) 标签向下 -->
     <circle cx="287" cy="64"  r="3" fill="#1d4ed8"/>
     <line x1="287" y1="67"  x2="287" y2="75"  stroke="#1d4ed8" stroke-width="0.8" stroke-dasharray="2,1"/>
     <text x="287" y="82"  text-anchor="middle" font-size="7" fill="#1e3a8a">BC 39</text>
-    <text x="287" y="92"  text-anchor="middle" font-size="7" fill="#1e3a8a">希拉曼二世 继</text>
+    <text lang="en" x="287" y="92"  text-anchor="middle" font-size="7" fill="#1e3a8a">Helaman II (succ.)</text><text lang="zh" x="287" y="92"  text-anchor="middle" font-size="7" fill="#1e3a8a">希拉曼二世 继</text>
 
     <!-- 法判: BC30 尼腓 (x=305, t≈0.716, y≈60) 标签向上 -->
     <circle cx="305" cy="60"  r="3" fill="#1d4ed8"/>
     <line x1="305" y1="57"  x2="305" y2="49"  stroke="#1d4ed8" stroke-width="0.8" stroke-dasharray="2,1"/>
     <text x="305" y="46"  text-anchor="middle" font-size="7" fill="#1e3a8a">BC 30</text>
-    <text x="305" y="36"  text-anchor="middle" font-size="7" fill="#1e3a8a">尼腓二世 继</text>
+    <text lang="en" x="305" y="36"  text-anchor="middle" font-size="7" fill="#1e3a8a">Nephi II (succ.)</text><text lang="zh" x="305" y="36"  text-anchor="middle" font-size="7" fill="#1e3a8a">尼腓二世 继</text>
 
     <!-- 法判: BC1 拉科乃乌斯 (x=361, t≈0.846, y≈50) 标签向上 -->
     <circle cx="361" cy="50"  r="3" fill="#1d4ed8"/>
     <line x1="361" y1="47"  x2="361" y2="39"  stroke="#1d4ed8" stroke-width="0.8" stroke-dasharray="2,1"/>
     <text x="361" y="36"  text-anchor="middle" font-size="7" fill="#1e3a8a">BC 1</text>
-    <text x="361" y="26"  text-anchor="middle" font-size="7" fill="#1e3a8a">拉科乃乌斯 继</text>
+    <text lang="en" x="361" y="26"  text-anchor="middle" font-size="7" fill="#1e3a8a">Lachoneus (succ.)</text><text lang="zh" x="361" y="26"  text-anchor="middle" font-size="7" fill="#1e3a8a">拉科乃乌斯 继</text>
 
     <!-- 各书卷位置 -->
-    <text x="40"  y="242" text-anchor="start"  font-size="7.5" fill="#475569">一书·二书·雅各·以挪士·雅龙·奥姆乃</text>
-    <text x="216" y="242" text-anchor="middle" font-size="7.5" fill="#1e3a8a">摩赛亚·阿尔玛·希拉曼</text>
-    <text x="430" y="242" text-anchor="middle" font-size="8.5" fill="#4c1d95" font-weight="bold">尼腓三书（顶峰）</text>
-    <text x="600" y="242" text-anchor="middle" font-size="7.5" fill="#92400e">尼腓四书·摩尔门书</text>
-    <text x="800" y="242" text-anchor="middle" font-size="8" fill="#9d174d" font-weight="bold">摩罗乃书</text>
+    <text lang="en" x="40"  y="242" text-anchor="start"  font-size="7.5" fill="#475569">1 Nephi · 2 Nephi · Jacob · Enos · Jarom · Omni</text><text lang="zh" x="40"  y="242" text-anchor="start"  font-size="7.5" fill="#475569">一书·二书·雅各·以挪士·雅龙·奥姆乃</text>
+    <text lang="en" x="216" y="242" text-anchor="middle" font-size="7.5" fill="#1e3a8a">Mosiah · Alma · Helaman</text><text lang="zh" x="216" y="242" text-anchor="middle" font-size="7.5" fill="#1e3a8a">摩赛亚·阿尔玛·希拉曼</text>
+    <text lang="en" x="430" y="242" text-anchor="middle" font-size="8.5" fill="#4c1d95" font-weight="bold">3 Nephi (Zenith)</text><text lang="zh" x="430" y="242" text-anchor="middle" font-size="8.5" fill="#4c1d95" font-weight="bold">尼腓三书（顶峰）</text>
+    <text lang="en" x="600" y="242" text-anchor="middle" font-size="7.5" fill="#92400e">4 Nephi · Mormon</text><text lang="zh" x="600" y="242" text-anchor="middle" font-size="7.5" fill="#92400e">尼腓四书·摩尔门书</text>
+    <text lang="en" x="800" y="242" text-anchor="middle" font-size="8" fill="#9d174d" font-weight="bold">Moroni</text><text lang="zh" x="800" y="242" text-anchor="middle" font-size="8" fill="#9d174d" font-weight="bold">摩罗乃书</text>
 
     <!-- 总结框 -->
     <rect x="14" y="252" width="832" height="22" rx="4" fill="#fdf2f8" stroke="#f9a8d4"/>
-    <text x="430" y="267" text-anchor="middle" font-size="8.5" fill="#9d174d" font-weight="bold">摩罗乃书是全书封底：以最孤独的声音，写下最普世的邀请——真诚祈问，圣灵必为证明</text>
+    <text lang="en" x="430" y="267" text-anchor="middle" font-size="8.5" fill="#9d174d" font-weight="bold">Moroni: in the loneliest voice, it writes the most universal invitation — ask sincerely, and the Holy Ghost will testify</text><text lang="zh" x="430" y="267" text-anchor="middle" font-size="8.5" fill="#9d174d" font-weight="bold">摩罗乃书是全书封底：以最孤独的声音，写下最普世的邀请——真诚祈问，圣灵必为证明</text>
   </svg>
 </div>
 
 </div><!-- .page -->
+<script>(function(){var l=localStorage.getItem('bom-lang')||'en';if(l==='zh')document.body.classList.add('lang-zh');var b=document.getElementById('langBtn');if(b)b.textContent=document.body.classList.contains('lang-zh')?'English':'中文'})();function switchLang(){var z=document.body.classList.toggle('lang-zh');localStorage.setItem('bom-lang',z?'zh':'en');document.getElementById('langBtn').textContent=z?'English':'中文'}</script>
+<script data-mob="3">(function(){
+  if(!window.matchMedia('(max-width:640px)').matches)return;
+  function mk(t,c){var e=document.createElement(t);if(c)e.className=c;return e;}
+
+  /* ── hamburger + dark drawer ── */
+  var ov=mk('div','drawer-overlay');
+  var dr=mk('nav','drawer');
+  var hd=mk('div','drawer-hd');
+  var tit=mk('span','drawer-title');
+  tit.innerHTML='<span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span>';
+  var cx=mk('button','drawer-close');
+  cx.setAttribute('aria-label','close');cx.textContent='×';
+  cx.addEventListener('click',closeDr);
+  hd.appendChild(tit);hd.appendChild(cx);
+  var lks=mk('div','drawer-links');
+  document.querySelectorAll('.nav .tab').forEach(function(a){
+    var l=mk('a','drawer-tab'+(a.classList.contains('on')?' on':''));
+    l.href=a.href;l.innerHTML=a.innerHTML;lks.appendChild(l);
+  });
+  dr.appendChild(hd);dr.appendChild(lks);
+  document.body.appendChild(ov);document.body.appendChild(dr);
+
+  var ham=mk('button','hamburger');
+  ham.setAttribute('aria-label','menu');
+  ham.innerHTML='<svg width="18" height="13" viewBox="0 0 18 13" fill="currentColor">'+
+    '<rect width="18" height="2" rx="1"/>'+
+    '<rect y="5.5" width="14" height="2" rx="1"/>'+
+    '<rect y="11" width="18" height="2" rx="1"/></svg>';
+  ham.addEventListener('click',openDr);
+  var hdr=document.querySelector('header');
+  hdr.insertBefore(ham,hdr.firstChild);
+  ov.addEventListener('click',closeDr);
+
+  function openDr(){
+    ov.classList.add('open');dr.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDr(){
+    ov.classList.remove('open');dr.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* ── chapter summary cards ── */
+  var CM={
+    vio:'#7c3aed',tea:'#0d9488',amb:'#d97706',
+    pin:'#be185d',ros:'#be123c',blu:'#2563eb',grn:'#16a34a'
+  };
+  var intro=document.querySelector('.intro');
+  if(!intro)return;
+  var ct=mk('div','mob-ch');
+  document.querySelectorAll('.page>.n').forEach(function(n){
+    var ck=Object.keys(CM).find(function(k){return n.classList.contains(k);});
+    var nl=n.querySelector('.nl'),nt=n.querySelector('.nt'),nc=n.querySelector('.nc');
+    if(!nl||!nt)return;
+    var c=mk('div','mob-sec');
+    c.style.borderLeftColor=ck?CM[ck]:'#64748b';
+    c.innerHTML=
+      '<span class="mob-nl">'+nl.innerHTML+'</span>'+
+      '<span class="mob-nt">'+nt.innerHTML+'</span>'+
+      (nc?'<span class="mob-nc">'+nc.innerHTML+'</span>':'');
+    ct.appendChild(c);
+  });
+  if(ct.children.length)intro.insertAdjacentElement('afterend',ct);
+})();</script>
 </body>
 </html>

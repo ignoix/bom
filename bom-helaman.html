@@ -12,11 +12,15 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
-.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
-.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;flex-shrink:0;border:1px solid #e2e8f0;border-radius:7px;text-decoration:none;color:#64748b;transition:all .15s;font-size:0}
+.back-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+.back-btn::before{content:'';display:block;width:15px;height:12px;background-color:#64748b;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain}
+.back-btn:hover::before{background-color:#1e293b}
+.toggle-btn{position:fixed;bottom:24px;right:24px;z-index:200;font-size:12px;color:#fff;padding:7px 14px;border:none;border-radius:20px;background:#64748b;cursor:pointer;font-family:inherit;transition:background .15s,transform .1s;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.toggle-btn:hover{background:#475569;transform:translateY(-1px)}
 
-.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
+.h-info{display:none}
+.nav{flex:1;display:flex;gap:2px;overflow-x:auto}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#4c1d95;background:#f5f3ff;border-color:#c4b5fd}
@@ -46,8 +50,9 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .nt{font-size:14px;font-weight:700;flex:1}
 .nw{font-size:11px;color:#64748b}
 .nc{font-size:10.5px;color:#94a3b8;margin-left:auto}
-.np{margin:7px 0 0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .28s ease}
-.n:hover .np{max-height:1200px;opacity:1}
+.np{margin:7px 0 0;max-height:1000px;overflow:hidden;opacity:1;transition:max-height .35s ease,opacity .28s ease}
+.n:hover .np{max-height:1000px;opacity:1}
+body.all-collapsed .np{max-height:0;opacity:0}
 ul.np{padding:0}
 .np li{font-size:12px;color:#475569;line-height:1.7;padding-left:1.8em;text-indent:-1.8em;list-style:none}
 .np li::before{content:''}
@@ -75,51 +80,220 @@ ul.np{padding:0}
 .rel{grid-column:1/-1;margin-top:28px}
 .rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
 .rel svg{width:100%;height:auto;display:block}
+
+/* language toggle */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+div[lang="en"],ul[lang="en"]{display:block}
+div[lang="zh"],ul[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+body.lang-zh div[lang="en"],body.lang-zh ul[lang="en"]{display:none}
+body.lang-zh div[lang="zh"],body.lang-zh ul[lang="zh"]{display:block}
+.lang-btn{font-size:11px;color:#64748b;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;margin-left:8px}
+.lang-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+/* ── mobile base ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;
+  width:40px;height:40px;color:#1e293b;flex-shrink:0;border-radius:8px;
+  display:none;align-items:center;justify-content:center}
+.hamburger:active{background:#f1f5f9}
+
+/* drawer — dark slate */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;width:280px;max-width:88vw;height:100%;
+  background:#1e293b;z-index:201;display:flex;flex-direction:column;
+  transform:translateX(-110%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:8px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 16px;border-bottom:1px solid #334155;flex-shrink:0}
+.drawer-title{font-size:9px;font-weight:700;letter-spacing:3px;color:#475569;
+  text-transform:uppercase}
+.drawer-close{background:none;border:none;cursor:pointer;font-size:20px;
+  color:#475569;padding:2px 6px;line-height:1;border-radius:4px}
+.drawer-close:hover{color:#94a3b8}
+.drawer-links{overflow-y:auto;flex:1;padding:8px 0 36px}
+.drawer-tab{display:flex;align-items:center;padding:13px 22px;font-size:14px;
+  color:#94a3b8;text-decoration:none;border-left:3px solid transparent;
+  transition:background .12s;line-height:1.3;letter-spacing:.1px}
+.drawer-tab:active{background:rgba(255,255,255,.05)}
+.drawer-tab.on{color:#f1f5f9;font-weight:600;border-left-color:#94a3b8;
+  background:rgba(255,255,255,.07)}
+
+/* chapter summary cards (desktop: hidden) */
+.mob-ch{display:none}
+.mob-sec{border-radius:10px;padding:13px 14px;background:#fff;
+  display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid #e2e8f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.mob-nl{font-size:10px;color:#94a3b8;font-weight:700;letter-spacing:.6px}
+.mob-nt{font-size:13px;font-weight:700;color:#1e293b;line-height:1.25}
+.mob-nc{font-size:10px;color:#b0bac5;margin-top:1px}
+
+@media(max-width:640px){
+  /* ── global ── */
+  body{font-size:15px;background:#eef1f6}
+
+  /* ── header ── */
+  header{padding:0 14px 0 6px;gap:6px;height:54px;
+    border-bottom:1px solid #dde3ec;box-shadow:0 1px 0 #dde3ec}
+  .hamburger{display:flex}
+  .nav,.back-btn,.hb,.hs{display:none}
+  .h-info{display:flex;flex:1;justify-content:center;text-align:center}
+  .hn{font-size:15px;font-weight:600;letter-spacing:.3px;color:#1e293b}
+  .lang-btn{font-size:11px;padding:5px 10px;border-radius:7px;flex-shrink:0}
+  .drawer-overlay.open,.drawer.open{opacity:1;pointer-events:auto}
+  .drawer.open{transform:translateX(0)}
+
+  /* ── page grid ── */
+  .page{grid-template-columns:1fr;padding:14px 12px 96px;gap:0;background:#eef1f6}
+
+  /* ── intro ── */
+  .intro{text-align:left;padding:22px 18px 20px;border-radius:16px;border:none;
+    background:#fff;margin-bottom:14px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:10px}
+  .intro-h{font-size:28px;font-weight:300;letter-spacing:-.5px;line-height:1.1;
+    margin-bottom:14px;color:#1e293b}
+  .intro-meta{flex-direction:column;gap:7px;justify-content:flex-start}
+  .im{font-size:12px;display:flex;gap:7px;align-items:baseline;color:#64748b}
+  .im b{color:#1e293b;font-weight:600}
+  .intro-en{font-size:11px;margin-top:8px;padding-top:10px;border-top:1px solid #f1f5f9;
+    color:#94a3b8}
+
+  /* ── chapter summary cards ── */
+  .mob-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f2f6}
+  .intro+div:not([class]){display:none}
+
+  /* ── phase labels ── hidden; color carried by card left border */
+  .ph,.ph-sp,.arr,.si-sp{display:none}
+
+  /* ── section card ── */
+  .n{grid-column:1;
+    border-top:none!important;border-right:none!important;border-bottom:none!important;
+    border-left-width:4px!important;
+    border-radius:0 16px 16px 0;
+    padding:18px 17px 20px;margin-bottom:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .n:hover{filter:none}
+
+  /* ── section header: chapter → title → location · time ── */
+  .nh{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:14px;align-items:baseline}
+  .nl{order:1;flex:0 0 100%;font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:6px;flex-wrap:wrap}
+  .nt{order:2;flex:0 0 100%;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:8px;white-space:normal;overflow-wrap:break-word;letter-spacing:normal}
+  .nw{order:3;font-size:12px;white-space:normal}
+  .nc{order:4;font-size:12px;margin-left:0;white-space:normal}
+  .nc::before{content:' · '}
+
+  /* ── scripture list ── */
+  .np{padding:0;margin:0}
+  .np li{font-size:14.5px;color:#374151;line-height:1.85;
+    padding-left:2.4em;text-indent:-2.4em;
+    padding-top:7px;padding-bottom:7px;
+    border-bottom:1px solid rgba(0,0,0,.05)}
+  .np li:last-child{border-bottom:none;padding-bottom:0}
+  .cn{display:inline-block;width:1.8em;font-size:11px;font-weight:700;
+    color:#94a3b8;letter-spacing:0;text-align:right;margin-right:6px}
+  .ns{font-size:14.5px;line-height:1.85;color:#374151}
+
+  /* ── event box ── */
+  .ev{grid-column:1;border-radius:12px;
+    border-style:solid!important;border-width:1px!important;
+    padding:12px 16px;margin-bottom:4px;font-size:13px;line-height:1.6}
+  .ev-icon{display:none}
+  .ev-date{font-size:9px;letter-spacing:1.5px;font-weight:700;margin-bottom:5px}
+
+  /* ── sidebar ── */
+  .si{grid-column:1;padding:0;margin-bottom:20px}
+  .si::before{display:none}
+  .nms{background:#fff;border-radius:12px;padding:14px 16px;
+    border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .nms+.nms{margin-top:8px}
+  .nm-title{font-size:9px;font-weight:700;letter-spacing:2px;color:#94a3b8;
+    text-transform:uppercase;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #f0f2f6}
+  .nm{display:grid;grid-template-columns:84px 1fr;gap:4px;
+    padding:6px 0;border-top:1px solid #f6f8fb;
+    align-items:baseline;line-height:1.45}
+  .nm:first-of-type{border-top:none;padding-top:0}
+  .nm b{font-size:12px;font-weight:600;color:#334155}
+  .nm span{font-size:12px;color:#64748b}
+
+  /* 1/2 Nephi character sidebar cards */
+  .sb{background:#f8fafc;border-radius:10px;padding:10px 13px;
+    border:1px solid #f0f2f6;margin-bottom:6px}
+  .sn{font-size:13.5px;font-weight:700;color:#1e293b}
+  .se{font-size:10.5px;color:#94a3b8;margin-top:1px}
+  .sd{font-size:12px;color:#475569;line-height:1.5;margin-top:5px}
+
+  /* ── legend ── */
+  .legend{grid-column:1;background:#fff;border-radius:12px;
+    padding:14px 16px;border:1px solid #dde3ec;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .legend-title{font-size:9px;letter-spacing:2px;color:#94a3b8;margin-bottom:10px}
+  .lg-item{font-size:12px;color:#475569}
+
+  /* ── arc / character SVG ── scale to fit, card container */
+  .rel{grid-column:1;margin:0 0 20px;overflow:hidden;
+    border:1px solid #dde3ec;border-radius:14px;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .rel-title{font-size:9px;letter-spacing:2px;color:#94a3b8;
+    padding:14px 16px 0;margin-bottom:6px;text-align:left}
+  .rel svg{width:100%;height:auto;min-width:0;display:block}
+
+  /* ── activity maps & other no-class SVG divs ── */
+  .page>div:not([class]) svg{
+    width:100%!important;height:auto!important;min-width:0;display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-btn" href="index.html">← 时间线</a>
+  <a class="back-btn" href="index.html">← <span lang="en">Timeline</span><span lang="zh">时间线</span></a>
   <div class="h-info">
-    <span class="hb">摩尔门经</span><span class="hs">/</span><span class="hn">希拉曼书</span>
+    <span class="hb"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span></span><span class="hs">/</span><span class="hn"><span lang="en">Helaman</span><span lang="zh">希拉曼书</span></span>
   </div>
   <nav class="nav">
-    <a class="tab" href="bom.html">一书</a>
-    <a class="tab" href="bom2.html">二书</a>
-    <a class="tab" href="bom-jacob.html">雅各</a>
-    <a class="tab" href="bom-enos.html">以挪士</a>
-    <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆乃</a>
-    <a class="tab" href="bom-wom.html">摩语</a>
-    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
-    <a class="tab" href="bom-alma.html">阿尔玛</a>
-    <a class="tab on" href="bom-helaman.html">希拉曼</a>
-    <a class="tab" href="bom-3nephi.html">三书</a>
-    <a class="tab" href="bom-4nephi.html">四书</a>
-    <a class="tab" href="bom-mormon.html">摩尔门</a>
-    <a class="tab" href="bom-ether.html">以帖</a>
-    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+    <a class="tab" href="bom.html"><span lang="en">1 Nephi</span><span lang="zh">一书</span></a>
+    <a class="tab" href="bom2.html"><span lang="en">2 Nephi</span><span lang="zh">二书</span></a>
+    <a class="tab" href="bom-jacob.html"><span lang="en">Jacob</span><span lang="zh">雅各</span></a>
+    <a class="tab" href="bom-enos.html"><span lang="en">Enos</span><span lang="zh">以挪士</span></a>
+    <a class="tab" href="bom-jarom.html"><span lang="en">Jarom</span><span lang="zh">雅龙</span></a>
+    <a class="tab" href="bom-omni.html"><span lang="en">Omni</span><span lang="zh">奥姆乃</span></a>
+    <a class="tab" href="bom-wom.html"><span lang="en">W of M</span><span lang="zh">摩语</span></a>
+    <a class="tab" href="bom-mosiah.html"><span lang="en">Mosiah</span><span lang="zh">摩赛亚</span></a>
+    <a class="tab" href="bom-alma.html"><span lang="en">Alma</span><span lang="zh">阿尔玛</span></a>
+    <a class="tab on" href="bom-helaman.html"><span lang="en">Helaman</span><span lang="zh">希拉曼</span></a>
+    <a class="tab" href="bom-3nephi.html"><span lang="en">3 Nephi</span><span lang="zh">三书</span></a>
+    <a class="tab" href="bom-4nephi.html"><span lang="en">4 Nephi</span><span lang="zh">四书</span></a>
+    <a class="tab" href="bom-mormon.html"><span lang="en">Mormon</span><span lang="zh">摩尔门</span></a>
+    <a class="tab" href="bom-ether.html"><span lang="en">Ether</span><span lang="zh">以帖</span></a>
+    <a class="tab" href="bom-moroni.html"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </header>
 
 <div class="page">
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">摩尔门经 · 大版缩编</div>
-  <div class="intro-h">希拉曼书 · Helaman</div>
+  <div class="intro-sup"><span lang="en">Book of Mormon · Abridged</span><span lang="zh">摩尔门经 · 大版缩编</span></div>
+  <div class="intro-h"><span lang="en">Book of Helaman</span><span lang="zh">希拉曼书 · Helaman</span></div>
   <div class="intro-meta">
-    <span class="im">时间 <b>约公元前 52–1 年</b></span>
-    <span class="im">地点 <b>萨拉赫拉 · 拉曼人地 · 各城</b></span>
-    <span class="im">章节 <b>16 章</b></span>
-    <span class="im">核心 <b>甘大安敦匪帮 · 神火显现 · 撒母耳城墙 · 基督降生预兆</b></span>
+    <span class="im"><span lang="en">Period <b>ca. 52–1 BC</b></span><span lang="zh">时间 <b>约公元前 52–1 年</b></span></span>
+    <span class="im"><span lang="en">Location <b>Zarahemla · Land of Nephi · Various cities</b></span><span lang="zh">地点 <b>萨拉赫拉 · 拉曼人地 · 各城</b></span></span>
+    <span class="im"><span lang="en">Chapters <b>16</b></span><span lang="zh">章节 <b>16 章</b></span></span>
+    <span class="im"><span lang="en">Themes <b>Gadianton Robbers · Pillar of Fire · Samuel on the Wall · Signs of Christ's birth</b></span><span lang="zh">核心 <b>甘大安敦匪帮 · 神火显现 · 撒母耳城墙 · 基督降生预兆</b></span></span>
   </div>
 </div>
 
 <!-- ── 活动地图 ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · ACTIVITY MAP</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Activity Map · Helaman</span><span lang="zh">活动地图示意 · 希拉曼书</span></div>
   <svg viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="hA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
@@ -147,132 +321,132 @@ ul.np{padding:0}
 
     <!-- ── 西顿河 River Sidon ── -->
     <path d="M 442,378 Q 443,290 440,195 Q 437,140 441,100" fill="none" stroke="#3b82f6" stroke-width="2.2" opacity="0.65"/>
-    <text x="450" y="292" font-size="7.5" fill="#2563eb" font-style="italic">西顿河</text>
+    <text lang="en" x="450" y="292" font-size="7.5" fill="#2563eb" font-style="italic">River Sidon</text><text lang="zh" x="450" y="292" font-size="7.5" fill="#2563eb" font-style="italic">西顿河</text>
 
     <!-- ── 地区标签 ── -->
-    <text x="460" y="22" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">极北之地</text>
-    <text x="460" y="35" text-anchor="middle" font-size="7.5" fill="#3b82f6">Land Northward</text>
-    <text x="422" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">萨拉赫拉地</text>
-    <text x="598" y="125" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">邦地</text>
-    <text x="178" y="302" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#065f46">荒野</text>
-    <text x="320" y="378" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">以实玛利地（拉曼人）</text>
+    <text lang="en" x="460" y="22" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">Land Northward</text><text lang="zh" x="460" y="22" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">极北之地</text>
+    <text lang="en" x="460" y="35" text-anchor="middle" font-size="7.5" fill="#3b82f6">Northern Lands</text><text lang="zh" x="460" y="35" text-anchor="middle" font-size="7.5" fill="#3b82f6">北境之地</text>
+    <text lang="en" x="422" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">Land of Zarahemla</text><text lang="zh" x="422" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#164e63">萨拉赫拉地</text>
+    <text lang="en" x="598" y="125" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">Bountiful</text><text lang="zh" x="598" y="125" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">邦地</text>
+    <text lang="en" x="178" y="302" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#065f46">Wilderness</text><text lang="zh" x="178" y="302" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#065f46">荒野</text>
+    <text lang="en" x="320" y="378" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">Land of Ishmael (Lamanites)</text><text lang="zh" x="320" y="378" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">以实玛利地（拉曼人）</text>
 
     <!-- ── 城市标记 ── -->
     <!-- 曼泰 Manti — ch.4 拉曼人占领 -->
     <circle cx="396" cy="258" r="5.5" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
-    <text x="406" y="262" font-size="8" fill="#4c1d95">曼泰 (Manti)</text>
+    <text lang="en" x="406" y="262" font-size="8" fill="#4c1d95">Manti</text><text lang="zh" x="406" y="262" font-size="8" fill="#4c1d95">曼泰 (Manti)</text>
     <!-- 以西劳地 Zeezrom — ch.5 传教地 -->
     <circle cx="470" cy="272" r="5.5" fill="#059669" stroke="#fff" stroke-width="1.5"/>
-    <text x="480" y="276" font-size="8" fill="#065f46">以西劳地</text>
+    <text lang="en" x="480" y="276" font-size="8" fill="#065f46">Zeezrom</text><text lang="zh" x="480" y="276" font-size="8" fill="#065f46">以西劳地</text>
     <!-- 吉德城 Gid — ch.5 尼腓李海传教 -->
     <circle cx="662" cy="168" r="5.5" fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
-    <text x="672" y="172" font-size="8" fill="#1e3a8a">吉德城</text>
+    <text lang="en" x="672" y="172" font-size="8" fill="#1e3a8a">City of Gid</text><text lang="zh" x="672" y="172" font-size="8" fill="#1e3a8a">吉德城</text>
     <!-- 米勒克城 Mulek — ch.5 传教地 -->
     <circle cx="690" cy="188" r="5.5" fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
-    <text x="700" y="192" font-size="8" fill="#1e3a8a">米勒克城</text>
+    <text lang="en" x="700" y="192" font-size="8" fill="#1e3a8a">City of Mulek</text><text lang="zh" x="700" y="192" font-size="8" fill="#1e3a8a">米勒克城</text>
 
     <!-- ── 事件标注 ── -->
     <!-- 甘大安敦匪帮 据点 -->
     <circle cx="178" cy="255" r="8" fill="#dc2626" stroke="#fff" stroke-width="2"/>
     <rect x="190" y="243" width="162" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fca5a5" stroke-width="1.2"/>
-    <text x="271" y="256" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">甘大安敦匪帮</text>
-    <text x="271" y="267" text-anchor="middle" font-size="7.5" fill="#f87171">荒山据点 · 渗透司法政治</text>
+    <text lang="en" x="271" y="256" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">Gadianton Robbers</text><text lang="zh" x="271" y="256" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">甘大安敦匪帮</text>
+    <text lang="en" x="271" y="267" text-anchor="middle" font-size="7.5" fill="#f87171">Wilderness hideout · infiltrates courts</text><text lang="zh" x="271" y="267" text-anchor="middle" font-size="7.5" fill="#f87171">荒山据点 · 渗透司法政治</text>
 
     <!-- 尼腓花园高塔 Garden Tower in Zarahemla -->
     <polygon points="428,144 448,144 448,165 438,157 428,165" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
     <rect x="452" y="138" width="172" height="30" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="538" y="151" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">尼腓花园高塔</text>
-    <text x="538" y="162" text-anchor="middle" font-size="7.5" fill="#7c3aed">萨拉赫拉城 · 封印权柄</text>
+    <text lang="en" x="538" y="151" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Garden Tower of Nephi</text><text lang="zh" x="538" y="151" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">尼腓花园高塔</text>
+    <text lang="en" x="538" y="162" text-anchor="middle" font-size="7.5" fill="#7c3aed">Zarahemla · sealing power</text><text lang="zh" x="538" y="162" text-anchor="middle" font-size="7.5" fill="#7c3aed">萨拉赫拉城 · 封印权柄</text>
 
     <!-- 撒母耳 Samuel on wall of Zarahemla -->
     <circle cx="538" cy="222" r="5" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
     <rect x="536" y="206" width="168" height="44" rx="4" fill="rgba(255,255,255,0.93)" stroke="#fde68a" stroke-width="2"/>
-    <text x="620" y="222" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">拉曼先知撒母耳</text>
-    <text x="620" y="233" text-anchor="middle" font-size="8" fill="#b45309">Samuel the Lamanite</text>
-    <text x="620" y="244" text-anchor="middle" font-size="7.5" fill="#b45309">站在城墙上 · 预言基督降生</text>
+    <text lang="en" x="620" y="222" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">Samuel the Lamanite</text><text lang="zh" x="620" y="222" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">拉曼先知撒母耳</text>
+    <text lang="en" x="620" y="233" text-anchor="middle" font-size="8" fill="#b45309">Samuel · Lamanite prophet</text><text lang="zh" x="620" y="233" text-anchor="middle" font-size="8" fill="#b45309">拉曼先知·撒母耳</text>
+    <text lang="en" x="620" y="244" text-anchor="middle" font-size="7.5" fill="#b45309">Stands on city wall · prophesies Christ's birth</text><text lang="zh" x="620" y="244" text-anchor="middle" font-size="7.5" fill="#b45309">站在城墙上 · 预言基督降生</text>
 
     <!-- 尼腓与李海被囚 Prison miracle -->
     <circle cx="320" cy="330" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
     <rect x="330" y="318" width="150" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.2"/>
-    <text x="405" y="331" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">尼腓与李海被囚</text>
-    <text x="405" y="342" text-anchor="middle" font-size="7.5" fill="#7c3aed">神火环绕 · 三百人归改</text>
+    <text lang="en" x="405" y="331" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">Nephi and Lehi Imprisoned</text><text lang="zh" x="405" y="331" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">尼腓与李海被囚</text>
+    <text lang="en" x="405" y="342" text-anchor="middle" font-size="7.5" fill="#7c3aed">Pillar of fire · 300 convert</text><text lang="zh" x="405" y="342" text-anchor="middle" font-size="7.5" fill="#7c3aed">神火环绕 · 三百人归改</text>
 
     <!-- ── 移动路线 ── -->
     <!-- 柯林德茂入侵 Coriantumr invasion (第1章, red) -->
     <path d="M 340,370 Q 372,288 416,204" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="7,3" marker-end="url(#hR)"/>
-    <text x="352" y="296" font-size="7.5" fill="#dc2626">柯林德茂入侵↑</text>
+    <text lang="en" x="352" y="296" font-size="7.5" fill="#dc2626">Coriantumr invasion↑</text><text lang="zh" x="352" y="296" font-size="7.5" fill="#dc2626">柯林德茂入侵↑</text>
 
     <!-- 北上移民 Nephite migration north (第3章, green) -->
     <path d="M 454,154 Q 464,96 473,53" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#hG)"/>
-    <text x="477" y="104" font-size="7.5" fill="#059669">北上移民</text>
+    <text lang="en" x="477" y="104" font-size="7.5" fill="#059669">Migration north</text><text lang="zh" x="477" y="104" font-size="7.5" fill="#059669">北上移民</text>
 
     <!-- 传教南行 Nephi+Lehi mission south (第5章, purple) -->
     <path d="M 432,183 Q 376,243 327,316" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#hA)"/>
-    <text x="360" y="244" font-size="7.5" fill="#7c3aed" text-anchor="middle">传教南行↓</text>
+    <text lang="en" x="360" y="244" font-size="7.5" fill="#7c3aed" text-anchor="middle">Mission south↓</text><text lang="zh" x="360" y="244" font-size="7.5" fill="#7c3aed" text-anchor="middle">传教南行↓</text>
 
     <!-- ── 水域标签 ── -->
-    <text x="28" y="190" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="820" y="260" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text lang="en" x="28" y="190" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">Pacific Ocean</text><text lang="zh" x="28" y="190" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text lang="en" x="820" y="260" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">Caribbean Sea</text><text lang="zh" x="820" y="260" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text lang="en" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text><text lang="zh" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
 
     <!-- ── 标题框 ── -->
     <rect x="6" y="6" width="242" height="36" rx="5" fill="rgba(255,255,255,0.94)" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="14" y="21" fill="#4c1d95" font-size="11" font-weight="bold">希拉曼书活动地图</text>
-    <text x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Helaman Activity Map · ~52–1 BC</text>
+    <text lang="en" x="14" y="21" fill="#4c1d95" font-size="11" font-weight="bold">Helaman Activity Map</text><text lang="zh" x="14" y="21" fill="#4c1d95" font-size="11" font-weight="bold">希拉曼书活动地图</text>
+    <text lang="en" x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">Helaman · ca. 52–1 BC</text><text lang="zh" x="14" y="35" fill="#94a3b8" font-size="8.5" font-style="italic">希拉曼书活动地图 · 约前 52–1 年</text>
 
     <!-- ── 图例框 ── -->
     <rect x="6" y="50" width="214" height="110" rx="5" fill="rgba(255,255,255,0.93)" stroke="#e2e8f0"/>
     <line x1="13" y1="64" x2="30" y2="64" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#hR)"/>
-    <text x="36" y="68" fill="#475569" font-size="7.8">柯林德茂入侵 (第1章)</text>
+    <text lang="en" x="36" y="68" fill="#475569" font-size="7.8">Coriantumr invasion (ch. 1)</text><text lang="zh" x="36" y="68" fill="#475569" font-size="7.8">柯林德茂入侵 (第1章)</text>
     <line x1="13" y1="80" x2="30" y2="80" stroke="#059669" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#hG)"/>
-    <text x="36" y="84" fill="#475569" font-size="7.8">北上移民 (第3章)</text>
+    <text lang="en" x="36" y="84" fill="#475569" font-size="7.8">Migration north (ch. 3)</text><text lang="zh" x="36" y="84" fill="#475569" font-size="7.8">北上移民 (第3章)</text>
     <line x1="13" y1="96" x2="30" y2="96" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#hA)"/>
-    <text x="36" y="100" fill="#475569" font-size="7.8">传教南行 (第5章)</text>
+    <text lang="en" x="36" y="100" fill="#475569" font-size="7.8">Mission south (ch. 5)</text><text lang="zh" x="36" y="100" fill="#475569" font-size="7.8">传教南行 (第5章)</text>
     <circle cx="19" cy="114" r="4.5" fill="#dc2626" stroke="#fff" stroke-width="1"/>
-    <text x="29" y="118" fill="#475569" font-size="7.8">甘大安敦据点（荒野）</text>
+    <text lang="en" x="29" y="118" fill="#475569" font-size="7.8">Gadianton hideout (wilderness)</text><text lang="zh" x="29" y="118" fill="#475569" font-size="7.8">甘大安敦据点（荒野）</text>
     <circle cx="19" cy="130" r="4.5" fill="#7c3aed" stroke="#fff" stroke-width="1"/>
-    <text x="29" y="134" fill="#475569" font-size="7.8">传道事件/宣告地点</text>
+    <text lang="en" x="29" y="134" fill="#475569" font-size="7.8">Mission/proclamation site</text><text lang="zh" x="29" y="134" fill="#475569" font-size="7.8">传道事件/宣告地点</text>
     <circle cx="19" cy="146" r="4" fill="#d97706" stroke="#fff" stroke-width="1"/>
-    <text x="29" y="150" fill="#475569" font-size="7.8">撒母耳·拉曼先知</text>
+    <text lang="en" x="29" y="150" fill="#475569" font-size="7.8">Samuel the Lamanite</text><text lang="zh" x="29" y="150" fill="#475569" font-size="7.8">撒母耳·拉曼先知</text>
   </svg>
-  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议</div>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px"><span lang="en">※ Geographic positions are approximate and academically debated</span><span lang="zh">※ 地理位置为示意，学术上仍有争议</span></div>
 </div>
 
-<!-- ── 章节梗概分布图 ── -->
+<!-- ── 章节概览图 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节梗概分布 · CHAPTER OVERVIEW</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Chapter Overview</span><span lang="zh">章节概览</span></div>
   <svg viewBox="0 0 860 316" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
-    <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（希拉曼书  16 章分布）</text>
+    <text lang="en" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">Five Narratives (Helaman  16 Chapters)</text><text lang="zh" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（希拉曼书  16 章分布）</text>
 
     <!-- 章数标签（在色块上方） -->
-    <text x="145" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">4章</text>
-    <text x="287" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">2章</text>
-    <text x="477" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#2563eb">6章</text>
-    <text x="691" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">3章</text>
-    <text x="786" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">1章</text>
+    <text lang="en" x="145" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">4 ch</text><text lang="zh" x="145" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">4章</text>
+    <text lang="en" x="287" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">2 ch</text><text lang="zh" x="287" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">2章</text>
+    <text lang="en" x="477" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#2563eb">6 ch</text><text lang="zh" x="477" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#2563eb">6章</text>
+    <text lang="en" x="691" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">3 ch</text><text lang="zh" x="691" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">3章</text>
+    <text lang="en" x="786" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">1 ch</text><text lang="zh" x="786" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">1章</text>
 
     <!-- 色块（按章数等比，总宽760px，x从50起） -->
     <!-- S1: 第1–4章 (4/16=190px) -->
     <rect x="50"  y="60" width="190" height="52" fill="#fee2e2"/>
-    <text x="145" y="81"  text-anchor="middle" font-size="13" font-weight="bold" fill="#9f1239">甘大安敦</text>
-    <text x="145" y="97"  text-anchor="middle" font-size="8"   fill="#dc2626">Gadianton · 匪帮初兴</text>
+    <text lang="en" x="145" y="81"  text-anchor="middle" font-size="13" font-weight="bold" fill="#9f1239">Gadianton</text><text lang="zh" x="145" y="81"  text-anchor="middle" font-size="13" font-weight="bold" fill="#9f1239">甘大安敦</text>
+    <text lang="en" x="145" y="97"  text-anchor="middle" font-size="8"   fill="#dc2626">Gadianton band rises</text><text lang="zh" x="145" y="97"  text-anchor="middle" font-size="8"   fill="#dc2626">甘大安敦·匪帮初兴</text>
 
     <!-- S2: 第5–6章 (2/16=95px) -->
     <rect x="240" y="60" width="95"  height="52" fill="#f5f3ff"/>
-    <text x="287" y="82"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#4c1d95">尼腓·李海</text>
-    <text x="287" y="97"  text-anchor="middle" font-size="7.5"  fill="#7c3aed">神火环绕</text>
+    <text lang="en" x="287" y="82"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#4c1d95">Nephi · Lehi</text><text lang="zh" x="287" y="82"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#4c1d95">尼腓·李海</text>
+    <text lang="en" x="287" y="97"  text-anchor="middle" font-size="7.5"  fill="#7c3aed">Pillar of Fire</text><text lang="zh" x="287" y="97"  text-anchor="middle" font-size="7.5"  fill="#7c3aed">神火环绕</text>
 
     <!-- S3: 第7–12章 (6/16=285px) -->
     <rect x="335" y="60" width="285" height="52" fill="#dbeafe"/>
-    <text x="477" y="84"  text-anchor="middle" font-size="16" font-weight="bold" fill="#1e40af">尼腓二世</text>
-    <text x="477" y="101" text-anchor="middle" font-size="8.5" fill="#2563eb">封印权柄 · 宣告饥荒</text>
+    <text lang="en" x="477" y="84"  text-anchor="middle" font-size="16" font-weight="bold" fill="#1e40af">Nephi II</text><text lang="zh" x="477" y="84"  text-anchor="middle" font-size="16" font-weight="bold" fill="#1e40af">尼腓二世</text>
+    <text lang="en" x="477" y="101" text-anchor="middle" font-size="8.5" fill="#2563eb">Sealing Power · Famine Declared</text><text lang="zh" x="477" y="101" text-anchor="middle" font-size="8.5" fill="#2563eb">封印权柄 · 宣告饥荒</text>
 
     <!-- S4: 第13–15章 (3/16=143px) -->
     <rect x="620" y="60" width="143" height="52" fill="#fef9c3"/>
-    <text x="691" y="84"  text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">撒母耳</text>
-    <text x="691" y="99"  text-anchor="middle" font-size="8"   fill="#b45309">城墙先知</text>
+    <text lang="en" x="691" y="84"  text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Samuel</text><text lang="zh" x="691" y="84"  text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">撒母耳</text>
+    <text lang="en" x="691" y="99"  text-anchor="middle" font-size="8"   fill="#b45309">Prophet on the Wall</text><text lang="zh" x="691" y="99"  text-anchor="middle" font-size="8"   fill="#b45309">城墙先知</text>
 
     <!-- S5: 第16章 (1/16=47px)，过窄，仅标色，下方补标注 -->
     <rect x="763" y="60" width="47"  height="52" fill="#d1fae5"/>
@@ -288,41 +462,41 @@ ul.np{padding:0}
 
     <!-- 色块下方：人物·章节·梗概 -->
     <!-- S1 -->
-    <text x="145" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">甘大安敦匪帮</text>
-    <text x="145" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1–4 章</text>
-    <text x="145" y="154" text-anchor="middle" font-size="8"   fill="#64748b">刺官弑政·秘密组合成</text>
-    <text x="145" y="166" text-anchor="middle" font-size="8"   fill="#64748b">拉曼入寇·骄傲循环始</text>
+    <text lang="en" x="145" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">Gadianton Band</text><text lang="zh" x="145" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">甘大安敦匪帮</text>
+    <text lang="en" x="145" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 1–4</text><text lang="zh" x="145" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1–4 章</text>
+    <text lang="en" x="145" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Officials slain · secret combination</text><text lang="zh" x="145" y="154" text-anchor="middle" font-size="8"   fill="#64748b">刺官弑政·秘密组合成</text>
+    <text lang="en" x="145" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Lamanite invasion · pride cycle begins</text><text lang="zh" x="145" y="166" text-anchor="middle" font-size="8"   fill="#64748b">拉曼入寇·骄傲循环始</text>
 
     <!-- S2 -->
-    <text x="287" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">尼腓 · 李海</text>
-    <text x="287" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 5–6 章</text>
-    <text x="287" y="154" text-anchor="middle" font-size="8"   fill="#64748b">神火环绕·声出云中</text>
-    <text x="287" y="166" text-anchor="middle" font-size="8"   fill="#64748b">三百归改·拉曼转义</text>
+    <text lang="en" x="287" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Nephi · Lehi</text><text lang="zh" x="287" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">尼腓 · 李海</text>
+    <text lang="en" x="287" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 5–6</text><text lang="zh" x="287" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 5–6 章</text>
+    <text lang="en" x="287" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Pillar of fire · voice from cloud</text><text lang="zh" x="287" y="154" text-anchor="middle" font-size="8"   fill="#64748b">神火环绕·声出云中</text>
+    <text lang="en" x="287" y="166" text-anchor="middle" font-size="8"   fill="#64748b">300 convert · Lamanites turn righteous</text><text lang="zh" x="287" y="166" text-anchor="middle" font-size="8"   fill="#64748b">三百归改·拉曼转义</text>
 
     <!-- S3 -->
-    <text x="477" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e40af">尼腓二世</text>
-    <text x="477" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 7–12 章</text>
-    <text x="477" y="154" text-anchor="middle" font-size="8"   fill="#64748b">高塔哀哭·揭弑真凶·获封印权柄</text>
-    <text x="477" y="166" text-anchor="middle" font-size="8"   fill="#64748b">宣告饥荒三年·摩尔门论骄傲循环</text>
+    <text lang="en" x="477" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e40af">Nephi II</text><text lang="zh" x="477" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e40af">尼腓二世</text>
+    <text lang="en" x="477" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 7–12</text><text lang="zh" x="477" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 7–12 章</text>
+    <text lang="en" x="477" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Tower lament · reveals killer · sealing power</text><text lang="zh" x="477" y="154" text-anchor="middle" font-size="8"   fill="#64748b">高塔哀哭·揭弑真凶·获封印权柄</text>
+    <text lang="en" x="477" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Three-year famine · Mormon on pride cycle</text><text lang="zh" x="477" y="166" text-anchor="middle" font-size="8"   fill="#64748b">宣告饥荒三年·摩尔门论骄傲循环</text>
 
     <!-- S4 -->
-    <text x="691" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">撒母耳（拉曼）</text>
-    <text x="691" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 13–15 章</text>
-    <text x="691" y="154" text-anchor="middle" font-size="8"   fill="#64748b">登城墙预言基督降生</text>
-    <text x="691" y="166" text-anchor="middle" font-size="8"   fill="#64748b">众射之·无一能中·遁旷野</text>
+    <text lang="en" x="691" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">Samuel (Lamanite)</text><text lang="zh" x="691" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#92400e">撒母耳（拉曼）</text>
+    <text lang="en" x="691" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 13–15</text><text lang="zh" x="691" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 13–15 章</text>
+    <text lang="en" x="691" y="154" text-anchor="middle" font-size="8"   fill="#64748b">On the wall · prophesies Christ's birth</text><text lang="zh" x="691" y="154" text-anchor="middle" font-size="8"   fill="#64748b">登城墙预言基督降生</text>
+    <text lang="en" x="691" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Shot at · none hit · flees to wilderness</text><text lang="zh" x="691" y="166" text-anchor="middle" font-size="8"   fill="#64748b">众射之·无一能中·遁旷野</text>
 
     <!-- S5 (窄，需下移) -->
-    <text x="786" y="128" text-anchor="middle" font-size="9"   font-weight="bold" fill="#065f46">守望</text>
-    <text x="786" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 16 章</text>
-    <text x="786" y="154" text-anchor="middle" font-size="7.5" fill="#64748b">预兆渐现</text>
-    <text x="786" y="166" text-anchor="middle" font-size="7.5" fill="#64748b">民分两端</text>
+    <text lang="en" x="786" y="128" text-anchor="middle" font-size="9"   font-weight="bold" fill="#065f46">Watching</text><text lang="zh" x="786" y="128" text-anchor="middle" font-size="9"   font-weight="bold" fill="#065f46">守望</text>
+    <text lang="en" x="786" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 16</text><text lang="zh" x="786" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 16 章</text>
+    <text lang="en" x="786" y="154" text-anchor="middle" font-size="7.5" fill="#64748b">Signs appear</text><text lang="zh" x="786" y="154" text-anchor="middle" font-size="7.5" fill="#64748b">预兆渐现</text>
+    <text lang="en" x="786" y="166" text-anchor="middle" font-size="7.5" fill="#64748b">People divided</text><text lang="zh" x="786" y="166" text-anchor="middle" font-size="7.5" fill="#64748b">民分两端</text>
 
     <!-- 注释 -->
-    <text x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 色块宽度按章数比例绘制：第16章仅1章（最短），第7–12章共6章占全书38%（最长）</text>
+    <text lang="en" x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ Block widths proportional to chapter count: ch. 16 is shortest (1 ch); ch. 7–12 has 6 ch, 38% of the book (longest)</text><text lang="zh" x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 色块宽度按章数比例绘制：第16章仅1章（最短），第7–12章共6章占全书38%（最长）</text>
 
     <!-- timeline section -->
     <line x1="50" y1="210" x2="810" y2="210" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 52–1 年</text>
+    <text lang="en" x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Timeline · 52–1 BC</text><text lang="zh" x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 52–1 年</text>
 
     <!-- axis (760px / 51yr ≈ 14.9px/yr, x = 50 + (52 - year_BC) * 14.9) -->
     <line x1="50" y1="268" x2="810" y2="268" stroke="#d1d5db" stroke-width="1.5"/>
@@ -331,148 +505,148 @@ ul.np{padding:0}
     <circle cx="50"  cy="268" r="3.5" fill="#dc2626"/>
     <line x1="50"  y1="254" x2="50"  y2="264" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="50"  y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">BC 52</text>
-    <text x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">甘大安敦匪帮兴起</text>
+    <text lang="en" x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">Gadianton band rises</text><text lang="zh" x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">甘大安敦匪帮兴起</text>
 
     <!-- BC 30 · below -->
     <circle cx="378" cy="268" r="3.5" fill="#7c3aed"/>
     <line x1="378" y1="272" x2="378" y2="284" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="378" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">BC 30</text>
-    <text x="378" y="305" text-anchor="middle" font-size="7.5" fill="#475569">神火环绕·三百归改</text>
+    <text lang="en" x="378" y="305" text-anchor="middle" font-size="7.5" fill="#475569">Pillar of fire · 300 convert</text><text lang="zh" x="378" y="305" text-anchor="middle" font-size="7.5" fill="#475569">神火环绕·三百归改</text>
 
     <!-- BC 23 · above -->
     <circle cx="482" cy="268" r="3.5" fill="#2563eb"/>
     <line x1="482" y1="254" x2="482" y2="264" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="482" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#2563eb">BC 23</text>
-    <text x="482" y="240" text-anchor="middle" font-size="7.5" fill="#475569">尼腓二世获封印权柄</text>
+    <text lang="en" x="482" y="240" text-anchor="middle" font-size="7.5" fill="#475569">Nephi II receives sealing power</text><text lang="zh" x="482" y="240" text-anchor="middle" font-size="7.5" fill="#475569">尼腓二世获封印权柄</text>
 
     <!-- BC 6 · below -->
     <circle cx="735" cy="268" r="3.5" fill="#d97706"/>
     <line x1="735" y1="272" x2="735" y2="284" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="735" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">BC 6</text>
-    <text x="735" y="305" text-anchor="middle" font-size="7.5" fill="#475569">撒母耳登城墙预言</text>
+    <text lang="en" x="735" y="305" text-anchor="middle" font-size="7.5" fill="#475569">Samuel prophesies on the wall</text><text lang="zh" x="735" y="305" text-anchor="middle" font-size="7.5" fill="#475569">撒母耳登城墙预言</text>
 
     <!-- BC 1 · above -->
     <circle cx="810" cy="268" r="3.5" fill="#059669"/>
     <line x1="810" y1="254" x2="810" y2="264" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="810" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#059669">BC 1</text>
-    <text x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">预兆渐现·静候黎明</text>
+    <text lang="en" x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">Signs appear · awaiting the dawn</text><text lang="zh" x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">预兆渐现·静候黎明</text>
   </svg>
 </div>
 
 <!-- ══ 甘大安敦匪帮兴起 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">匪帮<br>兴起</div></div>
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text"><span lang="en">Rise of<br>Gadianton</span><span lang="zh">匪帮<br>兴起</span></div></div>
 <div class="n ros">
   <div class="nh">
-    <span class="nl">第1–4章</span><span class="nt">匪党初兴，刺官弑政，拉曼入寇</span><span class="nw">萨拉赫拉·荒山</span><span class="nc">约前 52–49 年</span>
+    <span class="nl"><span lang="en">Ch. 1–4</span><span lang="zh">第1–4章</span></span><span class="nt"><span lang="en">Gadianton band forms, officials slain, Lamanite invasion</span><span lang="zh">匪党初兴，刺官弑政，拉曼入寇</span></span><span class="nw"><span lang="en">Zarahemla · Wilderness</span><span lang="zh">萨拉赫拉·荒山</span></span><span class="nc"><span lang="en">ca. 52–49 BC</span><span lang="zh">约前 52–49 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">1</span>派贺蓝薨，柯林德茂引拉曼众寇都，摩罗乃哈率师击退之</li>
-    <li><span class="cn">2</span>凯虚库门弑新任法官派贺蓝二世，途中被杀；甘大安敦遂率众遁荒山，秘密组合成</li>
-    <li><span class="cn">3</span>民大批北迁垦荒；希拉曼二世善政，暂得平安</li>
-    <li><span class="cn">4</span>骄傲日炽，拉曼人夺半壁城池；众悔改，摩罗乃哈方渐收复</li>
+    <li><span class="cn">1</span><span lang="en">Pahoran Sr. dies; Coriantumr leads Lamanites to sack the capital; Moronihah repels them</span><span lang="zh">派贺蓝薨，柯林德茂引拉曼众寇都，摩罗乃哈率师击退之</span></li>
+    <li><span class="cn">2</span><span lang="en">Kishkumen slays new chief judge Pahoran II, then is himself slain; Gadianton leads followers to the wilderness, forming a secret combination</span><span lang="zh">凯虚库门弑新任法官派贺蓝二世，途中被杀；甘大安敦遂率众遁荒山，秘密组合成</span></li>
+    <li><span class="cn">3</span><span lang="en">Many migrate north to settle; Helaman II governs well; brief peace</span><span lang="zh">民大批北迁垦荒；希拉曼二世善政，暂得平安</span></li>
+    <li><span class="cn">4</span><span lang="en">Pride grows; Lamanites seize many cities; after repentance Moronihah gradually reclaims them</span><span lang="zh">骄傲日炽，拉曼人夺半壁城池；众悔改，摩罗乃哈方渐收复</span></li>
   </ul>
 </div>
 <div class="si"><div class="nms">
-  <div class="nm">希拉曼二世 <span>Helaman II · 首席法官·书写者</span></div>
-  <div class="nm">派贺蓝二世 <span>Pahoran II · 遭弑法官</span></div>
-  <div class="nm">柯林德茂 <span>Coriantumr · 拉曼将领</span></div>
-  <div class="nm">凯虚库门 <span>Kishkumen · 刺客·途中被杀</span></div>
-  <div class="nm">甘大安敦 <span>Gadianton · 秘密组合创始人</span></div>
-  <div class="nm">摩罗乃哈 <span>Moronihah · 尼腓主将</span></div>
+  <div class="nm"><span lang="en">Helaman II</span><span lang="zh">希拉曼二世</span> <span><span lang="en">Chief Judge · record keeper</span><span lang="zh">首席法官·书写者</span></span></div>
+  <div class="nm"><span lang="en">Pahoran II</span><span lang="zh">派贺蓝二世</span> <span><span lang="en">assassinated chief judge</span><span lang="zh">遭弑法官</span></span></div>
+  <div class="nm"><span lang="en">Coriantumr</span><span lang="zh">柯林德茂</span> <span><span lang="en">Lamanite general</span><span lang="zh">拉曼将领</span></span></div>
+  <div class="nm"><span lang="en">Kishkumen</span><span lang="zh">凯虚库门</span> <span><span lang="en">assassin · slain en route</span><span lang="zh">刺客·途中被杀</span></span></div>
+  <div class="nm"><span lang="en">Gadianton</span><span lang="zh">甘大安敦</span> <span><span lang="en">founder of secret combination</span><span lang="zh">秘密组合创始人</span></span></div>
+  <div class="nm"><span lang="en">Moronihah</span><span lang="zh">摩罗乃哈</span> <span><span lang="en">Nephite general</span><span lang="zh">尼腓主将</span></span></div>
 </div></div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 神火环绕 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">神火<br>显现</div></div>
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text"><span lang="en">Pillar<br>of Fire</span><span lang="zh">神火<br>显现</span></div></div>
 <div class="n vio">
   <div class="nh">
-    <span class="nl">第5–6章</span><span class="nt">神火环绕，三百归改，拉曼转义</span><span class="nw">拉曼人地·萨拉赫拉</span><span class="nc">约前 30 年</span>
+    <span class="nl"><span lang="en">Ch. 5–6</span><span lang="zh">第5–6章</span></span><span class="nt"><span lang="en">Pillar of fire, three hundred convert, Lamanites turn righteous</span><span lang="zh">神火环绕，三百归改，拉曼转义</span></span><span class="nw"><span lang="en">Land of Nephi · Zarahemla</span><span lang="zh">拉曼人地·萨拉赫拉</span></span><span class="nc"><span lang="en">ca. 30 BC</span><span lang="zh">约前 30 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">5</span>尼腓、李海辞官南传，被捕入狱；神火降，声出云中，三百余人见而悉归改</li>
-    <li><span class="cn">6</span>拉曼人大批归改，义行胜于尼腓；尼腓人日趋腐败，甘大安敦遂渗入其法庭</li>
+    <li><span class="cn">5</span><span lang="en">Nephi and Lehi resign and preach south; imprisoned; pillar of fire descends, voice from the cloud — over 300 witnesses all convert</span><span lang="zh">尼腓、李海辞官南传，被捕入狱；神火降，声出云中，三百余人见而悉归改</span></li>
+    <li><span class="cn">6</span><span lang="en">Lamanites mass-convert and surpass Nephites in righteousness; Nephites corrupt; Gadianton infiltrates their courts</span><span lang="zh">拉曼人大批归改，义行胜于尼腓；尼腓人日趋腐败，甘大安敦遂渗入其法庭</span></li>
   </ul>
 </div>
 <div class="si"><div class="nms">
-  <div class="nm">尼腓二世 <span>Nephi II · 希拉曼长子</span></div>
-  <div class="nm">李海 <span>Lehi · 尼腓之弟</span></div>
-  <div class="nm">三百归改者 <span>300 Converts · 狱中见神火</span></div>
+  <div class="nm"><span lang="en">Nephi II</span><span lang="zh">尼腓二世</span> <span><span lang="en">eldest son of Helaman</span><span lang="zh">希拉曼长子</span></span></div>
+  <div class="nm"><span lang="en">Lehi</span><span lang="zh">李海</span> <span><span lang="en">Nephi's brother</span><span lang="zh">尼腓之弟</span></span></div>
+  <div class="nm"><span lang="en">300 converts</span><span lang="zh">三百归改者</span> <span><span lang="en">witnessed pillar of fire in prison</span><span lang="zh">狱中见神火</span></span></div>
 </div></div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 封印权柄 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text">封印<br>权柄</div></div>
+<div class="ph"><div class="ph-dot" style="background:#2563eb"></div><div class="ph-text"><span lang="en">Sealing<br>Power</span><span lang="zh">封印<br>权柄</span></div></div>
 <div class="n blu">
   <div class="nh">
-    <span class="nl">第7–12章</span><span class="nt">花园哀哭，封印授权，宣告三年饥荒</span><span class="nw">萨拉赫拉·花园高塔</span><span class="nc">约前 23–20 年</span>
+    <span class="nl"><span lang="en">Ch. 7–12</span><span lang="zh">第7–12章</span></span><span class="nt"><span lang="en">Tower lament, sealing power granted, three-year famine declared</span><span lang="zh">花园哀哭，封印授权，宣告三年饥荒</span></span><span class="nw"><span lang="en">Zarahemla · Garden Tower</span><span lang="zh">萨拉赫拉·花园高塔</span></span><span class="nc"><span lang="en">ca. 23–20 BC</span><span lang="zh">约前 23–20 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">7</span>尼腓自北方传道返，登花园高塔哀哭，为民罪叹，众人聚观</li>
-    <li><span class="cn">8</span>法官怒，欲激众驱逐尼腓；尼腓宣告：首席法官西卓伦今日已遭弑</li>
-    <li><span class="cn">9</span>遣使验之，果在；使者被捕，尼腓指出真凶西安德，众大惊，方释之</li>
-    <li><span class="cn">10</span>神赐封印权柄：「凡汝捆绑，天地皆从」</li>
-    <li><span class="cn">11</span>宣告饥荒，三年大旱；众悔改，旱止，骄傲随之复起</li>
-    <li><span class="cn">12</span>摩尔门叹：人心比尘土更不坚，俯伏于神尤难</li>
+    <li><span class="cn">7</span><span lang="en">Nephi returns from northern mission; ascends garden tower in mourning over the people's wickedness; crowds gather</span><span lang="zh">尼腓自北方传道返，登花园高塔哀哭，为民罪叹，众人聚观</span></li>
+    <li><span class="cn">8</span><span lang="en">Judges try to stir crowd against Nephi; Nephi declares: chief judge Seezoram was murdered this very day</span><span lang="zh">法官怒，欲激众驱逐尼腓；尼腓宣告：首席法官西卓伦今日已遭弑</span></li>
+    <li><span class="cn">9</span><span lang="en">Messengers confirm the killing; are arrested; Nephi identifies Seantum as the killer — crowd marvels and releases Nephi</span><span lang="zh">遣使验之，果在；使者被捕，尼腓指出真凶西安德，众大惊，方释之</span></li>
+    <li><span class="cn">10</span><span lang="en">God grants sealing power: "Whatsoever ye shall seal on earth shall be sealed in heaven"</span><span lang="zh">神赐封印权柄：「凡汝捆绑，天地皆从」</span></li>
+    <li><span class="cn">11</span><span lang="en">Nephi calls for famine; three-year drought; people repent, rains return; pride rises again</span><span lang="zh">宣告饥荒，三年大旱；众悔改，旱止，骄傲随之复起</span></li>
+    <li><span class="cn">12</span><span lang="en">Mormon laments: the hearts of men are less steadfast than the dust; to bow before God is the hardest thing</span><span lang="zh">摩尔门叹：人心比尘土更不坚，俯伏于神尤难</span></li>
   </ul>
 </div>
 <div class="si"><div class="nms">
-  <div class="nm">尼腓二世 <span>Nephi II · 封印权柄</span></div>
-  <div class="nm">西卓伦 <span>Seezoram · 遭弑首席法官</span></div>
-  <div class="nm">摩尔门 <span>Mormon · 插评人心软弱</span></div>
+  <div class="nm"><span lang="en">Nephi II</span><span lang="zh">尼腓二世</span> <span><span lang="en">sealing power</span><span lang="zh">封印权柄</span></span></div>
+  <div class="nm"><span lang="en">Seezoram</span><span lang="zh">西卓伦</span> <span><span lang="en">murdered chief judge</span><span lang="zh">遭弑首席法官</span></span></div>
+  <div class="nm"><span lang="en">Mormon</span><span lang="zh">摩尔门</span> <span><span lang="en">commentary on human weakness</span><span lang="zh">插评人心软弱</span></span></div>
 </div></div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 撒母耳城墙 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">撒母耳<br>城墙</div></div>
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text"><span lang="en">Samuel<br>on Wall</span><span lang="zh">撒母耳<br>城墙</span></div></div>
 <div class="n amb">
   <div class="nh">
-    <span class="nl">第13–15章</span><span class="nt">撒母耳登城墙，预言基督五年内降生</span><span class="nw">萨拉赫拉城墙</span><span class="nc">约前 6 年</span>
+    <span class="nl"><span lang="en">Ch. 13–15</span><span lang="zh">第13–15章</span></span><span class="nt"><span lang="en">Samuel stands on the wall, prophesies Christ's birth within five years</span><span lang="zh">撒母耳登城墙，预言基督五年内降生</span></span><span class="nw"><span lang="en">Wall of Zarahemla</span><span lang="zh">萨拉赫拉城墙</span></span><span class="nc"><span lang="en">ca. 6 BC</span><span lang="zh">约前 6 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">13</span>撒母耳被驱出城，乃登城墙宣道；告众：不悔改者，此城必毁</li>
-    <li><span class="cn">14</span>预言五年内基督降生，一夜无暗，天现新星；受难之日山崩城沉，三日黑暗</li>
-    <li><span class="cn">15</span>众以弓箭投石，无一能中；撒母耳讲毕，跳下城墙，遁入旷野</li>
+    <li><span class="cn">13</span><span lang="en">Samuel is expelled from the city; climbs the wall to preach; warns: if the people do not repent, this city will be destroyed</span><span lang="zh">撒母耳被驱出城，乃登城墙宣道；告众：不悔改者，此城必毁</span></li>
+    <li><span class="cn">14</span><span lang="en">Prophesies Christ's birth within five years: a night without darkness and a new star; at His death: earthquakes, cities sink, three days of darkness</span><span lang="zh">预言五年内基督降生，一夜无暗，天现新星；受难之日山崩城沉，三日黑暗</span></li>
+    <li><span class="cn">15</span><span lang="en">People shoot arrows and throw stones; none can hit him; Samuel finishes, leaps from the wall, and flees to the wilderness</span><span lang="zh">众以弓箭投石，无一能中；撒母耳讲毕，跳下城墙，遁入旷野</span></li>
   </ul>
 </div>
 <div class="si"><div class="nms">
-  <div class="nm">撒母耳 <span>Samuel the Lamanite · 城墙先知</span></div>
-  <div class="nm">尼腓二世 <span>Nephi II · 为归改者施洗</span></div>
+  <div class="nm"><span lang="en">Samuel</span><span lang="zh">撒母耳</span> <span><span lang="en">prophet on the wall</span><span lang="zh">城墙先知</span></span></div>
+  <div class="nm"><span lang="en">Nephi II</span><span lang="zh">尼腓二世</span> <span><span lang="en">baptizes converts</span><span lang="zh">为归改者施洗</span></span></div>
 </div></div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 预兆与守望 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text">信与<br>守望</div></div>
+<div class="ph"><div class="ph-dot" style="background:#059669"></div><div class="ph-text"><span lang="en">Faith &amp;<br>Watching</span><span lang="zh">信与<br>守望</span></div></div>
 <div class="n tea">
   <div class="nh">
-    <span class="nl">第16章</span><span class="nt">预兆渐现，民分两端，静候黎明</span><span class="nw">萨拉赫拉·各地</span><span class="nc">约前 1 年</span>
+    <span class="nl"><span lang="en">Ch. 16</span><span lang="zh">第16章</span></span><span class="nt"><span lang="en">Signs appear, people divided, awaiting the dawn</span><span lang="zh">预兆渐现，民分两端，静候黎明</span></span><span class="nw"><span lang="en">Zarahemla · Various places</span><span lang="zh">萨拉赫拉·各地</span></span><span class="nc"><span lang="en">ca. 1 BC</span><span lang="zh">约前 1 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">16</span>预兆渐现，信者欢喜；不信者称属自然，撒旦蔽众，甚者扬言：若期限之夜无验，必杀信者；全书末，民分两端，静候黎明</li>
+    <li><span class="cn">16</span><span lang="en">Signs begin to appear; believers rejoice; skeptics call them natural, Satan blinds many; extremists threaten to kill believers if the promised night passes without sign; the book ends with the people divided, awaiting the dawn</span><span lang="zh">预兆渐现，信者欢喜；不信者称属自然，撒旦蔽众，甚者扬言：若期限之夜无验，必杀信者；全书末，民分两端，静候黎明</span></li>
   </ul>
 </div>
 <div class="si"><div class="nms">
-  <div class="nm">尼腓三世 <span>Nephi III · 亲见神迹前夕</span></div>
-  <div class="nm">相信者 <span>Believers · 等待新星</span></div>
-  <div class="nm">不信者 <span>Disbelievers · 威胁处死信者</span></div>
+  <div class="nm"><span lang="en">Nephi III</span><span lang="zh">尼腓三世</span> <span><span lang="en">on the eve of miracles</span><span lang="zh">亲见神迹前夕</span></span></div>
+  <div class="nm"><span lang="en">Believers</span><span lang="zh">相信者</span> <span><span lang="en">waiting for the new star</span><span lang="zh">等待新星</span></span></div>
+  <div class="nm"><span lang="en">Unbelievers</span><span lang="zh">不信者</span> <span><span lang="en">threatening to kill believers</span><span lang="zh">威胁处死信者</span></span></div>
 </div></div>
 
 <!-- legend -->
 <div class="legend">
-  <div class="legend-title">COLOR LEGEND · 颜色说明</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>甘大安敦匪帮·政治腐败</div>
-  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>神火显现·归改</div>
-  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>尼腓宣告·封印权柄</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>撒母耳站城墙·预言</div>
-  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div>预兆·信与守望</div>
+  <div class="legend-title"><span lang="en">Color Guide</span><span lang="zh">颜色说明</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div><span lang="en">Gadianton Robbers · political corruption</span><span lang="zh">甘大安敦匪帮·政治腐败</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div><span lang="en">Pillar of Fire · conversion</span><span lang="zh">神火显现·归改</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div><span lang="en">Nephi's proclamations · sealing power</span><span lang="zh">尼腓宣告·封印权柄</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div><span lang="en">Samuel on the wall · prophecy</span><span lang="zh">撒母耳站城墙·预言</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#f0fdf9;border-color:#6ee7b7"></div><span lang="en">Signs · faith and watching</span><span lang="zh">预兆·信与守望</span></div>
 </div>
 
 <!-- ── 人物关系图 ── -->
 <div class="rel">
-  <div class="rel-title">主要人物关系 · KEY FIGURES OF HELAMAN</div>
+  <div class="rel-title"><span lang="en">Key Figures · Helaman</span><span lang="zh">主要人物关系 · 希拉曼书</span></div>
   <svg viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="hfA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
@@ -481,131 +655,198 @@ ul.np{padding:0}
     </defs>
 
     <!-- ── 家族图 ── -->
-    <text x="14" y="14" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">家族图 · FAMILY TREE</text>
+    <text lang="en" x="14" y="14" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">Family Tree</text><text lang="zh" x="14" y="14" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">家族图</text>
 
     <!-- 希拉曼二世 (根) -->
     <rect x="330" y="20" width="200" height="44" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-    <text x="430" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">希拉曼二世</text>
-    <text x="430" y="52" text-anchor="middle" font-size="8" fill="#7c3aed">Helaman II · 首席法官·记录者</text>
+    <text lang="en" x="430" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Helaman II</text><text lang="zh" x="430" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">希拉曼二世</text>
+    <text lang="en" x="430" y="52" text-anchor="middle" font-size="8" fill="#7c3aed">Chief Judge · record keeper</text><text lang="zh" x="430" y="52" text-anchor="middle" font-size="8" fill="#7c3aed">首席法官·记录者</text>
     <!-- 分支线 -->
     <line x1="430" y1="64" x2="430" y2="72" stroke="#7c3aed" stroke-width="1.5"/>
     <line x1="232" y1="72" x2="628" y2="72" stroke="#7c3aed" stroke-width="1.5"/>
     <line x1="232" y1="72" x2="232" y2="80" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#hfA)"/>
     <line x1="628" y1="72" x2="628" y2="80" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#hfA)"/>
-    <text x="320" y="70" text-anchor="middle" font-size="7.5" fill="#7c3aed">长子</text>
-    <text x="538" y="70" text-anchor="middle" font-size="7.5" fill="#7c3aed">次子</text>
+    <text lang="en" x="320" y="70" text-anchor="middle" font-size="7.5" fill="#7c3aed">eldest son</text><text lang="zh" x="320" y="70" text-anchor="middle" font-size="7.5" fill="#7c3aed">长子</text>
+    <text lang="en" x="538" y="70" text-anchor="middle" font-size="7.5" fill="#7c3aed">second son</text><text lang="zh" x="538" y="70" text-anchor="middle" font-size="7.5" fill="#7c3aed">次子</text>
 
     <!-- 尼腓二世 (长子) -->
     <rect x="157" y="80" width="150" height="46" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
-    <text x="232" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓二世</text>
-    <text x="232" y="110" text-anchor="middle" font-size="8" fill="#7c3aed">Nephi II</text>
-    <text x="232" y="122" text-anchor="middle" font-size="7" fill="#94a3b8">辞官传道·封印权柄·宣饥荒</text>
+    <text lang="en" x="232" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Nephi II</text><text lang="zh" x="232" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓二世</text>
+    <text lang="en" x="232" y="110" text-anchor="middle" font-size="8" fill="#7c3aed">Helaman's eldest son</text><text lang="zh" x="232" y="110" text-anchor="middle" font-size="8" fill="#7c3aed">希拉曼之长子</text>
+    <text lang="en" x="232" y="122" text-anchor="middle" font-size="7" fill="#94a3b8">Resigns · sealing power · declares famine</text><text lang="zh" x="232" y="122" text-anchor="middle" font-size="7" fill="#94a3b8">辞官传道·封印权柄·宣饥荒</text>
     <!-- 尼腓二世 → 尼腓三世 -->
     <line x1="232" y1="126" x2="232" y2="136" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#hfA)"/>
-    <text x="244" y="134" font-size="7.5" fill="#7c3aed">子</text>
+    <text lang="en" x="244" y="134" font-size="7.5" fill="#7c3aed">son</text><text lang="zh" x="244" y="134" font-size="7.5" fill="#7c3aed">子</text>
 
     <!-- 李海 (次子) -->
     <rect x="563" y="80" width="130" height="46" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="628" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">李海</text>
-    <text x="628" y="110" text-anchor="middle" font-size="8" fill="#7c3aed">Lehi</text>
-    <text x="628" y="122" text-anchor="middle" font-size="7" fill="#94a3b8">与兄同传道·神火环绕·归改三百</text>
+    <text lang="en" x="628" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Lehi</text><text lang="zh" x="628" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">李海</text>
+    <text lang="en" x="628" y="110" text-anchor="middle" font-size="8" fill="#7c3aed">Helaman's second son</text><text lang="zh" x="628" y="110" text-anchor="middle" font-size="8" fill="#7c3aed">希拉曼次子</text>
+    <text lang="en" x="628" y="122" text-anchor="middle" font-size="7" fill="#94a3b8">Missions with brother · pillar of fire · 300 convert</text><text lang="zh" x="628" y="122" text-anchor="middle" font-size="7" fill="#94a3b8">与兄同传道·神火环绕·归改三百</text>
 
     <!-- 尼腓三世 -->
     <rect x="157" y="136" width="150" height="46" rx="6" fill="#ecfeff" stroke="#0e7490" stroke-width="1.5"/>
-    <text x="232" y="154" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">尼腓三世</text>
-    <text x="232" y="166" text-anchor="middle" font-size="8" fill="#0e7490">Nephi III</text>
-    <text x="232" y="178" text-anchor="middle" font-size="7" fill="#94a3b8">希拉曼书末·亲见神·告基督明日降生</text>
+    <text lang="en" x="232" y="154" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">Nephi III</text><text lang="zh" x="232" y="154" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">尼腓三世</text>
+    <text lang="en" x="232" y="166" text-anchor="middle" font-size="8" fill="#0e7490">son of Nephi II</text><text lang="zh" x="232" y="166" text-anchor="middle" font-size="8" fill="#0e7490">尼腓二世之子</text>
+    <text lang="en" x="232" y="178" text-anchor="middle" font-size="7" fill="#94a3b8">End of Helaman · sees God · told Christ born tomorrow</text><text lang="zh" x="232" y="178" text-anchor="middle" font-size="7" fill="#94a3b8">希拉曼书末·亲见神·告基督明日降生</text>
 
     <!-- ── 首席法官传承 ── -->
     <line x1="0" y1="194" x2="860" y2="194" stroke="#e2e8f0" stroke-width="1"/>
-    <text x="14" y="206" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">首席法官传承顺序 · CHIEF JUDGES</text>
+    <text lang="en" x="14" y="206" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">Chief Judges Succession</text><text lang="zh" x="14" y="206" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">首席法官传承顺序</text>
 
     <!-- 派贺蓝（父） -->
     <rect x="8" y="212" width="106" height="36" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-    <text x="61" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">派贺蓝（父）</text>
-    <text x="61" y="240" text-anchor="middle" font-size="7.5" fill="#16a34a">自然薨逝</text>
+    <text lang="en" x="61" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Pahoran Sr.</text><text lang="zh" x="61" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">派贺蓝（父）</text>
+    <text lang="en" x="61" y="240" text-anchor="middle" font-size="7.5" fill="#16a34a">Died naturally</text><text lang="zh" x="61" y="240" text-anchor="middle" font-size="7.5" fill="#16a34a">自然薨逝</text>
     <line x1="114" y1="230" x2="126" y2="230" stroke="#64748b" stroke-width="1.5" marker-end="url(#hfB)"/>
 
     <!-- 派贺蓝二世 -->
     <rect x="128" y="212" width="116" height="36" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="186" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">派贺蓝二世</text>
-    <text x="186" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">遭凯虚库门弑</text>
+    <text lang="en" x="186" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">Pahoran II</text><text lang="zh" x="186" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">派贺蓝二世</text>
+    <text lang="en" x="186" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">Slain by Kishkumen</text><text lang="zh" x="186" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">遭凯虚库门弑</text>
     <line x1="244" y1="230" x2="256" y2="230" stroke="#64748b" stroke-width="1.5" marker-end="url(#hfB)"/>
 
     <!-- 派寇美拿 -->
     <rect x="258" y="212" width="112" height="36" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="314" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">派寇美拿</text>
-    <text x="314" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">柯林德茂战阵杀</text>
+    <text lang="en" x="314" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">Pacumeni</text><text lang="zh" x="314" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">派寇美拿</text>
+    <text lang="en" x="314" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">Killed by Coriantumr in battle</text><text lang="zh" x="314" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">柯林德茂战阵杀</text>
     <line x1="370" y1="230" x2="382" y2="230" stroke="#64748b" stroke-width="1.5" marker-end="url(#hfB)"/>
 
     <!-- 希拉曼二世 -->
     <rect x="384" y="212" width="118" height="36" rx="5" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="443" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">希拉曼二世</text>
-    <text x="443" y="240" text-anchor="middle" font-size="7.5" fill="#7c3aed">善政·平稳退位</text>
+    <text lang="en" x="443" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">Helaman II</text><text lang="zh" x="443" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">希拉曼二世</text>
+    <text lang="en" x="443" y="240" text-anchor="middle" font-size="7.5" fill="#7c3aed">Good rule · peaceful transition</text><text lang="zh" x="443" y="240" text-anchor="middle" font-size="7.5" fill="#7c3aed">善政·平稳退位</text>
     <line x1="502" y1="230" x2="514" y2="230" stroke="#64748b" stroke-width="1.5" marker-end="url(#hfB)"/>
 
     <!-- 尼腓二世 -->
     <rect x="516" y="212" width="114" height="36" rx="5" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="573" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">尼腓二世</text>
-    <text x="573" y="240" text-anchor="middle" font-size="7.5" fill="#7c3aed">辞职专心传道</text>
+    <text lang="en" x="573" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">Nephi II</text><text lang="zh" x="573" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">尼腓二世</text>
+    <text lang="en" x="573" y="240" text-anchor="middle" font-size="7.5" fill="#7c3aed">Resigned to preach</text><text lang="zh" x="573" y="240" text-anchor="middle" font-size="7.5" fill="#7c3aed">辞职专心传道</text>
     <line x1="630" y1="230" x2="642" y2="230" stroke="#64748b" stroke-width="1.5" marker-end="url(#hfB)"/>
 
     <!-- 西卓伦 -->
     <rect x="644" y="212" width="110" height="36" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="699" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">西卓伦</text>
-    <text x="699" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">遭其兄西安德弑</text>
+    <text lang="en" x="699" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">Seezoram</text><text lang="zh" x="699" y="227" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">西卓伦</text>
+    <text lang="en" x="699" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">Slain by his brother Seantum</text><text lang="zh" x="699" y="240" text-anchor="middle" font-size="7.5" fill="#dc2626">遭其兄西安德弑</text>
 
     <!-- ── 其他人物 ── -->
     <line x1="0" y1="262" x2="860" y2="262" stroke="#e2e8f0" stroke-width="1"/>
-    <text x="14" y="274" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">其他人物 · OTHER FIGURES</text>
+    <text lang="en" x="14" y="274" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">Other Figures</text><text lang="zh" x="14" y="274" font-size="8" font-weight="bold" letter-spacing="1.5" fill="#94a3b8">其他人物</text>
 
     <!-- 甘大安敦 -->
     <rect x="8" y="280" width="112" height="46" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="2"/>
-    <text x="64" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">甘大安敦</text>
-    <text x="64" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">Gadianton</text>
-    <text x="64" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">秘密组合创始人</text>
+    <text lang="en" x="64" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">Gadianton</text><text lang="zh" x="64" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">甘大安敦</text>
+    <text lang="en" x="64" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">Gadianton</text><text lang="zh" x="64" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">甘大安敦</text>
+    <text lang="en" x="64" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Founder of secret combination</text><text lang="zh" x="64" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">秘密组合创始人</text>
     <!-- 甘大安敦 → 凯虚库门 (属) -->
     <line x1="120" y1="302" x2="130" y2="302" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="125" y="298" text-anchor="middle" font-size="6.5" fill="#dc2626">属</text>
+    <text lang="en" x="125" y="298" text-anchor="middle" font-size="6.5" fill="#dc2626">member</text><text lang="zh" x="125" y="298" text-anchor="middle" font-size="6.5" fill="#dc2626">属</text>
 
     <!-- 凯虚库门 -->
     <rect x="130" y="280" width="112" height="46" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="186" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">凯虚库门</text>
-    <text x="186" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">Kishkumen</text>
-    <text x="186" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">刺客·弑派贺蓝二世·途中被杀</text>
+    <text lang="en" x="186" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">Kishkumen</text><text lang="zh" x="186" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">凯虚库门</text>
+    <text lang="en" x="186" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">Kishkumen</text><text lang="zh" x="186" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">凯虚库门</text>
+    <text lang="en" x="186" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Assassin · slays Pahoran II · slain en route</text><text lang="zh" x="186" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">刺客·弑派贺蓝二世·途中被杀</text>
 
     <!-- 西安德 -->
     <rect x="252" y="280" width="112" height="46" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="308" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">西安德</text>
-    <text x="308" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">Seantum</text>
-    <text x="308" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">弑兄西卓伦·被尼腓揭发</text>
+    <text lang="en" x="308" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">Seantum</text><text lang="zh" x="308" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#9f1239">西安德</text>
+    <text lang="en" x="308" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">Seantum</text><text lang="zh" x="308" y="309" text-anchor="middle" font-size="7.5" fill="#dc2626">西安德</text>
+    <text lang="en" x="308" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Murders brother Seezoram · exposed by Nephi</text><text lang="zh" x="308" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">弑兄西卓伦·被尼腓揭发</text>
 
     <!-- 派安卡 -->
     <rect x="374" y="280" width="112" height="46" rx="5" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
-    <text x="430" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">派安卡</text>
-    <text x="430" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">Paanchi</text>
-    <text x="430" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">派贺蓝三子·图谋叛乱·被处决</text>
+    <text lang="en" x="430" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">Paanchi</text><text lang="zh" x="430" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">派安卡</text>
+    <text lang="en" x="430" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">Paanchi</text><text lang="zh" x="430" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">派安卡</text>
+    <text lang="en" x="430" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Pahoran's third son · plots rebellion · executed</text><text lang="zh" x="430" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">派贺蓝三子·图谋叛乱·被处决</text>
 
     <!-- 柯林德茂 -->
     <rect x="496" y="280" width="112" height="46" rx="5" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
-    <text x="552" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">柯林德茂</text>
-    <text x="552" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">Coriantumr</text>
-    <text x="552" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">拉曼将领·寇都·杀派寇美拿</text>
+    <text lang="en" x="552" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">Coriantumr</text><text lang="zh" x="552" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">柯林德茂</text>
+    <text lang="en" x="552" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">Coriantumr</text><text lang="zh" x="552" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">柯林德茂</text>
+    <text lang="en" x="552" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Lamanite general · sacks capital · kills Pacumeni</text><text lang="zh" x="552" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">拉曼将领·寇都·杀派寇美拿</text>
 
     <!-- 摩罗乃哈 -->
     <rect x="618" y="280" width="112" height="46" rx="5" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
-    <text x="674" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">摩罗乃哈</text>
-    <text x="674" y="309" text-anchor="middle" font-size="7.5" fill="#2563eb">Moronihah</text>
-    <text x="674" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">尼腓主将·击退柯林德茂入侵</text>
+    <text lang="en" x="674" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Moronihah</text><text lang="zh" x="674" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">摩罗乃哈</text>
+    <text lang="en" x="674" y="309" text-anchor="middle" font-size="7.5" fill="#2563eb">Moronihah</text><text lang="zh" x="674" y="309" text-anchor="middle" font-size="7.5" fill="#2563eb">摩罗乃哈</text>
+    <text lang="en" x="674" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Nephite general · repels Coriantumr invasion</text><text lang="zh" x="674" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">尼腓主将·击退柯林德茂入侵</text>
 
     <!-- 撒母耳 -->
     <rect x="740" y="280" width="112" height="46" rx="5" fill="#fefce8" stroke="#fde68a" stroke-width="2"/>
-    <text x="796" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">撒母耳</text>
-    <text x="796" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">Samuel the Lamanite</text>
-    <text x="796" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">城墙先知·预言基督降生</text>
+    <text lang="en" x="796" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">Samuel</text><text lang="zh" x="796" y="297" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">撒母耳</text>
+    <text lang="en" x="796" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">Samuel the Lamanite</text><text lang="zh" x="796" y="309" text-anchor="middle" font-size="7.5" fill="#b45309">撒母耳·拉曼先知</text>
+    <text lang="en" x="796" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">Prophet on the wall · prophesies Christ's birth</text><text lang="zh" x="796" y="320" text-anchor="middle" font-size="7" fill="#94a3b8">城墙先知·预言基督降生</text>
   </svg>
 </div>
 
 </div><!-- .page -->
+<button class="toggle-btn" id="toggleBtn" onclick="toggleAll()"><span lang="en">Collapse all</span><span lang="zh">收起全部</span></button>
+<script>function toggleAll(){var b=document.getElementById("toggleBtn");var c=document.body.classList.toggle("all-collapsed");b.innerHTML=c?'<span lang="en">Expand all</span><span lang="zh">展开全部</span>':'<span lang="en">Collapse all</span><span lang="zh">收起全部</span>'}</script>
+<script>(function(){var l=localStorage.getItem('bom-lang')||'en';if(l==='zh')document.body.classList.add('lang-zh');var b=document.getElementById('langBtn');if(b)b.textContent=document.body.classList.contains('lang-zh')?'English':'中文'})();function switchLang(){var z=document.body.classList.toggle('lang-zh');localStorage.setItem('bom-lang',z?'zh':'en');document.getElementById('langBtn').textContent=z?'English':'中文'}</script>
+<script data-mob="3">(function(){
+  if(!window.matchMedia('(max-width:640px)').matches)return;
+  function mk(t,c){var e=document.createElement(t);if(c)e.className=c;return e;}
+
+  /* ── hamburger + dark drawer ── */
+  var ov=mk('div','drawer-overlay');
+  var dr=mk('nav','drawer');
+  var hd=mk('div','drawer-hd');
+  var tit=mk('span','drawer-title');
+  tit.innerHTML='<span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span>';
+  var cx=mk('button','drawer-close');
+  cx.setAttribute('aria-label','close');cx.textContent='×';
+  cx.addEventListener('click',closeDr);
+  hd.appendChild(tit);hd.appendChild(cx);
+  var lks=mk('div','drawer-links');
+  document.querySelectorAll('.nav .tab').forEach(function(a){
+    var l=mk('a','drawer-tab'+(a.classList.contains('on')?' on':''));
+    l.href=a.href;l.innerHTML=a.innerHTML;lks.appendChild(l);
+  });
+  dr.appendChild(hd);dr.appendChild(lks);
+  document.body.appendChild(ov);document.body.appendChild(dr);
+
+  var ham=mk('button','hamburger');
+  ham.setAttribute('aria-label','menu');
+  ham.innerHTML='<svg width="18" height="13" viewBox="0 0 18 13" fill="currentColor">'+
+    '<rect width="18" height="2" rx="1"/>'+
+    '<rect y="5.5" width="14" height="2" rx="1"/>'+
+    '<rect y="11" width="18" height="2" rx="1"/></svg>';
+  ham.addEventListener('click',openDr);
+  var hdr=document.querySelector('header');
+  hdr.insertBefore(ham,hdr.firstChild);
+  ov.addEventListener('click',closeDr);
+
+  function openDr(){
+    ov.classList.add('open');dr.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDr(){
+    ov.classList.remove('open');dr.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* ── chapter summary cards ── */
+  var CM={
+    vio:'#7c3aed',tea:'#0d9488',amb:'#d97706',
+    pin:'#be185d',ros:'#be123c',blu:'#2563eb',grn:'#16a34a'
+  };
+  var intro=document.querySelector('.intro');
+  if(!intro)return;
+  var ct=mk('div','mob-ch');
+  document.querySelectorAll('.page>.n').forEach(function(n){
+    var ck=Object.keys(CM).find(function(k){return n.classList.contains(k);});
+    var nl=n.querySelector('.nl'),nt=n.querySelector('.nt'),nc=n.querySelector('.nc');
+    if(!nl||!nt)return;
+    var c=mk('div','mob-sec');
+    c.style.borderLeftColor=ck?CM[ck]:'#64748b';
+    c.innerHTML=
+      '<span class="mob-nl">'+nl.innerHTML+'</span>'+
+      '<span class="mob-nt">'+nt.innerHTML+'</span>'+
+      (nc?'<span class="mob-nc">'+nc.innerHTML+'</span>':'');
+    ct.appendChild(c);
+  });
+  if(ct.children.length)intro.insertAdjacentElement('afterend',ct);
+})();</script>
 </body>
 </html>

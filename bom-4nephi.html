@@ -12,10 +12,12 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
-.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
-.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
+.h-info{display:none}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;flex-shrink:0;border:1px solid #e2e8f0;border-radius:7px;text-decoration:none;color:#64748b;transition:all .15s;font-size:0}
+.back-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+.back-btn::before{content:'';display:block;width:15px;height:12px;background-color:#64748b;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain}
+.back-btn:hover::before{background-color:#1e293b}
+.nav{flex:1;display:flex;gap:2px;overflow-x:auto}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#0f766e;background:#f0fdf9;border-color:#5eead4}
@@ -49,52 +51,221 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .rel{grid-column:1/-1;margin-top:28px}
 .rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
 .rel svg{width:100%;height:auto;display:block}
+
+/* language toggle */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+div[lang="en"],ul[lang="en"]{display:block}
+div[lang="zh"],ul[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+body.lang-zh div[lang="en"],body.lang-zh ul[lang="en"]{display:none}
+body.lang-zh div[lang="zh"],body.lang-zh ul[lang="zh"]{display:block}
+.lang-btn{font-size:11px;color:#64748b;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;margin-left:8px}
+.lang-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+/* ── mobile base ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;
+  width:40px;height:40px;color:#1e293b;flex-shrink:0;border-radius:8px;
+  display:none;align-items:center;justify-content:center}
+.hamburger:active{background:#f1f5f9}
+
+/* drawer — dark slate */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;width:280px;max-width:88vw;height:100%;
+  background:#1e293b;z-index:201;display:flex;flex-direction:column;
+  transform:translateX(-110%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:8px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 16px;border-bottom:1px solid #334155;flex-shrink:0}
+.drawer-title{font-size:9px;font-weight:700;letter-spacing:3px;color:#475569;
+  text-transform:uppercase}
+.drawer-close{background:none;border:none;cursor:pointer;font-size:20px;
+  color:#475569;padding:2px 6px;line-height:1;border-radius:4px}
+.drawer-close:hover{color:#94a3b8}
+.drawer-links{overflow-y:auto;flex:1;padding:8px 0 36px}
+.drawer-tab{display:flex;align-items:center;padding:13px 22px;font-size:14px;
+  color:#94a3b8;text-decoration:none;border-left:3px solid transparent;
+  transition:background .12s;line-height:1.3;letter-spacing:.1px}
+.drawer-tab:active{background:rgba(255,255,255,.05)}
+.drawer-tab.on{color:#f1f5f9;font-weight:600;border-left-color:#94a3b8;
+  background:rgba(255,255,255,.07)}
+
+/* chapter summary cards (desktop: hidden) */
+.mob-ch{display:none}
+.mob-sec{border-radius:10px;padding:13px 14px;background:#fff;
+  display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid #e2e8f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.mob-nl{font-size:10px;color:#94a3b8;font-weight:700;letter-spacing:.6px}
+.mob-nt{font-size:13px;font-weight:700;color:#1e293b;line-height:1.25}
+.mob-nc{font-size:10px;color:#b0bac5;margin-top:1px}
+
+@media(max-width:640px){
+  /* ── global ── */
+  body{font-size:15px;background:#eef1f6}
+
+  /* ── header ── */
+  header{padding:0 14px 0 6px;gap:6px;height:54px;
+    border-bottom:1px solid #dde3ec;box-shadow:0 1px 0 #dde3ec}
+  .hamburger{display:flex}
+  .nav,.back-btn,.hb,.hs{display:none}
+  .h-info{display:flex;flex:1;justify-content:center;text-align:center}
+  .hn{font-size:15px;font-weight:600;letter-spacing:.3px;color:#1e293b}
+  .lang-btn{font-size:11px;padding:5px 10px;border-radius:7px;flex-shrink:0}
+  .drawer-overlay.open,.drawer.open{opacity:1;pointer-events:auto}
+  .drawer.open{transform:translateX(0)}
+
+  /* ── page grid ── */
+  .page{grid-template-columns:1fr;padding:14px 12px 96px;gap:0;background:#eef1f6}
+
+  /* ── intro ── */
+  .intro{text-align:left;padding:22px 18px 20px;border-radius:16px;border:none;
+    background:#fff;margin-bottom:14px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:10px}
+  .intro-h{font-size:28px;font-weight:300;letter-spacing:-.5px;line-height:1.1;
+    margin-bottom:14px;color:#1e293b}
+  .intro-meta{flex-direction:column;gap:7px;justify-content:flex-start}
+  .im{font-size:12px;display:flex;gap:7px;align-items:baseline;color:#64748b}
+  .im b{color:#1e293b;font-weight:600}
+  .intro-en{font-size:11px;margin-top:8px;padding-top:10px;border-top:1px solid #f1f5f9;
+    color:#94a3b8}
+
+  /* ── chapter summary cards ── */
+  .mob-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f2f6}
+  .intro+div:not([class]){display:none}
+
+  /* ── phase labels ── hidden; color carried by card left border */
+  .ph,.ph-sp,.arr,.si-sp{display:none}
+
+  /* ── section card ── */
+  .n{grid-column:1;
+    border-top:none!important;border-right:none!important;border-bottom:none!important;
+    border-left-width:4px!important;
+    border-radius:0 16px 16px 0;
+    padding:18px 17px 20px;margin-bottom:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .n:hover{filter:none}
+
+  /* ── section header: chapter → title → location · time ── */
+  .nh{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:14px;align-items:baseline}
+  .nl{order:1;flex:0 0 100%;font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:6px;flex-wrap:wrap}
+  .nt{order:2;flex:0 0 100%;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:8px;white-space:normal;overflow-wrap:break-word;letter-spacing:normal}
+  .nw{order:3;font-size:12px;white-space:normal}
+  .nc{order:4;font-size:12px;margin-left:0;white-space:normal}
+  .nc::before{content:' · '}
+
+  /* ── scripture list ── */
+  .np{padding:0;margin:0}
+  .np li{font-size:14.5px;color:#374151;line-height:1.85;
+    padding-left:2.4em;text-indent:-2.4em;
+    padding-top:7px;padding-bottom:7px;
+    border-bottom:1px solid rgba(0,0,0,.05)}
+  .np li:last-child{border-bottom:none;padding-bottom:0}
+  .cn{display:inline-block;width:1.8em;font-size:11px;font-weight:700;
+    color:#94a3b8;letter-spacing:0;text-align:right;margin-right:6px}
+  .ns{font-size:14.5px;line-height:1.85;color:#374151}
+
+  /* ── event box ── */
+  .ev{grid-column:1;border-radius:12px;
+    border-style:solid!important;border-width:1px!important;
+    padding:12px 16px;margin-bottom:4px;font-size:13px;line-height:1.6}
+  .ev-icon{display:none}
+  .ev-date{font-size:9px;letter-spacing:1.5px;font-weight:700;margin-bottom:5px}
+
+  /* ── sidebar ── */
+  .si{grid-column:1;padding:0;margin-bottom:20px}
+  .si::before{display:none}
+  .nms{background:#fff;border-radius:12px;padding:14px 16px;
+    border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .nms+.nms{margin-top:8px}
+  .nm-title{font-size:9px;font-weight:700;letter-spacing:2px;color:#94a3b8;
+    text-transform:uppercase;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #f0f2f6}
+  .nm{display:grid;grid-template-columns:84px 1fr;gap:4px;
+    padding:6px 0;border-top:1px solid #f6f8fb;
+    align-items:baseline;line-height:1.45}
+  .nm:first-of-type{border-top:none;padding-top:0}
+  .nm b{font-size:12px;font-weight:600;color:#334155}
+  .nm span{font-size:12px;color:#64748b}
+
+  /* 1/2 Nephi character sidebar cards */
+  .sb{background:#f8fafc;border-radius:10px;padding:10px 13px;
+    border:1px solid #f0f2f6;margin-bottom:6px}
+  .sn{font-size:13.5px;font-weight:700;color:#1e293b}
+  .se{font-size:10.5px;color:#94a3b8;margin-top:1px}
+  .sd{font-size:12px;color:#475569;line-height:1.5;margin-top:5px}
+
+  /* ── legend ── */
+  .legend{grid-column:1;background:#fff;border-radius:12px;
+    padding:14px 16px;border:1px solid #dde3ec;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .legend-title{font-size:9px;letter-spacing:2px;color:#94a3b8;margin-bottom:10px}
+  .lg-item{font-size:12px;color:#475569}
+
+  /* ── arc / character SVG ── scale to fit, card container */
+  .rel{grid-column:1;margin:0 0 20px;overflow:hidden;
+    border:1px solid #dde3ec;border-radius:14px;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .rel-title{font-size:9px;letter-spacing:2px;color:#94a3b8;
+    padding:14px 16px 0;margin-bottom:6px;text-align:left}
+  .rel svg{width:100%;height:auto;min-width:0;display:block}
+
+  /* ── activity maps & other no-class SVG divs ── */
+  .page>div:not([class]) svg{
+    width:100%!important;height:auto!important;min-width:0;display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-btn" href="index.html">← 时间线</a>
+  <a class="back-btn" href="index.html">← <span lang="en">Timeline</span><span lang="zh">时间线</span></a>
   <div class="h-info">
-    <span class="hb">摩尔门经</span><span class="hs">/</span>
-    <span class="hn">第四尼腓书</span>
+    <span class="hb"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span></span><span class="hs">/</span>
+    <span class="hn"><span lang="en">4 Nephi</span><span lang="zh">第四尼腓书</span></span>
   </div>
   <nav class="nav">
-    <a class="tab" href="bom.html">一书</a>
-    <a class="tab" href="bom2.html">二书</a>
-    <a class="tab" href="bom-jacob.html">雅各</a>
-    <a class="tab" href="bom-enos.html">以挪士</a>
-    <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆乃</a>
-    <a class="tab" href="bom-wom.html">摩语</a>
-    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
-    <a class="tab" href="bom-alma.html">阿尔玛</a>
-    <a class="tab" href="bom-helaman.html">希拉曼</a>
-    <a class="tab" href="bom-3nephi.html">三书</a>
-    <a class="tab on" href="bom-4nephi.html">四书</a>
-    <a class="tab" href="bom-mormon.html">摩尔门</a>
-    <a class="tab" href="bom-ether.html">以帖</a>
-    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+    <a class="tab" href="bom.html"><span lang="en">1 Nephi</span><span lang="zh">一书</span></a>
+    <a class="tab" href="bom2.html"><span lang="en">2 Nephi</span><span lang="zh">二书</span></a>
+    <a class="tab" href="bom-jacob.html"><span lang="en">Jacob</span><span lang="zh">雅各</span></a>
+    <a class="tab" href="bom-enos.html"><span lang="en">Enos</span><span lang="zh">以挪士</span></a>
+    <a class="tab" href="bom-jarom.html"><span lang="en">Jarom</span><span lang="zh">雅龙</span></a>
+    <a class="tab" href="bom-omni.html"><span lang="en">Omni</span><span lang="zh">奥姆乃</span></a>
+    <a class="tab" href="bom-wom.html"><span lang="en">W of M</span><span lang="zh">摩语</span></a>
+    <a class="tab" href="bom-mosiah.html"><span lang="en">Mosiah</span><span lang="zh">摩赛亚</span></a>
+    <a class="tab" href="bom-alma.html"><span lang="en">Alma</span><span lang="zh">阿尔玛</span></a>
+    <a class="tab" href="bom-helaman.html"><span lang="en">Helaman</span><span lang="zh">希拉曼</span></a>
+    <a class="tab" href="bom-3nephi.html"><span lang="en">3 Nephi</span><span lang="zh">三书</span></a>
+    <a class="tab on" href="bom-4nephi.html"><span lang="en">4 Nephi</span><span lang="zh">四书</span></a>
+    <a class="tab" href="bom-mormon.html"><span lang="en">Mormon</span><span lang="zh">摩尔门</span></a>
+    <a class="tab" href="bom-ether.html"><span lang="en">Ether</span><span lang="zh">以帖</span></a>
+    <a class="tab" href="bom-moroni.html"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </header>
 
 <div class="page">
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">摩尔门经 · 大版金片 · 摩尔门删节</div>
-  <div class="intro-h">第四尼腓书</div>
+  <div class="intro-sup"><span lang="en">Book of Mormon · Large Plates · Mormon's Abridgment</span><span lang="zh">摩尔门经 · 大版金片 · 摩尔门删节</span></div>
+  <div class="intro-h"><span lang="en">4 Nephi</span><span lang="zh">第四尼腓书</span></div>
   <div class="intro-meta">
-    <span class="im">时间 <b>公元 34–321 年</b></span>
-    <span class="im">时长 <b>近三百年</b></span>
-    <span class="im">篇幅 <b>1 章 · 49 节</b></span>
-    <span class="im">核心 <b>黄金时代 · 骄傲循环 · 再度分裂</b></span>
+    <span class="im"><span lang="en">Date</span><span lang="zh">时间</span> <b>AD 34–321</b></span>
+    <span class="im"><span lang="en">Span</span><span lang="zh">时长</span> <b><span lang="en">Nearly 300 years</span><span lang="zh">近三百年</span></b></span>
+    <span class="im"><span lang="en">Length</span><span lang="zh">篇幅</span> <b>1 <span lang="en">ch.</span><span lang="zh">章</span> · 49 <span lang="en">verses</span><span lang="zh">节</span></b></span>
+    <span class="im"><span lang="en">Core</span><span lang="zh">核心</span> <b><span lang="en">Golden Age · Pride Cycle · Re-division</span><span lang="zh">黄金时代 · 骄傲循环 · 再度分裂</span></b></span>
   </div>
 </div>
 
 <!-- ── 活动地图 ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · 第四尼腓书</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Activity Map · 4 Nephi</span><span lang="zh">活动地图示意 · 第四尼腓书</span></div>
   <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <!-- ocean background -->
     <rect width="860" height="420" fill="#bfdbfe" rx="8"/>
@@ -105,77 +276,77 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- 旷野·盗匪据点 -->
     <rect x="18" y="14" width="126" height="40" rx="4" fill="rgba(255,251,235,0.92)" stroke="#d97706" stroke-width="1" stroke-dasharray="5,3"/>
-    <text x="81" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">旷野</text>
-    <text x="81" y="44" text-anchor="middle" font-size="7.5" fill="#b45309">盗匪再起（约 AD 231）</text>
+    <text lang="en" x="81" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">Wilderness</text><text lang="zh" x="81" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">旷野</text>
+    <text lang="en" x="81" y="44" text-anchor="middle" font-size="7.5" fill="#b45309">Robbers rise again (c. AD 231)</text><text lang="zh" x="81" y="44" text-anchor="middle" font-size="7.5" fill="#b45309">盗匪再起（约 AD 231）</text>
 
     <!-- 黄金时代 全地合一 overlay -->
     <ellipse cx="430" cy="215" rx="280" ry="148" fill="rgba(16,185,129,0.07)" stroke="#6ee7b7" stroke-width="1" stroke-dasharray="9,5"/>
-    <text x="430" y="178" text-anchor="middle" font-size="9" fill="#059669" font-style="italic" opacity="0.85">AD 34–200 · 全地合一，共财无争</text>
+    <text lang="en" x="430" y="178" text-anchor="middle" font-size="9" fill="#059669" font-style="italic" opacity="0.85">AD 34–200 · All united, no poverty or strife</text><text lang="zh" x="430" y="178" text-anchor="middle" font-size="9" fill="#059669" font-style="italic" opacity="0.85">AD 34–200 · 全地合一，共财无争</text>
 
     <!-- 细颈地带 label -->
-    <text x="430" y="148" text-anchor="middle" font-size="8" fill="#64748b" letter-spacing="1" opacity="0.7">— 细颈地带 —</text>
+    <text lang="en" x="430" y="148" text-anchor="middle" font-size="8" fill="#64748b" letter-spacing="1" opacity="0.7">— Narrow Neck —</text><text lang="zh" x="430" y="148" text-anchor="middle" font-size="8" fill="#64748b" letter-spacing="1" opacity="0.7">— 细颈地带 —</text>
 
     <!-- 科莫拉山 (Hill Shim) KEY LOCATION -->
     <circle cx="378" cy="102" r="9" fill="#d97706" stroke="#fff" stroke-width="2"/>
     <rect x="392" y="80" width="196" height="52" rx="4" fill="rgba(255,255,255,0.95)" stroke="#fde68a" stroke-width="1.5" stroke-dasharray="5,3"/>
-    <text x="490" y="98" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">科莫拉山</text>
-    <text x="490" y="111" text-anchor="middle" font-size="8.5" fill="#b45309">阿摩龙藏金版于此</text>
-    <text x="490" y="124" text-anchor="middle" font-size="7.5" fill="#94a3b8">AD 321 · Hill Shim · 安顿地</text>
+    <text lang="en" x="490" y="98" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">Hill Cumorah</text><text lang="zh" x="490" y="98" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">科莫拉山</text>
+    <text lang="en" x="490" y="111" text-anchor="middle" font-size="8.5" fill="#b45309">Ammaron hid the plates here</text><text lang="zh" x="490" y="111" text-anchor="middle" font-size="8.5" fill="#b45309">阿摩龙藏金版于此</text>
+    <text lang="en" x="490" y="124" text-anchor="middle" font-size="7.5" fill="#94a3b8">AD 321 · Hill Shim · Land of Antum</text><text lang="zh" x="490" y="124" text-anchor="middle" font-size="7.5" fill="#94a3b8">AD 321 · Hill Shim · 安顿地</text>
 
     <!-- 柴雷罕拉 -->
     <circle cx="386" cy="208" r="8" fill="#475569" stroke="#fff" stroke-width="2"/>
     <rect x="398" y="197" width="152" height="34" rx="4" fill="rgba(255,255,255,0.93)" stroke="#94a3b8" stroke-width="1.2"/>
-    <text x="474" y="213" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e293b">柴雷罕拉</text>
-    <text x="474" y="225" text-anchor="middle" font-size="7.5" fill="#64748b">尼腓人中心城市</text>
+    <text lang="en" x="474" y="213" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e293b">Zarahemla</text><text lang="zh" x="474" y="213" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e293b">柴雷罕拉</text>
+    <text lang="en" x="474" y="225" text-anchor="middle" font-size="7.5" fill="#64748b">Nephite central city</text><text lang="zh" x="474" y="225" text-anchor="middle" font-size="7.5" fill="#64748b">尼腓人中心城市</text>
 
     <!-- 尼腓地 -->
     <circle cx="374" cy="332" r="7" fill="#64748b" stroke="#fff" stroke-width="1.5"/>
     <rect x="386" y="321" width="130" height="30" rx="4" fill="rgba(255,255,255,0.92)" stroke="#94a3b8" stroke-width="1.2"/>
-    <text x="451" y="336" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e293b">尼腓地</text>
-    <text x="451" y="346" text-anchor="middle" font-size="7.5" fill="#64748b">早期拉曼人城市</text>
+    <text lang="en" x="451" y="336" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e293b">Land of Nephi</text><text lang="zh" x="451" y="336" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e293b">尼腓地</text>
+    <text lang="en" x="451" y="346" text-anchor="middle" font-size="7.5" fill="#64748b">Early Lamanite city</text><text lang="zh" x="451" y="346" text-anchor="middle" font-size="7.5" fill="#64748b">早期拉曼人城市</text>
 
     <!-- 再度分裂 线 AD 231 -->
     <line x1="108" y1="273" x2="820" y2="273" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="8,4"/>
     <rect x="598" y="240" width="148" height="48" rx="5" fill="rgba(255,241,242,0.93)" stroke="#fda4af" stroke-width="1"/>
-    <text x="672" y="258" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">AD 231 · 再度分裂</text>
-    <text x="672" y="271" text-anchor="middle" font-size="7.5" fill="#be123c">有人自称拉曼人</text>
-    <text x="672" y="282" text-anchor="middle" font-size="7.5" fill="#be123c">两族对立重现</text>
-    <text x="120" y="264" font-size="8" fill="#059669">尼腓人领域 ↑</text>
-    <text x="120" y="288" font-size="8" fill="#dc2626">↓ 拉曼人领域</text>
+    <text lang="en" x="672" y="258" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">AD 231 · Re-division</text><text lang="zh" x="672" y="258" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">AD 231 · 再度分裂</text>
+    <text lang="en" x="672" y="271" text-anchor="middle" font-size="7.5" fill="#be123c">Some call themselves Lamanites</text><text lang="zh" x="672" y="271" text-anchor="middle" font-size="7.5" fill="#be123c">有人自称拉曼人</text>
+    <text lang="en" x="672" y="282" text-anchor="middle" font-size="7.5" fill="#be123c">Two-nation division returns</text><text lang="zh" x="672" y="282" text-anchor="middle" font-size="7.5" fill="#be123c">两族对立重现</text>
+    <text lang="en" x="120" y="264" font-size="8" fill="#059669">Nephite territory ↑</text><text lang="zh" x="120" y="264" font-size="8" fill="#059669">尼腓人领域 ↑</text>
+    <text lang="en" x="120" y="288" font-size="8" fill="#dc2626">↓ Lamanite territory</text><text lang="zh" x="120" y="288" font-size="8" fill="#dc2626">↓ 拉曼人领域</text>
 
     <!-- water labels -->
-    <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="820" y="270" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text lang="en" x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">Pacific Ocean</text><text lang="zh" x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text lang="en" x="820" y="270" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">Caribbean Sea</text><text lang="zh" x="820" y="270" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text lang="en" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text><text lang="zh" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
   </svg>
-  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px"><span lang="en">※ Map is schematic; geography disputed. Mainstream view favors Mesoamerican model.</span><span lang="zh">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</span></div>
 </div>
 
 <!-- ── 节次概览 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">节次概览 · VERSE OVERVIEW</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Section Overview</span><span lang="zh">节次概览</span></div>
   <svg viewBox="0 0 860 282" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- title -->
-    <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">三段叙事（第四尼腓书 第一章 · 共 49 节）</text>
+    <text lang="en" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">Three Narratives (4 Nephi · Ch. 1 · 49 Verses)</text><text lang="zh" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">三段叙事（第四尼腓书 第一章 · 共 49 节）</text>
 
     <!-- section counts -->
-    <text x="228" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">23 节</text>
-    <text x="500" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">12 节</text>
-    <text x="701" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">14 节</text>
+    <text lang="en" x="228" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">23 v.</text><text lang="zh" x="228" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">23 节</text>
+    <text lang="en" x="500" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">12 v.</text><text lang="zh" x="500" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">12 节</text>
+    <text lang="en" x="701" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">14 v.</text><text lang="zh" x="701" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">14 节</text>
 
     <!-- colored bars (y=60–112) -->
     <rect x="50"  y="60" width="357" height="52" fill="#d1fae5"/>
-    <text x="228" y="81"  text-anchor="middle" font-size="13"  font-weight="bold" fill="#065f46">黄金时代</text>
-    <text x="228" y="97"  text-anchor="middle" font-size="8"   fill="#059669">合一共财·无贫无争</text>
+    <text lang="en" x="228" y="81"  text-anchor="middle" font-size="13"  font-weight="bold" fill="#065f46">Golden Age</text><text lang="zh" x="228" y="81"  text-anchor="middle" font-size="13"  font-weight="bold" fill="#065f46">黄金时代</text>
+    <text lang="en" x="228" y="97"  text-anchor="middle" font-size="8"   fill="#059669">United, shared goods, no poverty or strife</text><text lang="zh" x="228" y="97"  text-anchor="middle" font-size="8"   fill="#059669">合一共财·无贫无争</text>
 
     <rect x="407" y="60" width="186" height="52" fill="#fef3c7"/>
-    <text x="500" y="81"  text-anchor="middle" font-size="11"  font-weight="bold" fill="#92400e">衰落初现</text>
-    <text x="500" y="97"  text-anchor="middle" font-size="7.5" fill="#b45309">骄傲兴·分宗立派</text>
+    <text lang="en" x="500" y="81"  text-anchor="middle" font-size="11"  font-weight="bold" fill="#92400e">First Decline</text><text lang="zh" x="500" y="81"  text-anchor="middle" font-size="11"  font-weight="bold" fill="#92400e">衰落初现</text>
+    <text lang="en" x="500" y="97"  text-anchor="middle" font-size="7.5" fill="#b45309">Pride rises · factions form</text><text lang="zh" x="500" y="97"  text-anchor="middle" font-size="7.5" fill="#b45309">骄傲兴·分宗立派</text>
 
     <rect x="593" y="60" width="217" height="52" fill="#fee2e2"/>
-    <text x="701" y="81"  text-anchor="middle" font-size="11"  font-weight="bold" fill="#9f1239">再度分裂</text>
-    <text x="701" y="97"  text-anchor="middle" font-size="7.5" fill="#be123c">拉尼复分·藏版山中</text>
+    <text lang="en" x="701" y="81"  text-anchor="middle" font-size="11"  font-weight="bold" fill="#9f1239">Re-division</text><text lang="zh" x="701" y="81"  text-anchor="middle" font-size="11"  font-weight="bold" fill="#9f1239">再度分裂</text>
+    <text lang="en" x="701" y="97"  text-anchor="middle" font-size="7.5" fill="#be123c">Nephite-Lamanite split returns · plates hidden</text><text lang="zh" x="701" y="97"  text-anchor="middle" font-size="7.5" fill="#be123c">拉尼复分·藏版山中</text>
 
     <!-- dividers + outer border -->
     <line x1="407" y1="60" x2="407" y2="112" stroke="#fff" stroke-width="1.5"/>
@@ -183,18 +354,18 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <rect x="50" y="60" width="760" height="52" fill="none" stroke="#e2e8f0" stroke-width="1" rx="2"/>
 
     <!-- descriptions below bars -->
-    <text x="228" y="128" text-anchor="middle" font-size="8" fill="#64748b">升天后拉尼合一，共财无贫</text>
-    <text x="228" y="140" text-anchor="middle" font-size="8" fill="#64748b">神迹不断，义传三代</text>
+    <text lang="en" x="228" y="128" text-anchor="middle" font-size="8" fill="#64748b">After ascension, all united, shared goods, no poverty</text><text lang="zh" x="228" y="128" text-anchor="middle" font-size="8" fill="#64748b">升天后拉尼合一，共财无贫</text>
+    <text lang="en" x="228" y="140" text-anchor="middle" font-size="8" fill="#64748b">Miracles continue, righteousness through three generations</text><text lang="zh" x="228" y="140" text-anchor="middle" font-size="8" fill="#64748b">神迹不断，义传三代</text>
 
-    <text x="500" y="128" text-anchor="middle" font-size="8" fill="#64748b">骄傲渐起，不再共财</text>
-    <text x="500" y="140" text-anchor="middle" font-size="8" fill="#64748b">分宗立派，盗匪再起</text>
+    <text lang="en" x="500" y="128" text-anchor="middle" font-size="8" fill="#64748b">Pride gradually rises, goods no longer shared</text><text lang="zh" x="500" y="128" text-anchor="middle" font-size="8" fill="#64748b">骄傲渐起，不再共财</text>
+    <text lang="en" x="500" y="140" text-anchor="middle" font-size="8" fill="#64748b">Factions form, robbers rise again</text><text lang="zh" x="500" y="140" text-anchor="middle" font-size="8" fill="#64748b">分宗立派，盗匪再起</text>
 
-    <text x="701" y="128" text-anchor="middle" font-size="8" fill="#64748b">有人自称拉曼人，对立再现</text>
-    <text x="701" y="140" text-anchor="middle" font-size="8" fill="#64748b">阿摩龙藏版，嘱少年摩尔门</text>
+    <text lang="en" x="701" y="128" text-anchor="middle" font-size="8" fill="#64748b">Some call themselves Lamanites, opposition returns</text><text lang="zh" x="701" y="128" text-anchor="middle" font-size="8" fill="#64748b">有人自称拉曼人，对立再现</text>
+    <text lang="en" x="701" y="140" text-anchor="middle" font-size="8" fill="#64748b">Ammaron hides plates, instructs young Mormon</text><text lang="zh" x="701" y="140" text-anchor="middle" font-size="8" fill="#64748b">阿摩龙藏版，嘱少年摩尔门</text>
 
     <!-- timeline section -->
     <line x1="50" y1="156" x2="810" y2="156" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="430" y="171" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · AD 34–321</text>
+    <text lang="en" x="430" y="171" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Timeline · AD 34–321</text><text lang="zh" x="430" y="171" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · AD 34–321</text>
 
     <!-- axis -->
     <line x1="50" y1="214" x2="810" y2="214" stroke="#d1d5db" stroke-width="1.5"/>
@@ -203,131 +374,196 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <circle cx="50"  cy="214" r="3.5" fill="#059669"/>
     <line x1="50"  y1="200" x2="50"  y2="210" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="50"  y="196" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#059669">AD 34</text>
-    <text x="50"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">基督升天</text>
+    <text lang="en" x="50"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">Christ Ascends</text><text lang="zh" x="50"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">基督升天</text>
 
     <!-- AD 110 · below -->
     <circle cx="251" cy="214" r="3.5" fill="#059669"/>
     <line x1="251" y1="218" x2="251" y2="230" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="251" y="241" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#059669">AD 110</text>
-    <text x="251" y="251" text-anchor="middle" font-size="7.5" fill="#475569">阿摩司一世继</text>
+    <text lang="en" x="251" y="251" text-anchor="middle" font-size="7.5" fill="#475569">Amos I succeeds</text><text lang="zh" x="251" y="251" text-anchor="middle" font-size="7.5" fill="#475569">阿摩司一世继</text>
 
     <!-- AD 194 · above -->
     <circle cx="474" cy="214" r="3.5" fill="#059669"/>
     <line x1="474" y1="200" x2="474" y2="210" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="474" y="196" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#059669">AD 194</text>
-    <text x="474" y="186" text-anchor="middle" font-size="7.5" fill="#475569">阿摩司二世继</text>
+    <text lang="en" x="474" y="186" text-anchor="middle" font-size="7.5" fill="#475569">Amos II succeeds</text><text lang="zh" x="474" y="186" text-anchor="middle" font-size="7.5" fill="#475569">阿摩司二世继</text>
 
     <!-- AD 231 · below -->
     <circle cx="572" cy="214" r="3.5" fill="#dc2626"/>
     <line x1="572" y1="218" x2="572" y2="230" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="572" y="241" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">AD 231</text>
-    <text x="572" y="251" text-anchor="middle" font-size="7.5" fill="#475569">再度分裂</text>
+    <text lang="en" x="572" y="251" text-anchor="middle" font-size="7.5" fill="#475569">Re-division</text><text lang="zh" x="572" y="251" text-anchor="middle" font-size="7.5" fill="#475569">再度分裂</text>
 
     <!-- AD 306 · above -->
     <circle cx="770" cy="214" r="3.5" fill="#7c3aed"/>
     <line x1="770" y1="200" x2="770" y2="210" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="770" y="196" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">AD 306</text>
-    <text x="770" y="186" text-anchor="middle" font-size="7.5" fill="#475569">阿摩龙继</text>
+    <text lang="en" x="770" y="186" text-anchor="middle" font-size="7.5" fill="#475569">Ammaron succeeds</text><text lang="zh" x="770" y="186" text-anchor="middle" font-size="7.5" fill="#475569">阿摩龙继</text>
 
     <!-- AD 321 · below -->
     <circle cx="810" cy="214" r="3.5" fill="#7c3aed"/>
     <line x1="810" y1="218" x2="810" y2="230" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="810" y="241" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">AD 321</text>
-    <text x="810" y="251" text-anchor="middle" font-size="7.5" fill="#475569">嘱少年摩尔门</text>
+    <text lang="en" x="810" y="251" text-anchor="middle" font-size="7.5" fill="#475569">Instructs young Mormon</text><text lang="zh" x="810" y="251" text-anchor="middle" font-size="7.5" fill="#475569">嘱少年摩尔门</text>
 
     <!-- bottom note -->
-    <text x="430" y="272" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 是摩尔门经时间跨度最大的单一章节——近三百年历史仅以 49 节记录完毕</text>
+    <text lang="en" x="430" y="272" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ This is the single chapter with the greatest time span in the Book of Mormon — nearly 300 years in 49 verses</text><text lang="zh" x="430" y="272" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 是摩尔门经时间跨度最大的单一章节——近三百年历史仅以 49 节记录完毕</text>
   </svg>
 </div>
 
 <!-- single chapter card -->
 <div class="n" style="background:#f0fdf9;border-color:#6ee7b7">
   <div class="nh">
-    <span class="nl">第一章</span>
-    <span class="nt" style="color:#065f46">兴衰近三百年</span>
-    <span class="nw">全美洲大地</span>
-    <span class="nc">公元 34–321 年</span>
+    <span class="nl"><span lang="en">Ch. 1</span><span lang="zh">第一章</span></span>
+    <span class="nt" style="color:#065f46"><span lang="en">Nearly Three Centuries of Rise and Fall</span><span lang="zh">兴衰近三百年</span></span>
+    <span class="nw"><span lang="en">All the Americas</span><span lang="zh">全美洲大地</span></span>
+    <span class="nc"><span lang="en">AD 34–321</span><span lang="zh">公元 34–321 年</span></span>
   </div>
-  <div class="ns">升天之后，拉尼合一，共财无争近两百年；骄傲渐兴，再度分裂，阿摩龙藏版科莫拉山，嘱少年摩尔门承继记录。</div>
+  <div class="ns"><span lang="en">After Christ's ascension, Nephites and Lamanites united with no poverty for nearly two centuries; as pride grew they divided again; Ammaron hid the plates on Hill Cumorah and entrusted young Mormon to continue the record.</span><span lang="zh">升天之后，拉尼合一，共财无争近两百年；骄傲渐兴，再度分裂，阿摩龙藏版科莫拉山，嘱少年摩尔门承继记录。</span></div>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">记录传承</div>
-    <div class="nm"><b>尼腓四世</b><span>创记</span></div>
-    <div class="nm"><b>阿摩司一世</b><span>约 AD 110</span></div>
-    <div class="nm"><b>阿摩司二世</b><span>约 AD 194</span></div>
-    <div class="nm"><b>阿摩龙</b><span>约 AD 306</span></div>
-    <div class="nm"><b>少年摩尔门</b><span>AD 321</span></div>
+    <div class="nm-title"><span lang="en">Record Succession</span><span lang="zh">记录传承</span></div>
+    <div class="nm"><b><span lang="en">Nephi IV</span><span lang="zh">尼腓四世</span></b><span><span lang="en">Founded the record</span><span lang="zh">创记</span></span></div>
+    <div class="nm"><b><span lang="en">Amos I</span><span lang="zh">阿摩司一世</span></b><span><span lang="en">c. AD 110</span><span lang="zh">约 AD 110</span></span></div>
+    <div class="nm"><b><span lang="en">Amos II</span><span lang="zh">阿摩司二世</span></b><span><span lang="en">c. AD 194</span><span lang="zh">约 AD 194</span></span></div>
+    <div class="nm"><b><span lang="en">Ammaron</span><span lang="zh">阿摩龙</span></b><span><span lang="en">c. AD 306</span><span lang="zh">约 AD 306</span></span></div>
+    <div class="nm"><b><span lang="en">Young Mormon</span><span lang="zh">少年摩尔门</span></b><span>AD 321</span></div>
   </div>
 </div>
 
 <!-- diagram -->
 <div class="rel">
-  <div class="rel-title">人物关系 · 记录传承</div>
+  <div class="rel-title"><span lang="en">Character Relationships · Record Succession</span><span lang="zh">人物关系 · 记录传承</span></div>
   <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="nfG" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#059669"/></marker>
       <marker id="nfT" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#0e7490"/></marker>
     </defs>
 
-    <text x="310" y="18" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">家谱与记录传承</text>
+    <text lang="en" x="310" y="18" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Genealogy & Record Succession</text><text lang="zh" x="310" y="18" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">家谱与记录传承</text>
 
     <rect x="14" y="28" width="88" height="40" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="58" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓三世</text>
-    <text x="58" y="59" text-anchor="middle" font-size="8" fill="#7c3aed">3 Nephi · 三书</text>
+    <text lang="en" x="58" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Nephi III</text><text lang="zh" x="58" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓三世</text>
+    <text lang="en" x="58" y="59" text-anchor="middle" font-size="8" fill="#7c3aed">3 Nephi</text><text lang="zh" x="58" y="59" text-anchor="middle" font-size="8" fill="#7c3aed">3 Nephi · 三书</text>
 
     <rect x="130" y="28" width="88" height="40" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="174" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">尼腓四世</text>
-    <text x="174" y="59" text-anchor="middle" font-size="8" fill="#059669">四书首记</text>
+    <text lang="en" x="174" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">Nephi IV</text><text lang="zh" x="174" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">尼腓四世</text>
+    <text lang="en" x="174" y="59" text-anchor="middle" font-size="8" fill="#059669">Founded the record</text><text lang="zh" x="174" y="59" text-anchor="middle" font-size="8" fill="#059669">四书首记</text>
 
     <rect x="246" y="28" width="88" height="40" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="290" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">阿摩司一世</text>
-    <text x="290" y="59" text-anchor="middle" font-size="8" fill="#059669">Amos I · 约 AD 110</text>
+    <text lang="en" x="290" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">Amos I</text><text lang="zh" x="290" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">阿摩司一世</text>
+    <text lang="en" x="290" y="59" text-anchor="middle" font-size="8" fill="#059669">Amos I · c. AD 110</text><text lang="zh" x="290" y="59" text-anchor="middle" font-size="8" fill="#059669">Amos I · 约 AD 110</text>
 
     <rect x="362" y="14" width="88" height="40" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="406" y="31" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">阿摩司二世</text>
-    <text x="406" y="45" text-anchor="middle" font-size="8" fill="#059669">Amos II · 约 AD 194</text>
-    <text x="406" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">长子</text>
+    <text lang="en" x="406" y="31" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">Amos II</text><text lang="zh" x="406" y="31" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">阿摩司二世</text>
+    <text lang="en" x="406" y="45" text-anchor="middle" font-size="8" fill="#059669">Amos II · c. AD 194</text><text lang="zh" x="406" y="45" text-anchor="middle" font-size="8" fill="#059669">Amos II · 约 AD 194</text>
+    <text lang="en" x="406" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">firstborn</text><text lang="zh" x="406" y="56" text-anchor="middle" font-size="7.5" fill="#94a3b8">长子</text>
 
     <rect x="362" y="100" width="88" height="40" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="406" y="117" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">阿摩龙</text>
-    <text x="406" y="131" text-anchor="middle" font-size="8" fill="#b45309">Ammaron · 约 AD 306</text>
-    <text x="406" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">次子·继承记录</text>
+    <text lang="en" x="406" y="117" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Ammaron</text><text lang="zh" x="406" y="117" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">阿摩龙</text>
+    <text lang="en" x="406" y="131" text-anchor="middle" font-size="8" fill="#b45309">Ammaron · c. AD 306</text><text lang="zh" x="406" y="131" text-anchor="middle" font-size="8" fill="#b45309">Ammaron · 约 AD 306</text>
+    <text lang="en" x="406" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">second son · inherits record</text><text lang="zh" x="406" y="142" text-anchor="middle" font-size="7.5" fill="#94a3b8">次子·继承记录</text>
 
     <rect x="494" y="64" width="100" height="40" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
-    <text x="544" y="81" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">少年摩尔门</text>
-    <text x="544" y="95" text-anchor="middle" font-size="8" fill="#2563eb">约十岁 · AD 321</text>
-    <text x="544" y="106" text-anchor="middle" font-size="7.5" fill="#94a3b8">受托护版</text>
+    <text lang="en" x="544" y="81" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">Young Mormon</text><text lang="zh" x="544" y="81" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">少年摩尔门</text>
+    <text lang="en" x="544" y="95" text-anchor="middle" font-size="8" fill="#2563eb">c. age 10 · AD 321</text><text lang="zh" x="544" y="95" text-anchor="middle" font-size="8" fill="#2563eb">约十岁 · AD 321</text>
+    <text lang="en" x="544" y="106" text-anchor="middle" font-size="7.5" fill="#94a3b8">Entrusted with the plates</text><text lang="zh" x="544" y="106" text-anchor="middle" font-size="7.5" fill="#94a3b8">受托护版</text>
 
     <line x1="102" y1="48" x2="130" y2="48" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="116" y="44" text-anchor="middle" font-size="7.5" fill="#94a3b8">父子</text>
+    <text lang="en" x="116" y="44" text-anchor="middle" font-size="7.5" fill="#94a3b8">father–son</text><text lang="zh" x="116" y="44" text-anchor="middle" font-size="7.5" fill="#94a3b8">父子</text>
 
     <line x1="218" y1="48" x2="246" y2="48" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="232" y="44" text-anchor="middle" font-size="7.5" fill="#94a3b8">父子</text>
+    <text lang="en" x="232" y="44" text-anchor="middle" font-size="7.5" fill="#94a3b8">father–son</text><text lang="zh" x="232" y="44" text-anchor="middle" font-size="7.5" fill="#94a3b8">父子</text>
 
     <line x1="334" y1="44" x2="362" y2="36" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="350" y="36" text-anchor="middle" font-size="7.5" fill="#94a3b8">父子</text>
+    <text lang="en" x="350" y="36" text-anchor="middle" font-size="7.5" fill="#94a3b8">father–son</text><text lang="zh" x="350" y="36" text-anchor="middle" font-size="7.5" fill="#94a3b8">父子</text>
 
     <line x1="406" y1="54" x2="406" y2="100" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="422" y="81" font-size="7.5" fill="#7c3aed">兄弟</text>
+    <text lang="en" x="422" y="81" font-size="7.5" fill="#7c3aed">brothers</text><text lang="zh" x="422" y="81" font-size="7.5" fill="#7c3aed">兄弟</text>
 
     <line x1="450" y1="122" x2="494" y2="94" stroke="#0e7490" stroke-width="1.5" marker-end="url(#nfT)"/>
-    <text x="475" y="103" text-anchor="middle" font-size="7.5" fill="#0e7490">托付</text>
+    <text lang="en" x="475" y="103" text-anchor="middle" font-size="7.5" fill="#0e7490">entrusts</text><text lang="zh" x="475" y="103" text-anchor="middle" font-size="7.5" fill="#0e7490">托付</text>
 
     <rect x="642" y="28" width="202" height="112" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
-    <text x="743" y="47" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#475569">科莫拉山</text>
-    <text x="743" y="59" text-anchor="middle" font-size="8" fill="#94a3b8">Hill Shim · 藏版之地</text>
+    <text lang="en" x="743" y="47" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#475569">Hill Cumorah</text><text lang="zh" x="743" y="47" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#475569">科莫拉山</text>
+    <text lang="en" x="743" y="59" text-anchor="middle" font-size="8" fill="#94a3b8">Hill Shim · Hiding Place for Plates</text><text lang="zh" x="743" y="59" text-anchor="middle" font-size="8" fill="#94a3b8">Hill Shim · 藏版之地</text>
     <line x1="650" y1="66" x2="836" y2="66" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="652" y="82" font-size="8.5" fill="#475569">· 阿摩龙于 AD 321 藏入金版</text>
-    <text x="652" y="97" font-size="8.5" fill="#475569">· 告知少年摩尔门藏处</text>
-    <text x="652" y="112" font-size="8.5" fill="#475569">· 嘱其长大后继续记录</text>
-    <text x="652" y="127" font-size="8" fill="#94a3b8">· 摩尔门书由此接续</text>
+    <text lang="en" x="652" y="82" font-size="8.5" fill="#475569">· Ammaron hid the plates here in AD 321</text><text lang="zh" x="652" y="82" font-size="8.5" fill="#475569">· 阿摩龙于 AD 321 藏入金版</text>
+    <text lang="en" x="652" y="97" font-size="8.5" fill="#475569">· Told young Mormon where they were hidden</text><text lang="zh" x="652" y="97" font-size="8.5" fill="#475569">· 告知少年摩尔门藏处</text>
+    <text lang="en" x="652" y="112" font-size="8.5" fill="#475569">· Instructed him to continue the record when grown</text><text lang="zh" x="652" y="112" font-size="8.5" fill="#475569">· 嘱其长大后继续记录</text>
+    <text lang="en" x="652" y="127" font-size="8" fill="#94a3b8">· The Book of Mormon continues from here</text><text lang="zh" x="652" y="127" font-size="8" fill="#94a3b8">· 摩尔门书由此接续</text>
 
-    <text x="430" y="178" text-anchor="middle" font-size="8.5" fill="#94a3b8">※ 第四尼腓书仅 49 节，记录近三百年历史——是摩尔门经中时间跨度最大的单一章节</text>
-    <text x="430" y="193" text-anchor="middle" font-size="8" fill="#94a3b8">黄金时代标志："再无拉曼人，再无尼腓人——他们都是基督的儿女，皆成为一体"（4 Ne 1:17）</text>
+    <text lang="en" x="430" y="178" text-anchor="middle" font-size="8.5" fill="#94a3b8">※ 4 Nephi has just 49 verses covering nearly 300 years — the single chapter with the greatest time span in the Book of Mormon</text><text lang="zh" x="430" y="178" text-anchor="middle" font-size="8.5" fill="#94a3b8">※ 第四尼腓书仅 49 节，记录近三百年历史——是摩尔门经中时间跨度最大的单一章节</text>
+    <text lang="en" x="430" y="193" text-anchor="middle" font-size="8" fill="#94a3b8">Golden Age hallmark: "There were no Lamanites, nor any Nephites—they were all children of Christ, all one" (4 Ne 1:17)</text><text lang="zh" x="430" y="193" text-anchor="middle" font-size="8" fill="#94a3b8">黄金时代标志："再无拉曼人，再无尼腓人——他们都是基督的儿女，皆成为一体"（4 Ne 1:17）</text>
   </svg>
 </div>
 
 </div><!-- .page -->
+<script>(function(){var l=localStorage.getItem('bom-lang')||'en';if(l==='zh')document.body.classList.add('lang-zh');var b=document.getElementById('langBtn');if(b)b.textContent=document.body.classList.contains('lang-zh')?'English':'中文'})();function switchLang(){var z=document.body.classList.toggle('lang-zh');localStorage.setItem('bom-lang',z?'zh':'en');document.getElementById('langBtn').textContent=z?'English':'中文'}</script>
+<script data-mob="3">(function(){
+  if(!window.matchMedia('(max-width:640px)').matches)return;
+  function mk(t,c){var e=document.createElement(t);if(c)e.className=c;return e;}
+
+  /* ── hamburger + dark drawer ── */
+  var ov=mk('div','drawer-overlay');
+  var dr=mk('nav','drawer');
+  var hd=mk('div','drawer-hd');
+  var tit=mk('span','drawer-title');
+  tit.innerHTML='<span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span>';
+  var cx=mk('button','drawer-close');
+  cx.setAttribute('aria-label','close');cx.textContent='×';
+  cx.addEventListener('click',closeDr);
+  hd.appendChild(tit);hd.appendChild(cx);
+  var lks=mk('div','drawer-links');
+  document.querySelectorAll('.nav .tab').forEach(function(a){
+    var l=mk('a','drawer-tab'+(a.classList.contains('on')?' on':''));
+    l.href=a.href;l.innerHTML=a.innerHTML;lks.appendChild(l);
+  });
+  dr.appendChild(hd);dr.appendChild(lks);
+  document.body.appendChild(ov);document.body.appendChild(dr);
+
+  var ham=mk('button','hamburger');
+  ham.setAttribute('aria-label','menu');
+  ham.innerHTML='<svg width="18" height="13" viewBox="0 0 18 13" fill="currentColor">'+
+    '<rect width="18" height="2" rx="1"/>'+
+    '<rect y="5.5" width="14" height="2" rx="1"/>'+
+    '<rect y="11" width="18" height="2" rx="1"/></svg>';
+  ham.addEventListener('click',openDr);
+  var hdr=document.querySelector('header');
+  hdr.insertBefore(ham,hdr.firstChild);
+  ov.addEventListener('click',closeDr);
+
+  function openDr(){
+    ov.classList.add('open');dr.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDr(){
+    ov.classList.remove('open');dr.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* ── chapter summary cards ── */
+  var CM={
+    vio:'#7c3aed',tea:'#0d9488',amb:'#d97706',
+    pin:'#be185d',ros:'#be123c',blu:'#2563eb',grn:'#16a34a'
+  };
+  var intro=document.querySelector('.intro');
+  if(!intro)return;
+  var ct=mk('div','mob-ch');
+  document.querySelectorAll('.page>.n').forEach(function(n){
+    var ck=Object.keys(CM).find(function(k){return n.classList.contains(k);});
+    var nl=n.querySelector('.nl'),nt=n.querySelector('.nt'),nc=n.querySelector('.nc');
+    if(!nl||!nt)return;
+    var c=mk('div','mob-sec');
+    c.style.borderLeftColor=ck?CM[ck]:'#64748b';
+    c.innerHTML=
+      '<span class="mob-nl">'+nl.innerHTML+'</span>'+
+      '<span class="mob-nt">'+nt.innerHTML+'</span>'+
+      (nc?'<span class="mob-nc">'+nc.innerHTML+'</span>':'');
+    ct.appendChild(c);
+  });
+  if(ct.children.length)intro.insertAdjacentElement('afterend',ct);
+})();</script>
 </body>
 </html>

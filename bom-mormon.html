@@ -12,10 +12,12 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
-.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
-.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
+.h-info{display:none}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;flex-shrink:0;border:1px solid #e2e8f0;border-radius:7px;text-decoration:none;color:#64748b;transition:all .15s;font-size:0}
+.back-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+.back-btn::before{content:'';display:block;width:15px;height:12px;background-color:#64748b;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain}
+.back-btn:hover::before{background-color:#1e293b}
+.nav{flex:1;display:flex;gap:2px;overflow-x:auto}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#9f1239;background:#fff1f2;border-color:#fda4af}
@@ -70,52 +72,221 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .ros{background:#fff1f2;border-color:#fda4af}.ros .nt{color:#9f1239}
 .vio{background:#f5f3ff;border-color:#c4b5fd}.vio .nt{color:#4c1d95}
 .dark{background:#1e1b2e;border-color:#4c1d95}.dark .nt{color:#e9d5ff}.dark .nl{color:#c4b5fd}.dark .nw{color:#a78bfa}.dark .nc{color:#7c3aed}.dark .np li{color:#d1d5db}.dark .cn{color:#7c6ea0}
+
+/* language toggle */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+div[lang="en"],ul[lang="en"]{display:block}
+div[lang="zh"],ul[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+body.lang-zh div[lang="en"],body.lang-zh ul[lang="en"]{display:none}
+body.lang-zh div[lang="zh"],body.lang-zh ul[lang="zh"]{display:block}
+.lang-btn{font-size:11px;color:#64748b;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;margin-left:8px}
+.lang-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+/* ── mobile base ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;
+  width:40px;height:40px;color:#1e293b;flex-shrink:0;border-radius:8px;
+  display:none;align-items:center;justify-content:center}
+.hamburger:active{background:#f1f5f9}
+
+/* drawer — dark slate */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;width:280px;max-width:88vw;height:100%;
+  background:#1e293b;z-index:201;display:flex;flex-direction:column;
+  transform:translateX(-110%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:8px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 16px;border-bottom:1px solid #334155;flex-shrink:0}
+.drawer-title{font-size:9px;font-weight:700;letter-spacing:3px;color:#475569;
+  text-transform:uppercase}
+.drawer-close{background:none;border:none;cursor:pointer;font-size:20px;
+  color:#475569;padding:2px 6px;line-height:1;border-radius:4px}
+.drawer-close:hover{color:#94a3b8}
+.drawer-links{overflow-y:auto;flex:1;padding:8px 0 36px}
+.drawer-tab{display:flex;align-items:center;padding:13px 22px;font-size:14px;
+  color:#94a3b8;text-decoration:none;border-left:3px solid transparent;
+  transition:background .12s;line-height:1.3;letter-spacing:.1px}
+.drawer-tab:active{background:rgba(255,255,255,.05)}
+.drawer-tab.on{color:#f1f5f9;font-weight:600;border-left-color:#94a3b8;
+  background:rgba(255,255,255,.07)}
+
+/* chapter summary cards (desktop: hidden) */
+.mob-ch{display:none}
+.mob-sec{border-radius:10px;padding:13px 14px;background:#fff;
+  display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid #e2e8f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.mob-nl{font-size:10px;color:#94a3b8;font-weight:700;letter-spacing:.6px}
+.mob-nt{font-size:13px;font-weight:700;color:#1e293b;line-height:1.25}
+.mob-nc{font-size:10px;color:#b0bac5;margin-top:1px}
+
+@media(max-width:640px){
+  /* ── global ── */
+  body{font-size:15px;background:#eef1f6}
+
+  /* ── header ── */
+  header{padding:0 14px 0 6px;gap:6px;height:54px;
+    border-bottom:1px solid #dde3ec;box-shadow:0 1px 0 #dde3ec}
+  .hamburger{display:flex}
+  .nav,.back-btn,.hb,.hs{display:none}
+  .h-info{display:flex;flex:1;justify-content:center;text-align:center}
+  .hn{font-size:15px;font-weight:600;letter-spacing:.3px;color:#1e293b}
+  .lang-btn{font-size:11px;padding:5px 10px;border-radius:7px;flex-shrink:0}
+  .drawer-overlay.open,.drawer.open{opacity:1;pointer-events:auto}
+  .drawer.open{transform:translateX(0)}
+
+  /* ── page grid ── */
+  .page{grid-template-columns:1fr;padding:14px 12px 96px;gap:0;background:#eef1f6}
+
+  /* ── intro ── */
+  .intro{text-align:left;padding:22px 18px 20px;border-radius:16px;border:none;
+    background:#fff;margin-bottom:14px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:10px}
+  .intro-h{font-size:28px;font-weight:300;letter-spacing:-.5px;line-height:1.1;
+    margin-bottom:14px;color:#1e293b}
+  .intro-meta{flex-direction:column;gap:7px;justify-content:flex-start}
+  .im{font-size:12px;display:flex;gap:7px;align-items:baseline;color:#64748b}
+  .im b{color:#1e293b;font-weight:600}
+  .intro-en{font-size:11px;margin-top:8px;padding-top:10px;border-top:1px solid #f1f5f9;
+    color:#94a3b8}
+
+  /* ── chapter summary cards ── */
+  .mob-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f2f6}
+  .intro+div:not([class]){display:none}
+
+  /* ── phase labels ── hidden; color carried by card left border */
+  .ph,.ph-sp,.arr,.si-sp{display:none}
+
+  /* ── section card ── */
+  .n{grid-column:1;
+    border-top:none!important;border-right:none!important;border-bottom:none!important;
+    border-left-width:4px!important;
+    border-radius:0 16px 16px 0;
+    padding:18px 17px 20px;margin-bottom:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .n:hover{filter:none}
+
+  /* ── section header: chapter → title → location · time ── */
+  .nh{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:14px;align-items:baseline}
+  .nl{order:1;flex:0 0 100%;font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:6px;flex-wrap:wrap}
+  .nt{order:2;flex:0 0 100%;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:8px;white-space:normal;overflow-wrap:break-word;letter-spacing:normal}
+  .nw{order:3;font-size:12px;white-space:normal}
+  .nc{order:4;font-size:12px;margin-left:0;white-space:normal}
+  .nc::before{content:' · '}
+
+  /* ── scripture list ── */
+  .np{padding:0;margin:0}
+  .np li{font-size:14.5px;color:#374151;line-height:1.85;
+    padding-left:2.4em;text-indent:-2.4em;
+    padding-top:7px;padding-bottom:7px;
+    border-bottom:1px solid rgba(0,0,0,.05)}
+  .np li:last-child{border-bottom:none;padding-bottom:0}
+  .cn{display:inline-block;width:1.8em;font-size:11px;font-weight:700;
+    color:#94a3b8;letter-spacing:0;text-align:right;margin-right:6px}
+  .ns{font-size:14.5px;line-height:1.85;color:#374151}
+
+  /* ── event box ── */
+  .ev{grid-column:1;border-radius:12px;
+    border-style:solid!important;border-width:1px!important;
+    padding:12px 16px;margin-bottom:4px;font-size:13px;line-height:1.6}
+  .ev-icon{display:none}
+  .ev-date{font-size:9px;letter-spacing:1.5px;font-weight:700;margin-bottom:5px}
+
+  /* ── sidebar ── */
+  .si{grid-column:1;padding:0;margin-bottom:20px}
+  .si::before{display:none}
+  .nms{background:#fff;border-radius:12px;padding:14px 16px;
+    border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .nms+.nms{margin-top:8px}
+  .nm-title{font-size:9px;font-weight:700;letter-spacing:2px;color:#94a3b8;
+    text-transform:uppercase;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #f0f2f6}
+  .nm{display:grid;grid-template-columns:84px 1fr;gap:4px;
+    padding:6px 0;border-top:1px solid #f6f8fb;
+    align-items:baseline;line-height:1.45}
+  .nm:first-of-type{border-top:none;padding-top:0}
+  .nm b{font-size:12px;font-weight:600;color:#334155}
+  .nm span{font-size:12px;color:#64748b}
+
+  /* 1/2 Nephi character sidebar cards */
+  .sb{background:#f8fafc;border-radius:10px;padding:10px 13px;
+    border:1px solid #f0f2f6;margin-bottom:6px}
+  .sn{font-size:13.5px;font-weight:700;color:#1e293b}
+  .se{font-size:10.5px;color:#94a3b8;margin-top:1px}
+  .sd{font-size:12px;color:#475569;line-height:1.5;margin-top:5px}
+
+  /* ── legend ── */
+  .legend{grid-column:1;background:#fff;border-radius:12px;
+    padding:14px 16px;border:1px solid #dde3ec;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .legend-title{font-size:9px;letter-spacing:2px;color:#94a3b8;margin-bottom:10px}
+  .lg-item{font-size:12px;color:#475569}
+
+  /* ── arc / character SVG ── scale to fit, card container */
+  .rel{grid-column:1;margin:0 0 20px;overflow:hidden;
+    border:1px solid #dde3ec;border-radius:14px;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .rel-title{font-size:9px;letter-spacing:2px;color:#94a3b8;
+    padding:14px 16px 0;margin-bottom:6px;text-align:left}
+  .rel svg{width:100%;height:auto;min-width:0;display:block}
+
+  /* ── activity maps & other no-class SVG divs ── */
+  .page>div:not([class]) svg{
+    width:100%!important;height:auto!important;min-width:0;display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-btn" href="index.html">← 时间线</a>
+  <a class="back-btn" href="index.html">← <span lang="en">Timeline</span><span lang="zh">时间线</span></a>
   <div class="h-info">
-    <span class="hb">摩尔门经</span><span class="hs">/</span>
-    <span class="hn">摩尔门书</span>
+    <span class="hb"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span></span><span class="hs">/</span>
+    <span class="hn"><span lang="en">Mormon</span><span lang="zh">摩尔门书</span></span>
   </div>
   <nav class="nav">
-    <a class="tab" href="bom.html">一书</a>
-    <a class="tab" href="bom2.html">二书</a>
-    <a class="tab" href="bom-jacob.html">雅各</a>
-    <a class="tab" href="bom-enos.html">以挪士</a>
-    <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆乃</a>
-    <a class="tab" href="bom-wom.html">摩语</a>
-    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
-    <a class="tab" href="bom-alma.html">阿尔玛</a>
-    <a class="tab" href="bom-helaman.html">希拉曼</a>
-    <a class="tab" href="bom-3nephi.html">三书</a>
-    <a class="tab" href="bom-4nephi.html">四书</a>
-    <a class="tab on" href="bom-mormon.html">摩尔门</a>
-    <a class="tab" href="bom-ether.html">以帖</a>
-    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+    <a class="tab" href="bom.html"><span lang="en">1 Nephi</span><span lang="zh">一书</span></a>
+    <a class="tab" href="bom2.html"><span lang="en">2 Nephi</span><span lang="zh">二书</span></a>
+    <a class="tab" href="bom-jacob.html"><span lang="en">Jacob</span><span lang="zh">雅各</span></a>
+    <a class="tab" href="bom-enos.html"><span lang="en">Enos</span><span lang="zh">以挪士</span></a>
+    <a class="tab" href="bom-jarom.html"><span lang="en">Jarom</span><span lang="zh">雅龙</span></a>
+    <a class="tab" href="bom-omni.html"><span lang="en">Omni</span><span lang="zh">奥姆乃</span></a>
+    <a class="tab" href="bom-wom.html"><span lang="en">W of M</span><span lang="zh">摩语</span></a>
+    <a class="tab" href="bom-mosiah.html"><span lang="en">Mosiah</span><span lang="zh">摩赛亚</span></a>
+    <a class="tab" href="bom-alma.html"><span lang="en">Alma</span><span lang="zh">阿尔玛</span></a>
+    <a class="tab" href="bom-helaman.html"><span lang="en">Helaman</span><span lang="zh">希拉曼</span></a>
+    <a class="tab" href="bom-3nephi.html"><span lang="en">3 Nephi</span><span lang="zh">三书</span></a>
+    <a class="tab" href="bom-4nephi.html"><span lang="en">4 Nephi</span><span lang="zh">四书</span></a>
+    <a class="tab on" href="bom-mormon.html"><span lang="en">Mormon</span><span lang="zh">摩尔门</span></a>
+    <a class="tab" href="bom-ether.html"><span lang="en">Ether</span><span lang="zh">以帖</span></a>
+    <a class="tab" href="bom-moroni.html"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </header>
 
 <div class="page">
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">摩尔门经 · 大版金片 · 摩尔门自著并缩编</div>
-  <div class="intro-h">摩尔门书</div>
+  <div class="intro-sup"><span lang="en">Book of Mormon · Large Plates · Mormon's Own Writing & Abridgment</span><span lang="zh">摩尔门经 · 大版金片 · 摩尔门自著并缩编</span></div>
+  <div class="intro-h"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门书</span></div>
   <div class="intro-meta">
-    <span class="im">时间 <b>公元 322–385 年</b></span>
-    <span class="im">时长 <b>六十余年</b></span>
-    <span class="im">篇幅 <b>9 章</b></span>
-    <span class="im">核心 <b>先知将军 · 最后之战 · 尼腓人亡族</b></span>
+    <span class="im"><span lang="en">Date</span><span lang="zh">时间</span> <b>AD 322–385</b></span>
+    <span class="im"><span lang="en">Span</span><span lang="zh">时长</span> <b><span lang="en">60+ years</span><span lang="zh">六十余年</span></b></span>
+    <span class="im"><span lang="en">Length</span><span lang="zh">篇幅</span> <b>9 <span lang="en">chapters</span><span lang="zh">章</span></b></span>
+    <span class="im"><span lang="en">Core</span><span lang="zh">核心</span> <b><span lang="en">Prophet-General · Final War · Nephite Extinction</span><span lang="zh">先知将军 · 最后之战 · 尼腓人亡族</span></b></span>
   </div>
 </div>
 
 <!-- ── 活动地图 ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · 摩尔门书</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Activity Map · Book of Mormon</span><span lang="zh">活动地图示意 · 摩尔门书</span></div>
   <svg viewBox="0 0 860 390" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="mA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#dc2626"/></marker>
@@ -130,36 +301,36 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <!-- Hill Shim -->
     <circle cx="390" cy="155" r="9" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
     <rect x="400" y="143" width="160" height="28" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.2"/>
-    <text x="480" y="156" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">希姆山（金版藏处）</text>
-    <text x="480" y="167" text-anchor="middle" font-size="7.5" fill="#7c3aed">Hill Shim · 摩尔门取出金版</text>
+    <text lang="en" x="480" y="156" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">Hill Shim (Plates Storage)</text><text lang="zh" x="480" y="156" text-anchor="middle" font-size="9" font-weight="bold" fill="#4c1d95">希姆山（金版藏处）</text>
+    <text lang="en" x="480" y="167" text-anchor="middle" font-size="7.5" fill="#7c3aed">Hill Shim · Mormon retrieved the plates</text><text lang="zh" x="480" y="167" text-anchor="middle" font-size="7.5" fill="#7c3aed">Hill Shim · 摩尔门取出金版</text>
 
     <!-- Hill Cumorah -->
     <ellipse cx="520" cy="200" rx="72" ry="48" fill="rgba(127,29,29,0.25)" stroke="#9f1239" stroke-width="2"/>
     <polygon points="500,155 540,155 560,200 520,225 480,200" fill="#9f1239" opacity="0.6" stroke="#fff" stroke-width="1.5"/>
-    <text x="520" y="190" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">科莫拉山</text>
-    <text x="520" y="203" text-anchor="middle" font-size="8" fill="#fecaca">最后一战 AD 385</text>
-    <text x="520" y="215" text-anchor="middle" font-size="7.5" fill="#fecaca">约 23 万人战死</text>
+    <text lang="en" x="520" y="190" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">Hill Cumorah</text><text lang="zh" x="520" y="190" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">科莫拉山</text>
+    <text lang="en" x="520" y="203" text-anchor="middle" font-size="8" fill="#fecaca">Final Battle AD 385</text><text lang="zh" x="520" y="203" text-anchor="middle" font-size="8" fill="#fecaca">最后一战 AD 385</text>
+    <text lang="en" x="520" y="215" text-anchor="middle" font-size="7.5" fill="#fecaca">c. 230,000 died</text><text lang="zh" x="520" y="215" text-anchor="middle" font-size="7.5" fill="#fecaca">约 23 万人战死</text>
 
     <!-- Lamanite advance -->
     <path d="M 160,310 Q 280,260 440,230" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#mA)" opacity="0.7"/>
-    <text x="265" y="278" font-size="9" fill="#9f1239" text-anchor="middle">拉曼大军</text>
+    <text lang="en" x="265" y="278" font-size="9" fill="#9f1239" text-anchor="middle">Lamanite Army</text><text lang="zh" x="265" y="278" font-size="9" fill="#9f1239" text-anchor="middle">拉曼大军</text>
     <path d="M 100,240 Q 250,210 430,210" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#mA)" opacity="0.5" stroke-dasharray="6,3"/>
 
     <!-- Nephite retreat -->
     <path d="M 440,230 Q 470,215 500,200" fill="none" stroke="#1e3a8a" stroke-width="2.5" marker-end="url(#mB)" opacity="0.8"/>
-    <text x="448" y="222" font-size="8" fill="#1e3a8a">尼腓人后退</text>
+    <text lang="en" x="448" y="222" font-size="8" fill="#1e3a8a">Nephite retreat</text><text lang="zh" x="448" y="222" font-size="8" fill="#1e3a8a">尼腓人后退</text>
 
     <!-- Moroni survivor -->
     <rect x="558" y="290" width="170" height="36" rx="4" fill="rgba(255,255,255,0.93)" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="643" y="304" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">摩罗乃·唯一幸存者</text>
-    <text x="643" y="318" text-anchor="middle" font-size="7.5" fill="#7c3aed">继续写作·最终藏版</text>
+    <text lang="en" x="643" y="304" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Moroni · Sole Survivor</text><text lang="zh" x="643" y="304" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">摩罗乃·唯一幸存者</text>
+    <text lang="en" x="643" y="318" text-anchor="middle" font-size="7.5" fill="#7c3aed">Continues writing · finally hides plates</text><text lang="zh" x="643" y="318" text-anchor="middle" font-size="7.5" fill="#7c3aed">继续写作·最终藏版</text>
 
     <!-- Region labels -->
-    <text x="280" y="160" text-anchor="middle" font-size="9" fill="#7c2d12" opacity="0.8">荒废之地</text>
-    <text x="180" y="345" text-anchor="middle" font-size="9" fill="#9f1239" opacity="0.8">拉曼人势力范围</text>
-    <text x="28" y="185" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="820" y="256" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text lang="en" x="280" y="160" text-anchor="middle" font-size="9" fill="#7c2d12" opacity="0.8">Desolation</text><text lang="zh" x="280" y="160" text-anchor="middle" font-size="9" fill="#7c2d12" opacity="0.8">荒废之地</text>
+    <text lang="en" x="180" y="345" text-anchor="middle" font-size="9" fill="#9f1239" opacity="0.8">Lamanite sphere of influence</text><text lang="zh" x="180" y="345" text-anchor="middle" font-size="9" fill="#9f1239" opacity="0.8">拉曼人势力范围</text>
+    <text lang="en" x="28" y="185" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">Pacific Ocean</text><text lang="zh" x="28" y="185" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text lang="en" x="820" y="256" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">Caribbean Sea</text><text lang="zh" x="820" y="256" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text lang="en" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text><text lang="zh" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
 
     <!-- ── 补充地标·战场·交战过程 ── -->
 
@@ -168,84 +339,84 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- 提安根·底申战区标注 -->
     <rect x="124" y="252" width="108" height="30" rx="3" fill="rgba(255,255,255,0.88)" stroke="#fca5a5" stroke-width="1"/>
-    <text x="178" y="264" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">提安根战区</text>
-    <text x="178" y="275" text-anchor="middle" font-size="7" fill="#b91c1c">AD 363–375 拉锯</text>
+    <text lang="en" x="178" y="264" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">Teancum Battle Zone</text><text lang="zh" x="178" y="264" text-anchor="middle" font-size="8" font-weight="bold" fill="#9f1239">提安根战区</text>
+    <text lang="en" x="178" y="275" text-anchor="middle" font-size="7" fill="#b91c1c">AD 363–375 Stalemate</text><text lang="zh" x="178" y="275" text-anchor="middle" font-size="7" fill="#b91c1c">AD 363–375 拉锯</text>
 
     <!-- 约旦城 -->
     <circle cx="357" cy="127" r="5" fill="#1e3a8a" stroke="#fff" stroke-width="1.5"/>
     <rect x="202" y="113" width="146" height="28" rx="3" fill="rgba(255,255,255,0.9)" stroke="#93c5fd" stroke-width="1"/>
-    <text x="275" y="125" text-anchor="middle" font-size="8" font-weight="bold" fill="#1e3a8a">约旦城</text>
-    <text x="275" y="135" text-anchor="middle" font-size="7" fill="#3b82f6">AD 362 反攻得胜·摩尔门辞将</text>
+    <text lang="en" x="275" y="125" text-anchor="middle" font-size="8" font-weight="bold" fill="#1e3a8a">City of Jordan</text><text lang="zh" x="275" y="125" text-anchor="middle" font-size="8" font-weight="bold" fill="#1e3a8a">约旦城</text>
+    <text lang="en" x="275" y="135" text-anchor="middle" font-size="7" fill="#3b82f6">AD 362 Counterattack victory · Mormon resigns</text><text lang="zh" x="275" y="135" text-anchor="middle" font-size="7" fill="#3b82f6">AD 362 反攻得胜·摩尔门辞将</text>
     <line x1="348" y1="127" x2="352" y2="127" stroke="#93c5fd" stroke-width="0.8"/>
 
     <!-- 安顿地 -->
-    <text x="308" y="200" text-anchor="middle" font-size="7.5" fill="#64748b" opacity="0.8">安顿地</text>
-    <text x="308" y="211" text-anchor="middle" font-size="6.5" fill="#94a3b8" opacity="0.7">摩尔门幼年之地</text>
+    <text lang="en" x="308" y="200" text-anchor="middle" font-size="7.5" fill="#64748b" opacity="0.8">Land of Antum</text><text lang="zh" x="308" y="200" text-anchor="middle" font-size="7.5" fill="#64748b" opacity="0.8">安顿地</text>
+    <text lang="en" x="308" y="211" text-anchor="middle" font-size="6.5" fill="#94a3b8" opacity="0.7">Mormon's boyhood home</text><text lang="zh" x="308" y="211" text-anchor="middle" font-size="6.5" fill="#94a3b8" opacity="0.7">摩尔门幼年之地</text>
 
     <!-- 拉曼东路迂回包抄 -->
     <path d="M 368,368 Q 378,328 360,283" fill="none" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mA)" opacity="0.4" stroke-dasharray="5,3"/>
-    <text x="396" y="338" font-size="7" fill="#9f1239" text-anchor="middle">东路包抄</text>
+    <text lang="en" x="396" y="338" font-size="7" fill="#9f1239" text-anchor="middle">Eastern Flanking</text><text lang="zh" x="396" y="338" font-size="7" fill="#9f1239" text-anchor="middle">东路包抄</text>
 
     <!-- 拉曼主力进攻年代 -->
-    <text x="197" y="297" font-size="7" fill="#b91c1c" transform="rotate(-28,197,297)">AD 363 南进</text>
+    <text lang="en" x="197" y="297" font-size="7" fill="#b91c1c" transform="rotate(-28,197,297)">AD 363 Southward Advance</text><text lang="zh" x="197" y="297" font-size="7" fill="#b91c1c" transform="rotate(-28,197,297)">AD 363 南进</text>
 
     <!-- 尼腓第一阶段撤退：战区→北方 -->
     <path d="M 368,263 Q 380,235 392,206" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#mC)" opacity="0.55"/>
-    <text x="350" y="234" font-size="7" fill="#1d4ed8" text-anchor="end">①撤 363</text>
+    <text lang="en" x="350" y="234" font-size="7" fill="#1d4ed8" text-anchor="end">①Retreat 363</text><text lang="zh" x="350" y="234" font-size="7" fill="#1d4ed8" text-anchor="end">①撤 363</text>
 
     <!-- 第二阶段撤退年代标注 -->
-    <text x="476" y="240" font-size="7" fill="#1d4ed8">②末撤 380</text>
+    <text lang="en" x="476" y="240" font-size="7" fill="#1d4ed8">②Final Retreat 380</text><text lang="zh" x="476" y="240" font-size="7" fill="#1d4ed8">②末撤 380</text>
 
     <!-- 摩罗乃战后流亡路线 -->
     <path d="M 480,203 Q 512,246 558,284" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#mB)" opacity="0.55"/>
-    <text x="508" y="250" font-size="7" fill="#7c3aed">战后流亡</text>
+    <text lang="en" x="508" y="250" font-size="7" fill="#7c3aed">Post-war flight</text><text lang="zh" x="508" y="250" font-size="7" fill="#7c3aed">战后流亡</text>
 
     <!-- 图例 -->
     <rect x="570" y="338" width="242" height="44" rx="3" fill="rgba(255,255,255,0.85)" stroke="#e2e8f0"/>
-    <text x="578" y="350" font-size="7.5" fill="#64748b" font-weight="bold">图例</text>
-    <line x1="598" y1="348" x2="618" y2="348" stroke="#dc2626" stroke-width="2"/><text x="622" y="351" font-size="7" fill="#475569">拉曼军推进</text>
-    <line x1="688" y1="348" x2="708" y2="348" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/><text x="712" y="351" font-size="7" fill="#475569">尼腓撤退</text>
-    <line x1="578" y1="373" x2="598" y2="373" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3,2"/><text x="602" y="376" font-size="7" fill="#475569">摩罗乃流亡</text>
-    <circle cx="666" cy="373" r="3.5" fill="#1e3a8a"/><text x="672" y="376" font-size="7" fill="#475569">军事城市</text>
-    <circle cx="724" cy="373" r="3.5" fill="#7c3aed"/><text x="730" y="376" font-size="7" fill="#475569">金版相关</text>
+    <text lang="en" x="578" y="350" font-size="7.5" fill="#64748b" font-weight="bold">Legend</text><text lang="zh" x="578" y="350" font-size="7.5" fill="#64748b" font-weight="bold">图例</text>
+    <line x1="598" y1="348" x2="618" y2="348" stroke="#dc2626" stroke-width="2"/><text lang="en" x="622" y="351" font-size="7" fill="#475569">Lamanite advance</text><text lang="zh" x="622" y="351" font-size="7" fill="#475569">拉曼军推进</text>
+    <line x1="688" y1="348" x2="708" y2="348" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/><text lang="en" x="712" y="351" font-size="7" fill="#475569">Nephite retreat</text><text lang="zh" x="712" y="351" font-size="7" fill="#475569">尼腓撤退</text>
+    <line x1="578" y1="373" x2="598" y2="373" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3,2"/><text lang="en" x="602" y="376" font-size="7" fill="#475569">Moroni's flight</text><text lang="zh" x="602" y="376" font-size="7" fill="#475569">摩罗乃流亡</text>
+    <circle cx="666" cy="373" r="3.5" fill="#1e3a8a"/><text lang="en" x="672" y="376" font-size="7" fill="#475569">Military city</text><text lang="zh" x="672" y="376" font-size="7" fill="#475569">军事城市</text>
+    <circle cx="724" cy="373" r="3.5" fill="#7c3aed"/><text lang="en" x="730" y="376" font-size="7" fill="#475569">Plates-related</text><text lang="zh" x="730" y="376" font-size="7" fill="#475569">金版相关</text>
   </svg>
-  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px"><span lang="en">※ Map is schematic; geography disputed. Mainstream view favors Mesoamerican model.</span><span lang="zh">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</span></div>
 </div>
 
 <!-- ── 章节概览 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节概览 · CHAPTER OVERVIEW</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Chapter Overview</span><span lang="zh">章节概览</span></div>
   <svg viewBox="0 0 860 282" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
-    <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（摩尔门书 9 章分布）</text>
+    <text lang="en" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">Five Narratives (Book of Mormon · 9 Chapters)</text><text lang="zh" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（摩尔门书 9 章分布）</text>
 
     <!-- chapter counts (each chapter ≈84.44px) -->
-    <text x="134" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1e3a8a">2章</text>
-    <text x="261" y="54" text-anchor="middle" font-size="9"   font-weight="500" fill="#92400e">1章</text>
-    <text x="387" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9f1239">2章</text>
-    <text x="556" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9f1239">2章</text>
-    <text x="725" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">2章</text>
+    <text lang="en" x="134" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1e3a8a">2 Ch.</text><text lang="zh" x="134" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1e3a8a">2章</text>
+    <text lang="en" x="261" y="54" text-anchor="middle" font-size="9"   font-weight="500" fill="#92400e">1 Ch.</text><text lang="zh" x="261" y="54" text-anchor="middle" font-size="9"   font-weight="500" fill="#92400e">1章</text>
+    <text lang="en" x="387" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9f1239">2 Ch.</text><text lang="zh" x="387" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9f1239">2章</text>
+    <text lang="en" x="556" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9f1239">2 Ch.</text><text lang="zh" x="556" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#9f1239">2章</text>
+    <text lang="en" x="725" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">2 Ch.</text><text lang="zh" x="725" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">2章</text>
 
     <!-- bars -->
     <rect x="50"  y="60" width="169" height="52" fill="#dbeafe"/>
-    <text x="134" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#1e3a8a">少年摩尔门</text>
-    <text x="134" y="97" text-anchor="middle" font-size="7.5" fill="#2563eb">被选·取版·接管军队</text>
+    <text lang="en" x="134" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#1e3a8a">Young Mormon</text><text lang="zh" x="134" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#1e3a8a">少年摩尔门</text>
+    <text lang="en" x="134" y="97" text-anchor="middle" font-size="7.5" fill="#2563eb">Chosen · Retrieves plates · Commands army</text><text lang="zh" x="134" y="97" text-anchor="middle" font-size="7.5" fill="#2563eb">被选·取版·接管军队</text>
 
     <rect x="219" y="60" width="84"  height="52" fill="#fef3c7"/>
-    <text x="261" y="81" text-anchor="middle" font-size="10"  font-weight="bold" fill="#92400e">拒绝再战</text>
-    <text x="261" y="97" text-anchor="middle" font-size="7.5" fill="#b45309">辞将职</text>
+    <text lang="en" x="261" y="81" text-anchor="middle" font-size="10"  font-weight="bold" fill="#92400e">Refuses to Fight</text><text lang="zh" x="261" y="81" text-anchor="middle" font-size="10"  font-weight="bold" fill="#92400e">拒绝再战</text>
+    <text lang="en" x="261" y="97" text-anchor="middle" font-size="7.5" fill="#b45309">Resigns command</text><text lang="zh" x="261" y="97" text-anchor="middle" font-size="7.5" fill="#b45309">辞将职</text>
 
     <rect x="303" y="60" width="169" height="52" fill="#fee2e2"/>
-    <text x="387" y="81" text-anchor="middle" font-size="11"  font-weight="bold" fill="#9f1239">败退二十三年</text>
-    <text x="387" y="97" text-anchor="middle" font-size="7.5" fill="#dc2626">城池沦陷·北撤</text>
+    <text lang="en" x="387" y="81" text-anchor="middle" font-size="11"  font-weight="bold" fill="#9f1239">23-Year Retreat</text><text lang="zh" x="387" y="81" text-anchor="middle" font-size="11"  font-weight="bold" fill="#9f1239">败退二十三年</text>
+    <text lang="en" x="387" y="97" text-anchor="middle" font-size="7.5" fill="#dc2626">Cities fall · northern retreat</text><text lang="zh" x="387" y="97" text-anchor="middle" font-size="7.5" fill="#dc2626">城池沦陷·北撤</text>
 
     <rect x="472" y="60" width="169" height="52" fill="#1e1b2e"/>
-    <text x="556" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#f9a8d4">科莫拉山</text>
-    <text x="556" y="97" text-anchor="middle" font-size="7.5" fill="#fda4af">最后一战·尼腓亡族</text>
+    <text lang="en" x="556" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#f9a8d4">Hill Cumorah</text><text lang="zh" x="556" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#f9a8d4">科莫拉山</text>
+    <text lang="en" x="556" y="97" text-anchor="middle" font-size="7.5" fill="#fda4af">Final battle · Nephites annihilated</text><text lang="zh" x="556" y="97" text-anchor="middle" font-size="7.5" fill="#fda4af">最后一战·尼腓亡族</text>
 
     <rect x="641" y="60" width="169" height="52" fill="#f5f3ff"/>
-    <text x="725" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#4c1d95">摩罗乃续写</text>
-    <text x="725" y="97" text-anchor="middle" font-size="7.5" fill="#7c3aed">唯一幸存者</text>
+    <text lang="en" x="725" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#4c1d95">Moroni Continues</text><text lang="zh" x="725" y="81" text-anchor="middle" font-size="12"  font-weight="bold" fill="#4c1d95">摩罗乃续写</text>
+    <text lang="en" x="725" y="97" text-anchor="middle" font-size="7.5" fill="#7c3aed">Sole survivor</text><text lang="zh" x="725" y="97" text-anchor="middle" font-size="7.5" fill="#7c3aed">唯一幸存者</text>
 
     <!-- dividers + border -->
     <line x1="219" y1="60" x2="219" y2="112" stroke="#fff" stroke-width="1.5"/>
@@ -255,197 +426,197 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     <rect x="50" y="60" width="760" height="52" fill="none" stroke="#e2e8f0" stroke-width="1" rx="2"/>
 
     <!-- descriptions below bars -->
-    <text x="134" y="128" text-anchor="middle" font-size="8" fill="#64748b">十岁受托·十六岁领军</text>
-    <text x="134" y="140" text-anchor="middle" font-size="8" fill="#64748b">幼年亲见被译门徒</text>
+    <text lang="en" x="134" y="128" text-anchor="middle" font-size="8" fill="#64748b">Entrusted at 10 · commands at 16</text><text lang="zh" x="134" y="128" text-anchor="middle" font-size="8" fill="#64748b">十岁受托·十六岁领军</text>
+    <text lang="en" x="134" y="140" text-anchor="middle" font-size="8" fill="#64748b">Saw translated disciples as a boy</text><text lang="zh" x="134" y="140" text-anchor="middle" font-size="8" fill="#64748b">幼年亲见被译门徒</text>
 
-    <text x="261" y="128" text-anchor="middle" font-size="8" fill="#64748b">拒领复仇之师</text>
-    <text x="261" y="140" text-anchor="middle" font-size="8" fill="#64748b">被迫复出再领军</text>
+    <text lang="en" x="261" y="128" text-anchor="middle" font-size="8" fill="#64748b">Refuses to lead war of revenge</text><text lang="zh" x="261" y="128" text-anchor="middle" font-size="8" fill="#64748b">拒领复仇之师</text>
+    <text lang="en" x="261" y="140" text-anchor="middle" font-size="8" fill="#64748b">Forced to resume command</text><text lang="zh" x="261" y="140" text-anchor="middle" font-size="8" fill="#64748b">被迫复出再领军</text>
 
-    <text x="387" y="128" text-anchor="middle" font-size="8" fill="#64748b">约 AD 363–385</text>
-    <text x="387" y="140" text-anchor="middle" font-size="8" fill="#64748b">民心充满对神的诅咒</text>
+    <text lang="en" x="387" y="128" text-anchor="middle" font-size="8" fill="#64748b">c. AD 363–385</text><text lang="zh" x="387" y="128" text-anchor="middle" font-size="8" fill="#64748b">约 AD 363–385</text>
+    <text lang="en" x="387" y="140" text-anchor="middle" font-size="8" fill="#64748b">People's hearts filled with curses against God</text><text lang="zh" x="387" y="140" text-anchor="middle" font-size="8" fill="#64748b">民心充满对神的诅咒</text>
 
-    <text x="556" y="128" text-anchor="middle" font-size="8" fill="#64748b">AD 385 · 约 23 万人战死</text>
-    <text x="556" y="140" text-anchor="middle" font-size="8" fill="#64748b">摩尔门负伤殉职</text>
+    <text lang="en" x="556" y="128" text-anchor="middle" font-size="8" fill="#64748b">AD 385 · c. 230,000 died</text><text lang="zh" x="556" y="128" text-anchor="middle" font-size="8" fill="#64748b">AD 385 · 约 23 万人战死</text>
+    <text lang="en" x="556" y="140" text-anchor="middle" font-size="8" fill="#64748b">Mormon wounded and fell</text><text lang="zh" x="556" y="140" text-anchor="middle" font-size="8" fill="#64748b">摩尔门负伤殉职</text>
 
-    <text x="725" y="128" text-anchor="middle" font-size="8" fill="#64748b">斥伪善·预言末世</text>
-    <text x="725" y="140" text-anchor="middle" font-size="8" fill="#64748b">嘱读者祈祷求证</text>
+    <text lang="en" x="725" y="128" text-anchor="middle" font-size="8" fill="#64748b">Rebukes hypocrisy · prophesies last days</text><text lang="zh" x="725" y="128" text-anchor="middle" font-size="8" fill="#64748b">斥伪善·预言末世</text>
+    <text lang="en" x="725" y="140" text-anchor="middle" font-size="8" fill="#64748b">Urges readers to pray for testimony</text><text lang="zh" x="725" y="140" text-anchor="middle" font-size="8" fill="#64748b">嘱读者祈祷求证</text>
 
     <!-- timeline (760px / 63yr ≈ 12.06px/yr, x = 50 + (year-322)*12.06) -->
     <line x1="50" y1="156" x2="810" y2="156" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="430" y="171" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元 322–385 年</text>
+    <text lang="en" x="430" y="171" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Timeline · AD 322–385</text><text lang="zh" x="430" y="171" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元 322–385 年</text>
     <line x1="50" y1="214" x2="810" y2="214" stroke="#d1d5db" stroke-width="1.5"/>
 
     <!-- AD 322 · above -->
     <circle cx="50"  cy="214" r="3.5" fill="#1e3a8a"/>
     <line x1="50"  y1="200" x2="50"  y2="210" stroke="#1e3a8a" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="50"  y="196" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e3a8a">AD 322</text>
-    <text x="50"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">阿摩龙嘱托·受命</text>
+    <text lang="en" x="50"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">Ammaron's charge · commissioned</text><text lang="zh" x="50"  y="186" text-anchor="middle" font-size="7.5" fill="#475569">阿摩龙嘱托·受命</text>
 
     <!-- AD 336 · below -->
     <circle cx="219" cy="214" r="3.5" fill="#1e3a8a"/>
     <line x1="219" y1="218" x2="219" y2="230" stroke="#1e3a8a" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="219" y="241" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e3a8a">AD 336</text>
-    <text x="219" y="251" text-anchor="middle" font-size="7.5" fill="#475569">十六岁接掌军队</text>
+    <text lang="en" x="219" y="251" text-anchor="middle" font-size="7.5" fill="#475569">Commands army at 16</text><text lang="zh" x="219" y="251" text-anchor="middle" font-size="7.5" fill="#475569">十六岁接掌军队</text>
 
     <!-- AD 362 · above -->
     <circle cx="532" cy="214" r="3.5" fill="#d97706"/>
     <line x1="532" y1="200" x2="532" y2="210" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="532" y="196" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">AD 362</text>
-    <text x="532" y="186" text-anchor="middle" font-size="7.5" fill="#475569">辞将拒绝再战</text>
+    <text lang="en" x="532" y="186" text-anchor="middle" font-size="7.5" fill="#475569">Resigns, refuses to fight</text><text lang="zh" x="532" y="186" text-anchor="middle" font-size="7.5" fill="#475569">辞将拒绝再战</text>
 
     <!-- AD 380 · below -->
     <circle cx="749" cy="214" r="3.5" fill="#dc2626"/>
     <line x1="749" y1="218" x2="749" y2="230" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="749" y="241" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">AD 380</text>
-    <text x="749" y="251" text-anchor="middle" font-size="7.5" fill="#475569">二十三万末战聚集</text>
+    <text lang="en" x="749" y="251" text-anchor="middle" font-size="7.5" fill="#475569">230,000 gathered for final battle</text><text lang="zh" x="749" y="251" text-anchor="middle" font-size="7.5" fill="#475569">二十三万末战聚集</text>
 
     <!-- AD 385 · above -->
     <circle cx="810" cy="214" r="3.5" fill="#9f1239"/>
     <line x1="810" y1="200" x2="810" y2="210" stroke="#9f1239" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="810" y="196" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#9f1239">AD 385</text>
-    <text x="810" y="186" text-anchor="middle" font-size="7.5" fill="#475569">科莫拉山·尼腓亡族</text>
+    <text lang="en" x="810" y="186" text-anchor="middle" font-size="7.5" fill="#475569">Hill Cumorah · Nephites annihilated</text><text lang="zh" x="810" y="186" text-anchor="middle" font-size="7.5" fill="#475569">科莫拉山·尼腓亡族</text>
 
-    <text x="430" y="272" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩尔门书是摩尔门经最沉痛的一卷——先知将军同时面对属世的覆灭与属灵的绝望</text>
+    <text lang="en" x="430" y="272" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ The Book of Mormon is the most sorrowful volume — the prophet-general faces both worldly ruin and spiritual despair</text><text lang="zh" x="430" y="272" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 摩尔门书是摩尔门经最沉痛的一卷——先知将军同时面对属世的覆灭与属灵的绝望</text>
   </svg>
 </div>
 
 <!-- ══ 少年摩尔门 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#1e3a8a"></div><div class="ph-text">少年<br>摩尔门</div></div>
+<div class="ph"><div class="ph-dot" style="background:#1e3a8a"></div><div class="ph-text"><span lang="en">Young<br>Mormon</span><span lang="zh">少年<br>摩尔门</span></div></div>
 <div class="n blu">
   <div class="nh">
-    <span class="nl">第 1–2 章</span>
-    <span class="nt">十岁受命·十六领军</span>
-    <span class="nw">安顿地·希姆山</span>
-    <span class="nc">约 AD 322–336</span>
+    <span class="nl"><span lang="en">Ch. 1–2</span><span lang="zh">第 1–2 章</span></span>
+    <span class="nt"><span lang="en">Commissioned at 10 · Commands at 16</span><span lang="zh">十岁受命·十六领军</span></span>
+    <span class="nw"><span lang="en">Land of Antum · Hill Shim</span><span lang="zh">安顿地·希姆山</span></span>
+    <span class="nc"><span lang="en">c. AD 322–336</span><span lang="zh">约 AD 322–336</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">1</span>阿摩龙命：满廿四赴希姆山取版续记；幼见被译门徒，志节早定</li>
-    <li><span class="cn">2</span>十六岁临危受命领军；屡劝悔改，众心刚硬，惟怀仇念</li>
+    <li><span class="cn">1</span><span lang="en">Ammaron charges: at age 24 go to Hill Shim and retrieve the plates; as a boy Mormon sees translated disciples and resolves his path</span><span lang="zh">阿摩龙命：满廿四赴希姆山取版续记；幼见被译门徒，志节早定</span></li>
+    <li><span class="cn">2</span><span lang="en">At 16 takes emergency command; repeatedly calls for repentance but hearts are hardened and filled with revenge</span><span lang="zh">十六岁临危受命领军；屡劝悔改，众心刚硬，惟怀仇念</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">人物</div>
-    <div class="nm"><b>摩尔门</b><span>先知将军</span></div>
-    <div class="nm"><b>阿摩龙</b><span>嘱托·前任记者</span></div>
+    <div class="nm-title"><span lang="en">Characters</span><span lang="zh">人物</span></div>
+    <div class="nm"><b><span lang="en">Mormon</span><span lang="zh">摩尔门</span></b><span><span lang="en">Prophet-General</span><span lang="zh">先知将军</span></span></div>
+    <div class="nm"><b><span lang="en">Ammaron</span><span lang="zh">阿摩龙</span></b><span><span lang="en">Entrusts · Previous Keeper</span><span lang="zh">嘱托·前任记者</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 拒绝再战 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">拒绝<br>再战</div></div>
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text"><span lang="en">Refuses<br>to Fight</span><span lang="zh">拒绝<br>再战</span></div></div>
 <div class="n amb">
   <div class="nh">
-    <span class="nl">第 3 章</span>
-    <span class="nt">拒领复仇之师·辞将退出</span>
-    <span class="nw">战场</span>
-    <span class="nc">约 AD 362</span>
+    <span class="nl"><span lang="en">Ch. 3</span><span lang="zh">第 3 章</span></span>
+    <span class="nt"><span lang="en">Refuses war of revenge · Resigns command</span><span lang="zh">拒领复仇之师·辞将退出</span></span>
+    <span class="nw"><span lang="en">Battlefield</span><span lang="zh">战场</span></span>
+    <span class="nc"><span lang="en">c. AD 362</span><span lang="zh">约 AD 362</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">3</span>胜后众骄，誓拒复仇之师辞将；大军压境，被迫再出</li>
+    <li><span class="cn">3</span><span lang="en">After victory the people grow proud; Mormon vows to refuse and resigns; as enemies press in he is forced to return</span><span lang="zh">胜后众骄，誓拒复仇之师辞将；大军压境，被迫再出</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">摩尔门言</div>
-    <div class="nm"><b>第 3:11</b><span>"我不愿领</span></div>
-    <div class="nm"><span style="color:#475569">尔等复仇之战"</span></div>
+    <div class="nm-title"><span lang="en">Mormon's Words</span><span lang="zh">摩尔门言</span></div>
+    <div class="nm"><b><span lang="en">3:11</span><span lang="zh">第 3:11</span></b><span><span lang="en">&quot;I refuse to lead</span><span lang="zh">&quot;我不愿领</span></span></div>
+    <div class="nm"><span style="color:#475569"><span lang="en">your war of revenge&quot;</span><span lang="zh">尔等复仇之战&quot;</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 败退二十三年 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">亡族<br>战争</div></div>
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text"><span lang="en">War of<br>Extinction</span><span lang="zh">亡族<br>战争</span></div></div>
 <div class="n ros">
   <div class="nh">
-    <span class="nl">第 4–5 章</span>
-    <span class="nt">城池沦陷·众心充满诅咒</span>
-    <span class="nw">美洲全境</span>
-    <span class="nc">约 AD 363–385</span>
+    <span class="nl"><span lang="en">Ch. 4–5</span><span lang="zh">第 4–5 章</span></span>
+    <span class="nt"><span lang="en">Cities fall · Hearts filled with curses</span><span lang="zh">城池沦陷·众心充满诅咒</span></span>
+    <span class="nw"><span lang="en">All the Americas</span><span lang="zh">美洲全境</span></span>
+    <span class="nc"><span lang="en">c. AD 363–385</span><span lang="zh">约 AD 363–385</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">4</span>复出屡败，城池相继沦陷，民众一路北撤</li>
-    <li><span class="cn">5</span>众充满诅咒，无以信望领之；缩编千年记录，召余众廿三万聚于科莫拉待战</li>
+    <li><span class="cn">4</span><span lang="en">Returns to command but suffers repeated defeats; cities fall one by one; people retreat steadily northward</span><span lang="zh">复出屡败，城池相继沦陷，民众一路北撤</span></li>
+    <li><span class="cn">5</span><span lang="en">People filled with curses, beyond leading by faith or hope; abridges 1,000 years of records; summons 230,000 survivors to gather at Cumorah for the final stand</span><span lang="zh">众充满诅咒，无以信望领之；缩编千年记录，召余众廿三万聚于科莫拉待战</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">战争数据</div>
-    <div class="nm"><b>持续</b><span>约 23 年</span></div>
-    <div class="nm"><b>方向</b><span>一路北撤</span></div>
-    <div class="nm"><b>末战兵力</b><span>约 23 万</span></div>
+    <div class="nm-title"><span lang="en">Battle Data</span><span lang="zh">战争数据</span></div>
+    <div class="nm"><b><span lang="en">Duration</span><span lang="zh">持续</span></b><span><span lang="en">c. 23 years</span><span lang="zh">约 23 年</span></span></div>
+    <div class="nm"><b><span lang="en">Direction</span><span lang="zh">方向</span></b><span><span lang="en">Continuous northern retreat</span><span lang="zh">一路北撤</span></span></div>
+    <div class="nm"><b><span lang="en">Final Troop Count</span><span lang="zh">末战兵力</span></b><span><span lang="en">c. 230,000</span><span lang="zh">约 23 万</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div>
 <div class="ev">
-  知必亡而仍战，知必败而仍记
-  <div class="ev-date">第 5 章 · 战火中缩编千年史，留于后世</div>
+  <span lang="en">Though he knew destruction was inevitable, he still fought; though defeat was certain, he still recorded</span><span lang="zh">知必亡而仍战，知必败而仍记</span>
+  <div class="ev-date"><span lang="en">Ch. 5 · Abridging 1,000 years of history amid battle, leaving it for posterity</span><span lang="zh">第 5 章 · 战火中缩编千年史，留于后世</span></div>
 </div>
 <div class="si-sp"></div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 科莫拉山最后一战 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#9f1239"></div><div class="ph-text">科莫拉<br>最后战</div></div>
+<div class="ph"><div class="ph-dot" style="background:#9f1239"></div><div class="ph-text"><span lang="en">Cumorah<br>Last Battle</span><span lang="zh">科莫拉<br>最后战</span></div></div>
 <div class="n dark">
   <div class="nh">
-    <span class="nl">第 6–7 章</span>
-    <span class="nt">科莫拉决战·尼腓亡族·遗书后裔</span>
-    <span class="nw">科莫拉山</span>
+    <span class="nl"><span lang="en">Ch. 6–7</span><span lang="zh">第 6–7 章</span></span>
+    <span class="nt"><span lang="en">Cumorah · Nephites annihilated · Epistle to descendants</span><span lang="zh">科莫拉决战·尼腓亡族·遗书后裔</span></span>
+    <span class="nw"><span lang="en">Hill Cumorah</span><span lang="zh">科莫拉山</span></span>
     <span class="nc">AD 385</span>
   </div>
   <ul class="np">
-    <li><span class="cn">6</span>AD 385 决战，廿三万殒命，遍野尸骸；摩尔门阵前托版于摩罗乃，旋即殒职</li>
-    <li><span class="cn">7</span>遗书后裔：汝乃以色列苗裔，当识基督，悔改受洗入其名</li>
+    <li><span class="cn">6</span><span lang="en">AD 385 decisive battle; 230,000 slain, bodies covering the field; Mormon entrusts the plates to Moroni on the battlefield, then falls</span><span lang="zh">AD 385 决战，廿三万殒命，遍野尸骸；摩尔门阵前托版于摩罗乃，旋即殒职</span></li>
+    <li><span class="cn">7</span><span lang="en">Epistle to descendants: you are of the house of Israel; know Christ, repent and be baptized in His name</span><span lang="zh">遗书后裔：汝乃以色列苗裔，当识基督，悔改受洗入其名</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">金版传承</div>
-    <div class="nm"><b>阿摩龙</b><span>→ 摩尔门</span></div>
-    <div class="nm"><b>摩尔门</b><span>→ 摩罗乃</span></div>
-    <div class="nm"><b>摩罗乃</b><span>→ 藏版</span></div>
+    <div class="nm-title"><span lang="en">Plates Succession</span><span lang="zh">金版传承</span></div>
+    <div class="nm"><b><span lang="en">Ammaron</span><span lang="zh">阿摩龙</span></b><span><span lang="en">→ Mormon</span><span lang="zh">→ 摩尔门</span></span></div>
+    <div class="nm"><b><span lang="en">Mormon</span><span lang="zh">摩尔门</span></b><span><span lang="en">→ Moroni</span><span lang="zh">→ 摩罗乃</span></span></div>
+    <div class="nm"><b><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></b><span><span lang="en">→ Plates Hidden</span><span lang="zh">→ 藏版</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div>
 <div class="ev">
-  廿三万殒·遍野尸骸·尼腓文明终结
-  <div class="ev-date">第 6:16–22 · AD 385 · 科莫拉山</div>
+  <span lang="en">230,000 fell · corpses covering the field · Nephite civilization ended</span><span lang="zh">廿三万殒·遍野尸骸·尼腓文明终结</span>
+  <div class="ev-date"><span lang="en">Ch. 6:16–22 · AD 385 · Hill Cumorah</span><span lang="zh">第 6:16–22 · AD 385 · 科莫拉山</span></div>
 </div>
 <div class="si-sp"></div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 摩罗乃续写 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">摩罗乃<br>续写</div></div>
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text"><span lang="en">Moroni<br>Continues</span><span lang="zh">摩罗乃<br>续写</span></div></div>
 <div class="n vio">
   <div class="nh">
-    <span class="nl">第 8–9 章</span>
-    <span class="nt">唯一幸存·斥伪善·嘱后世</span>
-    <span class="nw">不知所在</span>
-    <span class="nc">AD 385 之后</span>
+    <span class="nl"><span lang="en">Ch. 8–9</span><span lang="zh">第 8–9 章</span></span>
+    <span class="nt"><span lang="en">Sole survivor · Rebukes hypocrisy · Charges posterity</span><span lang="zh">唯一幸存·斥伪善·嘱后世</span></span>
+    <span class="nw"><span lang="en">Whereabouts unknown</span><span lang="zh">不知所在</span></span>
+    <span class="nc"><span lang="en">After AD 385</span><span lang="zh">AD 385 之后</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">8</span>独存流亡；斥以钱货换恩典之伪善，预言此书末世必重现</li>
-    <li><span class="cn">9</span>神乃不变：昔行神迹，今亦能行；以诚心祷告，圣灵必证此书</li>
+    <li><span class="cn">8</span><span lang="en">Sole survivor, wandering; condemns selling grace for money; prophesies this book will reappear in the last days</span><span lang="zh">独存流亡；斥以钱货换恩典之伪善，预言此书末世必重现</span></li>
+    <li><span class="cn">9</span><span lang="en">God is unchanging: He worked miracles then and can work them now; pray sincerely and the Spirit will testify of this book</span><span lang="zh">神乃不变：昔行神迹，今亦能行；以诚心祷告，圣灵必证此书</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm-title">摩罗乃</div>
-    <div class="nm"><b>身份</b><span>最后一名尼腓人</span></div>
-    <div class="nm"><b>处境</b><span>四处流亡</span></div>
-    <div class="nm"><b>完成</b><span>约 AD 421</span></div>
+    <div class="nm-title"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></div>
+    <div class="nm"><b><span lang="en">Identity</span><span lang="zh">身份</span></b><span><span lang="en">Last Nephite</span><span lang="zh">最后一名尼腓人</span></span></div>
+    <div class="nm"><b><span lang="en">Situation</span><span lang="zh">处境</span></b><span><span lang="en">Wandering in exile</span><span lang="zh">四处流亡</span></span></div>
+    <div class="nm"><b><span lang="en">Completed</span><span lang="zh">完成</span></b><span><span lang="en">c. AD 421</span><span lang="zh">约 AD 421</span></span></div>
   </div>
 </div>
 
 <!-- ── 关系图 ── -->
 <div class="rel">
-  <div class="rel-title">金版传承顺序 · 人物关系</div>
+  <div class="rel-title"><span lang="en">Plates Succession · Character Relationships</span><span lang="zh">金版传承顺序 · 人物关系</span></div>
   <svg viewBox="0 0 860 222" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="mfV" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#7c3aed"/></marker>
@@ -454,43 +625,43 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
     </defs>
 
     <!-- 金版传承链标签 -->
-    <text x="14" y="14" font-size="9" letter-spacing="1.5" fill="#94a3b8">金版传承链</text>
-    <text x="846" y="14" text-anchor="end" font-size="8" fill="#cbd5e1">※ 本书无国王或法官顺序——政治体系已瓦解</text>
+    <text lang="en" x="14" y="14" font-size="9" letter-spacing="1.5" fill="#94a3b8">Chain of Plates Custody</text><text lang="zh" x="14" y="14" font-size="9" letter-spacing="1.5" fill="#94a3b8">金版传承链</text>
+    <text lang="en" x="846" y="14" text-anchor="end" font-size="8" fill="#cbd5e1">※ No king or judge succession — the political system had collapsed</text><text lang="zh" x="846" y="14" text-anchor="end" font-size="8" fill="#cbd5e1">※ 本书无国王或法官顺序——政治体系已瓦解</text>
 
     <!-- ── Row 1: 传承链 (y=22–78) ── -->
 
     <!-- Box 1: 阿摩龙 -->
     <rect x="14"  y="22" width="140" height="56" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="84"  y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">阿摩龙</text>
-    <text x="84"  y="56" text-anchor="middle" font-size="8"   fill="#7c3aed">前任记者 · Ammaron</text>
-    <text x="84"  y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 306–321 托付</text>
+    <text lang="en" x="84"  y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Ammaron</text><text lang="zh" x="84"  y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">阿摩龙</text>
+    <text lang="en" x="84"  y="56" text-anchor="middle" font-size="8"   fill="#7c3aed">Previous Keeper · Ammaron</text><text lang="zh" x="84"  y="56" text-anchor="middle" font-size="8"   fill="#7c3aed">前任记者 · Ammaron</text>
+    <text lang="en" x="84"  y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">c. AD 306–321 · Entrusts</text><text lang="zh" x="84"  y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 306–321 托付</text>
 
     <!-- Arrow 1→2 -->
     <line x1="154" y1="50" x2="188" y2="50" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#mfV)"/>
 
     <!-- Box 2: 摩尔门（加宽，居中主角） -->
     <rect x="190" y="22" width="206" height="56" rx="6" fill="#fff1f2" stroke="#9f1239" stroke-width="2.5"/>
-    <text x="293" y="41" text-anchor="middle" font-size="13" font-weight="bold" fill="#9f1239">摩尔门</text>
-    <text x="293" y="55" text-anchor="middle" font-size="8.5" fill="#be123c">先知将军 · 金版主编者</text>
-    <text x="293" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 311–385（在世 74 年）</text>
+    <text lang="en" x="293" y="41" text-anchor="middle" font-size="13" font-weight="bold" fill="#9f1239">Mormon</text><text lang="zh" x="293" y="41" text-anchor="middle" font-size="13" font-weight="bold" fill="#9f1239">摩尔门</text>
+    <text lang="en" x="293" y="55" text-anchor="middle" font-size="8.5" fill="#be123c">Prophet-General · Chief Editor of Gold Plates</text><text lang="zh" x="293" y="55" text-anchor="middle" font-size="8.5" fill="#be123c">先知将军 · 金版主编者</text>
+    <text lang="en" x="293" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">c. AD 311–385 (74 years)</text><text lang="zh" x="293" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 311–385（在世 74 年）</text>
 
     <!-- Arrow 2→3 -->
     <line x1="396" y1="50" x2="432" y2="50" stroke="#9f1239" stroke-width="1.5" marker-end="url(#mfR)"/>
 
     <!-- Box 3: 摩罗乃 -->
     <rect x="434" y="22" width="158" height="56" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="513" y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">摩罗乃</text>
-    <text x="513" y="56" text-anchor="middle" font-size="8"   fill="#7c3aed">最后一名尼腓人</text>
-    <text x="513" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">AD 385 后独自续写</text>
+    <text lang="en" x="513" y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Moroni</text><text lang="zh" x="513" y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">摩罗乃</text>
+    <text lang="en" x="513" y="56" text-anchor="middle" font-size="8"   fill="#7c3aed">Last Nephite</text><text lang="zh" x="513" y="56" text-anchor="middle" font-size="8"   fill="#7c3aed">最后一名尼腓人</text>
+    <text lang="en" x="513" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">Continued alone after AD 385</text><text lang="zh" x="513" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">AD 385 后独自续写</text>
 
     <!-- Arrow 3→4 -->
     <line x1="592" y1="50" x2="628" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#mfG)"/>
 
     <!-- Box 4: 藏版 -->
     <rect x="630" y="22" width="216" height="56" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-    <text x="738" y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">金版藏毕</text>
-    <text x="738" y="56" text-anchor="middle" font-size="8"   fill="#64748b">科莫拉山附近</text>
-    <text x="738" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 421 · 待时重现</text>
+    <text lang="en" x="738" y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">Plates Hidden Away</text><text lang="zh" x="738" y="43" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">金版藏毕</text>
+    <text lang="en" x="738" y="56" text-anchor="middle" font-size="8"   fill="#64748b">Near Hill Cumorah</text><text lang="zh" x="738" y="56" text-anchor="middle" font-size="8"   fill="#64748b">科莫拉山附近</text>
+    <text lang="en" x="738" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">c. AD 421 · To be revealed in due time</text><text lang="zh" x="738" y="68" text-anchor="middle" font-size="7.5" fill="#94a3b8">约 AD 421 · 待时重现</text>
 
     <!-- ── Row 2: 摩尔门双重角色（左）+ 结局（右）(y=96–152) ── -->
 
@@ -502,32 +673,97 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 
     <!-- 先知角色 -->
     <rect x="190" y="96" width="95" height="56" rx="5" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="237" y="115" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">先知角色</text>
-    <text x="237" y="128" text-anchor="middle" font-size="7.5" fill="#7c3aed">缩编金版·编辑评语</text>
-    <text x="237" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">对未来读者呼吁</text>
+    <text lang="en" x="237" y="115" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Prophet Role</text><text lang="zh" x="237" y="115" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">先知角色</text>
+    <text lang="en" x="237" y="128" text-anchor="middle" font-size="7.5" fill="#7c3aed">Abridged gold plates · editorial commentary</text><text lang="zh" x="237" y="128" text-anchor="middle" font-size="7.5" fill="#7c3aed">缩编金版·编辑评语</text>
+    <text lang="en" x="237" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">Appeals to future readers</text><text lang="zh" x="237" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">对未来读者呼吁</text>
 
     <!-- 将军角色 -->
     <rect x="301" y="96" width="95" height="56" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="1.5"/>
-    <text x="348" y="115" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">将军角色</text>
-    <text x="348" y="128" text-anchor="middle" font-size="7.5" fill="#be123c">十六岁接管军队</text>
-    <text x="348" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">23年撤退·AD385殒职</text>
+    <text lang="en" x="348" y="115" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">General Role</text><text lang="zh" x="348" y="115" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">将军角色</text>
+    <text lang="en" x="348" y="128" text-anchor="middle" font-size="7.5" fill="#be123c">Took command at age 16</text><text lang="zh" x="348" y="128" text-anchor="middle" font-size="7.5" fill="#be123c">十六岁接管军队</text>
+    <text lang="en" x="348" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">23-year retreat · fell at AD 385</text><text lang="zh" x="348" y="140" text-anchor="middle" font-size="7.5" fill="#94a3b8">23年撤退·AD385殒职</text>
 
     <!-- 连接线：摩罗乃 → 结局框 -->
     <line x1="513" y1="78" x2="513" y2="96" stroke="#9f1239" stroke-width="1"/>
 
     <!-- 结局框（横跨摩罗乃和藏版下方） -->
     <rect x="434" y="96" width="412" height="56" rx="5" fill="#1e1b2e" stroke="#4c1d95" stroke-width="1.5"/>
-    <text x="640" y="116" text-anchor="middle" font-size="10"  font-weight="bold" fill="#f9a8d4">科莫拉山最后一战 · AD 385</text>
-    <text x="640" y="130" text-anchor="middle" font-size="8"   fill="#fda4af">约 23 万人战死 · 摩尔门殒命 · 摩罗乃独存</text>
-    <text x="640" y="142" text-anchor="middle" font-size="7.5" fill="#c4b5fd">尼腓文明正式终结 · 近千年历史在此画上句点</text>
+    <text lang="en" x="640" y="116" text-anchor="middle" font-size="10"  font-weight="bold" fill="#f9a8d4">Final Battle of Hill Cumorah · AD 385</text><text lang="zh" x="640" y="116" text-anchor="middle" font-size="10"  font-weight="bold" fill="#f9a8d4">科莫拉山最后一战 · AD 385</text>
+    <text lang="en" x="640" y="130" text-anchor="middle" font-size="8"   fill="#fda4af">c. 230,000 died · Mormon fell · Moroni sole survivor</text><text lang="zh" x="640" y="130" text-anchor="middle" font-size="8"   fill="#fda4af">约 23 万人战死 · 摩尔门殒命 · 摩罗乃独存</text>
+    <text lang="en" x="640" y="142" text-anchor="middle" font-size="7.5" fill="#c4b5fd">Nephite civilization ended · nearly 1,000 years of history closes here</text><text lang="zh" x="640" y="142" text-anchor="middle" font-size="7.5" fill="#c4b5fd">尼腓文明正式终结 · 近千年历史在此画上句点</text>
 
     <!-- ── 总结注释 ── -->
     <rect x="14" y="170" width="832" height="38" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
-    <text x="430" y="185" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#475569">摩尔门：先知角色与将军角色同时压身，他比任何人都清楚民族必将灭亡</text>
-    <text x="430" y="200" text-anchor="middle" font-size="8"   fill="#94a3b8">然而他仍然选择留下、战斗、记录——这就是为什么这部经典以他的名字命名：《摩尔门经》</text>
+    <text lang="en" x="430" y="185" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#475569">Mormon bore both prophet and general roles at once; he knew better than anyone that his people would perish</text><text lang="zh" x="430" y="185" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#475569">摩尔门：先知角色与将军角色同时压身，他比任何人都清楚民族必将灭亡</text>
+    <text lang="en" x="430" y="200" text-anchor="middle" font-size="8"   fill="#94a3b8">Yet he chose to stay, fight, and record — that is why this scripture bears his name: The Book of Mormon</text><text lang="zh" x="430" y="200" text-anchor="middle" font-size="8"   fill="#94a3b8">然而他仍然选择留下、战斗、记录——这就是为什么这部经典以他的名字命名：《摩尔门经》</text>
   </svg>
 </div>
 
 </div><!-- .page -->
+<script>(function(){var l=localStorage.getItem('bom-lang')||'en';if(l==='zh')document.body.classList.add('lang-zh');var b=document.getElementById('langBtn');if(b)b.textContent=document.body.classList.contains('lang-zh')?'English':'中文'})();function switchLang(){var z=document.body.classList.toggle('lang-zh');localStorage.setItem('bom-lang',z?'zh':'en');document.getElementById('langBtn').textContent=z?'English':'中文'}</script>
+<script data-mob="3">(function(){
+  if(!window.matchMedia('(max-width:640px)').matches)return;
+  function mk(t,c){var e=document.createElement(t);if(c)e.className=c;return e;}
+
+  /* ── hamburger + dark drawer ── */
+  var ov=mk('div','drawer-overlay');
+  var dr=mk('nav','drawer');
+  var hd=mk('div','drawer-hd');
+  var tit=mk('span','drawer-title');
+  tit.innerHTML='<span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span>';
+  var cx=mk('button','drawer-close');
+  cx.setAttribute('aria-label','close');cx.textContent='×';
+  cx.addEventListener('click',closeDr);
+  hd.appendChild(tit);hd.appendChild(cx);
+  var lks=mk('div','drawer-links');
+  document.querySelectorAll('.nav .tab').forEach(function(a){
+    var l=mk('a','drawer-tab'+(a.classList.contains('on')?' on':''));
+    l.href=a.href;l.innerHTML=a.innerHTML;lks.appendChild(l);
+  });
+  dr.appendChild(hd);dr.appendChild(lks);
+  document.body.appendChild(ov);document.body.appendChild(dr);
+
+  var ham=mk('button','hamburger');
+  ham.setAttribute('aria-label','menu');
+  ham.innerHTML='<svg width="18" height="13" viewBox="0 0 18 13" fill="currentColor">'+
+    '<rect width="18" height="2" rx="1"/>'+
+    '<rect y="5.5" width="14" height="2" rx="1"/>'+
+    '<rect y="11" width="18" height="2" rx="1"/></svg>';
+  ham.addEventListener('click',openDr);
+  var hdr=document.querySelector('header');
+  hdr.insertBefore(ham,hdr.firstChild);
+  ov.addEventListener('click',closeDr);
+
+  function openDr(){
+    ov.classList.add('open');dr.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDr(){
+    ov.classList.remove('open');dr.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* ── chapter summary cards ── */
+  var CM={
+    vio:'#7c3aed',tea:'#0d9488',amb:'#d97706',
+    pin:'#be185d',ros:'#be123c',blu:'#2563eb',grn:'#16a34a'
+  };
+  var intro=document.querySelector('.intro');
+  if(!intro)return;
+  var ct=mk('div','mob-ch');
+  document.querySelectorAll('.page>.n').forEach(function(n){
+    var ck=Object.keys(CM).find(function(k){return n.classList.contains(k);});
+    var nl=n.querySelector('.nl'),nt=n.querySelector('.nt'),nc=n.querySelector('.nc');
+    if(!nl||!nt)return;
+    var c=mk('div','mob-sec');
+    c.style.borderLeftColor=ck?CM[ck]:'#64748b';
+    c.innerHTML=
+      '<span class="mob-nl">'+nl.innerHTML+'</span>'+
+      '<span class="mob-nt">'+nt.innerHTML+'</span>'+
+      (nc?'<span class="mob-nc">'+nc.innerHTML+'</span>':'');
+    ct.appendChild(c);
+  });
+  if(ct.children.length)intro.insertAdjacentElement('afterend',ct);
+})();</script>
 </body>
 </html>

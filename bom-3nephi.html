@@ -12,10 +12,12 @@ header{background:#fff;border-bottom:1px solid #e2e8f0;height:46px;display:flex;
 .hb{font-size:11px;color:#94a3b8}
 .hs{color:#cbd5e1}
 .hn{font-size:14px;font-weight:700;color:#1e293b}
-.back-btn{font-size:11px;color:#64748b;text-decoration:none;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;transition:all .15s;flex-shrink:0;margin-right:6px}
-.back-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
-.h-info{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.nav{margin-left:auto;display:flex;gap:3px;overflow-x:auto;flex-shrink:0;max-width:560px}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;flex-shrink:0;border:1px solid #e2e8f0;border-radius:7px;text-decoration:none;color:#64748b;transition:all .15s;font-size:0}
+.back-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+.back-btn::before{content:'';display:block;width:15px;height:12px;background-color:#64748b;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3E%3Crect x='0' y='0' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='4.75' width='15' height='2.5' rx='1.2'/%3E%3Crect x='0' y='9.5' width='10' height='2.5' rx='1.2'/%3E%3C/svg%3E") no-repeat center/contain}
+.back-btn:hover::before{background-color:#1e293b}
+.h-info{display:none}
+.nav{flex:1;display:flex;gap:2px;overflow-x:auto}
 .nav::-webkit-scrollbar{height:0}
 .tab{font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid transparent;background:none;color:#94a3b8;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .tab.on{color:#6d28d9;background:#f5f3ff;border-color:#a78bfa}
@@ -79,52 +81,221 @@ ul.np{padding:0;margin:7px 0 0}
 .rel{grid-column:1/-1;margin-top:28px}
 .rel-title{font-size:11px;letter-spacing:2px;color:#94a3b8;margin-bottom:14px;text-align:center}
 .rel svg{width:100%;height:auto;display:block}
+
+/* language toggle */
+[lang="en"]{display:inline}[lang="zh"]{display:none}
+div[lang="en"],ul[lang="en"]{display:block}
+div[lang="zh"],ul[lang="zh"]{display:none}
+body.lang-zh [lang="en"]{display:none}
+body.lang-zh [lang="zh"]{display:inline}
+body.lang-zh div[lang="en"],body.lang-zh ul[lang="en"]{display:none}
+body.lang-zh div[lang="zh"],body.lang-zh ul[lang="zh"]{display:block}
+.lang-btn{font-size:11px;color:#64748b;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;margin-left:8px}
+.lang-btn:hover{background:#f1f5f9;color:#1e293b;border-color:#cbd5e1}
+
+/* ── mobile base ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;
+  width:40px;height:40px;color:#1e293b;flex-shrink:0;border-radius:8px;
+  display:none;align-items:center;justify-content:center}
+.hamburger:active{background:#f1f5f9}
+
+/* drawer — dark slate */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;width:280px;max-width:88vw;height:100%;
+  background:#1e293b;z-index:201;display:flex;flex-direction:column;
+  transform:translateX(-110%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:8px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 16px;border-bottom:1px solid #334155;flex-shrink:0}
+.drawer-title{font-size:9px;font-weight:700;letter-spacing:3px;color:#475569;
+  text-transform:uppercase}
+.drawer-close{background:none;border:none;cursor:pointer;font-size:20px;
+  color:#475569;padding:2px 6px;line-height:1;border-radius:4px}
+.drawer-close:hover{color:#94a3b8}
+.drawer-links{overflow-y:auto;flex:1;padding:8px 0 36px}
+.drawer-tab{display:flex;align-items:center;padding:13px 22px;font-size:14px;
+  color:#94a3b8;text-decoration:none;border-left:3px solid transparent;
+  transition:background .12s;line-height:1.3;letter-spacing:.1px}
+.drawer-tab:active{background:rgba(255,255,255,.05)}
+.drawer-tab.on{color:#f1f5f9;font-weight:600;border-left-color:#94a3b8;
+  background:rgba(255,255,255,.07)}
+
+/* chapter summary cards (desktop: hidden) */
+.mob-ch{display:none}
+.mob-sec{border-radius:10px;padding:13px 14px;background:#fff;
+  display:flex;flex-direction:column;gap:3px;
+  border-left:3px solid #e2e8f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.mob-nl{font-size:10px;color:#94a3b8;font-weight:700;letter-spacing:.6px}
+.mob-nt{font-size:13px;font-weight:700;color:#1e293b;line-height:1.25}
+.mob-nc{font-size:10px;color:#b0bac5;margin-top:1px}
+
+@media(max-width:640px){
+  /* ── global ── */
+  body{font-size:15px;background:#eef1f6}
+
+  /* ── header ── */
+  header{padding:0 14px 0 6px;gap:6px;height:54px;
+    border-bottom:1px solid #dde3ec;box-shadow:0 1px 0 #dde3ec}
+  .hamburger{display:flex}
+  .nav,.back-btn,.hb,.hs{display:none}
+  .h-info{display:flex;flex:1;justify-content:center;text-align:center}
+  .hn{font-size:15px;font-weight:600;letter-spacing:.3px;color:#1e293b}
+  .lang-btn{font-size:11px;padding:5px 10px;border-radius:7px;flex-shrink:0}
+  .drawer-overlay.open,.drawer.open{opacity:1;pointer-events:auto}
+  .drawer.open{transform:translateX(0)}
+
+  /* ── page grid ── */
+  .page{grid-template-columns:1fr;padding:14px 12px 96px;gap:0;background:#eef1f6}
+
+  /* ── intro ── */
+  .intro{text-align:left;padding:22px 18px 20px;border-radius:16px;border:none;
+    background:#fff;margin-bottom:14px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .intro-sup{font-size:9.5px;letter-spacing:3px;color:#94a3b8;margin-bottom:10px}
+  .intro-h{font-size:28px;font-weight:300;letter-spacing:-.5px;line-height:1.1;
+    margin-bottom:14px;color:#1e293b}
+  .intro-meta{flex-direction:column;gap:7px;justify-content:flex-start}
+  .im{font-size:12px;display:flex;gap:7px;align-items:baseline;color:#64748b}
+  .im b{color:#1e293b;font-weight:600}
+  .intro-en{font-size:11px;margin-top:8px;padding-top:10px;border-top:1px solid #f1f5f9;
+    color:#94a3b8}
+
+  /* ── chapter summary cards ── */
+  .mob-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f2f6}
+  .intro+div:not([class]){display:none}
+
+  /* ── phase labels ── hidden; color carried by card left border */
+  .ph,.ph-sp,.arr,.si-sp{display:none}
+
+  /* ── section card ── */
+  .n{grid-column:1;
+    border-top:none!important;border-right:none!important;border-bottom:none!important;
+    border-left-width:4px!important;
+    border-radius:0 16px 16px 0;
+    padding:18px 17px 20px;margin-bottom:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .n:hover{filter:none}
+
+  /* ── section header: chapter → title → location · time ── */
+  .nh{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:14px;align-items:baseline}
+  .nl{order:1;flex:0 0 100%;font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:6px;flex-wrap:wrap}
+  .nt{order:2;flex:0 0 100%;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:8px;white-space:normal;overflow-wrap:break-word;letter-spacing:normal}
+  .nw{order:3;font-size:12px;white-space:normal}
+  .nc{order:4;font-size:12px;margin-left:0;white-space:normal}
+  .nc::before{content:' · '}
+
+  /* ── scripture list ── */
+  .np{padding:0;margin:0}
+  .np li{font-size:14.5px;color:#374151;line-height:1.85;
+    padding-left:2.4em;text-indent:-2.4em;
+    padding-top:7px;padding-bottom:7px;
+    border-bottom:1px solid rgba(0,0,0,.05)}
+  .np li:last-child{border-bottom:none;padding-bottom:0}
+  .cn{display:inline-block;width:1.8em;font-size:11px;font-weight:700;
+    color:#94a3b8;letter-spacing:0;text-align:right;margin-right:6px}
+  .ns{font-size:14.5px;line-height:1.85;color:#374151}
+
+  /* ── event box ── */
+  .ev{grid-column:1;border-radius:12px;
+    border-style:solid!important;border-width:1px!important;
+    padding:12px 16px;margin-bottom:4px;font-size:13px;line-height:1.6}
+  .ev-icon{display:none}
+  .ev-date{font-size:9px;letter-spacing:1.5px;font-weight:700;margin-bottom:5px}
+
+  /* ── sidebar ── */
+  .si{grid-column:1;padding:0;margin-bottom:20px}
+  .si::before{display:none}
+  .nms{background:#fff;border-radius:12px;padding:14px 16px;
+    border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .nms+.nms{margin-top:8px}
+  .nm-title{font-size:9px;font-weight:700;letter-spacing:2px;color:#94a3b8;
+    text-transform:uppercase;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #f0f2f6}
+  .nm{display:grid;grid-template-columns:84px 1fr;gap:4px;
+    padding:6px 0;border-top:1px solid #f6f8fb;
+    align-items:baseline;line-height:1.45}
+  .nm:first-of-type{border-top:none;padding-top:0}
+  .nm b{font-size:12px;font-weight:600;color:#334155}
+  .nm span{font-size:12px;color:#64748b}
+
+  /* 1/2 Nephi character sidebar cards */
+  .sb{background:#f8fafc;border-radius:10px;padding:10px 13px;
+    border:1px solid #f0f2f6;margin-bottom:6px}
+  .sn{font-size:13.5px;font-weight:700;color:#1e293b}
+  .se{font-size:10.5px;color:#94a3b8;margin-top:1px}
+  .sd{font-size:12px;color:#475569;line-height:1.5;margin-top:5px}
+
+  /* ── legend ── */
+  .legend{grid-column:1;background:#fff;border-radius:12px;
+    padding:14px 16px;border:1px solid #dde3ec;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .legend-title{font-size:9px;letter-spacing:2px;color:#94a3b8;margin-bottom:10px}
+  .lg-item{font-size:12px;color:#475569}
+
+  /* ── arc / character SVG ── scale to fit, card container */
+  .rel{grid-column:1;margin:0 0 20px;overflow:hidden;
+    border:1px solid #dde3ec;border-radius:14px;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .rel-title{font-size:9px;letter-spacing:2px;color:#94a3b8;
+    padding:14px 16px 0;margin-bottom:6px;text-align:left}
+  .rel svg{width:100%;height:auto;min-width:0;display:block}
+
+  /* ── activity maps & other no-class SVG divs ── */
+  .page>div:not([class]) svg{
+    width:100%!important;height:auto!important;min-width:0;display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-btn" href="index.html">← 时间线</a>
+  <a class="back-btn" href="index.html">← <span lang="en">Timeline</span><span lang="zh">时间线</span></a>
   <div class="h-info">
-    <span class="hb">摩尔门经</span><span class="hs">/</span><span class="hn">尼腓三书</span>
+    <span class="hb"><span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span></span><span class="hs">/</span><span class="hn"><span lang="en">3 Nephi</span><span lang="zh">尼腓三书</span></span>
   </div>
   <nav class="nav">
-    <a class="tab" href="bom.html">一书</a>
-    <a class="tab" href="bom2.html">二书</a>
-    <a class="tab" href="bom-jacob.html">雅各</a>
-    <a class="tab" href="bom-enos.html">以挪士</a>
-    <a class="tab" href="bom-jarom.html">雅龙</a>
-    <a class="tab" href="bom-omni.html">奥姆乃</a>
-    <a class="tab" href="bom-wom.html">摩语</a>
-    <a class="tab" href="bom-mosiah.html">摩赛亚</a>
-    <a class="tab" href="bom-alma.html">阿尔玛</a>
-    <a class="tab" href="bom-helaman.html">希拉曼</a>
-    <a class="tab on" href="bom-3nephi.html">三书</a>
-    <a class="tab" href="bom-4nephi.html">四书</a>
-    <a class="tab" href="bom-mormon.html">摩尔门</a>
-    <a class="tab" href="bom-ether.html">以帖</a>
-    <a class="tab" href="bom-moroni.html">摩罗乃</a>
+    <a class="tab" href="bom.html"><span lang="en">1 Nephi</span><span lang="zh">一书</span></a>
+    <a class="tab" href="bom2.html"><span lang="en">2 Nephi</span><span lang="zh">二书</span></a>
+    <a class="tab" href="bom-jacob.html"><span lang="en">Jacob</span><span lang="zh">雅各</span></a>
+    <a class="tab" href="bom-enos.html"><span lang="en">Enos</span><span lang="zh">以挪士</span></a>
+    <a class="tab" href="bom-jarom.html"><span lang="en">Jarom</span><span lang="zh">雅龙</span></a>
+    <a class="tab" href="bom-omni.html"><span lang="en">Omni</span><span lang="zh">奥姆乃</span></a>
+    <a class="tab" href="bom-wom.html"><span lang="en">W of M</span><span lang="zh">摩语</span></a>
+    <a class="tab" href="bom-mosiah.html"><span lang="en">Mosiah</span><span lang="zh">摩赛亚</span></a>
+    <a class="tab" href="bom-alma.html"><span lang="en">Alma</span><span lang="zh">阿尔玛</span></a>
+    <a class="tab" href="bom-helaman.html"><span lang="en">Helaman</span><span lang="zh">希拉曼</span></a>
+    <a class="tab on" href="bom-3nephi.html"><span lang="en">3 Nephi</span><span lang="zh">三书</span></a>
+    <a class="tab" href="bom-4nephi.html"><span lang="en">4 Nephi</span><span lang="zh">四书</span></a>
+    <a class="tab" href="bom-mormon.html"><span lang="en">Mormon</span><span lang="zh">摩尔门</span></a>
+    <a class="tab" href="bom-ether.html"><span lang="en">Ether</span><span lang="zh">以帖</span></a>
+    <a class="tab" href="bom-moroni.html"><span lang="en">Moroni</span><span lang="zh">摩罗乃</span></a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="switchLang()">中文</button>
 </header>
 
 <div class="page">
 
 <!-- intro -->
 <div class="intro">
-  <div class="intro-sup">摩尔门经 · 大版 · 摩尔门删节</div>
-  <div class="intro-h">尼腓三书</div>
-  <div class="intro-en">大破坏·三日黑暗·基督亲临·山上宝训·圣餐·教会确立</div>
+  <div class="intro-sup"><span lang="en">Book of Mormon · Large Plates · Mormon's Abridgment</span><span lang="zh">摩尔门经 · 大版 · 摩尔门删节</span></div>
+  <div class="intro-h"><span lang="en">3 Nephi</span><span lang="zh">尼腓三书</span></div>
+  <div class="intro-en"><span lang="en">Great Destruction · Three-Day Darkness · Christ Visits · Sermon on Mount · Sacrament · Church Established</span><span lang="zh">大破坏·三日黑暗·基督亲临·山上宝训·圣餐·教会确立</span></div>
   <div class="intro-meta">
-    <span class="im">时间 <b>约公元前 1 年 – 公元 34 年</b></span>
-    <span class="im">地点 <b>邦地圣殿 · 美洲大地</b></span>
-    <span class="im">章节 <b>30 章</b></span>
-    <span class="im">核心 <b>基督亲临美洲 · 山上宝训 · 圣餐 · 两千五百人触摸伤痕</b></span>
+    <span class="im"><span lang="en">Date</span><span lang="zh">时间</span> <b>c. BC 1 – AD 34</b></span>
+    <span class="im"><span lang="en">Location</span><span lang="zh">地点</span> <b><span lang="en">Temple of Bountiful · Americas</span><span lang="zh">邦地圣殿 · 美洲大地</span></b></span>
+    <span class="im"><span lang="en">Length</span><span lang="zh">章节</span> <b>30 <span lang="en">chapters</span><span lang="zh">章</span></b></span>
+    <span class="im"><span lang="en">Core</span><span lang="zh">核心</span> <b><span lang="en">Christ visits Americas · Sermon on Mount · Sacrament · 2,500 touch His wounds</span><span lang="zh">基督亲临美洲 · 山上宝训 · 圣餐 · 两千五百人触摸伤痕</span></b></span>
   </div>
 </div>
 
 <!-- ── 活动地图 ── -->
 <div style="grid-column:1/-1;margin:22px 0 30px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">活动地图示意 · 尼腓三书</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Activity Map · 3 Nephi</span><span lang="zh">活动地图示意 · 尼腓三书</span></div>
   <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:8px;display:block;border:1px solid #e2e8f0">
     <defs>
       <marker id="nA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
@@ -139,101 +310,101 @@ ul.np{padding:0;margin:7px 0 0}
 
     <!-- 三日黑暗区域 -->
     <ellipse cx="400" cy="220" rx="320" ry="160" fill="rgba(30,10,60,0.13)" stroke="#6d28d9" stroke-width="1" stroke-dasharray="8,4"/>
-    <text x="400" y="100" text-anchor="middle" font-size="10" fill="#4c1d95" font-style="italic" opacity="0.7">三日黑暗 · 大破坏区域</text>
+    <text lang="en" x="400" y="100" text-anchor="middle" font-size="10" fill="#4c1d95" font-style="italic" opacity="0.7">Three-Day Darkness · Destruction Zone</text><text lang="zh" x="400" y="100" text-anchor="middle" font-size="10" fill="#4c1d95" font-style="italic" opacity="0.7">三日黑暗 · 大破坏区域</text>
 
     <!-- 邦地圣殿 -->
     <polygon points="432,148 452,148 452,172 442,163 432,172" fill="#6d28d9" stroke="#fff" stroke-width="1.5"/>
     <rect x="456" y="138" width="190" height="44" rx="4" fill="rgba(255,255,255,0.95)" stroke="#a78bfa" stroke-width="2"/>
-    <text x="551" y="154" text-anchor="middle" font-size="10" font-weight="bold" fill="#4c1d95">邦地圣殿</text>
-    <text x="551" y="166" text-anchor="middle" font-size="8.5" fill="#7c3aed">基督从天而降</text>
-    <text x="551" y="177" text-anchor="middle" font-size="7.5" fill="#94a3b8">两千五百人亲手摸祂的伤痕</text>
+    <text lang="en" x="551" y="154" text-anchor="middle" font-size="10" font-weight="bold" fill="#4c1d95">Temple of Bountiful</text><text lang="zh" x="551" y="154" text-anchor="middle" font-size="10" font-weight="bold" fill="#4c1d95">邦地圣殿</text>
+    <text lang="en" x="551" y="166" text-anchor="middle" font-size="8.5" fill="#7c3aed">Christ descends from heaven</text><text lang="zh" x="551" y="166" text-anchor="middle" font-size="8.5" fill="#7c3aed">基督从天而降</text>
+    <text lang="en" x="551" y="177" text-anchor="middle" font-size="7.5" fill="#94a3b8">2,500 people touch His wounds</text><text lang="zh" x="551" y="177" text-anchor="middle" font-size="7.5" fill="#94a3b8">两千五百人亲手摸祂的伤痕</text>
 
     <!-- 光降 -->
     <ellipse cx="442" cy="120" rx="50" ry="30" fill="url(#glory)" opacity="0.9"/>
     <line x1="442" y1="60" x2="442" y2="148" stroke="#fbbf24" stroke-width="2.5" opacity="0.7"/>
-    <text x="442" y="52" text-anchor="middle" font-size="8.5" fill="#92400e" font-weight="bold">基督降临</text>
+    <text lang="en" x="442" y="52" text-anchor="middle" font-size="8.5" fill="#92400e" font-weight="bold">Christ Comes</text><text lang="zh" x="442" y="52" text-anchor="middle" font-size="8.5" fill="#92400e" font-weight="bold">基督降临</text>
 
     <!-- 萨拉赫拉 -->
     <circle cx="380" cy="200" r="8" fill="#dc2626" stroke="#fff" stroke-width="2"/>
     <rect x="388" y="190" width="140" height="28" rx="4" fill="rgba(255,255,255,0.92)" stroke="#fca5a5" stroke-width="1.2"/>
-    <text x="458" y="203" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">萨拉赫拉被大火焚毁</text>
-    <text x="458" y="214" text-anchor="middle" font-size="7.5" fill="#f87171">约公元 34 年</text>
+    <text lang="en" x="458" y="203" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">Zarahemla burned by fire</text><text lang="zh" x="458" y="203" text-anchor="middle" font-size="9" font-weight="bold" fill="#9f1239">萨拉赫拉被大火焚毁</text>
+    <text lang="en" x="458" y="214" text-anchor="middle" font-size="7.5" fill="#f87171">c. AD 34</text><text lang="zh" x="458" y="214" text-anchor="middle" font-size="7.5" fill="#f87171">约公元 34 年</text>
 
     <!-- 摩罗乃城 -->
     <circle cx="308" cy="270" r="7" fill="#1e3a8a" stroke="#fff" stroke-width="1.5"/>
     <rect x="318" y="260" width="136" height="24" rx="4" fill="rgba(255,255,255,0.92)" stroke="#93c5fd" stroke-width="1.2"/>
-    <text x="386" y="276" text-anchor="middle" font-size="9" fill="#1e3a8a">摩罗乃城沉入海底</text>
+    <text lang="en" x="386" y="276" text-anchor="middle" font-size="9" fill="#1e3a8a">City of Moroni sinks into sea</text><text lang="zh" x="386" y="276" text-anchor="middle" font-size="9" fill="#1e3a8a">摩罗乃城沉入海底</text>
 
     <!-- 雅各城 -->
     <circle cx="530" cy="280" r="6" fill="#dc2626" stroke="#fff" stroke-width="1.5"/>
-    <text x="538" y="288" font-size="8" fill="#9f1239">雅各城被焚</text>
+    <text lang="en" x="538" y="288" font-size="8" fill="#9f1239">Jacob's city burned</text><text lang="zh" x="538" y="288" font-size="8" fill="#9f1239">雅各城被焚</text>
 
     <!-- 新星 -->
     <circle cx="680" cy="54" r="10" fill="#fbbf24" stroke="#fff" stroke-width="2"/>
-    <text x="680" y="51" text-anchor="middle" font-size="7" fill="#78350f" font-weight="bold">新星</text>
-    <text x="696" y="48" font-size="9" fill="#92400e">撒母耳预言应验</text>
+    <text lang="en" x="680" y="51" text-anchor="middle" font-size="7" fill="#78350f" font-weight="bold">New Star</text><text lang="zh" x="680" y="51" text-anchor="middle" font-size="7" fill="#78350f" font-weight="bold">新星</text>
+    <text lang="en" x="696" y="48" font-size="9" fill="#92400e">Samuel's prophecy fulfilled</text><text lang="zh" x="696" y="48" font-size="9" fill="#92400e">撒母耳预言应验</text>
 
     <!-- 宝训洗礼区域 -->
     <ellipse cx="560" cy="190" rx="60" ry="38" fill="rgba(245,243,255,0.55)" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,3"/>
-    <text x="560" y="194" text-anchor="middle" font-size="8.5" fill="#4c1d95">宝训·洗礼·圣餐</text>
+    <text lang="en" x="560" y="194" text-anchor="middle" font-size="8.5" fill="#4c1d95">Sermon · Baptism · Sacrament</text><text lang="zh" x="560" y="194" text-anchor="middle" font-size="8.5" fill="#4c1d95">宝训·洗礼·圣餐</text>
 
     <!-- 幸存者 -->
-    <text x="442" y="230" text-anchor="middle" font-size="8.5" fill="#065f46">幸存者聚集</text>
-    <text x="442" y="242" text-anchor="middle" font-size="7.5" fill="#0d9488">听到声音从天而来</text>
+    <text lang="en" x="442" y="230" text-anchor="middle" font-size="8.5" fill="#065f46">Survivors gather</text><text lang="zh" x="442" y="230" text-anchor="middle" font-size="8.5" fill="#065f46">幸存者聚集</text>
+    <text lang="en" x="442" y="242" text-anchor="middle" font-size="7.5" fill="#0d9488">Voice heard from heaven</text><text lang="zh" x="442" y="242" text-anchor="middle" font-size="7.5" fill="#0d9488">听到声音从天而来</text>
 
     <!-- 水域标注 -->
-    <text x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
-    <text x="820" y="270" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
-    <text x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
+    <text lang="en" x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">Pacific Ocean</text><text lang="zh" x="28" y="196" fill="#2563eb" font-size="10" font-style="italic" text-anchor="middle">太平洋</text>
+    <text lang="en" x="820" y="270" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">Caribbean Sea</text><text lang="zh" x="820" y="270" fill="#2563eb" font-size="9.5" font-style="italic" text-anchor="middle">加勒比海</text>
+    <text lang="en" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">Gulf of Mexico</text><text lang="zh" x="700" y="67" fill="#2563eb" font-size="8.5" font-style="italic" text-anchor="middle" opacity="0.9">墨西哥湾</text>
 
     <!-- 旷野·甘大安敦据点 -->
     <rect x="18" y="14" width="126" height="40" rx="4" fill="rgba(255,251,235,0.92)" stroke="#d97706" stroke-width="1" stroke-dasharray="5,3"/>
-    <text x="81" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">旷野</text>
-    <text x="81" y="44" text-anchor="middle" font-size="7.5" fill="#b45309">甘大安敦匪帮据点</text>
+    <text lang="en" x="81" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">Wilderness</text><text lang="zh" x="81" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">旷野</text>
+    <text lang="en" x="81" y="44" text-anchor="middle" font-size="7.5" fill="#b45309">Gadianton robbers' stronghold</text><text lang="zh" x="81" y="44" text-anchor="middle" font-size="7.5" fill="#b45309">甘大安敦匪帮据点</text>
   </svg>
-  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</div>
+  <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:6px"><span lang="en">※ Map is schematic; geography disputed. Mainstream view favors Mesoamerican model.</span><span lang="zh">※ 地理位置为示意，学术上仍有争议；主流观点倾向中美洲理论</span></div>
 </div>
 
-<!-- ── 章节梗概分布图 ── -->
+<!-- ── 章节概览图 ── -->
 <div style="grid-column:1/-1;margin:0 0 28px;border-top:1px solid #e2e8f0;padding-top:22px">
-  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px">章节梗概分布 · CHAPTER OVERVIEW</div>
+  <div style="font-size:10px;letter-spacing:2px;color:#94a3b8;text-align:center;margin-bottom:12px"><span lang="en">Chapter Overview</span><span lang="zh">章节概览</span></div>
   <svg viewBox="0 0 860 316" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
 
     <!-- 标题 -->
-    <text x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（尼腓三书 30 章分布）</text>
+    <text lang="en" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">Five Narratives (3 Nephi · 30 Chapters)</text><text lang="zh" x="430" y="22" text-anchor="middle" font-size="13" font-weight="300" fill="#475569" letter-spacing="2">五段叙事（尼腓三书 30 章分布）</text>
 
     <!-- 章数标签 -->
-    <text x="138" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">7章</text>
-    <text x="265" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">3章</text>
-    <text x="404" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">8章</text>
-    <text x="607" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4ed8">8章</text>
-    <text x="759" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">4章</text>
+    <text lang="en" x="138" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">7 Ch.</text><text lang="zh" x="138" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#d97706">7章</text>
+    <text lang="en" x="265" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">3 Ch.</text><text lang="zh" x="265" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#dc2626">3章</text>
+    <text lang="en" x="404" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">8 Ch.</text><text lang="zh" x="404" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">8章</text>
+    <text lang="en" x="607" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4ed8">8 Ch.</text><text lang="zh" x="607" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4ed8">8章</text>
+    <text lang="en" x="759" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">4 Ch.</text><text lang="zh" x="759" y="54" text-anchor="middle" font-size="11" font-weight="500" fill="#0e7490">4章</text>
 
     <!-- 色块（总宽760px，x从50起；每章25.33px） -->
     <!-- S1: 第1–7章 (7ch=177px) -->
     <rect x="50"  y="60" width="177" height="52" fill="#fef9c3"/>
-    <text x="138" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#78350f">征兆年代</text>
-    <text x="138" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">匪帮猖獗·和平交替</text>
+    <text lang="en" x="138" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#78350f">Era of Signs</text><text lang="zh" x="138" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#78350f">征兆年代</text>
+    <text lang="en" x="138" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">Robbers rampant · brief peace</text><text lang="zh" x="138" y="97"  text-anchor="middle" font-size="8"    fill="#92400e">匪帮猖獗·和平交替</text>
 
     <!-- S2: 第8–10章 (3ch=76px) -->
     <rect x="227" y="60" width="76"  height="52" fill="#fee2e2"/>
-    <text x="265" y="81"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#9f1239">大破坏</text>
-    <text x="265" y="97"  text-anchor="middle" font-size="7.5"  fill="#be123c">三日黑暗</text>
+    <text lang="en" x="265" y="81"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#9f1239">Destruction</text><text lang="zh" x="265" y="81"  text-anchor="middle" font-size="10"   font-weight="bold" fill="#9f1239">大破坏</text>
+    <text lang="en" x="265" y="97"  text-anchor="middle" font-size="7.5"  fill="#be123c">Three-Day Darkness</text><text lang="zh" x="265" y="97"  text-anchor="middle" font-size="7.5"  fill="#be123c">三日黑暗</text>
 
     <!-- S3: 第11–18章 (8ch=203px) -->
     <rect x="303" y="60" width="203" height="52" fill="#f5f3ff"/>
-    <text x="404" y="78"  text-anchor="middle" font-size="14"   font-weight="bold" fill="#4c1d95">基督第一日降临</text>
-    <text x="404" y="97"  text-anchor="middle" font-size="8.5"  fill="#7c3aed">宝训 · 圣餐 · 十二门徒</text>
+    <text lang="en" x="404" y="78"  text-anchor="middle" font-size="14"   font-weight="bold" fill="#4c1d95">Christ's First-Day Visit</text><text lang="zh" x="404" y="78"  text-anchor="middle" font-size="14"   font-weight="bold" fill="#4c1d95">基督第一日降临</text>
+    <text lang="en" x="404" y="97"  text-anchor="middle" font-size="8.5"  fill="#7c3aed">Sermon · Sacrament · Twelve</text><text lang="zh" x="404" y="97"  text-anchor="middle" font-size="8.5"  fill="#7c3aed">宝训 · 圣餐 · 十二门徒</text>
 
     <!-- S4: 第19–26章 (8ch=203px) -->
     <rect x="506" y="60" width="203" height="52" fill="#dbeafe"/>
-    <text x="607" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#1e3a8a">第二日再临</text>
-    <text x="607" y="97"  text-anchor="middle" font-size="8"    fill="#1d4ed8">以赛亚·玛拉基·先知之言</text>
+    <text lang="en" x="607" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#1e3a8a">Christ's Second-Day Visit</text><text lang="zh" x="607" y="81"  text-anchor="middle" font-size="13"   font-weight="bold" fill="#1e3a8a">第二日再临</text>
+    <text lang="en" x="607" y="97"  text-anchor="middle" font-size="8"    fill="#1d4ed8">Isaiah · Malachi · Prophetic Words</text><text lang="zh" x="607" y="97"  text-anchor="middle" font-size="8"    fill="#1d4ed8">以赛亚·玛拉基·先知之言</text>
 
     <!-- S5: 第27–30章 (4ch=101px) -->
     <rect x="709" y="60" width="101" height="52" fill="#cffafe"/>
-    <text x="759" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#164e63">教会确立</text>
-    <text x="759" y="97"  text-anchor="middle" font-size="8"    fill="#0e7490">被译门徒</text>
+    <text lang="en" x="759" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#164e63">Church Established</text><text lang="zh" x="759" y="81"  text-anchor="middle" font-size="11"   font-weight="bold" fill="#164e63">教会确立</text>
+    <text lang="en" x="759" y="97"  text-anchor="middle" font-size="8"    fill="#0e7490">Translated Disciples</text><text lang="zh" x="759" y="97"  text-anchor="middle" font-size="8"    fill="#0e7490">被译门徒</text>
 
     <!-- 分隔线 -->
     <line x1="227" y1="60" x2="227" y2="112" stroke="#fff" stroke-width="1.5"/>
@@ -243,36 +414,36 @@ ul.np{padding:0;margin:7px 0 0}
     <rect x="50" y="60" width="760" height="52" fill="none" stroke="#e2e8f0" stroke-width="1" rx="2"/>
 
     <!-- 色块下方说明 -->
-    <text x="138" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#78350f">尼腓三世</text>
-    <text x="138" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1–7 章</text>
-    <text x="138" y="154" text-anchor="middle" font-size="8"   fill="#64748b">降生之夜无黑暗·新星出现</text>
-    <text x="138" y="166" text-anchor="middle" font-size="8"   fill="#64748b">匪帮猖獗·传道·短暂和平</text>
+    <text lang="en" x="138" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#78350f">Nephi III</text><text lang="zh" x="138" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#78350f">尼腓三世</text>
+    <text lang="en" x="138" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 1–7</text><text lang="zh" x="138" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 1–7 章</text>
+    <text lang="en" x="138" y="154" text-anchor="middle" font-size="8"   fill="#64748b">No darkness at birth · new star appears</text><text lang="zh" x="138" y="154" text-anchor="middle" font-size="8"   fill="#64748b">降生之夜无黑暗·新星出现</text>
+    <text lang="en" x="138" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Robbers rampant · ministry · brief peace</text><text lang="zh" x="138" y="166" text-anchor="middle" font-size="8"   fill="#64748b">匪帮猖獗·传道·短暂和平</text>
 
-    <text x="265" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">受难之日</text>
-    <text x="265" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 8–10 章</text>
-    <text x="265" y="154" text-anchor="middle" font-size="8"   fill="#64748b">16座城毁·三日黑暗</text>
-    <text x="265" y="166" text-anchor="middle" font-size="8"   fill="#64748b">声音宣告·幸存者聚集</text>
+    <text lang="en" x="265" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">Day of Crucifixion</text><text lang="zh" x="265" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#9f1239">受难之日</text>
+    <text lang="en" x="265" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 8–10</text><text lang="zh" x="265" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 8–10 章</text>
+    <text lang="en" x="265" y="154" text-anchor="middle" font-size="8"   fill="#64748b">16 cities destroyed · three-day darkness</text><text lang="zh" x="265" y="154" text-anchor="middle" font-size="8"   fill="#64748b">16座城毁·三日黑暗</text>
+    <text lang="en" x="265" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Voice proclaims · survivors gather</text><text lang="zh" x="265" y="166" text-anchor="middle" font-size="8"   fill="#64748b">声音宣告·幸存者聚集</text>
 
-    <text x="404" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">耶稣基督</text>
-    <text x="404" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 11–18 章</text>
-    <text x="404" y="154" text-anchor="middle" font-size="8"   fill="#64748b">2500人触摸钉痕·宝训</text>
-    <text x="404" y="166" text-anchor="middle" font-size="8"   fill="#64748b">圣餐礼·十二门徒受权</text>
+    <text lang="en" x="404" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">Jesus Christ</text><text lang="zh" x="404" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#4c1d95">耶稣基督</text>
+    <text lang="en" x="404" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 11–18</text><text lang="zh" x="404" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 11–18 章</text>
+    <text lang="en" x="404" y="154" text-anchor="middle" font-size="8"   fill="#64748b">2,500 touch nail marks · Sermon on Mount</text><text lang="zh" x="404" y="154" text-anchor="middle" font-size="8"   fill="#64748b">2500人触摸钉痕·宝训</text>
+    <text lang="en" x="404" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Sacrament · Twelve ordained</text><text lang="zh" x="404" y="166" text-anchor="middle" font-size="8"   fill="#64748b">圣餐礼·十二门徒受权</text>
 
-    <text x="607" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">十二门徒</text>
-    <text x="607" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 19–26 章</text>
-    <text x="607" y="154" text-anchor="middle" font-size="8"   fill="#64748b">圣灵降如火·以赛亚54章</text>
-    <text x="607" y="166" text-anchor="middle" font-size="8"   fill="#64748b">玛拉基引用·记录封印</text>
+    <text lang="en" x="607" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">Twelve Disciples</text><text lang="zh" x="607" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1e3a8a">十二门徒</text>
+    <text lang="en" x="607" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 19–26</text><text lang="zh" x="607" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 19–26 章</text>
+    <text lang="en" x="607" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Holy Ghost like fire · Isaiah 54</text><text lang="zh" x="607" y="154" text-anchor="middle" font-size="8"   fill="#64748b">圣灵降如火·以赛亚54章</text>
+    <text lang="en" x="607" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Malachi quoted · record sealed</text><text lang="zh" x="607" y="166" text-anchor="middle" font-size="8"   fill="#64748b">玛拉基引用·记录封印</text>
 
-    <text x="759" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">三被译门徒</text>
-    <text x="759" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 27–30 章</text>
-    <text x="759" y="154" text-anchor="middle" font-size="8"   fill="#64748b">教会以基督名命名</text>
-    <text x="759" y="166" text-anchor="middle" font-size="8"   fill="#64748b">摩尔门结语·呼吁悔改</text>
+    <text lang="en" x="759" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">Three Translated Disciples</text><text lang="zh" x="759" y="128" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#164e63">三被译门徒</text>
+    <text lang="en" x="759" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">Ch. 27–30</text><text lang="zh" x="759" y="141" text-anchor="middle" font-size="8"   fill="#94a3b8">第 27–30 章</text>
+    <text lang="en" x="759" y="154" text-anchor="middle" font-size="8"   fill="#64748b">Church named after Christ</text><text lang="zh" x="759" y="154" text-anchor="middle" font-size="8"   fill="#64748b">教会以基督名命名</text>
+    <text lang="en" x="759" y="166" text-anchor="middle" font-size="8"   fill="#64748b">Mormon's closing · call to repentance</text><text lang="zh" x="759" y="166" text-anchor="middle" font-size="8"   fill="#64748b">摩尔门结语·呼吁悔改</text>
 
-    <text x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 尼腓三书是摩尔门经神学顶点：复活的基督亲身降临美洲，所讲内容与马太5–7章平行，两千五百人逐一触摸钉痕</text>
+    <text lang="en" x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 3 Nephi is the theological apex: the risen Christ visits the Americas, His words parallel Matthew 5–7, and 2,500 touch His wounds</text><text lang="zh" x="430" y="196" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 尼腓三书是摩尔门经神学顶点：复活的基督亲身降临美洲，所讲内容与马太5–7章平行，两千五百人逐一触摸钉痕</text>
 
     <!-- timeline section -->
     <line x1="50" y1="210" x2="810" y2="210" stroke="#f1f5f9" stroke-width="1"/>
-    <text x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 1 年 – 公元 34 年</text>
+    <text lang="en" x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">Timeline · BC 1 – AD 34</text><text lang="zh" x="430" y="225" text-anchor="middle" font-size="9" letter-spacing="2" fill="#94a3b8">时间轴 · 公元前 1 年 – 公元 34 年</text>
 
     <!-- axis (760px / 35yr = 21.7px/yr, x = 50 + (year+1)*21.7) -->
     <line x1="50" y1="268" x2="810" y2="268" stroke="#d1d5db" stroke-width="1.5"/>
@@ -281,76 +452,76 @@ ul.np{padding:0;margin:7px 0 0}
     <circle cx="50"  cy="268" r="3.5" fill="#d97706"/>
     <line x1="50"  y1="254" x2="50"  y2="264" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="50"  y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">BC 1</text>
-    <text x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">夜无黑暗·降生之夜</text>
+    <text lang="en" x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">No darkness · birth night</text><text lang="zh" x="50"  y="240" text-anchor="middle" font-size="7.5" fill="#475569">夜无黑暗·降生之夜</text>
 
     <!-- AD ~16 · below -->
     <circle cx="419" cy="268" r="3.5" fill="#d97706"/>
     <line x1="419" y1="272" x2="419" y2="284" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="419" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">约 AD 16</text>
-    <text x="419" y="305" text-anchor="middle" font-size="7.5" fill="#475569">甘大安敦匪帮猖獗</text>
+    <text lang="en" x="419" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">c. AD 16</text><text lang="zh" x="419" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">约 AD 16</text>
+    <text lang="en" x="419" y="305" text-anchor="middle" font-size="7.5" fill="#475569">Gadianton robbers rampant</text><text lang="zh" x="419" y="305" text-anchor="middle" font-size="7.5" fill="#475569">甘大安敦匪帮猖獗</text>
 
     <!-- AD ~26 · above -->
     <circle cx="636" cy="268" r="3.5" fill="#d97706"/>
     <line x1="636" y1="254" x2="636" y2="264" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="636" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">约 AD 26</text>
-    <text x="636" y="240" text-anchor="middle" font-size="7.5" fill="#475569">律法废·人各为政</text>
+    <text lang="en" x="636" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">c. AD 26</text><text lang="zh" x="636" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#d97706">约 AD 26</text>
+    <text lang="en" x="636" y="240" text-anchor="middle" font-size="7.5" fill="#475569">Laws abolished · anarchy</text><text lang="zh" x="636" y="240" text-anchor="middle" font-size="7.5" fill="#475569">律法废·人各为政</text>
 
     <!-- AD 33 · below -->
     <circle cx="788" cy="268" r="3.5" fill="#dc2626"/>
     <line x1="788" y1="272" x2="788" y2="284" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="788" y="295" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#dc2626">AD 33</text>
-    <text x="788" y="305" text-anchor="middle" font-size="7.5" fill="#475569">三日黑暗·大破坏</text>
+    <text lang="en" x="788" y="305" text-anchor="middle" font-size="7.5" fill="#475569">Three-Day Darkness · Great Destruction</text><text lang="zh" x="788" y="305" text-anchor="middle" font-size="7.5" fill="#475569">三日黑暗·大破坏</text>
 
     <!-- AD 34 · above -->
     <circle cx="810" cy="268" r="3.5" fill="#7c3aed"/>
     <line x1="810" y1="254" x2="810" y2="264" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
     <text x="810" y="250" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#7c3aed">AD 34</text>
-    <text x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">基督亲临美洲</text>
+    <text lang="en" x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">Christ visits the Americas</text><text lang="zh" x="810" y="240" text-anchor="middle" font-size="7.5" fill="#475569">基督亲临美洲</text>
   </svg>
 </div>
 
 <!-- ══ 征兆年代 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text">征兆</div></div>
+<div class="ph"><div class="ph-dot" style="background:#d97706"></div><div class="ph-text"><span lang="en">Signs</span><span lang="zh">征兆</span></div></div>
 <div class="n amb">
   <div class="nh">
-    <span class="nl">第 1–7 章</span><span class="nt">征兆年代·匪帮猖獗</span><span class="nw">全地·旷野</span><span class="nc">约公元前 1 年 – 公元初</span>
+    <span class="nl"><span lang="en">Ch. 1–7</span><span lang="zh">第 1–7 章</span></span><span class="nt"><span lang="en">Era of Signs · Robbers Rampant</span><span lang="zh">征兆年代·匪帮猖獗</span></span><span class="nw"><span lang="en">All the Land · Wilderness</span><span lang="zh">全地·旷野</span></span><span class="nc"><span lang="en">c. BC 1 – Early AD</span><span lang="zh">约公元前 1 年 – 公元初</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">1</span>夜无黑暗验降生，新星出，不信者仆地</li>
-    <li><span class="cn">2</span>骄傲日炽，甘大安敦秘密组合成</li>
-    <li><span class="cn">3</span>甘大安敦首领致书劝降，尼腓拒之</li>
-    <li><span class="cn">4</span>众据山聚粮御敌，匪帮遇饥荒溃</li>
-    <li><span class="cn">5</span>尼腓传道，蒙权行神迹</li>
-    <li><span class="cn">6</span>两族短暂和好，骄傲复炽</li>
-    <li><span class="cn">7</span>律法废，政府散，人各为政</li>
+    <li><span class="cn">1</span><span lang="en">No darkness at night verifies birth; new star appears; disbelievers fall</span><span lang="zh">夜无黑暗验降生，新星出，不信者仆地</span></li>
+    <li><span class="cn">2</span><span lang="en">Pride intensifies; Gadianton secret combinations formed</span><span lang="zh">骄傲日炽，甘大安敦秘密组合成</span></li>
+    <li><span class="cn">3</span><span lang="en">Gadianton leader writes demanding surrender; Nephi refuses</span><span lang="zh">甘大安敦首领致书劝降，尼腓拒之</span></li>
+    <li><span class="cn">4</span><span lang="en">People gather on hills with food; robbers starve and surrender</span><span lang="zh">众据山聚粮御敌，匪帮遇饥荒溃</span></li>
+    <li><span class="cn">5</span><span lang="en">Nephi preaches; given power to work miracles</span><span lang="zh">尼腓传道，蒙权行神迹</span></li>
+    <li><span class="cn">6</span><span lang="en">Two peoples briefly united; pride rises again</span><span lang="zh">两族短暂和好，骄傲复炽</span></li>
+    <li><span class="cn">7</span><span lang="en">Laws abandoned, government dissolved, anarchy prevails</span><span lang="zh">律法废，政府散，人各为政</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">尼腓三世 <span>Nephi III · 首席门徒</span></div>
-    <div class="nm">撒母耳 <span>Samuel · 预言者</span></div>
-    <div class="nm">甘大安敦首领 <span>Giddianhi · 匪帮现任统领</span></div>
+    <div class="nm"><span lang="en">Nephi III</span><span lang="zh">尼腓三世</span> <span><span lang="en">Nephi III · Chief Disciple</span><span lang="zh">Nephi III · 首席门徒</span></span></div>
+    <div class="nm"><span lang="en">Samuel</span><span lang="zh">撒母耳</span> <span><span lang="en">Samuel · Prophet</span><span lang="zh">Samuel · 预言者</span></span></div>
+    <div class="nm"><span lang="en">Gadianton Leader</span><span lang="zh">甘大安敦首领</span> <span><span lang="en">Giddianhi · Robber Captain</span><span lang="zh">Giddianhi · 匪帮现任统领</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 大破坏 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text">大破坏</div></div>
+<div class="ph"><div class="ph-dot" style="background:#dc2626"></div><div class="ph-text"><span lang="en">Destruction</span><span lang="zh">大破坏</span></div></div>
 <div class="n ros">
   <div class="nh">
-    <span class="nl">第 8–10 章</span><span class="nt">受难之日·三日黑暗</span><span class="nw">美洲全地</span><span class="nc">公元 33 年</span>
+    <span class="nl"><span lang="en">Ch. 8–10</span><span lang="zh">第 8–10 章</span></span><span class="nt"><span lang="en">Day of Crucifixion · Three-Day Darkness</span><span lang="zh">受难之日·三日黑暗</span></span><span class="nw"><span lang="en">All the Americas</span><span lang="zh">美洲全地</span></span><span class="nc"><span lang="en">AD 33</span><span lang="zh">公元 33 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">8</span>骤起风暴地震，十六城毁，大地面貌全变</li>
-    <li><span class="cn">9</span>黑暗中声音：我是基督，律法在我成全</li>
-    <li><span class="cn">10</span>三日黑暗散，较义者得存，声呼来归</li>
+    <li><span class="cn">8</span><span lang="en">Sudden storms and earthquakes; sixteen cities destroyed; landscape transformed</span><span lang="zh">骤起风暴地震，十六城毁，大地面貌全变</span></li>
+    <li><span class="cn">9</span><span lang="en">Voice in darkness: I am Christ; the law is fulfilled in me</span><span lang="zh">黑暗中声音：我是基督，律法在我成全</span></li>
+    <li><span class="cn">10</span><span lang="en">Darkness ends; the more righteous are spared; voice calls them to return</span><span lang="zh">三日黑暗散，较义者得存，声呼来归</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">耶稣基督 <span>声音·黑暗中宣告</span></div>
-    <div class="nm">幸存者 <span>较义·蒙神保存</span></div>
+    <div class="nm"><span lang="en">Jesus Christ</span><span lang="zh">耶稣基督</span> <span><span lang="en">Voice proclaims in darkness</span><span lang="zh">声音·黑暗中宣告</span></span></div>
+    <div class="nm"><span lang="en">Survivors</span><span lang="zh">幸存者</span> <span><span lang="en">More righteous · preserved by God</span><span lang="zh">较义·蒙神保存</span></span></div>
   </div>
 </div>
 
@@ -358,8 +529,8 @@ ul.np{padding:0;margin:7px 0 0}
 <div class="ev">
   <span class="ev-icon">✦</span>
   <div>
-    <div>三日黑暗过后·黑暗消散——幸存者相聚邦地圣殿外，等待将见何事</div>
-    <div class="ev-date">公元 34 年 · 第 10 章末·第 11 章起</div>
+    <div><span lang="en">After three days of darkness end, survivors gather outside the Temple of Bountiful, awaiting what will come</span><span lang="zh">三日黑暗过后·黑暗消散——幸存者相聚邦地圣殿外，等待将见何事</span></div>
+    <div class="ev-date"><span lang="en">AD 34 · End of Ch. 10 · Beginning of Ch. 11</span><span lang="zh">公元 34 年 · 第 10 章末·第 11 章起</span></div>
   </div>
 </div>
 <div class="si-sp"></div>
@@ -367,94 +538,94 @@ ul.np{padding:0;margin:7px 0 0}
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 基督第一日降临 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text">降临</div></div>
+<div class="ph"><div class="ph-dot" style="background:#7c3aed"></div><div class="ph-text"><span lang="en">Descent</span><span lang="zh">降临</span></div></div>
 <div class="n vio">
   <div class="nh">
-    <span class="nl">第 11–18 章</span><span class="nt">基督第一日降临·山上宝训·圣餐</span><span class="nw">邦地圣殿</span><span class="nc">公元 34 年</span>
+    <span class="nl"><span lang="en">Ch. 11–18</span><span lang="zh">第 11–18 章</span></span><span class="nt"><span lang="en">Christ's First Visit · Sermon on Mount · Sacrament</span><span lang="zh">基督第一日降临·山上宝训·圣餐</span></span><span class="nw"><span lang="en">Temple of Bountiful</span><span lang="zh">邦地圣殿</span></span><span class="nc"><span lang="en">AD 34</span><span lang="zh">公元 34 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">11</span>两千五百触摸钉痕，召十二门徒赐洗礼权</li>
-    <li><span class="cn">12</span>宣八福，怒同于杀，邪念同于淫</li>
-    <li><span class="cn">13</span>论施舍祷告禁食，教主祷文</li>
-    <li><span class="cn">14</span>勿论断人，窄路难行</li>
-    <li><span class="cn">15</span>旧约律法已在己身成全</li>
-    <li><span class="cn">16</span>以法莲子孙将识基督，异邦得福</li>
-    <li><span class="cn">17</span>为众医病，儿童祝福，天使降火哺育</li>
-    <li><span class="cn">18</span>立圣餐礼，分饼杯纪身血</li>
+    <li><span class="cn">11</span><span lang="en">2,500 touch nail marks; twelve disciples called and given baptismal authority</span><span lang="zh">两千五百触摸钉痕，召十二门徒赐洗礼权</span></li>
+    <li><span class="cn">12</span><span lang="en">Proclaims Beatitudes; anger equals murder, lust equals adultery</span><span lang="zh">宣八福，怒同于杀，邪念同于淫</span></li>
+    <li><span class="cn">13</span><span lang="en">Teaches almsgiving, prayer, and fasting; gives the Lord's Prayer</span><span lang="zh">论施舍祷告禁食，教主祷文</span></li>
+    <li><span class="cn">14</span><span lang="en">Judge not; the way is strait and narrow</span><span lang="zh">勿论断人，窄路难行</span></li>
+    <li><span class="cn">15</span><span lang="en">The law of Moses is fulfilled in Him</span><span lang="zh">旧约律法已在己身成全</span></li>
+    <li><span class="cn">16</span><span lang="en">Ephraim's descendants will know Christ; Gentiles receive blessings</span><span lang="zh">以法莲子孙将识基督，异邦得福</span></li>
+    <li><span class="cn">17</span><span lang="en">Heals the multitude; blesses children; angels minister with fire</span><span lang="zh">为众医病，儿童祝福，天使降火哺育</span></li>
+    <li><span class="cn">18</span><span lang="en">Institutes sacrament; distributes bread and cup to remember His body and blood</span><span lang="zh">立圣餐礼，分饼杯纪身血</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">耶稣基督 <span>降临者</span></div>
-    <div class="nm">尼腓三世 <span>首席门徒·受授权</span></div>
-    <div class="nm">十二门徒 <span>美洲使徒团</span></div>
-    <div class="nm">两千五百人 <span>亲眼见证者</span></div>
+    <div class="nm"><span lang="en">Jesus Christ</span><span lang="zh">耶稣基督</span> <span><span lang="en">The One Who Descended</span><span lang="zh">降临者</span></span></div>
+    <div class="nm"><span lang="en">Nephi III</span><span lang="zh">尼腓三世</span> <span><span lang="en">Chief Disciple · Ordained</span><span lang="zh">首席门徒·受授权</span></span></div>
+    <div class="nm"><span lang="en">Twelve Disciples</span><span lang="zh">十二门徒</span> <span><span lang="en">American Apostolic Body</span><span lang="zh">美洲使徒团</span></span></div>
+    <div class="nm"><span lang="en">2,500 People</span><span lang="zh">两千五百人</span> <span><span lang="en">Eyewitnesses</span><span lang="zh">亲眼见证者</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 第二日再临 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#1d4ed8"></div><div class="ph-text">再临</div></div>
+<div class="ph"><div class="ph-dot" style="background:#1d4ed8"></div><div class="ph-text"><span lang="en">Return</span><span lang="zh">再临</span></div></div>
 <div class="n blu">
   <div class="nh">
-    <span class="nl">第 19–26 章</span><span class="nt">第二日再临·先知之言</span><span class="nw">邦地圣殿（次日）</span><span class="nc">公元 34 年</span>
+    <span class="nl"><span lang="en">Ch. 19–26</span><span lang="zh">第 19–26 章</span></span><span class="nt"><span lang="en">Christ's Second Day · Prophetic Words</span><span lang="zh">第二日再临·先知之言</span></span><span class="nw"><span lang="en">Temple of Bountiful (next day)</span><span lang="zh">邦地圣殿（次日）</span></span><span class="nc"><span lang="en">AD 34</span><span lang="zh">公元 34 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">19</span>圣灵降如火，门徒面白如天使</li>
-    <li><span class="cn">20</span>以法莲家将被聚集于故土</li>
-    <li><span class="cn">21</span>以色列家被聚，异邦不悔则被割于约外</li>
-    <li><span class="cn">22</span>引以赛亚五十四章：锡安复兴</li>
-    <li><span class="cn">23</span>命众研读摩西之书</li>
-    <li><span class="cn">24</span>引玛拉基：当奉十一，敬畏神</li>
-    <li><span class="cn">25</span>以利亚必在主大日前来</li>
-    <li><span class="cn">26</span>摩尔门封印记录，待神旨揭</li>
+    <li><span class="cn">19</span><span lang="en">Holy Ghost descends like fire; disciples' faces shine white as angels</span><span lang="zh">圣灵降如火，门徒面白如天使</span></li>
+    <li><span class="cn">20</span><span lang="en">House of Ephraim to be gathered to their homeland</span><span lang="zh">以法莲家将被聚集于故土</span></li>
+    <li><span class="cn">21</span><span lang="en">House of Israel to be gathered; unrepentant Gentiles cut off from covenant</span><span lang="zh">以色列家被聚，异邦不悔则被割于约外</span></li>
+    <li><span class="cn">22</span><span lang="en">Quotes Isaiah 54: Zion restored</span><span lang="zh">引以赛亚五十四章：锡安复兴</span></li>
+    <li><span class="cn">23</span><span lang="en">Commands people to study the writings of Moses</span><span lang="zh">命众研读摩西之书</span></li>
+    <li><span class="cn">24</span><span lang="en">Quotes Malachi: pay tithes, fear God</span><span lang="zh">引玛拉基：当奉十一，敬畏神</span></li>
+    <li><span class="cn">25</span><span lang="en">Elijah shall come before the great day of the Lord</span><span lang="zh">以利亚必在主大日前来</span></li>
+    <li><span class="cn">26</span><span lang="en">Mormon seals the record; to be revealed at God's command</span><span lang="zh">摩尔门封印记录，待神旨揭</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">十二门徒 <span>施洗·转化</span></div>
-    <div class="nm">以赛亚 <span>54章·被引用</span></div>
-    <div class="nm">玛拉基 <span>3–4章·被引用</span></div>
-    <div class="nm">摩尔门 <span>编者·封印记录</span></div>
+    <div class="nm"><span lang="en">Twelve Disciples</span><span lang="zh">十二门徒</span> <span><span lang="en">Baptizing · Transforming</span><span lang="zh">施洗·转化</span></span></div>
+    <div class="nm"><span lang="en">Isaiah</span><span lang="zh">以赛亚</span> <span><span lang="en">Ch. 54 · Quoted</span><span lang="zh">54章·被引用</span></span></div>
+    <div class="nm"><span lang="en">Malachi</span><span lang="zh">玛拉基</span> <span><span lang="en">Ch. 3–4 · Quoted</span><span lang="zh">3–4章·被引用</span></span></div>
+    <div class="nm"><span lang="en">Mormon</span><span lang="zh">摩尔门</span> <span><span lang="en">Editor · Sealed Record</span><span lang="zh">编者·封印记录</span></span></div>
   </div>
 </div>
 
 <div class="ph-sp"></div><div class="arr"></div><div class="si-sp"></div>
 
 <!-- ══ 教会确立 ══ -->
-<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text">确立</div></div>
+<div class="ph"><div class="ph-dot" style="background:#0e7490"></div><div class="ph-text"><span lang="en">Established</span><span lang="zh">确立</span></div></div>
 <div class="n cya">
   <div class="nh">
-    <span class="nl">第 27–30 章</span><span class="nt">教会确立·三位被译门徒</span><span class="nw">邦地</span><span class="nc">公元 34 年</span>
+    <span class="nl"><span lang="en">Ch. 27–30</span><span lang="zh">第 27–30 章</span></span><span class="nt"><span lang="en">Church Established · Three Translated Disciples</span><span lang="zh">教会确立·三位被译门徒</span></span><span class="nw"><span lang="en">Bountiful</span><span lang="zh">邦地</span></span><span class="nc"><span lang="en">AD 34</span><span lang="zh">公元 34 年</span></span>
   </div>
   <ul class="np">
-    <li><span class="cn">27</span>以我名命教会，父方认之</li>
-    <li><span class="cn">28</span>三门徒译化，不死传道至主再来</li>
-    <li><span class="cn">29</span>摩尔门：神约应验已开始</li>
-    <li><span class="cn">30</span>呼众悔改，来归基督</li>
+    <li><span class="cn">27</span><span lang="en">Name the church after Me; the Father will acknowledge it</span><span lang="zh">以我名命教会，父方认之</span></li>
+    <li><span class="cn">28</span><span lang="en">Three disciples translated; immortal, they preach until the Lord's return</span><span lang="zh">三门徒译化，不死传道至主再来</span></li>
+    <li><span class="cn">29</span><span lang="en">Mormon: the fulfillment of God's covenant has begun</span><span lang="zh">摩尔门：神约应验已开始</span></li>
+    <li><span class="cn">30</span><span lang="en">Call all to repent and come to Christ</span><span lang="zh">呼众悔改，来归基督</span></li>
   </ul>
 </div>
 <div class="si">
   <div class="nms">
-    <div class="nm">三被译门徒 <span>不死·传道至今</span></div>
-    <div class="nm">摩尔门 <span>编者·见证者</span></div>
+    <div class="nm"><span lang="en">Three Translated Disciples</span><span lang="zh">三被译门徒</span> <span><span lang="en">Immortal · Still Preaching</span><span lang="zh">不死·传道至今</span></span></div>
+    <div class="nm"><span lang="en">Mormon</span><span lang="zh">摩尔门</span> <span><span lang="en">Editor · Witness</span><span lang="zh">编者·见证者</span></span></div>
   </div>
 </div>
 
 <!-- 图例 -->
 <div class="legend">
-  <div class="legend-title">图例</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div>征兆年代·降生之夜·匪帮</div>
-  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div>大破坏·三日黑暗</div>
-  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div>基督第一日降临·宝训·圣餐</div>
-  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div>第二日再临·以赛亚·玛拉基</div>
-  <div class="lg-item"><div class="lg-box" style="background:#ecfeff;border-color:#67e8f9"></div>教会以基督名确立·三被译门徒</div>
+  <div class="legend-title"><span lang="en">Legend</span><span lang="zh">图例</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#fefce8;border-color:#fde68a"></div><span lang="en">Era of Signs · Birth Night · Robbers</span><span lang="zh">征兆年代·降生之夜·匪帮</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#fff1f2;border-color:#fda4af"></div><span lang="en">Great Destruction · Three-Day Darkness</span><span lang="zh">大破坏·三日黑暗</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#f5f3ff;border-color:#c4b5fd"></div><span lang="en">Christ's First Visit · Sermon · Sacrament</span><span lang="zh">基督第一日降临·宝训·圣餐</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#eff6ff;border-color:#93c5fd"></div><span lang="en">Second Day · Isaiah · Malachi</span><span lang="zh">第二日再临·以赛亚·玛拉基</span></div>
+  <div class="lg-item"><div class="lg-box" style="background:#ecfeff;border-color:#67e8f9"></div><span lang="en">Church Established · Three Translated Disciples</span><span lang="zh">教会以基督名确立·三被译门徒</span></div>
 </div>
 
 <!-- ── 人物关系图 ── -->
 <div class="rel">
-  <div class="rel-title">人物关系 · 家谱 · 尼腓三书</div>
+  <div class="rel-title"><span lang="en">Character Relationships · Genealogy · 3 Nephi</span><span lang="zh">人物关系 · 家谱 · 尼腓三书</span></div>
   <svg viewBox="0 0 860 326" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">
     <defs>
       <marker id="nfA" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7c3aed"/></marker>
@@ -464,87 +635,87 @@ ul.np{padding:0;margin:7px 0 0}
     </defs>
 
     <!-- ══ 家谱 ══ -->
-    <text x="16" y="18" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="2">家谱</text>
+    <text lang="en" x="16" y="18" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="2">Genealogy</text><text lang="zh" x="16" y="18" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="2">家谱</text>
     <line x1="16" y1="22" x2="844" y2="22" stroke="#e2e8f0" stroke-width="1"/>
 
     <!-- 希拉曼二世 -->
     <rect x="30" y="28" width="148" height="52" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="104" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">希拉曼二世</text>
-    <text x="104" y="62" text-anchor="middle" font-size="8" fill="#b45309">Helaman II</text>
-    <text x="104" y="74" text-anchor="middle" font-size="7.5" fill="#94a3b8">大能先知·希拉曼书主角</text>
+    <text lang="en" x="104" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Helaman II</text><text lang="zh" x="104" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">希拉曼二世</text>
+    <text lang="en" x="104" y="62" text-anchor="middle" font-size="8" fill="#b45309">Helaman II</text>
+    <text lang="en" x="104" y="74" text-anchor="middle" font-size="7.5" fill="#94a3b8">Mighty prophet · Helaman's protagonist</text><text lang="zh" x="104" y="74" text-anchor="middle" font-size="7.5" fill="#94a3b8">大能先知·希拉曼书主角</text>
     <!-- 希拉曼 → 尼腓二世 -->
     <line x1="178" y1="54" x2="222" y2="54" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="200" y="50" text-anchor="middle" font-size="7.5" fill="#059669">子</text>
+    <text lang="en" x="200" y="50" text-anchor="middle" font-size="7.5" fill="#059669">son</text><text lang="zh" x="200" y="50" text-anchor="middle" font-size="7.5" fill="#059669">子</text>
 
     <!-- 尼腓二世 -->
     <rect x="224" y="28" width="148" height="52" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="298" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">尼腓二世</text>
-    <text x="298" y="62" text-anchor="middle" font-size="8" fill="#b45309">Nephi II</text>
-    <text x="298" y="74" text-anchor="middle" font-size="7.5" fill="#94a3b8">移山·解枷锁·大能预言者</text>
+    <text lang="en" x="298" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Nephi II</text><text lang="zh" x="298" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">尼腓二世</text>
+    <text lang="en" x="298" y="62" text-anchor="middle" font-size="8" fill="#b45309">Nephi II</text>
+    <text lang="en" x="298" y="74" text-anchor="middle" font-size="7.5" fill="#94a3b8">Moved mountains · freed prisoners · mighty prophet</text><text lang="zh" x="298" y="74" text-anchor="middle" font-size="7.5" fill="#94a3b8">移山·解枷锁·大能预言者</text>
     <!-- 尼腓二世 → 尼腓三世（长子，斜下左） -->
     <line x1="266" y1="80" x2="244" y2="108" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="242" y="100" font-size="7.5" fill="#059669">长子</text>
+    <text lang="en" x="242" y="100" font-size="7.5" fill="#059669">firstborn</text><text lang="zh" x="242" y="100" font-size="7.5" fill="#059669">长子</text>
     <!-- 尼腓二世 → 提摩太（次子，斜下右） -->
     <line x1="330" y1="80" x2="452" y2="108" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="408" y="100" font-size="7.5" fill="#059669">次子</text>
+    <text lang="en" x="408" y="100" font-size="7.5" fill="#059669">second son</text><text lang="zh" x="408" y="100" font-size="7.5" fill="#059669">次子</text>
 
     <!-- 尼腓三世（主角，加粗边框） -->
     <rect x="158" y="110" width="172" height="52" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-    <text x="244" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">尼腓三世</text>
-    <text x="244" y="144" text-anchor="middle" font-size="8" fill="#7c3aed">Nephi III · 首席门徒</text>
-    <text x="244" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">受权施洗·带领门徒·记录者</text>
+    <text lang="en" x="244" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">Nephi III</text><text lang="zh" x="244" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">尼腓三世</text>
+    <text lang="en" x="244" y="144" text-anchor="middle" font-size="8" fill="#7c3aed">Nephi III · Chief Disciple</text><text lang="zh" x="244" y="144" text-anchor="middle" font-size="8" fill="#7c3aed">Nephi III · 首席门徒</text>
+    <text lang="en" x="244" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">Ordained to baptize · leads disciples · recorder</text><text lang="zh" x="244" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">受权施洗·带领门徒·记录者</text>
 
     <!-- 提摩太 -->
     <rect x="422" y="110" width="148" height="52" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="496" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">提摩太</text>
-    <text x="496" y="144" text-anchor="middle" font-size="8" fill="#b45309">Timothy · 尼腓之弟</text>
-    <text x="496" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">曾被尼腓三世复活</text>
+    <text lang="en" x="496" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Timothy</text><text lang="zh" x="496" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">提摩太</text>
+    <text lang="en" x="496" y="144" text-anchor="middle" font-size="8" fill="#b45309">Timothy · Nephi's brother</text><text lang="zh" x="496" y="144" text-anchor="middle" font-size="8" fill="#b45309">Timothy · 尼腓之弟</text>
+    <text lang="en" x="496" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">Once raised from the dead by Nephi III</text><text lang="zh" x="496" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">曾被尼腓三世复活</text>
     <!-- 提摩太 → 约拿 -->
     <line x1="570" y1="136" x2="612" y2="136" stroke="#059669" stroke-width="1.5" marker-end="url(#nfG)"/>
-    <text x="591" y="132" text-anchor="middle" font-size="7.5" fill="#059669">子</text>
+    <text lang="en" x="591" y="132" text-anchor="middle" font-size="7.5" fill="#059669">son</text><text lang="zh" x="591" y="132" text-anchor="middle" font-size="7.5" fill="#059669">子</text>
 
     <!-- 约拿 -->
     <rect x="614" y="110" width="120" height="52" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="674" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">约拿</text>
-    <text x="674" y="144" text-anchor="middle" font-size="8" fill="#b45309">Jonas · 提摩太之子</text>
-    <text x="674" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">十二门徒之一</text>
+    <text lang="en" x="674" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Jonas</text><text lang="zh" x="674" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">约拿</text>
+    <text lang="en" x="674" y="144" text-anchor="middle" font-size="8" fill="#b45309">Jonas · Timothy's son</text><text lang="zh" x="674" y="144" text-anchor="middle" font-size="8" fill="#b45309">Jonas · 提摩太之子</text>
+    <text lang="en" x="674" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">One of the twelve disciples</text><text lang="zh" x="674" y="155" text-anchor="middle" font-size="7.5" fill="#94a3b8">十二门徒之一</text>
 
     <!-- ══ 权柄 · 见证 · 对峙 ══ -->
-    <text x="16" y="178" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="2">权柄 · 见证 · 对峙</text>
+    <text lang="en" x="16" y="178" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="2">Authority · Witness · Confrontation</text><text lang="zh" x="16" y="178" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="2">权柄 · 见证 · 对峙</text>
     <line x1="16" y1="182" x2="844" y2="182" stroke="#e2e8f0" stroke-width="1"/>
 
     <!-- 耶稣基督 -->
     <rect x="16" y="190" width="158" height="56" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
-    <text x="95" y="210" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">耶稣基督</text>
-    <text x="95" y="224" text-anchor="middle" font-size="8" fill="#7c3aed">复活主 · 亲临美洲</text>
-    <text x="95" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">第 11 章降于邦地圣殿</text>
+    <text lang="en" x="95" y="210" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">Jesus Christ</text><text lang="zh" x="95" y="210" text-anchor="middle" font-size="12" font-weight="bold" fill="#4c1d95">耶稣基督</text>
+    <text lang="en" x="95" y="224" text-anchor="middle" font-size="8" fill="#7c3aed">Risen Lord · Visits Americas</text><text lang="zh" x="95" y="224" text-anchor="middle" font-size="8" fill="#7c3aed">复活主 · 亲临美洲</text>
+    <text lang="en" x="95" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">Descends at Temple of Bountiful, Ch. 11</text><text lang="zh" x="95" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">第 11 章降于邦地圣殿</text>
     <!-- 耶稣 → 尼腓三世 -->
     <line x1="174" y1="218" x2="222" y2="218" stroke="#7c3aed" stroke-width="2" marker-end="url(#nfA)"/>
-    <text x="198" y="213" text-anchor="middle" font-size="7.5" fill="#7c3aed">授权</text>
+    <text lang="en" x="198" y="213" text-anchor="middle" font-size="7.5" fill="#7c3aed">Authorizes</text><text lang="zh" x="198" y="213" text-anchor="middle" font-size="7.5" fill="#7c3aed">授权</text>
 
     <!-- 尼腓三世（权柄区引用） -->
     <rect x="224" y="190" width="150" height="56" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
-    <text x="299" y="212" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓三世</text>
-    <text x="299" y="226" text-anchor="middle" font-size="8" fill="#7c3aed">首席门徒</text>
-    <text x="299" y="239" text-anchor="middle" font-size="7.5" fill="#94a3b8">↑同上</text>
+    <text lang="en" x="299" y="212" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">Nephi III</text><text lang="zh" x="299" y="212" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">尼腓三世</text>
+    <text lang="en" x="299" y="226" text-anchor="middle" font-size="8" fill="#7c3aed">Chief Disciple</text><text lang="zh" x="299" y="226" text-anchor="middle" font-size="8" fill="#7c3aed">首席门徒</text>
+    <text lang="en" x="299" y="239" text-anchor="middle" font-size="7.5" fill="#94a3b8">↑ same as above</text><text lang="zh" x="299" y="239" text-anchor="middle" font-size="7.5" fill="#94a3b8">↑同上</text>
     <!-- 尼腓三世 → 十二门徒 -->
     <line x1="374" y1="218" x2="420" y2="218" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#nfA)"/>
-    <text x="397" y="213" text-anchor="middle" font-size="7.5" fill="#7c3aed">带领</text>
+    <text lang="en" x="397" y="213" text-anchor="middle" font-size="7.5" fill="#7c3aed">leads</text><text lang="zh" x="397" y="213" text-anchor="middle" font-size="7.5" fill="#7c3aed">带领</text>
 
     <!-- 十二门徒 -->
     <rect x="422" y="190" width="158" height="56" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
-    <text x="501" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">十二门徒</text>
-    <text x="501" y="224" text-anchor="middle" font-size="8" fill="#b45309">美洲使徒团</text>
-    <text x="501" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">施洗 · 传圣灵权柄</text>
+    <text lang="en" x="501" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Twelve Disciples</text><text lang="zh" x="501" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">十二门徒</text>
+    <text lang="en" x="501" y="224" text-anchor="middle" font-size="8" fill="#b45309">American Apostolic Body</text><text lang="zh" x="501" y="224" text-anchor="middle" font-size="8" fill="#b45309">美洲使徒团</text>
+    <text lang="en" x="501" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">Baptize · confer Holy Ghost authority</text><text lang="zh" x="501" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">施洗 · 传圣灵权柄</text>
     <!-- 十二门徒 → 三被译 -->
     <line x1="580" y1="218" x2="626" y2="218" stroke="#0e7490" stroke-width="1.5" marker-end="url(#nfT)"/>
-    <text x="603" y="213" text-anchor="middle" font-size="7.5" fill="#0e7490">其中三位</text>
+    <text lang="en" x="603" y="213" text-anchor="middle" font-size="7.5" fill="#0e7490">three of them</text><text lang="zh" x="603" y="213" text-anchor="middle" font-size="7.5" fill="#0e7490">其中三位</text>
 
     <!-- 三被译门徒 -->
     <rect x="628" y="190" width="216" height="56" rx="6" fill="#ecfeff" stroke="#67e8f9" stroke-width="1.5"/>
-    <text x="736" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">三被译门徒</text>
-    <text x="736" y="224" text-anchor="middle" font-size="8" fill="#0e7490">不死 · 传道至末日</text>
-    <text x="736" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">摩尔门亲眼见证</text>
+    <text lang="en" x="736" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">Three Translated Disciples</text><text lang="zh" x="736" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#164e63">三被译门徒</text>
+    <text lang="en" x="736" y="224" text-anchor="middle" font-size="8" fill="#0e7490">Immortal · Preach until end</text><text lang="zh" x="736" y="224" text-anchor="middle" font-size="8" fill="#0e7490">不死 · 传道至末日</text>
+    <text lang="en" x="736" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">Mormon personally witnessed</text><text lang="zh" x="736" y="237" text-anchor="middle" font-size="7.5" fill="#94a3b8">摩尔门亲眼见证</text>
 
     <!-- 竖向虚线：耶稣 → 两千五百位见证者 -->
     <line x1="95" y1="246" x2="95" y2="264" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="4,3"/>
@@ -553,32 +724,97 @@ ul.np{padding:0;margin:7px 0 0}
 
     <!-- 两千五百位见证者 -->
     <rect x="16" y="266" width="200" height="44" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-    <text x="116" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">两千五百位见证者</text>
-    <text x="116" y="298" text-anchor="middle" font-size="7.5" fill="#1d4ed8">亲手触摸基督钉痕肋伤</text>
+    <text lang="en" x="116" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">2,500 Witnesses</text><text lang="zh" x="116" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1e3a8a">两千五百位见证者</text>
+    <text lang="en" x="116" y="298" text-anchor="middle" font-size="7.5" fill="#1d4ed8">Personally touched Christ's wounds</text><text lang="zh" x="116" y="298" text-anchor="middle" font-size="7.5" fill="#1d4ed8">亲手触摸基督钉痕肋伤</text>
 
     <!-- 摩尔门 -->
     <rect x="224" y="266" width="150" height="44" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="299" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#065f46">摩尔门</text>
-    <text x="299" y="298" text-anchor="middle" font-size="7.5" fill="#059669">编辑删节 · 约公元 320 年</text>
+    <text lang="en" x="299" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#065f46">Mormon</text><text lang="zh" x="299" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#065f46">摩尔门</text>
+    <text lang="en" x="299" y="298" text-anchor="middle" font-size="7.5" fill="#059669">Edited & abridged · c. AD 320</text><text lang="zh" x="299" y="298" text-anchor="middle" font-size="7.5" fill="#059669">编辑删节 · 约公元 320 年</text>
 
     <!-- 拉科乃乌斯 -->
     <rect x="422" y="266" width="158" height="44" rx="6" fill="#f0fdf9" stroke="#6ee7b7" stroke-width="1.5"/>
-    <text x="501" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#065f46">拉科乃乌斯</text>
-    <text x="501" y="298" text-anchor="middle" font-size="7.5" fill="#059669">行政长官 · 组织御敌</text>
+    <text lang="en" x="501" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#065f46">Lachoneus</text><text lang="zh" x="501" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#065f46">拉科乃乌斯</text>
+    <text lang="en" x="501" y="298" text-anchor="middle" font-size="7.5" fill="#059669">Governor · organized defense</text><text lang="zh" x="501" y="298" text-anchor="middle" font-size="7.5" fill="#059669">行政长官 · 组织御敌</text>
     <!-- 书信对峙 -->
     <line x1="580" y1="288" x2="624" y2="288" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
-    <text x="602" y="283" text-anchor="middle" font-size="7" fill="#dc2626">书信对峙</text>
+    <text lang="en" x="602" y="283" text-anchor="middle" font-size="7" fill="#dc2626">epistolary standoff</text><text lang="zh" x="602" y="283" text-anchor="middle" font-size="7" fill="#dc2626">书信对峙</text>
 
     <!-- 甘大安敦首领 -->
     <rect x="626" y="266" width="218" height="44" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1.5"/>
-    <text x="735" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9f1239">甘大安敦首领</text>
-    <text x="735" y="298" text-anchor="middle" font-size="7.5" fill="#be123c">Giddianhi · 匪帮统领</text>
+    <text lang="en" x="735" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9f1239">Gadianton Leader</text><text lang="zh" x="735" y="284" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9f1239">甘大安敦首领</text>
+    <text lang="en" x="735" y="298" text-anchor="middle" font-size="7.5" fill="#be123c">Giddianhi · Robber Captain</text><text lang="zh" x="735" y="298" text-anchor="middle" font-size="7.5" fill="#be123c">Giddianhi · 匪帮统领</text>
 
     <!-- 底部注释 -->
-    <text x="430" y="318" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 提摩太曾死而复活（尼三 19:4）；摩尔门约公元 320 年删节编辑尼腓三世记录；三被译门徒摩尔门亲眼见证其存在</text>
+    <text lang="en" x="430" y="318" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ Timothy was raised from death (3 Ne 19:4); Mormon abridged Nephi III's record c. AD 320; Mormon personally witnessed the three translated disciples</text><text lang="zh" x="430" y="318" text-anchor="middle" font-size="7.5" fill="#94a3b8">※ 提摩太曾死而复活（尼三 19:4）；摩尔门约公元 320 年删节编辑尼腓三世记录；三被译门徒摩尔门亲眼见证其存在</text>
   </svg>
 </div>
 
 </div><!-- .page -->
+<script>(function(){var l=localStorage.getItem('bom-lang')||'en';if(l==='zh')document.body.classList.add('lang-zh');var b=document.getElementById('langBtn');if(b)b.textContent=document.body.classList.contains('lang-zh')?'English':'中文'})();function switchLang(){var z=document.body.classList.toggle('lang-zh');localStorage.setItem('bom-lang',z?'zh':'en');document.getElementById('langBtn').textContent=z?'English':'中文'}</script>
+<script data-mob="3">(function(){
+  if(!window.matchMedia('(max-width:640px)').matches)return;
+  function mk(t,c){var e=document.createElement(t);if(c)e.className=c;return e;}
+
+  /* ── hamburger + dark drawer ── */
+  var ov=mk('div','drawer-overlay');
+  var dr=mk('nav','drawer');
+  var hd=mk('div','drawer-hd');
+  var tit=mk('span','drawer-title');
+  tit.innerHTML='<span lang="en">Book of Mormon</span><span lang="zh">摩尔门经</span>';
+  var cx=mk('button','drawer-close');
+  cx.setAttribute('aria-label','close');cx.textContent='×';
+  cx.addEventListener('click',closeDr);
+  hd.appendChild(tit);hd.appendChild(cx);
+  var lks=mk('div','drawer-links');
+  document.querySelectorAll('.nav .tab').forEach(function(a){
+    var l=mk('a','drawer-tab'+(a.classList.contains('on')?' on':''));
+    l.href=a.href;l.innerHTML=a.innerHTML;lks.appendChild(l);
+  });
+  dr.appendChild(hd);dr.appendChild(lks);
+  document.body.appendChild(ov);document.body.appendChild(dr);
+
+  var ham=mk('button','hamburger');
+  ham.setAttribute('aria-label','menu');
+  ham.innerHTML='<svg width="18" height="13" viewBox="0 0 18 13" fill="currentColor">'+
+    '<rect width="18" height="2" rx="1"/>'+
+    '<rect y="5.5" width="14" height="2" rx="1"/>'+
+    '<rect y="11" width="18" height="2" rx="1"/></svg>';
+  ham.addEventListener('click',openDr);
+  var hdr=document.querySelector('header');
+  hdr.insertBefore(ham,hdr.firstChild);
+  ov.addEventListener('click',closeDr);
+
+  function openDr(){
+    ov.classList.add('open');dr.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDr(){
+    ov.classList.remove('open');dr.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  /* ── chapter summary cards ── */
+  var CM={
+    vio:'#7c3aed',tea:'#0d9488',amb:'#d97706',
+    pin:'#be185d',ros:'#be123c',blu:'#2563eb',grn:'#16a34a'
+  };
+  var intro=document.querySelector('.intro');
+  if(!intro)return;
+  var ct=mk('div','mob-ch');
+  document.querySelectorAll('.page>.n').forEach(function(n){
+    var ck=Object.keys(CM).find(function(k){return n.classList.contains(k);});
+    var nl=n.querySelector('.nl'),nt=n.querySelector('.nt'),nc=n.querySelector('.nc');
+    if(!nl||!nt)return;
+    var c=mk('div','mob-sec');
+    c.style.borderLeftColor=ck?CM[ck]:'#64748b';
+    c.innerHTML=
+      '<span class="mob-nl">'+nl.innerHTML+'</span>'+
+      '<span class="mob-nt">'+nt.innerHTML+'</span>'+
+      (nc?'<span class="mob-nc">'+nc.innerHTML+'</span>':'');
+    ct.appendChild(c);
+  });
+  if(ct.children.length)intro.insertAdjacentElement('afterend',ct);
+})();</script>
 </body>
 </html>
