@@ -184,6 +184,11 @@ h1 {
   transition: filter 0.15s;
 }
 .bar:hover { filter: brightness(1.35); z-index: 50; }
+.bar.has-link { border: 1px solid rgba(255,255,255,0.28) !important; }
+.bar.has-link::after {
+  content: '↗'; position: absolute; top: 2px; right: 3px;
+  font-size: 7px; color: rgba(255,255,255,0.5); line-height: 1; pointer-events: none;
+}
 .bar span {
   font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6);
   text-shadow: 0 1px 3px rgba(0,0,0,0.7); padding: 0 4px;
@@ -488,9 +493,11 @@ async function showMapPanel(d) {
   const mpDesc = document.getElementById('mpDesc');
   const mpWiki = document.getElementById('mpWiki');
 
-  mpName.textContent  = d.name;
+  const isZh = document.body.classList.contains('lang-zh');
+
+  mpName.textContent  = t(d.name, d.en || d.name);
   mpName.style.color  = d.color;
-  mpEn.textContent    = d.en;
+  mpEn.textContent    = t(d.en || '', d.name);
   mpYears.textContent = fmtYear(d.start) + ' – ' + fmtYear(d.end) + t('　共 ' + (d.end - d.start) + ' 年', '  (' + (d.end - d.start) + ' years)');
 
   mpLoad.textContent  = t('載入中⋯', 'Loading...');
@@ -499,24 +506,46 @@ async function showMapPanel(d) {
   mpImg.src           = '';
   mpDesc.textContent  = '';
   mpWiki.href         = '#';
-  mpWiki.style.visibility = d.wikiEn ? 'visible' : 'hidden';
+  mpWiki.style.visibility = 'hidden';
 
   panel.style.display = 'flex';
 
-  if (!d.wikiEn) { mpLoad.textContent = t('暫無 Wikipedia 條目連結', 'No Wikipedia link'); return; }
-
-  mpWiki.href = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(d.wikiEn);
+  if (!d.wikiEn && !(isZh && d.name)) {
+    mpLoad.textContent = t('暫無 Wikipedia 條目連結', 'No Wikipedia link');
+    return;
+  }
 
   try {
-    const resp = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(d.wikiEn));
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
+    let wikiData, wikiHref;
+
+    if (isZh && d.name) {
+      const zhResp = await fetch('https://zh.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(d.name));
+      if (zhResp.ok) {
+        const zhData = await zhResp.json();
+        if (zhData.extract) {
+          wikiData = zhData;
+          wikiHref = 'https://zh.wikipedia.org/wiki/' + encodeURIComponent(zhData.title || d.name);
+        }
+      }
+    }
+
+    if (!wikiData && d.wikiEn) {
+      const enResp = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(d.wikiEn));
+      if (!enResp.ok) throw new Error('HTTP ' + enResp.status);
+      wikiData = await enResp.json();
+      wikiHref = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(d.wikiEn);
+    }
+
+    if (!wikiData) { mpLoad.textContent = t('暫無 Wikipedia 條目連結', 'No Wikipedia link'); return; }
+
     mpLoad.style.display = 'none';
-    if (data.thumbnail && data.thumbnail.source) {
-      mpImg.src           = data.thumbnail.source;
+    mpWiki.href = wikiHref;
+    mpWiki.style.visibility = 'visible';
+    if (wikiData.thumbnail && wikiData.thumbnail.source) {
+      mpImg.src           = wikiData.thumbnail.source;
       mpImg.style.display = 'block';
     }
-    mpDesc.textContent = data.extract || t('無摘要資料。', 'No description available.');
+    mpDesc.textContent = wikiData.extract || t('無摘要資料。', 'No description available.');
   } catch (err) {
     mpLoad.textContent = t('載入失敗（請確認網路連線）', 'Failed to load (check connection)');
   }
@@ -833,7 +862,7 @@ function render() {
       const x = toX(d.start);
       const w = Math.max((d.end - d.start) * PPY, 1);
       const bar = document.createElement('div');
-      bar.className = 'bar';
+      bar.className = 'bar' + (d.link ? ' has-link' : '');
       bar.style.cssText = `left:${x}px;width:${w}px;top:${vRow*RH+4}px;background:${d.color};${d.dim ? 'opacity:0.28;' : ''}`;
       if (w >= 14) {
         const sp = document.createElement('span');
@@ -864,7 +893,7 @@ function render() {
           showTip(
             `<strong>${d.name}</strong><span class="sub">${d.en}</span>` +
             `${fmtYear(d.start)} – ${fmtYear(d.end)}<br><span style="color:#8a6030">${t('共 ','')}${d.end - d.start}${t(' 年',' yrs')}</span>` +
-            (d.link ? `<br><span style="color:#c9a84c;font-size:10px">${t('點擊開啟敘事頁 ↗','Open narrative ↗')}</span>` :
+            (d.link ? `<br><span style="color:#c9a84c;font-size:10px">${t('點擊進入章節頁面 ↗','Click to open chapter page ↗')}</span>` :
               d.wikiEn ? `<br><span style="color:#6a4a28;font-size:10px">${t('點擊查看 Wikipedia ↗','Click for Wikipedia ↗')}</span>` : '')
           );
         }
