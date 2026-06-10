@@ -381,6 +381,7 @@ const SECTIONS = [
     pinned:         true,
     defaultVisRows: [0, 1, 2],
     rowLabels:      ZH_ROW_LABELS,
+    rowLabelsEn:    ['Major Dynasties', 'Legendary Figures', 'Emperors'],
     groups:         [...ZH_DYNASTIES, ...ZH_EMPERORS],
     events:         ZH_EVENTS,
   },
@@ -398,6 +399,7 @@ const SECTIONS = [
     sepBorder:      'rgba(125,211,252,0.25)',
     defaultVisRows: [0, 1, 6],
     rowLabels:      BIBLE_ROW_LABELS,
+    rowLabelsEn:    ['Israel/Judah', 'Biblical Figures', 'OT Books', 'NT Books', 'Kings of Israel', 'Kings of Judah', 'Gentile Empires'],
     groups:         BIBLE_GROUPS,
     events:         BIBLE_EVENTS,
   },
@@ -414,6 +416,7 @@ const SECTIONS = [
     sepBg:          'rgba(196,181,253,0.06)',
     sepBorder:      'rgba(196,181,253,0.25)',
     rowLabels:      MORMEN_ROW_LABELS,
+    rowLabelsEn:    ['Jaredites', 'Nephites', 'Lamanites', 'Mulekites', 'Ether/Small Plates', 'Large Plates Books', 'Nephite Kings/Judges', 'Jaredite/Branch Kings'],
     groups:         MORMEN_GROUPS,
     events:         MORMEN_EVENTS,
   },
@@ -658,7 +661,8 @@ function openPanel(sIdx, anchor) {
   hr.className = 'fp-hr';
   panel.appendChild(hr);
 
-  sec.rowLabels.forEach((name, r) => {
+  const panelRowLbls = document.body.classList.contains('lang-zh') ? sec.rowLabels : (sec.rowLabelsEn || sec.rowLabels);
+  panelRowLbls.forEach((name, r) => {
     const lbl = document.createElement('label');
     lbl.className = 'fp-row';
     const cb = document.createElement('input');
@@ -714,11 +718,12 @@ function buildLabels() {
     evtLbl.textContent = t(sec.evtLabel, sec.evtLabelEn);
     el.appendChild(evtLbl);
     const vis = visibility[idx];
-    sec.rowLabels.forEach((t, r) => {
+    const rowLbls = document.body.classList.contains('lang-zh') ? sec.rowLabels : (sec.rowLabelsEn || sec.rowLabels);
+    rowLbls.forEach((lbl, r) => {
       if (!vis.has(r)) return;
       const d = document.createElement('div');
       d.className = 'lbl lbl-row';
-      d.textContent = t;
+      d.textContent = lbl;
       el.appendChild(d);
     });
   });
@@ -832,11 +837,16 @@ function render() {
       bar.style.cssText = `left:${x}px;width:${w}px;top:${vRow*RH+4}px;background:${d.color};${d.dim ? 'opacity:0.28;' : ''}`;
       if (w >= 14) {
         const sp = document.createElement('span');
+        const isZh = document.body.classList.contains('lang-zh');
         if (d.personal !== undefined) {
           sp.style.fontSize = '9px';
-          sp.textContent = w < 24 ? d.name.slice(0, 1) : d.name.slice(0, 2);
+          sp.textContent = isZh
+            ? (w < 24 ? d.name.slice(0, 1) : d.name.slice(0, 2))
+            : (d.en || d.name).split(/\s[–(]/)[0];
         } else {
-          sp.textContent = w < 50 && d.name.length > 2 ? d.name.slice(0, 2) : d.name;
+          sp.textContent = isZh
+            ? (w < 50 && d.name.length > 2 ? d.name.slice(0, 2) : d.name)
+            : (d.en || d.name);
         }
         bar.appendChild(sp);
       }
