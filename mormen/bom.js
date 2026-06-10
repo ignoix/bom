@@ -20,7 +20,7 @@ const MORMEN_GROUPS = [
   { name:'妙利客人', en:'Mulekites / People of Zarahemla', start:-586, end:-200, color:'#065f46', row:3 },
 
   // ══ Row 4 以帖書 + 小版各書 ══════════════════════════════════════════════
-  { name:'以帖書',     en:'Ether — Jaredite Record',    start:-2500, end:-600,  color:'#92400e', row:4 },
+  { name:'以帖書',     en:'Ether — Jaredite Record',    start:-2500, end:-600,  color:'#92400e', row:4, link:'bom-ether.html' },
   { name:'第一尼腓書', en:'1 Nephi',                    start: -600, end:-570,  color:'#dc2626', row:4, link:'bom.html' },
   { name:'第二尼腓書', en:'2 Nephi',                    start: -570, end:-544,  color:'#ea580c', row:4, link:'bom2.html' },
   { name:'雅各書',     en:'Jacob',                      start: -544, end:-420,  color:'#d97706', row:4, link:'bom-jacob.html' },
