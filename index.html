@@ -443,7 +443,10 @@ const fmtYear = y => y < 0
 
 function groupByYear(arr) {
   const m = new Map();
-  arr.forEach(e => { if (!m.has(e.year)) m.set(e.year, []); m.get(e.year).push(e.text); });
+  arr.forEach(e => {
+    if (!m.has(e.year)) m.set(e.year, []);
+    m.get(e.year).push({ zh: e.text, en: e.textEn || e.text });
+  });
   return m;
 }
 SECTIONS.forEach(s => { s._evtMap = groupByYear(s.events); });
@@ -824,7 +827,7 @@ function render() {
       mark.addEventListener('mouseenter', () => {
         showTip(
           `<span class="ehd" style="color:${sec.evtColor}">${fmtYear(year)}</span>` +
-          texts.map(t => `<span class="erow">${t}</span>`).join('')
+          texts.map(item => `<span class="erow">${t(item.zh, item.en)}</span>`).join('')
         );
       });
       mark.addEventListener('mousemove', moveTip);

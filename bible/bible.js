@@ -191,50 +191,50 @@ const BIBLE_GROUPS = [
 
 const BIBLE_EVENTS = [
   // ── 族長時代 ──────────────────────────────────────────────────────
-  { year: -2000, text: '亞伯拉罕蒙召，神應許賜迦南地並賜他後裔如星' },
-  { year: -1876, text: '約瑟被兄長賣至埃及，後升任宰相，拯救埃及和自己家族' },
-  { year: -1526, text: '摩西生於埃及，被法老女兒所救，暗中由母親哺養' },
+  { year: -2000, text: '亞伯拉罕蒙召，神應許賜迦南地並賜他後裔如星', textEn: 'Abraham called; God promises Canaan and descendants as numerous as stars' },
+  { year: -1876, text: '約瑟被兄長賣至埃及，後升任宰相，拯救埃及和自己家族', textEn: 'Joseph sold to Egypt by brothers; rises to vizier; saves Egypt and his family' },
+  { year: -1526, text: '摩西生於埃及，被法老女兒所救，暗中由母親哺養', textEn: 'Moses born in Egypt; rescued by Pharaoh\'s daughter; secretly nursed by his own mother' },
 
   // ── 出埃及 ──────────────────────────────────────────────────────
-  { year: -1446, text: '十災降臨埃及，逾越節羔羊之血保護以色列人；摩西帶領約二百萬人出埃及' },
-  { year: -1446, text: '分開紅海，摩西在西奈山頒佈十誡，立約版納入約櫃' },
+  { year: -1446, text: '十災降臨埃及，逾越節羔羊之血保護以色列人；摩西帶領約二百萬人出埃及', textEn: 'Ten Plagues on Egypt; Passover blood protects Israel; Moses leads ~2 million out of Egypt' },
+  { year: -1446, text: '分開紅海，摩西在西奈山頒佈十誡，立約版納入約櫃', textEn: 'Red Sea parted; Ten Commandments given at Sinai; Ark of the Covenant made' },
 
   // ── 進迦南 ──────────────────────────────────────────────────────
-  { year: -1406, text: '約書亞帶領以色列人奇蹟渡過約旦河，攻陷耶利哥城（喇合以紅線得救）' },
+  { year: -1406, text: '約書亞帶領以色列人奇蹟渡過約旦河，攻陷耶利哥城（喇合以紅線得救）', textEn: 'Joshua leads Israel across Jordan; Jericho falls miraculously (Rahab saved by red cord)' },
 
   // ── 王國時代 ────────────────────────────────────────────────────
-  { year: -1050, text: '掃羅膏立為以色列第一位王（由先知撒母耳膏抹）' },
-  { year: -1010, text: '大衛成為以色列全地之王，攻取耶路撒冷定都，迎回約櫃' },
-  { year:  -966, text: '所羅門王開始建造聖殿；神異象中應許：若離棄神聖殿將被拆毀' },
-  { year:  -930, text: '所羅門死後王國分裂：耶羅波安領北國以色列，羅波安領南國猶大' },
+  { year: -1050, text: '掃羅膏立為以色列第一位王（由先知撒母耳膏抹）', textEn: 'Saul anointed first king of Israel by Prophet Samuel' },
+  { year: -1010, text: '大衛成為以色列全地之王，攻取耶路撒冷定都，迎回約櫃', textEn: 'David crowned king over all Israel; captures Jerusalem as capital; brings back the Ark' },
+  { year:  -966, text: '所羅門王開始建造聖殿；神異象中應許：若離棄神聖殿將被拆毀', textEn: 'Solomon begins building the Temple; God warns: abandon me and this Temple will be destroyed' },
+  { year:  -930, text: '所羅門死後王國分裂：耶羅波安領北國以色列，羅波安領南國猶大', textEn: 'Kingdom splits after Solomon\'s death: Jeroboam leads Northern Israel, Rehoboam leads Judah' },
 
   // ── 先知與亡國 ──────────────────────────────────────────────────
-  { year:  -870, text: '先知以利亞在迦密山大獲全勝：一人對抗四百五十名巴力先知，火從天降' },
-  { year:  -740, text: '先知以賽亞蒙召（「我在這裡，請差遣我」），預言童女懷孕生子以馬內利' },
-  { year:  -722, text: '亞述王撒珥根攻陷撒瑪利亞，北國以色列亡，十支派被擄散入萬國' },
-  { year:  -701, text: '亞述王西拿基立圍攻耶路撒冷，希西家王禱告，天使一夜擊殺十八萬五千亞述兵' },
-  { year:  -627, text: '先知耶利米蒙召，傳悔改信息，預言七十年被擄' },
-  { year:  -621, text: '猶大王約西亞重新找到律法書，推行宗教改革，廢除偶像' },
-  { year:  -605, text: '但以理及一批猶大貴族首次被擄至巴比倫，拒食王膳，仍健壯' },
-  { year:  -586, text: '尼布甲尼撒攻陷耶路撒冷，火燒聖殿，拆毀城牆，猶大亡國' },
+  { year:  -870, text: '先知以利亞在迦密山大獲全勝：一人對抗四百五十名巴力先知，火從天降', textEn: 'Elijah defeats 450 prophets of Baal on Mount Carmel; fire falls from heaven' },
+  { year:  -740, text: '先知以賽亞蒙召（「我在這裡，請差遣我」），預言童女懷孕生子以馬內利', textEn: 'Isaiah called ("Here am I; send me"); prophesies virgin birth of Immanuel' },
+  { year:  -722, text: '亞述王撒珥根攻陷撒瑪利亞，北國以色列亡，十支派被擄散入萬國', textEn: 'Assyria conquers Samaria; Northern Kingdom of Israel falls; Ten Tribes exiled among the nations' },
+  { year:  -701, text: '亞述王西拿基立圍攻耶路撒冷，希西家王禱告，天使一夜擊殺十八萬五千亞述兵', textEn: 'Sennacherib besieges Jerusalem; Hezekiah prays; angel kills 185,000 Assyrians in one night' },
+  { year:  -627, text: '先知耶利米蒙召，傳悔改信息，預言七十年被擄', textEn: 'Jeremiah called as prophet; preaches repentance; prophesies 70-year captivity' },
+  { year:  -621, text: '猶大王約西亞重新找到律法書，推行宗教改革，廢除偶像', textEn: 'King Josiah rediscovers the Law scroll; sweeping religious reform; idols destroyed' },
+  { year:  -605, text: '但以理及一批猶大貴族首次被擄至巴比倫，拒食王膳，仍健壯', textEn: 'Daniel and Judean nobles first taken to Babylon; refuse king\'s food; remain healthy' },
+  { year:  -586, text: '尼布甲尼撒攻陷耶路撒冷，火燒聖殿，拆毀城牆，猶大亡國', textEn: 'Nebuchadnezzar destroys Jerusalem; burns the Temple; tears down walls; Judah falls' },
 
   // ── 被擄與歸回 ──────────────────────────────────────────────────
-  { year:  -539, text: '但以理在獅子坑中平安（波斯王古列元年），波斯征服巴比倫' },
-  { year:  -538, text: '古列大帝頒布詔書，允許猶太人歸回故土重建聖殿' },
-  { year:  -516, text: '第二聖殿落成獻殿，距所羅門聖殿被毀剛好七十年' },
-  { year:  -458, text: '文士以斯拉率第二批歸回者，推行律法改革，解散異族婚姻' },
-  { year:  -445, text: '尼希米率眾重建耶路撒冷城牆，僅五十二天完工' },
-  { year:  -483, text: '以斯帖在波斯王宮挺身護衛猶太人，免遭哈曼滅族之禍' },
+  { year:  -539, text: '但以理在獅子坑中平安（波斯王古列元年），波斯征服巴比倫', textEn: 'Daniel survives the lions\' den; Persia conquers Babylon under Cyrus the Great' },
+  { year:  -538, text: '古列大帝頒布詔書，允許猶太人歸回故土重建聖殿', textEn: 'Cyrus the Great\'s decree: Jews allowed to return and rebuild the Temple' },
+  { year:  -516, text: '第二聖殿落成獻殿，距所羅門聖殿被毀剛好七十年', textEn: 'Second Temple completed and dedicated — exactly 70 years after Solomon\'s Temple destroyed' },
+  { year:  -458, text: '文士以斯拉率第二批歸回者，推行律法改革，解散異族婚姻', textEn: 'Ezra leads second return; law reform; mixed marriages dissolved' },
+  { year:  -445, text: '尼希米率眾重建耶路撒冷城牆，僅五十二天完工', textEn: 'Nehemiah rebuilds Jerusalem\'s walls in just 52 days' },
+  { year:  -483, text: '以斯帖在波斯王宮挺身護衛猶太人，免遭哈曼滅族之禍', textEn: 'Esther risks her life in the Persian court to save her people from Haman\'s genocide plot' },
 
   // ── 新約時代 ────────────────────────────────────────────────────
-  { year:   -4,  text: '耶穌基督降生於伯利恆（馬利亞由聖靈感孕），東方博士獻禮朝拜' },
-  { year:   27,  text: '耶穌在約旦河受洗，聖靈如鴿降下，神聲說：「這是我的愛子」；開始三年傳道' },
-  { year:   30,  text: '耶穌在耶路撒冷被釘十字架，受難，葬後第三天復活，向五百多人顯現' },
-  { year:   30,  text: '五旬節聖靈降臨如同大風、火舌，教會建立，三千人受洗' },
-  { year:   35,  text: '掃羅（保羅）在大馬士革路上遇見復活的主，悔改歸主，後成為外邦使徒' },
-  { year:   50,  text: '耶路撒冷大公會議：決議外邦信徒不需遵守割禮律法，確立因信稱義' },
-  { year:   67,  text: '使徒保羅在羅馬城殉道' },
-  { year:   68,  text: '使徒彼得在羅馬殉道（據傳倒掛十字架）' },
-  { year:   70,  text: '羅馬將軍提多攻陷耶路撒冷，第二聖殿被完全拆毀（耶穌預言應驗）' },
-  { year:   95,  text: '使徒約翰在拔摩孤島獲啟示，寫成《啟示錄》，描繪末世與新天新地' },
+  { year:   -4,  text: '耶穌基督降生於伯利恆（馬利亞由聖靈感孕），東方博士獻禮朝拜', textEn: 'Jesus Christ born in Bethlehem (Mary conceived by Holy Ghost); Magi present gifts' },
+  { year:   27,  text: '耶穌在約旦河受洗，聖靈如鴿降下，神聲說：「這是我的愛子」；開始三年傳道', textEn: 'Jesus baptized in Jordan; Holy Spirit descends as dove; God declares "This is my beloved Son"; ministry begins' },
+  { year:   30,  text: '耶穌在耶路撒冷被釘十字架，受難，葬後第三天復活，向五百多人顯現', textEn: 'Jesus crucified in Jerusalem; buried; risen on the third day; appears to 500+' },
+  { year:   30,  text: '五旬節聖靈降臨如同大風、火舌，教會建立，三千人受洗', textEn: 'Pentecost: Holy Spirit descends as wind and tongues of fire; Church established; 3,000 baptized' },
+  { year:   35,  text: '掃羅（保羅）在大馬士革路上遇見復活的主，悔改歸主，後成為外邦使徒', textEn: 'Saul (Paul) encounters risen Christ on Damascus road; converts; becomes apostle to the gentiles' },
+  { year:   50,  text: '耶路撒冷大公會議：決議外邦信徒不需遵守割禮律法，確立因信稱義', textEn: 'Jerusalem Council: gentile believers need not be circumcised; salvation by faith affirmed' },
+  { year:   67,  text: '使徒保羅在羅馬城殉道', textEn: 'Apostle Paul martyred in Rome' },
+  { year:   68,  text: '使徒彼得在羅馬殉道（據傳倒掛十字架）', textEn: 'Apostle Peter martyred in Rome (tradition: crucified upside down)' },
+  { year:   70,  text: '羅馬將軍提多攻陷耶路撒冷，第二聖殿被完全拆毀（耶穌預言應驗）', textEn: 'Roman General Titus destroys Jerusalem; Second Temple demolished (fulfilling Jesus\'s prophecy)' },
+  { year:   95,  text: '使徒約翰在拔摩孤島獲啟示，寫成《啟示錄》，描繪末世與新天新地', textEn: 'Apostle John on Patmos receives Revelation — end times, return of Christ, New Jerusalem' },
 ];
